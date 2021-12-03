@@ -11,10 +11,29 @@ namespace Final_Project_ASP_MVC.Core
     {
         public static string connStr = ConfigurationManager.AppSettings["connection"].ToString();
         public static MySqlConnection conn = new MySqlConnection(connStr);
+        public static List<string> images;
 
         static Connection()
         {
             conn.Open();
+        }
+
+        public static List<string> GetImages()
+        {
+            images = new List<string>();
+            string sql = "SELECT Name FROM Images";
+            //conn.Open();
+            MySqlCommand cmd = new MySqlCommand(sql, conn);
+            MySqlDataReader img = cmd.ExecuteReader();
+            //string str = "";
+            while (img.Read())
+            {
+                images.Add(img[0].ToString());
+            }
+            img.Close();
+            //conn.Close();
+            return images;
+           
         }
 
         public static List<Sportsman> GetProjects()

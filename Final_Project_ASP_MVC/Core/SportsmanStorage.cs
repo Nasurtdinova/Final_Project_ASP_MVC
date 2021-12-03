@@ -8,6 +8,7 @@ namespace Final_Project_ASP_MVC.Core
 {
     public class SportsmanStorage : IEnumerable
     {
+      
         public static List<Sportsman> projects { get; private set; } = Connection.GetProjects();
 
         public IEnumerator GetEnumerator()

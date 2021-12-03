@@ -1,0 +1,38 @@
+﻿@model Final_Project_ASP_MVC.Core.Sportsman
+
+<div class="row justify-content-lg-cehter">
+    <h1>Add new project</h1>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Add">
+            <div class="form-group">
+                <label asp-for="Surname" class="control-label">Surname</label>
+                <input asp-for="Surname" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label">Name</label>
+                <input asp-for="Name" class=" form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Image" class="control-label">Image</label>
+                <select>
+                    <option selected="selected">  </option>
+                    @foreach(var image in Final_Project_ASP_MVC.Core.Connection.GetImages())
+                    {
+                        <option>@image</option>
+                    }
+
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Add" class=" btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to projects list</a>
+</div>
