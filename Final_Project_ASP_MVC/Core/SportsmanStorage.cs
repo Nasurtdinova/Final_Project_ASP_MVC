@@ -9,23 +9,23 @@ namespace Final_Project_ASP_MVC.Core
     public class SportsmanStorage : IEnumerable
     {
       
-        public static List<Sportsman> projects { get; private set; } = Connection.GetProjects();
+        public static List<Sportsman> sportsmans { get; private set; } = Connection.GetSportsmans();
 
         public IEnumerator GetEnumerator()
         {
-            return projects.GetEnumerator();
+            return sportsmans.GetEnumerator();
         }
 
         public void Add(Sportsman project)
         {
-            Connection.AddProject(project);
-            projects.Add(project);
+            Connection.AddSportsman(project);
+            sportsmans.Add(project);
         }
 
         public void RemoveByName(string name)
         {
-            Connection.RemoveProject(name);
-            projects.RemoveAll(p => p.Name == name);
+            Connection.RemoveSportsman(name);
+            sportsmans.RemoveAll(p => p.Name == name);
         }
     }
 }

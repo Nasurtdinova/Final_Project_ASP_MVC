@@ -36,7 +36,7 @@ namespace Final_Project_ASP_MVC.Core
            
         }
 
-        public static List<Sportsman> GetProjects()
+        public static List<Sportsman> GetSportsmans()
         {
             List<Sportsman> projects = new List<Sportsman>();
 
@@ -61,11 +61,11 @@ namespace Final_Project_ASP_MVC.Core
             return projects;
         }
 
-        public static void RemoveProject(string name)
+        public static void RemoveSportsman(string name)
         {
             try
             {
-                MySqlCommand cmd = new MySqlCommand($"DELETE from Projects.Projects WHERE (Name = '{name}')", conn);
+                MySqlCommand cmd = new MySqlCommand($"DELETE from Competition.Sportsman WHERE (Name = '{name}')", conn);
                 cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
@@ -74,7 +74,7 @@ namespace Final_Project_ASP_MVC.Core
             }
         }
 
-        public static void AddProject(Sportsman sportsman)
+        public static void AddSportsman(Sportsman sportsman)
         {
             try
             {

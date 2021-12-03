@@ -1,7 +1,7 @@
 ﻿@model Final_Project_ASP_MVC.Core.Sportsman
 
 <div class="row justify-content-lg-cehter">
-    <h1>Add new project</h1>
+    <h1>Add new sportsman</h1>
 </div>
 
 <div class="row">
@@ -17,9 +17,9 @@
             </div>
             <div class="form-group">
                 <label asp-for="Image" class="control-label">Image</label>
-                <select>
+                <select asp-for="Image" class=" form-control">
                     <option selected="selected">  </option>
-                    @foreach(var image in Final_Project_ASP_MVC.Core.Connection.GetImages())
+                    @foreach(string image in Final_Project_ASP_MVC.Core.Connection.GetImages())
                     {
                         <option>@image</option>
                     }
