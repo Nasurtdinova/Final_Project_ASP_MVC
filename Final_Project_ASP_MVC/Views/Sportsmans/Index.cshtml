@@ -1,8 +1,11 @@
-﻿@model Final_Project_ASP_MVC.Core.SportsmanStorage
+﻿@{
+    ViewData["Title"] = "Sportsmans";
+}
+@model Final_Project_ASP_MVC.Core.SportsmanStorage
 <h2>Sportsmans</h2>
 <div class="row justify-content-end">
     <a class="btn btn-primary" asp-controller="Sportsmans"
-       asp-action="Add" role="button">Add project</a>
+       asp-action="Add" role="button">Add sportsman</a>
 </div>
 <br />
 <div class="row">
@@ -17,6 +20,9 @@
                     </div>
                     <div>
                         <p class="font-weight-normal">@sportsman.Surname</p>
+                    </div>
+                    <div>
+                        <p class="font-weight-normal">@sportsman.Name</p>
                     </div>
                     <div class="text-center">
                         <a class="btn btn-danger" asp-controller="Sportsmans"

@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 namespace Final_Project_ASP_MVC.Core
 {
     public class SportsmanStorage : IEnumerable
-    {
-      
+    {     
         public static List<Sportsman> sportsmans { get; private set; } = Connection.GetSportsmans();
 
         public IEnumerator GetEnumerator()

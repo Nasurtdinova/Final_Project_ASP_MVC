@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "Command";
+}
+@model Final_Project_ASP_MVC.Core.CommandStorage
+<h2>Commands</h2>
+<div class="row justify-content-end">
+    <a class="btn btn-primary" asp-controller="Commands"
+       asp-action="Add" role="button">Add command</a>
+</div>
+<br />
+<div class="row">
+    @foreach (Final_Project_ASP_MVC.Core.Command command in Model)
+    {
+        <div class="col-md-4 mb-5">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div>
+                        <img class="card-img-top" width="300" height="300" src="@command.Image"
+                             alt="@command.Name" />
+                    </div>
+
+                    <div>
+                        <p class="font-weight-normal">Название команды: @command.Name</p>
+                    </div>
+                    <div>
+                        <p class="font-weight-normal">Количество человек: @command.Count</p>
+                    </div>
+                    <div>
+                        <p class="font-weight-normal">Город: @command.City</p>
+                    </div>
+                    <div class="text-center">
+                        <a class="btn btn-danger" asp-controller="Sportsmans"
+                           asp-action="Remove" asp-route-name="@command.Name" role="button">
+                            Remove
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

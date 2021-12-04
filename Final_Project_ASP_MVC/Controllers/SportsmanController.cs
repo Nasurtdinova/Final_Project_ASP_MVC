@@ -9,10 +9,10 @@ namespace Final_Project_ASP_MVC.Controllers
 {
     public class SportsmansController : Controller
     {
-        SportsmanStorage projectStorage = PSCope.sportsmanStorage;
+        SportsmanStorage sportsmanStorage = SSCopy.sportsmanStorage;
         public IActionResult Index()
         {
-            return View(projectStorage);
+            return View(sportsmanStorage);
         }
 
         public IActionResult Add()
@@ -21,16 +21,16 @@ namespace Final_Project_ASP_MVC.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(Final_Project_ASP_MVC.Core.Sportsman project)
+        public IActionResult Add(Sportsman project)
         {
 
-            projectStorage.Add(project);
+            sportsmanStorage.Add(project);
             return RedirectToAction("Index");
         }
 
         public IActionResult Remove(string name)
         {
-            projectStorage.RemoveByName(name);
+            sportsmanStorage.RemoveByName(name);
             return RedirectToAction("Index");
         }
     }

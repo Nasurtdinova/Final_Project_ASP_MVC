@@ -1,4 +1,7 @@
-﻿@model Final_Project_ASP_MVC.Core.Sportsman
+﻿@{
+    ViewData["Title"] = "Add sportsman";
+}
+@model Final_Project_ASP_MVC.Core.Sportsman
 
 <div class="row justify-content-lg-cehter">
     <h1>Add new sportsman</h1>
@@ -19,7 +22,7 @@
                 <label asp-for="Image" class="control-label">Image</label>
                 <select asp-for="Image" class=" form-control">
                     <option selected="selected">  </option>
-                    @foreach(string image in Final_Project_ASP_MVC.Core.Connection.GetImages())
+                    @foreach (string image in Final_Project_ASP_MVC.Core.Connection.GetImages())
                     {
                         <option>@image</option>
                     }
