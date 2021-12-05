@@ -34,13 +34,28 @@ namespace Final_Project_ASP_MVC.Core
             return images;         
         }
 
+        //public static string GetPath()
+        //{
+        //    string sql = "SELECT Name FROM Images";
+        //    MySqlCommand cmd = new MySqlCommand(sql, conn);
+        //    MySqlDataReader img = cmd.ExecuteReader();
+
+        //    while (img.Read())
+        //    {
+        //        images.Add(img[0].ToString());
+        //    }
+        //    img.Close();
+
+        //    return images;
+        //}
+
         public static List<Sportsman> GetSportsmans()
         {
             List<Sportsman> sportsmans = new List<Sportsman>();
 
             try
             {
-                string sql = "SELECT ID,Surname,Competition.Sportsman.Name,Competition.Images.Name FROM Competition.Sportsman  join Competition.Images  on ID = idImages;";
+                string sql = "SELECT ID,Surname,Competition.Sportsman.Name,Competition.Images.Name FROM Competition.Sportsman  join Competition.Images  on ID_Image = idImages;";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 MySqlDataReader res = cmd.ExecuteReader();
 
@@ -98,15 +113,18 @@ namespace Final_Project_ASP_MVC.Core
         }
 
         public static void AddSportsman(Sportsman sportsman)
-        {
+        {         
             try
             {
-                string sql = $"SELECT idImages  FROM Competition.Sportsman  join Competition.Images  on '{sportsman.Image}' = Competition.Images.Name;";
-                MySqlCommand cmd1 = new MySqlCommand(sql, conn);
-                MySqlDataReader res = cmd1.ExecuteReader();
-
-                MySqlCommand cmd = new MySqlCommand($"INSERT INTO Competition.Sportsman(Surname, Name, Image) VALUES('{sportsman.Surname}', '{sportsman.Name}','{res[0]}')", conn);
-                cmd.ExecuteNonQuery();
+                //string sql = $"SELECT idImages  FROM Competition.Sportsman  join Competition.Images  on ID_Image = idImages where  '{sportsman.Image}' = Competition.Images.Name;";
+                //MySqlCommand cmd1 = new MySqlCommand(sql, conn);
+                //MySqlDataReader res = cmd1.ExecuteReader();
+                //while (res.Read())
+                //{
+                    MySqlCommand cmd = new MySqlCommand($"INSERT INTO `Competition`.`Sportsman` (`Surname`, `Name`, `ID_Image`) SELECT '{sportsman.Surname}', '{sportsman.Name}', idImages  FROM Competition.Sportsman  join Competition.Images  on ID_Image = idImages where  '{sportsman.Image}' = Competition.Images.Name", conn);
+                    cmd.ExecuteNonQuery();
+                //}
+                //res.Close();
             }
             catch (Exception ex)
             {
