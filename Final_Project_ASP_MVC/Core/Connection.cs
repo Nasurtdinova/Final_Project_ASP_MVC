@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Final_Project_ASP_MVC.Models;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -12,6 +13,7 @@ namespace Final_Project_ASP_MVC.Core
         public static string connStr = ConfigurationManager.AppSettings["connection"].ToString();
         public static MySqlConnection conn = new MySqlConnection(connStr);
         public static List<string> images;
+        public static List<string> cities;
 
         static Connection()
         {
@@ -34,21 +36,36 @@ namespace Final_Project_ASP_MVC.Core
             return images;         
         }
 
-        //public static string GetPath()
-        //{
-        //    string sql = "SELECT Name FROM Images";
-        //    MySqlCommand cmd = new MySqlCommand(sql, conn);
-        //    MySqlDataReader img = cmd.ExecuteReader();
+        public static List<string> GetCities()
+        {
+            cities = new List<string>();
+            string sql = "SELECT Name FROM City";
+            MySqlCommand cmd = new MySqlCommand(sql, conn);
+            MySqlDataReader city = cmd.ExecuteReader();
 
-        //    while (img.Read())
-        //    {
-        //        images.Add(img[0].ToString());
-        //    }
-        //    img.Close();
+            while (city.Read())
+            {
+                cities.Add(city[0].ToString());
+            }
+            city.Close();
 
-        //    return images;
-        //}
+            return cities;
+        }
 
+        public static bool IsLogin(string email, string password)
+        {
+            try
+            {
+                string sql = $"SELECT Email,Password FROM Competition.User where '{email}' = Email and '{password}' = Password ;";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                MySqlDataReader res = cmd.ExecuteReader();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
         public static List<Sportsman> GetSportsmans()
         {
             List<Sportsman> sportsmans = new List<Sportsman>();
@@ -113,18 +130,37 @@ namespace Final_Project_ASP_MVC.Core
         }
 
         public static void AddSportsman(Sportsman sportsman)
-        {         
+        {
             try
             {
-                //string sql = $"SELECT idImages  FROM Competition.Sportsman  join Competition.Images  on ID_Image = idImages where  '{sportsman.Image}' = Competition.Images.Name;";
-                //MySqlCommand cmd1 = new MySqlCommand(sql, conn);
-                //MySqlDataReader res = cmd1.ExecuteReader();
-                //while (res.Read())
-                //{
-                    MySqlCommand cmd = new MySqlCommand($"INSERT INTO `Competition`.`Sportsman` (`Surname`, `Name`, `ID_Image`) SELECT '{sportsman.Surname}', '{sportsman.Name}', idImages  FROM Competition.Sportsman  join Competition.Images  on ID_Image = idImages where  '{sportsman.Image}' = Competition.Images.Name", conn);
-                    cmd.ExecuteNonQuery();
-                //}
-                //res.Close();
+                MySqlCommand cmd = new MySqlCommand($"INSERT INTO `Competition`.`Sportsman` (`Surname`, `Name`, `ID_Image`) SELECT '{sportsman.Surname}', '{sportsman.Name}', idImages  FROM Competition.Images where '{sportsman.Image}' = Competition.Images.Name", conn);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        public static void AddUser(User user)
+        {
+            try
+            {
+                MySqlCommand cmd = new MySqlCommand($"INSERT INTO `Competition`.`User` (`Email`, `Password`, `Year`) Values ('{user.Email}','{user.Password}', {user.Year})", conn);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        public static void UpdateSportsman(Sportsman sportsman)
+        {
+            try
+            {
+                MySqlCommand cmd = new MySqlCommand($"update Competition.Sportsman set Surname='{sportsman.Surname}',Name='{sportsman.Name}' where ID = {sportsman.ID};", conn);
+                cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
             {

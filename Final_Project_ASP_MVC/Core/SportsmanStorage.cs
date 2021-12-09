@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Final_Project_ASP_MVC.Models;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,12 @@ namespace Final_Project_ASP_MVC.Core
         {
             Connection.RemoveSportsman(name);
             sportsmans.RemoveAll(p => p.Name == name);
+        }
+
+        public void Update(Sportsman sportsman)
+        {
+            Connection.UpdateSportsman(sportsman);
+            sportsmans.Reverse();
         }
     }
 }

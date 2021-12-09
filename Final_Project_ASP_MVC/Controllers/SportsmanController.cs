@@ -23,7 +23,6 @@ namespace Final_Project_ASP_MVC.Controllers
         [HttpPost]
         public IActionResult Add(Sportsman project)
         {
-
             sportsmanStorage.Add(project);
             return RedirectToAction("Index");
         }
@@ -31,6 +30,13 @@ namespace Final_Project_ASP_MVC.Controllers
         public IActionResult Remove(string name)
         {
             sportsmanStorage.RemoveByName(name);
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public IActionResult Update(Sportsman sportsman)
+        {
+            sportsmanStorage.Update(sportsman);
             return RedirectToAction("Index");
         }
     }

@@ -14,5 +14,11 @@ namespace Final_Project_ASP_MVC.Core
         {
             return commands.GetEnumerator();
         }
+
+        public void Add(Command command)
+        {
+            //Connection(command);
+            commands.Add(command);
+        }
     }
 }

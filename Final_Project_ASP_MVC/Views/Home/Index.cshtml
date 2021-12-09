@@ -5,4 +5,17 @@
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <img src="~/images/logoCompet.png" width="900" height="500" class="round" />
+    @if (User.Identity.IsAuthenticated)
+    {
+        <p>@User.Identity.Name</p>
+
+        <form method="post" asp-controller="Home" asp-action="Index">
+            <input type="submit" value="Выход" />
+        </form>
+    }
+    else
+    {
+        <a asp-controller="Account" asp-action="Login">Вход</a>
+        <a asp-controller="Account" asp-action="Register">Регистрация</a>
+    }
 </div>
