@@ -33,6 +33,13 @@ namespace Final_Project_ASP_MVC.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
+        public IActionResult Update(int id)
+        {
+            Sportsman sportsman = Connection.GetSportsmansId(id);
+            return View(sportsman);
+        }
+
         [HttpPost]
         public IActionResult Update(Sportsman sportsman)
         {

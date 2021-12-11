@@ -6,36 +6,36 @@
 <div class="row justify-content-lg-cehter">
     <h1>Update sportsman</h1>
 </div>
+@using (Html.BeginForm("Update", "Sportsmans", FormMethod.Post))
+{
+    <fieldset>
+        @Html.HiddenFor(m => m.ID)
+        <p>
+            @Html.LabelFor(m => m.Surname, "Surname")
+            <br />
+            @Html.EditorFor(m => m.Surname)
+        </p>
+        <p>
+            @Html.LabelFor(m => m.Name, "Name")
+            <br />
+            @Html.EditorFor(m => m.Name)
 
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Update">
-            <div class="form-group">
-                <label asp-for="Surname" class="control-label">Surname</label>
-                <input asp-for="Surname" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label">Name</label>
-                <input asp-for="Name" class=" form-control" />
-            </div>
-            <div class="form-group">
-                <label asp-for="Image" class="control-label">Image</label>
-                @*<input asp-for="Image" class=" form-control" />*@
-                <select asp-for="Image" class=" form-control">
-                    <option selected="selected">  </option>
-                    @foreach (string image in Final_Project_ASP_MVC.Core.Connection.GetImages())
-                    {
-                        <option>@image</option>
-                    }
-                </select>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Update" class=" btn @*btn-primary*@ btn-outline-secondary" />
-            </div>
-        </form>
-    </div>
-</div>
+        </p>
+        <p>
+            @Html.LabelFor(m => m.Image, "Image")
+            <br />
+            <select asp-for="Image" class="form-control">
+                <option selected="selected" value=" @Html.EditorFor(m => m.Image)">  </option>
+                @foreach (string image in Final_Project_ASP_MVC.Core.Connection.GetImages())
+                {
+                    <option>@image</option>
+                }
 
+            </select>
+        </p>
+        <p><input type="submit" value="Отправить" /></p>
+    </fieldset>
+}
 <div>
     <a asp-action="Index">Back to projects list</a>
 </div>

@@ -31,7 +31,7 @@ namespace Final_Project_ASP_MVC.Core
         public void Update(Sportsman sportsman)
         {
             Connection.UpdateSportsman(sportsman);
-            sportsmans.Reverse();
+            sportsmans = Connection.GetSportsmans();
         }
     }
 }

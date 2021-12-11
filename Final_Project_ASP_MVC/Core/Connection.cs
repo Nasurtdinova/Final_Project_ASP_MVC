@@ -91,6 +91,30 @@ namespace Final_Project_ASP_MVC.Core
             return sportsmans;
         }
 
+        public static Sportsman GetSportsmansId(int id)
+        {
+            Sportsman sportsman = null;
+            try
+            {
+                string sql = $"SELECT ID,Surname,Competition.Sportsman.Name,Competition.Images.Name FROM Competition.Sportsman  join Competition.Images  on ID_Image = idImages where Competition.Sportsman.ID = {id};";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                MySqlDataReader res = cmd.ExecuteReader();
+
+                while (res.Read())
+                {
+                    sportsman = new Sportsman { ID = Convert.ToInt32(res[0]), Surname = res[1].ToString(), Name = res[2].ToString(), Image = res[3].ToString() };
+                }
+                res.Close();
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            return sportsman;
+        }
+
         public static List<Command> GetCommands()
         {
             List<Command> commands = new List<Command>();
