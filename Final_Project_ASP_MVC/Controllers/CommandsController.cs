@@ -14,5 +14,23 @@ namespace Final_Project_ASP_MVC.Controllers
         {
             return View(commandStorage);
         }
+
+        public IActionResult Add()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Add(Command command)
+        {
+            commandStorage.Add(command);
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Remove(int id)
+        {
+            commandStorage.RemoveByName(id);
+            return RedirectToAction("Index");
+        }
     }
 }

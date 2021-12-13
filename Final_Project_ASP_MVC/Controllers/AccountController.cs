@@ -24,24 +24,11 @@ namespace Final_Project_ASP_MVC.Controllers
             {
                 User user = new User { Email = model.Email, UserName = model.Email, Password = model.Password, Year = model.Year };
                 Connection.AddUser(user);
-                // добавляем пользователя
-                //var result = await _userManager.CreateAsync(user, model.Password);
-                //if (result.Succeeded)
-                //{
-                    // установка куки
-                    //await _signInManager.SignInAsync(user, false);
-                    return RedirectToAction("Index", "Home");
-                //}
-                //else
-                //{
-                //    foreach (var error in result.Errors)
-                //    {
-                //        ModelState.AddModelError(string.Empty, error.Description);
-                //    }
-                //}
+                return RedirectToAction("Index", "Home");
             }
             return View(model);
         }
+
         [HttpGet]
         public IActionResult Login(string returnUrl = null)
         {
@@ -63,7 +50,7 @@ namespace Final_Project_ASP_MVC.Controllers
                     }
                     else
                     {
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", "Sportsmans");
                     }
                 }
                 else

@@ -21,9 +21,9 @@ namespace Final_Project_ASP_MVC.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(Sportsman project)
+        public IActionResult Add(Sportsman sportsman)
         {
-            sportsmanStorage.Add(project);
+            sportsmanStorage.Add(sportsman);
             return RedirectToAction("Index");
         }
 

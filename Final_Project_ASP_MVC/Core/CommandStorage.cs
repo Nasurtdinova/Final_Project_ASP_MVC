@@ -17,8 +17,14 @@ namespace Final_Project_ASP_MVC.Core
 
         public void Add(Command command)
         {
-            //Connection(command);
+            Connection.AddCommand(command);
             commands.Add(command);
+        }
+
+        public void RemoveByName(int id)
+        {
+            Connection.RemoveCommand(id);
+            commands.RemoveAll(p => p.ID == id);
         }
     }
 }
