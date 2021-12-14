@@ -50,7 +50,7 @@ namespace Final_Project_ASP_MVC.Controllers
                     }
                     else
                     {
-                        return RedirectToAction("Index", "Sportsmans");
+                        return RedirectToAction("Index", "Admin");
                     }
                 }
                 else

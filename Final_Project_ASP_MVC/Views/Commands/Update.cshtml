@@ -1,0 +1,53 @@
+﻿@{
+    ViewData["Title"] = "Update command";
+}
+@model Final_Project_ASP_MVC.Core.Command
+
+<div class="row justify-content-lg-cehter">
+    <h1>Update command</h1>
+</div>
+@using (Html.BeginForm("Update", "Commands", FormMethod.Post))
+{
+<fieldset>
+    @Html.HiddenFor(m => m.ID)
+    <p>
+        @Html.LabelFor(m => m.Name, "Name")
+        <br />
+        @Html.EditorFor(m => m.Name)
+    </p>
+    <p>
+        @Html.LabelFor(m => m.Count, "Count")
+        <br />
+        @Html.EditorFor(m => m.Count)
+
+    </p>
+    <p>
+        @Html.LabelFor(m => m.Image, "Image")
+        <br />
+        <select asp-for="Image" class="form-control">
+            <option selected="selected" value=" @Html.EditorFor(m => m.Image)">  </option>
+            @foreach (string image in Final_Project_ASP_MVC.Core.Connection.GetImages())
+            {
+                <option>@image</option>
+            }
+
+        </select>
+    </p>
+    <p>
+        @Html.LabelFor(m => m.City, "City")
+        <br />
+        <select asp-for="City" class="form-control">
+            <option selected="selected" value=" @Html.EditorFor(m => m.City)">  </option>
+            @foreach (string city in Final_Project_ASP_MVC.Core.Connection.GetCities())
+            {
+                <option>@city</option>
+            }
+
+        </select>
+    </p>
+    <p><input type="submit" value="Отправить" /></p>
+</fieldset>
+}
+<div>
+    <a asp-action="Index">Back to projects list</a>
+</div>

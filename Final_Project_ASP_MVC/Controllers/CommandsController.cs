@@ -32,5 +32,19 @@ namespace Final_Project_ASP_MVC.Controllers
             commandStorage.RemoveByName(id);
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public IActionResult Update(int id)
+        {
+            Command command = Connection.GetCommandsId(id);
+            return View(command);
+        }
+
+        [HttpPost]
+        public IActionResult Update(Command command)
+        {
+            commandStorage.Update(command);
+            return RedirectToAction("Index");
+        }
     }
 }

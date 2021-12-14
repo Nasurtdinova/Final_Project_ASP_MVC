@@ -3,11 +3,6 @@
 }
 @model Final_Project_ASP_MVC.Core.SportsmanStorage
 <h2>Sportsmans</h2>
-<div class="row justify-content-end">
-    <a class="btn btn-primary" asp-controller="Sportsmans"
-       asp-action="Add" role="button">Add sportsman</a>
-</div>
-<br />
 <div class="row">
     @foreach (Final_Project_ASP_MVC.Core.Sportsman sportsman in Model)
     {
@@ -23,16 +18,6 @@
                     </div>
                     <div>
                         <p class="font-weight-normal">@sportsman.Name</p>
-                    </div>
-                    <div class="text-center">
-                        <a class="btn btn-danger" asp-controller="Sportsmans"
-                           asp-action="Remove" asp-route-id="@sportsman.ID" role="button">
-                            Remove
-                        </a>
-                        <a class="btn btn-primary" asp-controller="Sportsmans"
-                           asp-action="Update" asp-route-id="@sportsman.ID" role="button">
-                            Update
-                        </a>
                     </div>
                 </div>
             </div>

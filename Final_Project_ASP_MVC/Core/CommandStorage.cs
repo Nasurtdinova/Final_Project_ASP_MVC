@@ -26,5 +26,11 @@ namespace Final_Project_ASP_MVC.Core
             Connection.RemoveCommand(id);
             commands.RemoveAll(p => p.ID == id);
         }
+
+        public void Update(Command command)
+        {
+            Connection.UpdateCommand(command);
+            commands = Connection.GetCommands();
+        }
     }
 }

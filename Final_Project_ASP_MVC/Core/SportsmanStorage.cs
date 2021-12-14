@@ -22,10 +22,10 @@ namespace Final_Project_ASP_MVC.Core
             sportsmans.Add(project);
         }
 
-        public void RemoveByName(string name)
+        public void RemoveByName(int id)
         {
-            Connection.RemoveSportsman(name);
-            sportsmans.RemoveAll(p => p.Name == name);
+            Connection.RemoveSportsman(id);
+            sportsmans.RemoveAll(p => p.ID == id);
         }
 
         public void Update(Sportsman sportsman)

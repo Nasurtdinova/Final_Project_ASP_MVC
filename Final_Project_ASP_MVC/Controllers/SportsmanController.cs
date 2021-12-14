@@ -27,9 +27,9 @@ namespace Final_Project_ASP_MVC.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult Remove(string name)
+        public IActionResult Remove(int id)
         {
-            sportsmanStorage.RemoveByName(name);
+            sportsmanStorage.RemoveByName(id);
             return RedirectToAction("Index");
         }
 
