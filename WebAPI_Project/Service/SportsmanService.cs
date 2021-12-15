@@ -9,6 +9,7 @@ namespace WebAPI_Project.Service
     public static class SportsmanService
     {
         static List<Sportsman> Sportsmans { get; }
+        static int nextId = 23;
         static SportsmanService()
         {
             Sportsmans = Connection.GetSportsmans();
@@ -21,6 +22,7 @@ namespace WebAPI_Project.Service
         public static void Add(Sportsman sportsman)
         {
             Connection.AddSportsman(sportsman);
+            sportsman.ID = nextId++;
             Sportsmans.Add(sportsman);
         }
 

@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "Conmpetition";
+}
+@model List<Final_Project_ASP_MVC.Core.Competition>
+<h2>Competitions</h2>
+<div class="row justify-content-end">
+    <a class="btn btn-primary" asp-controller="Commands"
+       asp-action="Add" role="button">Add command</a>
+</div>
+<br />
+<div class="row">
+    @foreach (var compet in Model)
+    {
+        <div class="col-md-4 mb-5">
+            <div class="card h-100">
+                <div class="card-body">
+
+                    <div>
+                        <p class="font-weight-normal">Название соревнования: @compet.Name</p>
+                    </div>
+                    <div>
+                        <p class="font-weight-normal">Место проведения: @compet.NameVenue</p>
+                    </div>
+                    <div>
+                        <p class="font-weight-normal">Улица: @compet.Street</p>
+                    </div>
+                    <div>
+                        <p class="font-weight-normal">Дом: @compet.Home</p>
+                    </div>
+                    <div>
+                        <p class="font-weight-normal">Город: @compet.City</p>
+                    </div>
+                    <div>
+                        <p class="font-weight-normal">Дата проведения: @compet.Date</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

@@ -181,6 +181,33 @@ namespace Final_Project_ASP_MVC.Core
             return commands;
         }
 
+        public static List<Competition> GetCompetition()
+        {
+            MySqlConnection conn = new MySqlConnection(connStr);
+            conn.Open();
+            List<Competition> competition = new List<Competition>();
+
+            try
+            {
+                string sql = "select idCompetition, Competition.Competition.Name, Competition.Venue.Name, Street, Competition.City.Name, Home,Date from Competition.Competition join Competition.Venue on Competition.Competition.idVenue = Competition.Venue.idVenue join Competition.City on Competition.Venue.idCity = Competition.City.idCity;";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                MySqlDataReader res = cmd.ExecuteReader();
+
+                while (res.Read())
+                {
+                    competition.Add(new Competition { ID = Convert.ToInt32(res[0]), Name = res[1].ToString(), NameVenue = res[2].ToString(), Street = res[3].ToString(), City = res[4].ToString(), Home = Convert.ToInt32(res[5].ToString()), Date = Convert.ToDateTime(res[6].ToString()) });
+                }
+                res.Close();
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            conn.Close();
+            return competition;
+        }
+
         public static void AddCommand(Command command)
         {
             MySqlConnection conn = new MySqlConnection(connStr);
