@@ -1,10 +1,10 @@
 ﻿@{
-    ViewData["Title"] = "Conmpetition";
+    ViewData["Title"] = "Competition";
 }
 @model List<Final_Project_ASP_MVC.Core.Competition>
 <h2>Competitions</h2>
 <div class="row justify-content-end">
-    <a class="btn btn-primary" asp-controller="Commands"
+    <a class="btn btn-primary" asp-controller="Competition"
        asp-action="Add" role="button">Add command</a>
 </div>
 <br />
@@ -32,6 +32,16 @@
                     </div>
                     <div>
                         <p class="font-weight-normal">Дата проведения: @compet.Date</p>
+                    </div>
+                    <div class="text-center">
+                        <a class="btn btn-danger" asp-controller="Competition"
+                           asp-action="Remove" asp-route-id="@compet.ID" role="button">
+                            Remove
+                        </a>
+                        <a class="btn btn-primary" asp-controller="Competition"
+                           asp-action="Update" asp-route-id="@compet.ID" role="button">
+                            Update
+                        </a>
                     </div>
                 </div>
             </div>

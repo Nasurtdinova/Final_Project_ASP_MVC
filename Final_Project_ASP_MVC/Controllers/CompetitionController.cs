@@ -14,5 +14,31 @@ namespace Final_Project_ASP_MVC.Controllers
            var competitions = CompetitionStorage.competition;
             return View(competitions);
         }
+
+        public IActionResult Add()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Add(Competition compet)
+        {
+            CompetitionStorage.Add(compet);
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult Update(int id)
+        {
+            Competition competition = Connection.GetCompetId(id);
+            return View(competition);
+        }
+
+        [HttpPost]
+        public IActionResult Update(Competition compet)
+        {
+            CompetitionStorage.Update(compet);
+            return RedirectToAction("Index");
+        }
     }
 }

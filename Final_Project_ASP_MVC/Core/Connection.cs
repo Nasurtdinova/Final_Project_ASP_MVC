@@ -154,6 +154,32 @@ namespace Final_Project_ASP_MVC.Core
             return command;
         }
 
+        public static Competition GetCompetId(int id)
+        {
+            MySqlConnection conn = new MySqlConnection(connStr);
+            conn.Open();
+            Competition compet = null;
+            try
+            {
+                string sql = $"SELECT idCompetition,Competition.Competition.Name,NameVenue,Street,Home,Date, Competition.City.Name FROM Competition.Competition  join Competition.City  on Competition.Competition.idCity = Competition.City.idCity where idCompetition ={id};";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                MySqlDataReader res = cmd.ExecuteReader();
+
+                while (res.Read())
+                {
+                    compet = new Competition { ID = Convert.ToInt32(res[0]), Name = res[1].ToString(), NameVenue = res[2].ToString(), Street = res[3].ToString(),Home=Convert.ToInt32(res[4]), Date=Convert.ToDateTime(res[5]), City = res[6].ToString() };
+                }
+                res.Close();
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            conn.Close();
+            return compet;
+        }
+
         public static List<Command> GetCommands()
         {
             MySqlConnection conn = new MySqlConnection(connStr);
@@ -189,7 +215,7 @@ namespace Final_Project_ASP_MVC.Core
 
             try
             {
-                string sql = "select idCompetition, Competition.Competition.Name, Competition.Venue.Name, Street, Competition.City.Name, Home,Date from Competition.Competition join Competition.Venue on Competition.Competition.idVenue = Competition.Venue.idVenue join Competition.City on Competition.Venue.idCity = Competition.City.idCity;";
+                string sql = "select idCompetition, Competition.Competition.Name, NameVenue, Street, Competition.City.Name, Home,Date from Competition.Competition join Competition.City on Competition.idCity = Competition.City.idCity;";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 MySqlDataReader res = cmd.ExecuteReader();
 
@@ -215,6 +241,22 @@ namespace Final_Project_ASP_MVC.Core
             try
             {
                 MySqlCommand cmd = new MySqlCommand($"INSERT INTO `Competition`.`Command` (`Name`, `Count`, `Image`,ID_city) SELECT '{command.Name}', {command.Count}, '{command.Image}', idCity  FROM Competition.City where '{command.City}' = Competition.City.Name;", conn);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            conn.Close();
+        }
+
+        public static void AddCompetition(Competition compet)
+        {
+            MySqlConnection conn = new MySqlConnection(connStr);
+            conn.Open();
+            try
+            {
+                MySqlCommand cmd = new MySqlCommand($"INSERT INTO `Competition`.`Competition` (`Name`, `NameVenue`, `Street`,Home,Date,idCity) SELECT '{compet.Name}', '{compet.NameVenue}', '{compet.Street}', {compet.Home}, '{compet.Date.ToString("yyyy-MM-dd hh:mm:ss")}', idCity  FROM Competition.City where '{compet.City}' = Competition.City.Name;", conn);
                 cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
@@ -311,6 +353,21 @@ namespace Final_Project_ASP_MVC.Core
             try
             {
                 MySqlCommand cmd = new MySqlCommand($"update Competition.Command set Name='{command.Name}',Count={command.Count},Image='{command.Image}' where idCommand = {command.ID};", conn);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            conn.Close();
+        }
+        public static void UpdateCompet(Competition compet)
+        {
+            MySqlConnection conn = new MySqlConnection(connStr);
+            conn.Open();
+            try
+            {
+                MySqlCommand cmd = new MySqlCommand($"update Competition.Competition set Name='{compet.Name}',NameVenue='{compet.NameVenue}',Street='{compet.Street}', Home='{compet.Home}',Date ='{compet.Date.ToString("yyyy-MM-dd hh:mm:ss")}' where idCompetition = {compet.ID};", conn);
                 cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
