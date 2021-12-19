@@ -44,7 +44,5 @@ namespace WebAPI_Project.Service
             Connection.UpdateSportsman(sportsman);
             Sportsmans[index] = sportsman;
         }
-
-
     }
 }

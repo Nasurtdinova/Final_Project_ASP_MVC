@@ -15,6 +15,11 @@ namespace Final_Project_ASP_MVC.Controllers
             return View(commandStorage);
         }
 
+        public IActionResult Viewer()
+        {
+            return View(commandStorage);
+        }
+
         public IActionResult Add()
         {
             return View();

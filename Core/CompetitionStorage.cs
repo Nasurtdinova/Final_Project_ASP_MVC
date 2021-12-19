@@ -15,6 +15,13 @@ namespace Final_Project_ASP_MVC.Core
             Connection.AddCompetition(compet);
             competition.Add(compet);
         }
+
+        public static void RemoveByName(int id)
+        {
+            Connection.RemoveCompetition(id);
+            competition.RemoveAll(p => p.ID == id);
+        }
+
         public static void Update(Competition compet)
         {
             Connection.UpdateCompet(compet);

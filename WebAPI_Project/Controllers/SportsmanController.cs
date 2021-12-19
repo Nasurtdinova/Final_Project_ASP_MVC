@@ -14,6 +14,7 @@ namespace WebAPI_Project.Controllers
     public class SportsmanController : ControllerBase
     {
         public SportsmanController() {}
+
         [HttpGet]
         public ActionResult<List<Sportsman>> GetAll() => SportsmanService.GetAll();
 
@@ -32,7 +33,8 @@ namespace WebAPI_Project.Controllers
         public IActionResult Create(Sportsman sportsman)
         {
             SportsmanService.Add(sportsman);
-            return CreatedAtAction(nameof(Create), new { id = sportsman.ID }, sportsman);
+            return NoContent();
+            //return CreatedAtAction(nameof(Create), new { id = sportsman.ID }, sportsman);
         }
 
         [HttpPut("{id}")]

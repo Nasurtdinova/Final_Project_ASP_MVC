@@ -7,28 +7,23 @@ using System.Threading.Tasks;
 
 namespace Final_Project_ASP_MVC.Core
 {
-    public class SportsmanStorage : IEnumerable
+    public class SportsmanStorage
     {     
         public static List<Sportsman> sportsmans { get; private set; } = Connection.GetSportsmans();
 
-        public IEnumerator GetEnumerator()
-        {
-            return sportsmans.GetEnumerator();
-        }
-
-        public void Add(Sportsman project)
+        public static void Add(Sportsman project)
         {
             Connection.AddSportsman(project);
             sportsmans.Add(project);
         }
 
-        public void RemoveByName(int id)
+        public static void RemoveByName(int id)
         {
             Connection.RemoveSportsman(id);
             sportsmans.RemoveAll(p => p.ID == id);
         }
 
-        public void Update(Sportsman sportsman)
+        public static void Update(Sportsman sportsman)
         {
             Connection.UpdateSportsman(sportsman);
             sportsmans = Connection.GetSportsmans();

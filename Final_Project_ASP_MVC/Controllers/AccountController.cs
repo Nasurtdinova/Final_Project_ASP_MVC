@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
 using Final_Project_ASP_MVC.Models;
 using Final_Project_ASP_MVC.ViewModels;
 using Final_Project_ASP_MVC.Core;

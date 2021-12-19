@@ -1,0 +1,21 @@
+﻿@{
+    ViewData["Title"] = "Result competition";
+}
+@model List<Core.Result>
+<h2>Result competitions</h2>
+<br />
+<table border="1" style="border-collapse:collapse;" width=100% cellpadding="4" cellspacing="20">
+    <tr>
+        <th>Название команды</th>
+        <th>Название соревнования</th>
+        <th>Место</th>
+    </tr>
+    @foreach (var result in Model)
+    {
+        <tr>
+            <td align="center">@result.Command</td>
+            <td align="center">@result.Compet</td>
+            <td align="center">@result.Rank</td>
+        </tr>
+    }
+</table>

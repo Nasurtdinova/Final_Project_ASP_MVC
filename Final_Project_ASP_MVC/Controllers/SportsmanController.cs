@@ -9,10 +9,16 @@ namespace Final_Project_ASP_MVC.Controllers
 {
     public class SportsmansController : Controller
     {
-        SportsmanStorage sportsmanStorage = SSCopy.sportsmanStorage;
         public IActionResult Index()
         {
-            return View(sportsmanStorage);
+            var sportsmans = SportsmanStorage.sportsmans;
+            return View(sportsmans);
+        }
+
+        public IActionResult Viewer()
+        {
+            var sportsmans = SportsmanStorage.sportsmans;
+            return View(sportsmans);
         }
 
         public IActionResult Add()
@@ -23,13 +29,13 @@ namespace Final_Project_ASP_MVC.Controllers
         [HttpPost]
         public IActionResult Add(Sportsman sportsman)
         {
-            sportsmanStorage.Add(sportsman);
+            SportsmanStorage.Add(sportsman);
             return RedirectToAction("Index");
         }
 
         public IActionResult Remove(int id)
         {
-            sportsmanStorage.RemoveByName(id);
+            SportsmanStorage.RemoveByName(id);
             return RedirectToAction("Index");
         }
 
@@ -43,7 +49,7 @@ namespace Final_Project_ASP_MVC.Controllers
         [HttpPost]
         public IActionResult Update(Sportsman sportsman)
         {
-            sportsmanStorage.Update(sportsman);
+            SportsmanStorage.Update(sportsman);
             return RedirectToAction("Index");
         }
     }

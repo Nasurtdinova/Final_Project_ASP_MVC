@@ -15,6 +15,12 @@ namespace Final_Project_ASP_MVC.Controllers
             return View(competitions);
         }
 
+        public IActionResult Viewer()
+        {
+            var competitions = CompetitionStorage.competition;
+            return View(competitions);
+        }
+
         public IActionResult Add()
         {
             return View();
@@ -38,6 +44,12 @@ namespace Final_Project_ASP_MVC.Controllers
         public IActionResult Update(Competition compet)
         {
             CompetitionStorage.Update(compet);
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Remove(int id)
+        {
+            CompetitionStorage.RemoveByName(id);
             return RedirectToAction("Index");
         }
     }
