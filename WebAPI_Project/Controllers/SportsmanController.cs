@@ -41,8 +41,8 @@ namespace WebAPI_Project.Controllers
             if (id != sportsman.ID)
                 return BadRequest();
 
-            var existingProject = Connection.GetSportsmansId(id);
-            if (existingProject is null)
+            var existingSportsman = Connection.GetSportsmansId(id);
+            if (existingSportsman is null)
                 return NotFound();
 
             Connection.UpdateSportsman(sportsman);
@@ -53,9 +53,9 @@ namespace WebAPI_Project.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var project = Connection.GetSportsmansId(id);
+            var sportsman = Connection.GetSportsmansId(id);
 
-            if (project is null)
+            if (sportsman is null)
                 return NotFound();
 
             Connection.RemoveSportsman(id);

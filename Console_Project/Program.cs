@@ -8,15 +8,16 @@ namespace Console_Project
     {
         static void Main(string[] args)
         {
-            List<Sportsman> sportsmans = new List<Sportsman>();
-
-            sportsmans = Connection.GetSportsmans();
+            List<Sportsman> sportsmans = Connection.GetSportsmans();
             foreach (Sportsman i in sportsmans)
             {               
                 Console.WriteLine(i.Name);
+                Console.WriteLine(i.Surname);
             }
-           
-            Console.WriteLine("Hello World!");
+
+            Connection.AddSportsman(new Sportsman() { Name = "Степанов", Surname = "Степан", Image = "/images/Sportsmans/sport12.jpg" });
+            Connection.UpdateSportsman(new Sportsman() { ID = 28, Name = "Леонидов", Surname = "Степан", Image = "/images/Sportsmans/sport12.jpg" });
+            Connection.RemoveSportsman(28);
         }
     }
 }
