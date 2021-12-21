@@ -9,10 +9,10 @@ namespace Console_Project
         static void Main(string[] args)
         {
             List<Sportsman> sportsmans = new List<Sportsman>();
+
             sportsmans = Connection.GetSportsmans();
             foreach (Sportsman i in sportsmans)
-            {
-                
+            {               
                 Console.WriteLine(i.Name);
             }
            

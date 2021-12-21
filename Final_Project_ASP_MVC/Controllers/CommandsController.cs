@@ -9,15 +9,16 @@ namespace Final_Project_ASP_MVC.Controllers
 {
     public class CommandsController : Controller
     {
-        CommandStorage commandStorage = CScopy.commandStorage;
         public IActionResult Index()
         {
-            return View(commandStorage);
+            var commands = CommandStorage.commands;
+            return View(commands);
         }
 
         public IActionResult Viewer()
         {
-            return View(commandStorage);
+            var commands = CommandStorage.commands;
+            return View(commands);
         }
 
         public IActionResult Add()
@@ -28,13 +29,13 @@ namespace Final_Project_ASP_MVC.Controllers
         [HttpPost]
         public IActionResult Add(Command command)
         {
-            commandStorage.Add(command);
+            CommandStorage.Add(command);
             return RedirectToAction("Index");
         }
 
         public IActionResult Remove(int id)
         {
-            commandStorage.RemoveByName(id);
+            CommandStorage.RemoveByName(id);
             return RedirectToAction("Index");
         }
 
@@ -48,7 +49,7 @@ namespace Final_Project_ASP_MVC.Controllers
         [HttpPost]
         public IActionResult Update(Command command)
         {
-            commandStorage.Update(command);
+            CommandStorage.Update(command);
             return RedirectToAction("Index");
         }
     }

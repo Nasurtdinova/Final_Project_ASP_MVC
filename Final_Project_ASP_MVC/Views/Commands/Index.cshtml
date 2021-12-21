@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Command";
 }
-@model Final_Project_ASP_MVC.Core.CommandStorage
+@model List<Final_Project_ASP_MVC.Core.Command>
 <h2>Commands</h2>
 <div class="row justify-content-end">
     <a class="btn btn-primary" asp-controller="Commands"
@@ -11,7 +11,7 @@
 </div>
 <br />
 <div class="row">
-    @foreach (Final_Project_ASP_MVC.Core.Command command in Model)
+    @foreach (var command in Model)
     {
         <div class="col-md-4 mb-5">
             <div class="card h-100">

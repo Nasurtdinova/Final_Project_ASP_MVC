@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Final_Project_ASP_MVC.Core;
-using WebAPI_Project.Service;
 
 namespace WebAPI_Project.Controllers
 {
@@ -16,12 +15,12 @@ namespace WebAPI_Project.Controllers
         public CompetitionController() { }
 
         [HttpGet]
-        public ActionResult<List<Competition>> GetAll() => CompetitionService.GetAll();
+        public ActionResult<List<Competition>> GetAll() => Connection.GetCompetition();
 
         [HttpGet("{id}")]
         public ActionResult<Competition> Get(int id)
         {
-            var compet = CompetitionService.Get(id);
+            var compet = Connection.GetCompetId(id);
 
             if (compet == null)
                 return NotFound();
@@ -32,9 +31,36 @@ namespace WebAPI_Project.Controllers
         [HttpPost]
         public IActionResult Create(Competition compet)
         {
-            CompetitionService.Add(compet);
+            Connection.AddCompetition(compet);
             return NoContent();
-            //return CreatedAtAction(nameof(Create), new { id = compet.ID }, compet);
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult Update(int id, Competition competition)
+        {
+            if (id != competition.ID)
+                return BadRequest();
+
+            var existingCompet = Connection.GetCompetId(id);
+            if (existingCompet is null)
+                return NotFound();
+
+            Connection.UpdateCompet(competition);
+
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            var compet = Connection.GetCompetId(id);
+
+            if (compet is null)
+                return NotFound();
+
+            Connection.RemoveCompetition(id);
+
+            return NoContent();
         }
     }
 }

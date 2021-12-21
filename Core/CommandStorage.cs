@@ -15,19 +15,19 @@ namespace Final_Project_ASP_MVC.Core
             return commands.GetEnumerator();
         }
 
-        public void Add(Command command)
+        public static void Add(Command command)
         {
             Connection.AddCommand(command);
             commands.Add(command);
         }
 
-        public void RemoveByName(int id)
+        public static void RemoveByName(int id)
         {
             Connection.RemoveCommand(id);
             commands.RemoveAll(p => p.ID == id);
         }
 
-        public void Update(Command command)
+        public static void Update(Command command)
         {
             Connection.UpdateCommand(command);
             commands = Connection.GetCommands();

@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using WebAPI_Project.Service;
 
 namespace WebAPI_Project.Controllers
 {
@@ -16,12 +15,12 @@ namespace WebAPI_Project.Controllers
         public SportsmanController() {}
 
         [HttpGet]
-        public ActionResult<List<Sportsman>> GetAll() => SportsmanService.GetAll();
+        public ActionResult<List<Sportsman>> GetAll() => Connection.GetSportsmans();
 
         [HttpGet("{id}")]
         public ActionResult<Sportsman> Get(int id)
         {
-            var sportsman = SportsmanService.Get(id);
+            var sportsman = Connection.GetSportsmansId(id);
 
             if (sportsman == null)
                 return NotFound();
@@ -32,9 +31,8 @@ namespace WebAPI_Project.Controllers
         [HttpPost]
         public IActionResult Create(Sportsman sportsman)
         {
-            SportsmanService.Add(sportsman);
+            Connection.AddSportsman(sportsman);
             return NoContent();
-            //return CreatedAtAction(nameof(Create), new { id = sportsman.ID }, sportsman);
         }
 
         [HttpPut("{id}")]
@@ -43,11 +41,11 @@ namespace WebAPI_Project.Controllers
             if (id != sportsman.ID)
                 return BadRequest();
 
-            var existingProject = SportsmanService.Get(id);
+            var existingProject = Connection.GetSportsmansId(id);
             if (existingProject is null)
                 return NotFound();
 
-            SportsmanService.Update(sportsman);
+            Connection.UpdateSportsman(sportsman);
 
             return NoContent();
         }
@@ -55,16 +53,14 @@ namespace WebAPI_Project.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var project = SportsmanService.Get(id);
+            var project = Connection.GetSportsmansId(id);
 
             if (project is null)
                 return NotFound();
 
-            SportsmanService.Delete(id);
+            Connection.RemoveSportsman(id);
 
             return NoContent();
         }
-
-
     }
 }
