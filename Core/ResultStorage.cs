@@ -1,4 +1,5 @@
-﻿using Final_Project_ASP_MVC.Core;
+﻿
+using Final_Project_ASP_MVC.Core;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -15,16 +16,16 @@ namespace Core
             results.Add(result);
         }
 
-        public static void RemoveByName(int idResult)
+        public static void RemoveByName(int id)
         {
-            Connection.RemoveResult(idResult);
-            results.RemoveAll(p => p.IDresult == idResult);
+            Connection.RemoveResult(id);
+            results.RemoveAll(p => p.ID == id);
         }
 
-        //public static void Update(Competition compet)
-        //{
-        //    Connection.UpdateCompet(compet);
-        //    competition = Connection.GetCompetition();
-        //}
+        public static void Update(Result result)
+        {
+            Connection.UpdateResult(result);
+            results = Connection.GetResults();
+        }
     }
 }

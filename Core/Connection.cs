@@ -1,4 +1,5 @@
-﻿using Core;
+﻿
+using Core;
 using Final_Project_ASP_MVC.Models;
 using MySql.Data.MySqlClient;
 using System;
@@ -148,13 +149,40 @@ namespace Final_Project_ASP_MVC.Core
 
             try
             {
-                string sql = "SELECT Competition.Command.Name, Competition.Competition.Name, Competition.ResultCompetition.Rank, Competition.ResultCompetition.idResult from Competition.ResultCompetition join Competition.Command on Competition.ResultCompetition.idCommand = Competition.Command.idCommand join Competition.Competition on Competition.ResultCompetition.idCompetition = Competition.Competition.idCompetition;";
+                string sql = "SELECT Competition.ResultCompetition.idResult, Competition.Command.Name, Competition.Competition.Name, Competition.ResultCompetition.Rank from Competition.ResultCompetition join Competition.Command on Competition.ResultCompetition.idCommand = Competition.Command.idCommand join Competition.Competition on Competition.ResultCompetition.idCompetition = Competition.Competition.idCompetition;";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 MySqlDataReader res = cmd.ExecuteReader();
 
                 while (res.Read())
                 {
-                    results.Add(new Result { Command = res[0].ToString(), Compet = res[1].ToString(), Rank = Convert.ToInt32(res[2]), IDresult = Convert.ToInt32(res[3]) });
+                    results.Add(new Result { ID = Convert.ToInt32(res[0]), Command = res[1].ToString(), Compet = res[2].ToString(), Rank = Convert.ToInt32(res[3]) });
+                }
+                res.Close();
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            conn.Close();
+            return results;
+        }
+
+        public static Result GetResultsId(int id)
+        {
+            MySqlConnection conn = new MySqlConnection(connStr);
+            conn.Open();
+            Result results = null;
+
+            try
+            {
+                string sql = $"SELECT Competition.ResultCompetition.idResult, Competition.Command.Name, Competition.Competition.Name, Competition.ResultCompetition.Rank from Competition.ResultCompetition join Competition.Command on Competition.ResultCompetition.idCommand = Competition.Command.idCommand join Competition.Competition on Competition.ResultCompetition.idCompetition = Competition.Competition.idCompetition where Competition.ResultCompetition.idResult = {id};";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                MySqlDataReader res = cmd.ExecuteReader();
+
+                while (res.Read())
+                {
+                    results = new Result { ID = Convert.ToInt32(res[0]), Command = res[1].ToString(), Compet = res[2].ToString(), Rank = Convert.ToInt32(res[3]) };
                 }
                 res.Close();
             }
@@ -379,13 +407,13 @@ namespace Final_Project_ASP_MVC.Core
             conn.Close();
         }
 
-        public static void RemoveResult(int idResult)
+        public static void RemoveResult(int id)
         {
             MySqlConnection conn = new MySqlConnection(connStr);
             conn.Open();
             try
             {
-                MySqlCommand cmd = new MySqlCommand($"DELETE from Competition.ResultCompetition WHERE (idResult = {idResult});", conn);
+                MySqlCommand cmd = new MySqlCommand($"DELETE from Competition.ResultCompetition WHERE (idResult = {id});", conn);
                 cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
@@ -465,7 +493,7 @@ namespace Final_Project_ASP_MVC.Core
             conn.Open();
             try
             {
-                MySqlCommand cmd = new MySqlCommand($"update Competition.Command set Name='{command.Name}',Count={command.Count},Image='{command.Image}' where idCommand = {command.ID};", conn);
+                MySqlCommand cmd = new MySqlCommand($"update Competition.Command set Name='{command.Name}',Count={command.Count},Image='{command.Image}', ID_city = (select Competition.City.idCity from Competition.City where Competition.City.Name = '{command.City}') where idCommand = {command.ID};", conn);
                 cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
@@ -480,7 +508,23 @@ namespace Final_Project_ASP_MVC.Core
             conn.Open();
             try
             {
-                MySqlCommand cmd = new MySqlCommand($"update Competition.Competition set Name='{compet.Name}',NameVenue='{compet.NameVenue}',Street='{compet.Street}', Home='{compet.Home}',Date ='{compet.Date.ToString("yyyy-MM-dd hh:mm:ss")}' where idCompetition = {compet.ID};", conn);
+                MySqlCommand cmd = new MySqlCommand($"update Competition.Competition set Name='{compet.Name}',NameVenue='{compet.NameVenue}',Street='{compet.Street}', Home='{compet.Home}',idCity = (select idCity from City where Competition.City.Name = '{compet.City}'), Date ='{compet.Date.ToString("yyyy-MM-dd hh:mm:ss")}' where idCompetition = {compet.ID};", conn);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            conn.Close();
+        }
+
+        public static void UpdateResult(Result result)
+        {
+            MySqlConnection conn = new MySqlConnection(connStr);
+            conn.Open();
+            try
+            {
+                MySqlCommand cmd = new MySqlCommand($"update Competition.ResultCompetition set Competition.ResultCompetition.idCompetition=(select Competition.Competition.idCompetition from Competition.Competition where Competition.Competition.Name = '{result.Compet}'), Competition.ResultCompetition.idCommand=(select Competition.Command.idCommand from Competition.Command where Competition.Command.Name = '{result.Command}'), Competition.ResultCompetition.Rank = {result.Rank} where idResult = {result.ID};", conn);
                 cmd.ExecuteNonQuery();
             }
             catch (Exception ex)

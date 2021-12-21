@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Core;
+using Final_Project_ASP_MVC.Core;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Final_Project_ASP_MVC.Controllers
@@ -33,9 +34,23 @@ namespace Final_Project_ASP_MVC.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult Remove(int idResult)
+        [HttpGet]
+        public IActionResult Update(int id)
         {
-            ResultStorage.RemoveByName(idResult);
+            Result result = Connection.GetResultsId(id);
+            return View(result);
+        }
+
+        [HttpPost]
+        public IActionResult Update(Result result)
+        {
+            ResultStorage.Update(result);
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Remove(int id)
+        {
+            ResultStorage.RemoveByName(id);
             return RedirectToAction("Index");
         }
     }

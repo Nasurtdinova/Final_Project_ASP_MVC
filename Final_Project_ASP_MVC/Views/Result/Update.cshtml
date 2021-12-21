@@ -1,0 +1,47 @@
+﻿@{
+    ViewData["Title"] = "Update result";
+}
+@model Core.Result
+
+<div class="row justify-content-lg-center">
+    <h1>Update result</h1>
+</div>
+@using (Html.BeginForm("Update", "Result", FormMethod.Post))
+{
+<fieldset>
+    @Html.HiddenFor(m => m.ID)
+    <p>
+        @Html.LabelFor(m => m.Command, "Command")
+        <br />
+        <select asp-for="Command" class="form-control">
+            <option selected="selected" value=" @Html.EditorFor(m => m.Command)">  </option>
+            @foreach (string command in Final_Project_ASP_MVC.Core.Connection.GetNameCommands())
+            {
+                <option>@command</option>
+            }
+
+        </select>
+    </p>
+    <p>
+        @Html.LabelFor(m => m.Compet, "Competition")
+        <br />
+        <select asp-for="Compet" class="form-control">
+            <option selected="selected" value=" @Html.EditorFor(m => m.Compet)">  </option>
+            @foreach (string compet in Final_Project_ASP_MVC.Core.Connection.GetNameCompets())
+            {
+                <option>@compet</option>
+            }
+
+        </select>
+    </p>
+    <p>
+        @Html.LabelFor(m => m.Rank, "Rank")
+        <br />
+        @Html.EditorFor(m => m.Rank)
+    </p>
+    <p><input type="submit" value="Отправить" /></p>
+</fieldset>
+}
+<div>
+    <a asp-action="Index">Back to projects list</a>
+</div>
