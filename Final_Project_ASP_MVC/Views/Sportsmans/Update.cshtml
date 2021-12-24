@@ -8,33 +8,68 @@
 </div>
 @using (Html.BeginForm("Update", "Sportsmans", FormMethod.Post))
 {
-    <fieldset>
-        @Html.HiddenFor(m => m.ID)
-        <p>
-            @Html.LabelFor(m => m.Surname, "Surname")
-            <br />
-            @Html.EditorFor(m => m.Surname)
-        </p>
-        <p>
-            @Html.LabelFor(m => m.Name, "Name")
-            <br />
-            @Html.EditorFor(m => m.Name)
+<fieldset>
+    @Html.HiddenFor(m => m.ID)
+    <p>
+        @Html.LabelFor(m => m.Surname, "Surname")
+        <br />
+        @Html.EditorFor(m => m.Surname)
+    </p>
+    <p>
+        @Html.LabelFor(m => m.Name, "Name")
+        <br />
+        @Html.EditorFor(m => m.Name)
 
-        </p>
-        <p>
-            @Html.LabelFor(m => m.Image, "Image")
-            <br />
-            <select asp-for="Image" class="form-control">
-                <option selected="selected" value=" @Html.EditorFor(m => m.Image)">  </option>
-                @foreach (string image in Final_Project_ASP_MVC.Core.Connection.GetImages())
-                {
-                    <option>@image</option>
-                }
+    </p>
+    <p>
+        @Html.LabelFor(m => m.Image, "Image")
+        <br />
+        <select asp-for="Image" class="form-control">
+            <option selected="selected" value=" @Html.EditorFor(m => m.Image)">  </option>
+            @foreach (string image in Final_Project_ASP_MVC.Core.Connection.GetImages())
+            {
+                <option>@image</option>
+            }
 
-            </select>
-        </p>
-        <p><input type="submit" value="Отправить" /></p>
-    </fieldset>
+        </select>
+    </p>
+    <p>
+        @Html.LabelFor(m => m.Title, "Title")
+        <br />
+        <select asp-for="Title" class="form-control">
+            <option selected="selected" value=" @Html.EditorFor(m => m.Title)">  </option>
+            @foreach (string title in Final_Project_ASP_MVC.Core.Connection.GetTitles())
+            {
+                <option>@title</option>
+            }
+
+        </select>
+    </p>
+    <p>
+        @Html.LabelFor(m => m.Height, "Height")
+        <br />
+        @Html.EditorFor(m => m.Height)
+    </p>
+    <p>
+        @Html.LabelFor(m => m.Cost, "Cost")
+        <br />
+        @Html.EditorFor(m => m.Cost)
+    </p>
+
+    <p>
+        @Html.LabelFor(m => m.Command, "Command")
+        <br />
+        <select asp-for="Command" class="form-control">
+            <option selected="selected" value=" @Html.EditorFor(m => m.Command)">  </option>
+            @foreach (string command in Final_Project_ASP_MVC.Core.Connection.GetNameCommands())
+            {
+                <option>@command</option>
+            }
+
+        </select>
+    </p>
+    <p><input type="submit" value="Отправить" /></p>
+</fieldset>
 }
 <div>
     <a asp-action="Index">Back to projects list</a>

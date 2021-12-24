@@ -16,13 +16,11 @@ namespace Final_Project_ASP_MVC.Core
         public static MySqlConnection conn; 
         public static List<string> images;
         public static List<string> cities;
+        public static List<string> titles;
         public static List<string> commands;
         public static List<string> competitions;
 
-        //static Connection()
-        //{
-        //    conn.Open();
-        //}
+        public static List<Sportsman> sporCom;
 
         public static List<string> GetImages()
         {
@@ -40,6 +38,24 @@ namespace Final_Project_ASP_MVC.Core
             img.Close();
             conn.Close();
             return images;          
+        }
+
+        public static List<string> GetTitles()
+        {
+            MySqlConnection conn = new MySqlConnection(connStr);
+            conn.Open();
+            titles = new List<string>();
+            string sql = "SELECT Name FROM Title";
+            MySqlCommand cmd = new MySqlCommand(sql, conn);
+            MySqlDataReader tit = cmd.ExecuteReader();
+
+            while (tit.Read())
+            {
+                titles.Add(tit[0].ToString());
+            }
+            tit.Close();
+            conn.Close();
+            return titles;
         }
 
         public static List<string> GetNameCommands()
@@ -123,13 +139,18 @@ namespace Final_Project_ASP_MVC.Core
 
             try
             {
-                string sql = "SELECT ID,Surname,Competition.Sportsman.Name,Competition.Images.Name FROM Competition.Sportsman  join Competition.Images  on ID_Image = idImages;";
+                string sql = "SELECT ID,Surname,Competition.Sportsman.Name,Competition.Images.Name, Competition.Title.Name,Height,Cost, Competition.Command.Name " +
+                    "FROM Competition.Sportsman  " +
+                    "join Competition.Images  on ID_Image = idImages " +
+                    "join Competition.Title on Competition.Title.idTitle = Competition.Sportsman.idTitle join Competition.Command on Competition.Command.idCommand = Competition.Sportsman.idCommand;";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 MySqlDataReader res = cmd.ExecuteReader();
 
                 while (res.Read())
                 {
-                    sportsmans.Add(new Sportsman { ID = Convert.ToInt32(res[0]), Surname = res[1].ToString(), Name = res[2].ToString(), Image = res[3].ToString() });
+                    sportsmans.Add(new Sportsman { ID = Convert.ToInt32(res[0]), Surname = res[1].ToString(), 
+                        Name = res[2].ToString(), Image = res[3].ToString(), Title = res[4].ToString(), 
+                        Height = Convert.ToInt32(res[5]), Cost = Convert.ToInt32(res[6]), Command = res[7].ToString() });
                 }
                 res.Close();
             }
@@ -168,6 +189,32 @@ namespace Final_Project_ASP_MVC.Core
             return results;
         }
 
+        public static List<Sportsman> GetSporCom(int id)
+        {
+            MySqlConnection conn = new MySqlConnection(connStr);
+            conn.Open();
+            sporCom = new List<Sportsman>();
+            try
+            {
+                string sql = $"select * from Competition.Sportsman where idCommand = {id};";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                MySqlDataReader res = cmd.ExecuteReader();
+
+                while (res.Read())
+                {
+                    sporCom.Add(new Sportsman { ID = Convert.ToInt32(res[0]), Surname = res[1].ToString(), Name = res[2].ToString() });
+                }
+                res.Close();
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            conn.Close();
+            return sporCom;
+        }
+
         public static Result GetResultsId(int id)
         {
             MySqlConnection conn = new MySqlConnection(connStr);
@@ -202,13 +249,22 @@ namespace Final_Project_ASP_MVC.Core
             Sportsman sportsman = null;
             try
             {
-                string sql = $"SELECT ID,Surname,Competition.Sportsman.Name,Competition.Images.Name FROM Competition.Sportsman  join Competition.Images  on ID_Image = idImages where Competition.Sportsman.ID = {id};";
+                string sql = $"SELECT ID,Surname,Competition.Sportsman.Name,Competition.Images.Name, Competition.Title.Name,Height,Cost, Competition.Command.Name FROM Competition.Sportsman join Competition.Images on ID_Image = idImages join Competition.Title on Competition.Title.idTitle = Competition.Sportsman.idTitle join Competition.Command on Competition.Command.idCommand = Competition.Sportsman.idCommand where Competition.Sportsman.ID = {id};";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 MySqlDataReader res = cmd.ExecuteReader();
 
                 while (res.Read())
                 {
-                    sportsman = new Sportsman { ID = Convert.ToInt32(res[0]), Surname = res[1].ToString(), Name = res[2].ToString(), Image = res[3].ToString() };
+                    sportsman = new Sportsman { 
+                        ID = Convert.ToInt32(res[0]), 
+                        Surname = res[1].ToString(), 
+                        Name = res[2].ToString(), 
+                        Image = res[3].ToString(),
+                        Title = res[4].ToString(),
+                        Height = Convert.ToInt32(res[5]),
+                        Cost = Convert.ToInt32(res[6]),
+                        Command = res[7].ToString()
+                    };
                 }
                 res.Close();
             }
@@ -429,7 +485,7 @@ namespace Final_Project_ASP_MVC.Core
             conn.Open();
             try
             {
-                MySqlCommand cmd = new MySqlCommand($"INSERT INTO `Competition`.`Sportsman` (`Surname`, `Name`, `ID_Image`) SELECT '{sportsman.Surname}', '{sportsman.Name}', idImages  FROM Competition.Images where '{sportsman.Image}' = Competition.Images.Name", conn);
+                MySqlCommand cmd = new MySqlCommand($"INSERT INTO `Competition`.`Sportsman`(surname,Competition.Sportsman.Name,ID_Image,idTitle,Cost,Height, idCommand) values('{sportsman.Surname}', '{sportsman.Name}', (select Competition.Images.idImages FROM Competition.Images where '{sportsman.Image}' = Competition.Images.Name), (select Competition.Title.idTitle FROM Competition.Title where '{sportsman.Title}' = Competition.Title.Name),{sportsman.Cost}, {sportsman.Height}, (select Competition.Command.idCommand from Competition.Command where Competition.Command.Name = '{sportsman.Command}'));", conn);
                 cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
@@ -478,7 +534,7 @@ namespace Final_Project_ASP_MVC.Core
             conn.Open();
             try
             {
-                MySqlCommand cmd = new MySqlCommand($"update Competition.Sportsman set Competition.Sportsman.Surname='{sportsman.Surname}',Competition.Sportsman.Name='{sportsman.Name}', Competition.Sportsman.ID_Image = (select idImages  from Competition.Images where '{sportsman.Image}'=Competition.Images.Name) where ID = {sportsman.ID};", conn);
+                MySqlCommand cmd = new MySqlCommand($"update Competition.Sportsman set Competition.Sportsman.Surname='{sportsman.Surname}',Competition.Sportsman.Name='{sportsman.Name}', Competition.Sportsman.ID_Image = (select idImages  from Competition.Images where '{sportsman.Image}' = Competition.Images.Name), Competition.Sportsman.idTitle = (select idTitle from Competition.Title where '{sportsman.Title}' = Competition.Title.Name), Competition.Sportsman.Height = {sportsman.Height}, Competition.Sportsman.Cost = {sportsman.Cost},Competition.Sportsman.idCommand =(select Competition.Command.idCommand from Competition.Command where Competition.Command.Name = '{sportsman.Command}') where ID = {sportsman.ID};", conn);
                 cmd.ExecuteNonQuery();
             }
             catch (Exception ex)

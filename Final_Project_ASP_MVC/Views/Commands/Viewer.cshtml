@@ -23,6 +23,13 @@
                         <div>
                             <p class="font-weight-normal">Город: @command.City</p>
                         </div>
+
+                        <div class="text-center">
+                            <a class="btn btn-primary" asp-controller="Commands"
+                               asp-action="SportsmanCommand" asp-route-id="@command.ID" role="button">
+                                View
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

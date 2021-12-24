@@ -52,5 +52,12 @@ namespace Final_Project_ASP_MVC.Controllers
             SportsmanStorage.Update(sportsman);
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public IActionResult ViewerView(int id)
+        {
+            Sportsman sportsman = Connection.GetSportsmansId(id);
+            return View(sportsman);
+        }
     }
 }

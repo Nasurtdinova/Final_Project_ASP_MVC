@@ -52,5 +52,12 @@ namespace Final_Project_ASP_MVC.Controllers
             CommandStorage.Update(command);
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public IActionResult SportsmanCommand(int id)
+        {
+            List<Sportsman> sportCom = Connection.GetSporCom(id);
+            return View(sportCom);
+        }
     }
 }

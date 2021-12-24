@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Sportsmans";
+    ViewData["Title"] = "Command";
 }
 @model List<Final_Project_ASP_MVC.Core.Sportsman>
 <h2>Sportsmans</h2>
@@ -9,15 +9,12 @@
         <div class="col-md-4 mb-5">
             <div class="card h-100">
                 <div class="card-body">
+
                     <div>
-                        <img class="card-img-top" width="300" height="300" src="@sportsman.Image"
-                             alt="@sportsman.Name" />
+                        <p class="font-weight-normal">@sportsman.Name</p>
                     </div>
                     <div>
                         <p class="font-weight-normal">@sportsman.Surname</p>
-                    </div>
-                    <div>
-                        <p class="font-weight-normal">@sportsman.Name</p>
                     </div>
                     <div class="text-center">
                         <a class="btn btn-primary" asp-controller="Sportsmans"
@@ -25,8 +22,8 @@
                             View
                         </a>
                     </div>
-                    </div>
                 </div>
-        </div>
+                </div>
+            </div>
     }
 </div>

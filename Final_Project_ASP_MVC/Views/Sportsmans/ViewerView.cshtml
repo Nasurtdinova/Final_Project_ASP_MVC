@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "Sportsman";
+}
+@model Final_Project_ASP_MVC.Core.Sportsman
+
+@using (Html.BeginForm("ViewerView", "Sportsmans", FormMethod.Post))
+{
+    <fieldset>
+        @Html.HiddenFor(m => m.ID)
+        <p>
+            @Html.LabelFor(m => m.Surname, "Surname")
+            <br />
+            @Html.EditorFor(m => m.Surname)
+        </p>
+        <p>
+            @Html.LabelFor(m => m.Name, "Name")
+            <br />
+            @Html.EditorFor(m => m.Name)
+
+        </p>
+        <p>
+            @Html.LabelFor(m => m.Title, "Title")
+            <br />
+            @Html.EditorFor(m => m.Title)
+        </p>
+        <p>
+            @Html.LabelFor(m => m.Height, "Height")
+            <br />
+            @Html.EditorFor(m => m.Height)
+        </p>
+        <p>
+            @Html.LabelFor(m => m.Cost, "Cost")
+            <br />
+            @Html.EditorFor(m => m.Cost)
+        </p>
+    </fieldset>
+}
+<div>
+    <a asp-action="Viewer">Back to sportsmans list</a>
+</div>
+
