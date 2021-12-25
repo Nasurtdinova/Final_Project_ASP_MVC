@@ -1,4 +1,5 @@
 ﻿@{
+    Layout = "~/Views/Shared/_LayoutCopy.cshtml";
     ViewData["Title"] = "Update result";
 }
 @model Core.Result
@@ -39,9 +40,9 @@
         <br />
         @Html.EditorFor(m => m.Rank)
     </p>
-    <p><input type="submit" value="Отправить" /></p>
+    <p><input type="submit" value="OK" /></p>
 </fieldset>
 }
 <div>
-    <a asp-action="Index">Back to projects list</a>
+    <a asp-action="Index">Back to results list</a>
 </div>

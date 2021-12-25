@@ -1,0 +1,47 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutCopy.cshtml";
+    ViewData["Title"] = "Sponsorship";
+}
+@model List<Core.Sponsorship>
+<h2>Sponsorship</h2>
+<div class="row justify-content-end">
+    <a class="btn btn-primary" asp-controller="Sponsorship"
+       asp-action="Add" role="button">Add</a>
+    <a class="btn btn-primary" asp-controller="Admin"
+       asp-action="Index" role="button">Main page</a>
+</div>
+<br />
+
+
+<div class="row">
+    @foreach (var sponsorship in Model)
+    {
+        <div class="col-md-4 mb-5">
+            <div class="card h-100">
+                <div class="card-body">
+
+                    <div>
+                        <p class="font-weight-normal">Name sponsor: @sponsorship.SponsorName</p>
+                    </div>
+                    <div>
+                        <p class="font-weight-normal">Name command: @sponsorship.Command</p>
+                    </div>
+                    <div>
+                        <p class="font-weight-normal">Team of the contract: @sponsorship.teamContract</p>
+                    </div>
+                    <div>
+                        <p class="font-weight-normal">Amount: @sponsorship.Amount</p>
+                    </div>
+                    <a class="btn btn-danger" asp-controller="Sponsorship"
+                       asp-action="Remove" asp-route-id="@sponsorship.ID" role="button">
+                        Remove
+                    </a>
+                    <a class="btn btn-primary" asp-controller="Sponsorship"
+                       asp-action="Update" asp-route-id="@sponsorship.ID" role="button">
+                        Update
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

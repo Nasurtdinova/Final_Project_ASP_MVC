@@ -13,18 +13,18 @@ namespace Final_Project_ASP_MVC.ViewModels
         public string Email { get; set; }
 
         [Required]
-        [Display(Name = "Год рождения")]
+        [Display(Name = "Year of birth")]
         public int Year { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Пароль")]
+        [Display(Name = "Password")]
         public string Password { get; set; }
 
         [Required]
-        [Compare("Password", ErrorMessage = "Пароли не совпадают")]
+        [Compare("Password", ErrorMessage = "Passwords don't match")]
         [DataType(DataType.Password)]
-        [Display(Name = "Подтвердить пароль")]
+        [Display(Name = "Confirm password")]
         public string PasswordConfirm { get; set; }
     }
 }

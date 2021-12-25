@@ -23,7 +23,7 @@ namespace Final_Project_ASP_MVC.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult IndexHome()
         {
             return View();
         }

@@ -47,11 +47,16 @@ namespace Final_Project_ASP_MVC.Controllers
                     {
                         return Redirect(model.ReturnUrl);
                     }
+                    else if (model.Email == "nasurtdinovaguz@mail.ru" && model.Password == "2003")
+                    {
+                        return RedirectToAction("IndexHome", "Home");
+                    }
                     else
                     {
-                        return RedirectToAction("Index", "Admin");
+                        //
                     }
                 }
+              
                 else
                 {
                     ModelState.AddModelError("", "Неправильный логин и (или) пароль");

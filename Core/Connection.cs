@@ -13,7 +13,7 @@ namespace Final_Project_ASP_MVC.Core
     public class Connection
     {
         public static string connStr = ConfigurationManager.AppSettings["connection"].ToString();
-        public static MySqlConnection conn; 
+        public static MySqlConnection conn = new MySqlConnection(connStr);
         public static List<string> images;
         public static List<string> cities;
         public static List<string> titles;
@@ -24,7 +24,6 @@ namespace Final_Project_ASP_MVC.Core
 
         public static List<string> GetImages()
         {
-            MySqlConnection conn = new MySqlConnection(connStr);
             conn.Open();
             images = new List<string>();
             string sql = "SELECT Name FROM Images";
@@ -42,7 +41,6 @@ namespace Final_Project_ASP_MVC.Core
 
         public static List<string> GetTitles()
         {
-            MySqlConnection conn = new MySqlConnection(connStr);
             conn.Open();
             titles = new List<string>();
             string sql = "SELECT Name FROM Title";
@@ -60,7 +58,6 @@ namespace Final_Project_ASP_MVC.Core
 
         public static List<string> GetNameCommands()
         {
-            MySqlConnection conn = new MySqlConnection(connStr);
             conn.Open();
             commands = new List<string>();
             string sql = "SELECT Name FROM Command";
@@ -78,7 +75,6 @@ namespace Final_Project_ASP_MVC.Core
 
         public static List<string> GetNameCompets()
         {
-            MySqlConnection conn = new MySqlConnection(connStr);
             conn.Open();
             competitions = new List<string>();
             string sql = "SELECT Name FROM Competition.Competition";
@@ -96,7 +92,6 @@ namespace Final_Project_ASP_MVC.Core
 
         public static List<string> GetCities()
         {
-            MySqlConnection conn = new MySqlConnection(connStr);
             conn.Open();
             cities = new List<string>();
             string sql = "SELECT Name FROM City";
@@ -114,26 +109,29 @@ namespace Final_Project_ASP_MVC.Core
 
         public static bool IsLogin(string email, string password)
         {
-            MySqlConnection conn = new MySqlConnection(connStr);
             conn.Open();
-            try
+            string sql = $"SELECT Email,Password FROM Competition.User where '{email}' = Email and '{password}' = Password;";
+            MySqlCommand cmd = new MySqlCommand(sql, conn);
+            MySqlDataReader res = cmd.ExecuteReader();
+            while (res.Read())
             {
-                string sql = $"SELECT Email,Password FROM Competition.User where '{email}' = Email and '{password}' = Password ;";
-                MySqlCommand cmd = new MySqlCommand(sql, conn);
-                MySqlDataReader res = cmd.ExecuteReader();
-                conn.Close();
-                return true;
+                if (res[0].ToString() == email && res[1].ToString() == password)
+                {
+                    
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+                
             }
-            catch
-            {
-                conn.Close();
-                return false;
-            }
-            
+            conn.Close();
+            res.Close();
+            return false;
         }
         public static List<Sportsman> GetSportsmans()
         {
-            MySqlConnection conn = new MySqlConnection(connStr);
             conn.Open();
             List<Sportsman> sportsmans = new List<Sportsman>();
 
@@ -164,7 +162,6 @@ namespace Final_Project_ASP_MVC.Core
         }
         public static List<Result> GetResults()
         {
-            MySqlConnection conn = new MySqlConnection(connStr);
             conn.Open();
             List<Result> results = new List<Result>();
 
@@ -189,9 +186,33 @@ namespace Final_Project_ASP_MVC.Core
             return results;
         }
 
+        public static List<Sponsorship> GetSponsorship()
+        {
+            conn.Open();
+            List<Sponsorship> sponsorship = new List<Sponsorship>();
+
+            try
+            {
+                string sql = "SELECT id, Competition.User.Name, Competition.User.Surname, Competition.Command.Name, teamContract, amount from Competition.SponsorCommand join Competition.User on Competition.SponsorCommand.idSponsor = Competition.User.idUser join Competition.Command on Competition.SponsorCommand.idCom = Competition.Command.idCommand; ";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                MySqlDataReader res = cmd.ExecuteReader();
+
+                while (res.Read())
+                {
+                    sponsorship.Add(new Sponsorship { ID = Convert.ToInt32(res[0]), SponsorName = res[1].ToString(), SponsorSurname = res[2].ToString(), Command = res[3].ToString(), teamContract = Convert.ToInt32(res[4]), Amount = Convert.ToInt32(res[5]) });
+                }
+                res.Close();
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            conn.Close();
+            return sponsorship;
+        }
         public static List<Sportsman> GetSporCom(int id)
         {
-            MySqlConnection conn = new MySqlConnection(connStr);
             conn.Open();
             sporCom = new List<Sportsman>();
             try
@@ -217,7 +238,6 @@ namespace Final_Project_ASP_MVC.Core
 
         public static Result GetResultsId(int id)
         {
-            MySqlConnection conn = new MySqlConnection(connStr);
             conn.Open();
             Result results = null;
 
@@ -244,7 +264,6 @@ namespace Final_Project_ASP_MVC.Core
 
         public static Sportsman GetSportsmansId(int id)
         {
-            MySqlConnection conn = new MySqlConnection(connStr);
             conn.Open();
             Sportsman sportsman = null;
             try
@@ -279,7 +298,6 @@ namespace Final_Project_ASP_MVC.Core
 
         public static Command GetCommandsId(int id)
         {
-            MySqlConnection conn = new MySqlConnection(connStr);
             conn.Open();
             Command command = null;
             try
@@ -305,7 +323,6 @@ namespace Final_Project_ASP_MVC.Core
 
         public static Competition GetCompetId(int id)
         {
-            MySqlConnection conn = new MySqlConnection(connStr);
             conn.Open();
             Competition compet = null;
             try
@@ -331,7 +348,6 @@ namespace Final_Project_ASP_MVC.Core
 
         public static List<Command> GetCommands()
         {
-            MySqlConnection conn = new MySqlConnection(connStr);
             conn.Open();
             List<Command> commands = new List<Command>();
 
@@ -358,7 +374,6 @@ namespace Final_Project_ASP_MVC.Core
 
         public static List<Competition> GetCompetition()
         {
-            MySqlConnection conn = new MySqlConnection(connStr);
             conn.Open();
             List<Competition> competition = new List<Competition>();
 
@@ -385,7 +400,6 @@ namespace Final_Project_ASP_MVC.Core
 
         public static void AddCommand(Command command)
         {
-            MySqlConnection conn = new MySqlConnection(connStr);
             conn.Open();
             try
             {
@@ -399,9 +413,23 @@ namespace Final_Project_ASP_MVC.Core
             conn.Close();
         }
 
+        public static void AddSponsorship(Sponsorship sponsorship)
+        {
+            conn.Open();
+            try
+            {
+                MySqlCommand cmd = new MySqlCommand($"INSERT INTO Competition.SponsorCommand (idSponsor, idCom, teamContract, amount) values ((select Competition.User.idUser from Competition.User where Competition.User.Name = '{sponsorship.SponsorName}' && Competition.User.Surname = '{sponsorship.SponsorSurname}'), (select Competition.Command.idCommand from Competition.Command where Competition.Command.Name = '{sponsorship.Command}'), {sponsorship.teamContract}, {sponsorship.Amount});", conn);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            conn.Close();
+        }
+
         public static void AddCompetition(Competition compet)
         {
-            MySqlConnection conn = new MySqlConnection(connStr);
             conn.Open();
             try
             {
@@ -417,7 +445,6 @@ namespace Final_Project_ASP_MVC.Core
 
         public static void RemoveCommand(int id)
         {
-            MySqlConnection conn = new MySqlConnection(connStr);
             conn.Open();
             try
             {
@@ -433,7 +460,6 @@ namespace Final_Project_ASP_MVC.Core
 
         public static void RemoveSportsman(int id)
         {
-            MySqlConnection conn = new MySqlConnection(connStr);
             conn.Open();
             try
             {
@@ -449,7 +475,6 @@ namespace Final_Project_ASP_MVC.Core
 
         public static void RemoveCompetition(int id)
         {
-            MySqlConnection conn = new MySqlConnection(connStr);
             conn.Open();
             try
             {
@@ -465,7 +490,6 @@ namespace Final_Project_ASP_MVC.Core
 
         public static void RemoveResult(int id)
         {
-            MySqlConnection conn = new MySqlConnection(connStr);
             conn.Open();
             try
             {
@@ -481,7 +505,6 @@ namespace Final_Project_ASP_MVC.Core
 
         public static void AddSportsman(Sportsman sportsman)
         {
-            MySqlConnection conn = new MySqlConnection(connStr);
             conn.Open();
             try
             {
@@ -497,7 +520,6 @@ namespace Final_Project_ASP_MVC.Core
 
         public static void AddResult(Result result)
         {
-            MySqlConnection conn = new MySqlConnection(connStr);
             conn.Open();
             try
             {
@@ -513,7 +535,6 @@ namespace Final_Project_ASP_MVC.Core
 
         public static void AddUser(User user)
         {
-            MySqlConnection conn = new MySqlConnection(connStr);
             conn.Open();
             try
             {
@@ -525,12 +546,10 @@ namespace Final_Project_ASP_MVC.Core
                 Console.WriteLine(ex.Message);
             }
             conn.Close();
-
         }
 
         public static void UpdateSportsman(Sportsman sportsman)
         {
-            MySqlConnection conn = new MySqlConnection(connStr);
             conn.Open();
             try
             {
@@ -545,7 +564,6 @@ namespace Final_Project_ASP_MVC.Core
         }
         public static void UpdateCommand(Command command)
         {
-            MySqlConnection conn = new MySqlConnection(connStr);
             conn.Open();
             try
             {
@@ -560,7 +578,6 @@ namespace Final_Project_ASP_MVC.Core
         }
         public static void UpdateCompet(Competition compet)
         {
-            MySqlConnection conn = new MySqlConnection(connStr);
             conn.Open();
             try
             {
@@ -576,7 +593,6 @@ namespace Final_Project_ASP_MVC.Core
 
         public static void UpdateResult(Result result)
         {
-            MySqlConnection conn = new MySqlConnection(connStr);
             conn.Open();
             try
             {
