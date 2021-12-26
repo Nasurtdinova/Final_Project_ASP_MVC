@@ -1,0 +1,28 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutSponsor.cshtml";
+    ViewData["Title"] = "Competition";
+}
+@model List<Final_Project_ASP_MVC.Core.Competition>
+<h2>Competitions</h2>
+<br />
+<table border="1" style="border-collapse:collapse;" width=100% cellpadding="4" cellspacing="20">
+    <tr>
+        <th>Название соревнования</th>
+        <th>Место проведения</th>
+        <th>Улица</th>
+        <th>Дом</th>
+        <th>Город</th>
+        <th>Дата проведения</th>
+    </tr>
+    @foreach (var compet in Model)
+    {
+        <tr>
+            <td align="center">@compet.Name</td>
+            <td align="center">@compet.NameVenue</td>
+            <td align="center">@compet.Street</td>
+            <td align="center">@compet.Home</td>
+            <td align="center">@compet.City</td>
+            <td align="center">@compet.Date</td>
+        </tr>
+    }
+</table>

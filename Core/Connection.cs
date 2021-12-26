@@ -13,7 +13,7 @@ namespace Final_Project_ASP_MVC.Core
     public class Connection
     {
         public static string connStr = ConfigurationManager.AppSettings["connection"].ToString();
-        public static MySqlConnection conn = new MySqlConnection(connStr);
+        public static MySqlConnection conn;
         public static List<string> images;
         public static List<string> cities;
         public static List<string> titles;
@@ -21,6 +21,48 @@ namespace Final_Project_ASP_MVC.Core
         public static List<string> competitions;
 
         public static List<Sportsman> sporCom;
+        public static int idUser { get; set; }
+        public static string Name { get; set; }
+        public static string Surname { get; set; }
+
+        public Connection(string login, string password)
+        {
+            idUser = GetIdUser(login, password);
+            GetUser(idUser);
+        }
+
+        public static int GetIdUser(string email, string password)
+        {
+            conn = new MySqlConnection(connStr);
+            conn.Open();
+            string sql = $"SELECT idUser FROM Competition.User where '{email}' = Email and '{password}' = Password;";
+            MySqlCommand cmd = new MySqlCommand(sql, conn);
+            MySqlDataReader res = cmd.ExecuteReader();
+            while (res.Read())
+            {
+                return Convert.ToInt32(res[0]);
+            }
+            res.Close();
+            conn.Close();
+            return Convert.ToInt32(res[0]);          
+        }
+
+        public static void GetUser(int idUser)
+        {
+            conn = new MySqlConnection(connStr);
+            conn.Open();
+            string sql = $"SELECT Name, Surname FROM Competition.User where '{idUser}' = idUser;";
+            MySqlCommand cmd = new MySqlCommand(sql, conn);
+            MySqlDataReader res = cmd.ExecuteReader();
+            while (res.Read())
+            {
+                Name = res[0].ToString();
+                Surname = res[1].ToString();
+            }
+            res.Close();
+            conn.Close();
+
+        }
 
         public static List<string> GetImages()
         {
@@ -109,6 +151,7 @@ namespace Final_Project_ASP_MVC.Core
 
         public static bool IsLogin(string email, string password)
         {
+            conn = new MySqlConnection(connStr);
             conn.Open();
             string sql = $"SELECT Email,Password FROM Competition.User where '{email}' = Email and '{password}' = Password;";
             MySqlCommand cmd = new MySqlCommand(sql, conn);
@@ -125,13 +168,14 @@ namespace Final_Project_ASP_MVC.Core
                     return false;
                 }
                 
-            }
-            conn.Close();
+            }           
             res.Close();
+            conn.Close();
             return false;
         }
         public static List<Sportsman> GetSportsmans()
         {
+            conn = new MySqlConnection(connStr);
             conn.Open();
             List<Sportsman> sportsmans = new List<Sportsman>();
 
@@ -162,12 +206,16 @@ namespace Final_Project_ASP_MVC.Core
         }
         public static List<Result> GetResults()
         {
+            conn = new MySqlConnection(connStr);
             conn.Open();
             List<Result> results = new List<Result>();
 
             try
             {
-                string sql = "SELECT Competition.ResultCompetition.idResult, Competition.Command.Name, Competition.Competition.Name, Competition.ResultCompetition.Rank from Competition.ResultCompetition join Competition.Command on Competition.ResultCompetition.idCommand = Competition.Command.idCommand join Competition.Competition on Competition.ResultCompetition.idCompetition = Competition.Competition.idCompetition;";
+                string sql = "SELECT Competition.ResultCompetition.idResult, Competition.Command.Name, Competition.Competition.Name, Competition.ResultCompetition.Rank " +
+                    "from Competition.ResultCompetition " +
+                    "join Competition.Command on Competition.ResultCompetition.idCommand = Competition.Command.idCommand " +
+                    "join Competition.Competition on Competition.ResultCompetition.idCompetition = Competition.Competition.idCompetition;";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 MySqlDataReader res = cmd.ExecuteReader();
 
@@ -188,12 +236,13 @@ namespace Final_Project_ASP_MVC.Core
 
         public static List<Sponsorship> GetSponsorship()
         {
+            conn = new MySqlConnection(connStr);
             conn.Open();
             List<Sponsorship> sponsorship = new List<Sponsorship>();
 
             try
             {
-                string sql = "SELECT id, Competition.User.Name, Competition.User.Surname, Competition.Command.Name, teamContract, amount from Competition.SponsorCommand join Competition.User on Competition.SponsorCommand.idSponsor = Competition.User.idUser join Competition.Command on Competition.SponsorCommand.idCom = Competition.Command.idCommand; ";
+                string sql = $"SELECT id, Competition.User.Name, Competition.User.Surname, Competition.Command.Name, teamContract, amount from Competition.SponsorCommand join Competition.User on Competition.SponsorCommand.idSponsor = Competition.User.idUser join Competition.Command on Competition.SponsorCommand.idCom = Competition.Command.idCommand where Competition.SponsorCommand.idSponsor = {idUser}; ";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 MySqlDataReader res = cmd.ExecuteReader();
 
@@ -298,6 +347,7 @@ namespace Final_Project_ASP_MVC.Core
 
         public static Command GetCommandsId(int id)
         {
+            conn = new MySqlConnection(connStr);
             conn.Open();
             Command command = null;
             try
@@ -348,6 +398,7 @@ namespace Final_Project_ASP_MVC.Core
 
         public static List<Command> GetCommands()
         {
+            conn = new MySqlConnection(connStr);
             conn.Open();
             List<Command> commands = new List<Command>();
 
@@ -374,6 +425,7 @@ namespace Final_Project_ASP_MVC.Core
 
         public static List<Competition> GetCompetition()
         {
+            conn = new MySqlConnection(connStr);
             conn.Open();
             List<Competition> competition = new List<Competition>();
 
@@ -418,7 +470,7 @@ namespace Final_Project_ASP_MVC.Core
             conn.Open();
             try
             {
-                MySqlCommand cmd = new MySqlCommand($"INSERT INTO Competition.SponsorCommand (idSponsor, idCom, teamContract, amount) values ((select Competition.User.idUser from Competition.User where Competition.User.Name = '{sponsorship.SponsorName}' && Competition.User.Surname = '{sponsorship.SponsorSurname}'), (select Competition.Command.idCommand from Competition.Command where Competition.Command.Name = '{sponsorship.Command}'), {sponsorship.teamContract}, {sponsorship.Amount});", conn);
+                MySqlCommand cmd = new MySqlCommand($"INSERT INTO Competition.SponsorCommand (idSponsor, idCom, teamContract, amount) values ({idUser}, (select Competition.Command.idCommand from Competition.Command where Competition.Command.Name = '{sponsorship.Command}'), {sponsorship.teamContract}, {sponsorship.Amount});", conn);
                 cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
@@ -449,6 +501,21 @@ namespace Final_Project_ASP_MVC.Core
             try
             {
                 MySqlCommand cmd = new MySqlCommand($"DELETE from Competition.Command WHERE (idCommand = '{id}')", conn);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            conn.Close();
+        }
+
+        public static void RemoveSponsorship(int id)
+        {
+            conn.Open();
+            try
+            {
+                MySqlCommand cmd = new MySqlCommand($"DELETE from Competition.SponsorCommand WHERE (Competition.SponsorCommand.id = '{id}')", conn);
                 cmd.ExecuteNonQuery();
             }
             catch (Exception ex)

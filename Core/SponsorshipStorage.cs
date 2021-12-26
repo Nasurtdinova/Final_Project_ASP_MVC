@@ -15,11 +15,11 @@ namespace Core
             sponsorships.Add(sponship);
         }
 
-        //public static void RemoveByName(int id)
-        //{
-        //    Connection.RemoveCompetition(id);
-        //    competition.RemoveAll(p => p.ID == id);
-        //}
+        public static void RemoveByName(int id)
+        {
+            Connection.RemoveSponsorship(id);
+            sponsorships.RemoveAll(p => p.ID == id);
+        }
 
         //public static void Update(Sponsorship compet)
         //{

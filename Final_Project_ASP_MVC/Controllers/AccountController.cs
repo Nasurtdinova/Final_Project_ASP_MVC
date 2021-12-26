@@ -53,7 +53,8 @@ namespace Final_Project_ASP_MVC.Controllers
                     }
                     else
                     {
-                        //
+                        Connection con = new Connection(model.Email, model.Password);
+                        return RedirectToAction("IndexSponsor", "Home");
                     }
                 }
               

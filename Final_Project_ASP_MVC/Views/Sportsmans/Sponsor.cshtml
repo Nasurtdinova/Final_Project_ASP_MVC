@@ -1,14 +1,9 @@
 ﻿@{
-    Layout = "~/Views/Shared/_LayoutCopy.cshtml";
+    Layout = "~/Views/Shared/_LayoutSponsor.cshtml";
     ViewData["Title"] = "Sportsmans";
 }
 @model List<Final_Project_ASP_MVC.Core.Sportsman>
 <h2>Sportsmans</h2>
-<div class="row justify-content-end">
-    <a class="btn btn-primary" asp-controller="Sportsmans"
-       asp-action="Add" role="button">Add sportsman</a>
-</div>
-<br />
 <div class="row">
     @foreach (var sportsman in Model)
     {
@@ -26,13 +21,9 @@
                         <p class="font-weight-normal">@sportsman.Name</p>
                     </div>
                     <div class="text-center">
-                        <a class="btn btn-danger" asp-controller="Sportsmans"
-                           asp-action="Remove" asp-route-id="@sportsman.ID" role="button">
-                            Remove
-                        </a>
                         <a class="btn btn-primary" asp-controller="Sportsmans"
-                           asp-action="Update" asp-route-id="@sportsman.ID" role="button">
-                            Update
+                           asp-action="ViewerView" asp-route-id="@sportsman.ID" role="button">
+                            View
                         </a>
                     </div>
                 </div>

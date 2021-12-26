@@ -21,6 +21,12 @@ namespace Final_Project_ASP_MVC.Controllers
             return View(competitions);
         }
 
+        public IActionResult Sponsor()
+        {
+            var competitions = CompetitionStorage.competition;
+            return View(competitions);
+        }
+
         public IActionResult Add()
         {
             return View();
