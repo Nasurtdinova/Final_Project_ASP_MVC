@@ -17,6 +17,14 @@ namespace Final_Project_ASP_MVC.ViewModels
         public int Year { get; set; }
 
         [Required]
+        [Display(Name = "Surname")]
+        public string Surname { get; set; }
+
+        [Required]
+        [Display(Name = "Name")]
+        public string Name { get; set; }
+
+        [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }

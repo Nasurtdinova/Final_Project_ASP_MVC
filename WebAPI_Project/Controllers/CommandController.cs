@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Core;
 using Final_Project_ASP_MVC.Core;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,12 +16,12 @@ namespace WebAPI_Project.Controllers
         public CommandController() { }
 
         [HttpGet]
-        public ActionResult<List<Command>> GetAll() => Connection.GetCommands();
+        public ActionResult<List<Command>> GetAll() => ConnectionCommands.GetCommands();
 
         [HttpGet("{id}")]
         public ActionResult<Command> Get(int id)
         {
-            var command = Connection.GetCommandsId(id);
+            var command = ConnectionCommands.GetCommandsId(id);
 
             if (command == null)
                 return NotFound();
@@ -31,7 +32,7 @@ namespace WebAPI_Project.Controllers
         [HttpPost]
         public IActionResult Create(Command command)
         {
-            Connection.AddCommand(command);
+            ConnectionCommands.AddCommand(command);
             return NoContent();
         }
 
@@ -41,11 +42,11 @@ namespace WebAPI_Project.Controllers
             if (id != command.ID)
                 return BadRequest();
 
-            var existingCommand = Connection.GetCommandsId(id);
+            var existingCommand = ConnectionCommands.GetCommandsId(id);
             if (existingCommand is null)
                 return NotFound();
 
-            Connection.UpdateCommand(existingCommand);
+            ConnectionCommands.UpdateCommand(existingCommand);
 
             return NoContent();
         }
@@ -53,12 +54,12 @@ namespace WebAPI_Project.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var command = Connection.GetCommandsId(id);
+            var command = ConnectionCommands.GetCommandsId(id);
 
             if (command is null)
                 return NotFound();
 
-            Connection.RemoveCommand(id);
+            ConnectionCommands.RemoveCommand(id);
 
             return NoContent();
         }

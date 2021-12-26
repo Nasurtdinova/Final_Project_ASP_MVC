@@ -43,7 +43,7 @@ namespace Final_Project_ASP_MVC.Controllers
         [HttpGet]
         public IActionResult Update(int id)
         {
-            Result result = Connection.GetResultsId(id);
+            Result result = ConnectionResults.GetResultsId(id);
             return View(result);
         }
 

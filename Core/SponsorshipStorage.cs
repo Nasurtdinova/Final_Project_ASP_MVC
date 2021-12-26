@@ -7,17 +7,18 @@ namespace Core
 {
     public class SponsorshipStorage
     {
-        public static List<Sponsorship> sponsorships { get; private set; } = Connection.GetSponsorship();
+        public static List<Sponsorship> sponsorships { get; private set; } = ConnectionSponsorship.GetSponsorship();
+        public static List<Sponsorship> sponsorshipsViewerAdmin { get; private set; } = ConnectionSponsorship.GetSponsorshipViewerAdmin();
 
         public static void Add(Sponsorship sponship)
         {
-            Connection.AddSponsorship(sponship);
+            ConnectionSponsorship.AddSponsorship(sponship);
             sponsorships.Add(sponship);
         }
 
         public static void RemoveByName(int id)
         {
-            Connection.RemoveSponsorship(id);
+            ConnectionSponsorship.RemoveSponsorship(id);
             sponsorships.RemoveAll(p => p.ID == id);
         }
 

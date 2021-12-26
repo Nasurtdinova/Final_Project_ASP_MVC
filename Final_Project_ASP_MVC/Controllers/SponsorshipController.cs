@@ -17,12 +17,12 @@ namespace Final_Project_ASP_MVC.Controllers
 
         public IActionResult IndexAdmin()
         {
-            var sponsorships = SponsorshipStorage.sponsorships;
+            var sponsorships = SponsorshipStorage.sponsorshipsViewerAdmin;
             return View(sponsorships);
         }
         public IActionResult IndexViewer()
         {
-            var sponsorships = SponsorshipStorage.sponsorships;
+            var sponsorships = SponsorshipStorage.sponsorshipsViewerAdmin;
             return View(sponsorships);
         }
 

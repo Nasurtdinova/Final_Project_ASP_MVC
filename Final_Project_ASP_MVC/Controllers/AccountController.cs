@@ -21,7 +21,7 @@ namespace Final_Project_ASP_MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = new User { Email = model.Email, UserName = model.Email, Password = model.Password, Year = model.Year };
+                User user = new User { Email = model.Email, Password = model.Password, Year = model.Year, Surname = model.Surname, UserName= model.Name };
                 Connection.AddUser(user);
                 return RedirectToAction("Index", "Home");
             }

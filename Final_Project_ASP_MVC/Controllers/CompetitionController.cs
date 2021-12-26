@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Core;
 using Final_Project_ASP_MVC.Core;
 using Microsoft.AspNetCore.Mvc;
 
@@ -42,7 +43,7 @@ namespace Final_Project_ASP_MVC.Controllers
         [HttpGet]
         public IActionResult Update(int id)
         {
-            Competition competition = Connection.GetCompetId(id);
+            Competition competition = ConnectionCompetitions.GetCompetId(id);
             return View(competition);
         }
 

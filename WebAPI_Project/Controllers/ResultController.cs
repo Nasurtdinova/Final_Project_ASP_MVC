@@ -16,12 +16,12 @@ namespace WebAPI_Project.Controllers
         public ResultController() { }
 
         [HttpGet]
-        public ActionResult<List<Result>> GetAll() => Connection.GetResults();
+        public ActionResult<List<Result>> GetAll() => ConnectionResults.GetResults();
 
         [HttpGet("{id}")]
         public ActionResult<Result> Get(int id)
         {
-            var result = Connection.GetResultsId(id);
+            var result = ConnectionResults.GetResultsId(id);
 
             if (result == null)
                 return NotFound();
@@ -32,7 +32,7 @@ namespace WebAPI_Project.Controllers
         [HttpPost]
         public IActionResult Create(Result result)
         {
-            Connection.AddResult(result);
+            ConnectionResults.AddResult(result);
             return NoContent();
         }
 
@@ -42,11 +42,11 @@ namespace WebAPI_Project.Controllers
             if (id != result.ID)
                 return BadRequest();
 
-            var existingResult = Connection.GetResultsId(id);
+            var existingResult = ConnectionResults.GetResultsId(id);
             if (existingResult is null)
                 return NotFound();
 
-            Connection.UpdateResult(existingResult);
+            ConnectionResults.UpdateResult(existingResult);
 
             return NoContent();
         }
@@ -54,12 +54,12 @@ namespace WebAPI_Project.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var result = Connection.GetResultsId(id);
+            var result = ConnectionResults.GetResultsId(id);
 
             if (result is null)
                 return NotFound();
 
-            Connection.RemoveResult(id);
+            ConnectionResults.RemoveResult(id);
 
             return NoContent();
         }

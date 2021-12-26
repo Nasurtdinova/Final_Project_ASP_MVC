@@ -1,4 +1,5 @@
-﻿using Final_Project_ASP_MVC.Core;
+﻿using Core;
+using Final_Project_ASP_MVC.Core;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -15,12 +16,12 @@ namespace WebAPI_Project.Controllers
         public SportsmanController() {}
 
         [HttpGet]
-        public ActionResult<List<Sportsman>> GetAll() => Connection.GetSportsmans();
+        public ActionResult<List<Sportsman>> GetAll() => ConnectionSportsmans.GetSportsmans();
 
         [HttpGet("{id}")]
         public ActionResult<Sportsman> Get(int id)
         {
-            var sportsman = Connection.GetSportsmansId(id);
+            var sportsman = ConnectionSportsmans.GetSportsmansId(id);
 
             if (sportsman == null)
                 return NotFound();
@@ -31,7 +32,7 @@ namespace WebAPI_Project.Controllers
         [HttpPost]
         public IActionResult Create(Sportsman sportsman)
         {
-            Connection.AddSportsman(sportsman);
+            ConnectionSportsmans.AddSportsman(sportsman);
             return NoContent();
         }
 
@@ -41,11 +42,11 @@ namespace WebAPI_Project.Controllers
             if (id != sportsman.ID)
                 return BadRequest();
 
-            var existingSportsman = Connection.GetSportsmansId(id);
+            var existingSportsman = ConnectionSportsmans.GetSportsmansId(id);
             if (existingSportsman is null)
                 return NotFound();
 
-            Connection.UpdateSportsman(sportsman);
+            ConnectionSportsmans.UpdateSportsman(sportsman);
 
             return NoContent();
         }
@@ -53,12 +54,12 @@ namespace WebAPI_Project.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var sportsman = Connection.GetSportsmansId(id);
+            var sportsman = ConnectionSportsmans.GetSportsmansId(id);
 
             if (sportsman is null)
                 return NotFound();
 
-            Connection.RemoveSportsman(id);
+            ConnectionSportsmans.RemoveSportsman(id);
 
             return NoContent();
         }

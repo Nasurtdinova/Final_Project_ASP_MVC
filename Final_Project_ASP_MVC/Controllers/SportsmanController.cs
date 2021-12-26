@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Core;
 using Final_Project_ASP_MVC.Core;
 using Microsoft.AspNetCore.Mvc;
 
@@ -48,7 +49,7 @@ namespace Final_Project_ASP_MVC.Controllers
         [HttpGet]
         public IActionResult Update(int id)
         {
-            Sportsman sportsman = Connection.GetSportsmansId(id);
+            Sportsman sportsman = ConnectionSportsmans.GetSportsmansId(id);
             return View(sportsman);
         }
 
@@ -62,7 +63,7 @@ namespace Final_Project_ASP_MVC.Controllers
         [HttpGet]
         public IActionResult ViewerView(int id)
         {
-            Sportsman sportsman = Connection.GetSportsmansId(id);
+            Sportsman sportsman = ConnectionSportsmans.GetSportsmansId(id);
             return View(sportsman);
         }
     }
