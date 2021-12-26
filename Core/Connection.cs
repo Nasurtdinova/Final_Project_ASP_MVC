@@ -19,7 +19,6 @@ namespace Final_Project_ASP_MVC.Core
         public static List<string> titles;
         public static List<string> commands;
         public static List<string> competitions;
-        //public static List<Sportsman> sporCom;
 
         public static int idUser { get; set; }
         public static string Name { get; set; }

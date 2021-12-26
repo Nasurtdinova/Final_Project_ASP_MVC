@@ -12,6 +12,15 @@ namespace Console_Project
         {
             Console.WriteLine("Hello, input login and password, else write Viewer");
             string login = Console.ReadLine();
+            if (login == "Viewer")
+            {
+                while (true)
+                {
+                    Console.WriteLine("If you want to see, click, sportsmans - 1, commands - 2, competitions - 3, results of competitions - 4, sponsorships - 5");
+                    int click = Convert.ToInt32(Console.ReadLine());
+                    Done(click, "Get", " ");
+                }
+            }
             string password = null;
             while (true)
             {
@@ -29,24 +38,33 @@ namespace Console_Project
                     {
                         Console.WriteLine("If you want to see, click, sportsmans - 1, commands - 2, competitions - 3, results of competitions - 4, sponsorships - 5");
                         int click = Convert.ToInt32(Console.ReadLine());
+                        if (click == 5)
+                        {
+                            PrintSponsorshipsViewer("Get");
+                            continue;
+                        }
                         Console.WriteLine("What do you want to do 'Get', 'Add', 'Remove', 'Update'?");
                         string instruction = Console.ReadLine();
-                        Console.WriteLine("Input values");
+                        if (instruction == "Get")
+                        {
+                            Done(click, "Get", " ");
+                            continue;
+                        }
+
                         switch (click)
                         {
                             case 1:
-                                Console.WriteLine("Name Surname Title Height Cost Command");
+                                Console.WriteLine("Input values: Name Surname Title Height Cost Command");
                                 break;
                             case 2:
-                                Console.WriteLine("Name City Count");
+                                Console.WriteLine("Input values: Name City Count");
                                 break;
                             case 3:
-                                Console.WriteLine("Name NameVenue Street Home City Date");
+                                Console.WriteLine("Input values: Name NameVenue Street Home City Date");
                                 break;
                             case 4:
-                                Console.WriteLine("Command Compet Rank");
+                                Console.WriteLine("Input values: Command Compet Rank");
                                 break;
-
                         }
                         string values = Console.ReadLine();
                         Done(click, instruction, values);
@@ -56,31 +74,24 @@ namespace Console_Project
                 {
                     while (true)
                     {
+                        Connection con = new Connection(login, password);
                         Console.WriteLine("If you want to see, click, sportsmans - 1, commands - 2, competitions - 3, results of competitions - 4, sponsorships - 5");
                         int click = Convert.ToInt32(Console.ReadLine());
-                        string instruction = "Get";
-                        string values = " ";
-                        switch (click)
+                        if (click == 5)
                         {
-                            case 5:
-                                Console.WriteLine("What do you want to do 'Get', 'Add', 'Remove', 'Update'?");
-                                instruction = Console.ReadLine();
-                                Console.WriteLine("Sponsor Command");
-                                values = Console.ReadLine();
-                                break;
+                            Console.WriteLine("What do you want to do 'Get', 'Add', 'Remove'?");
+                            string instruction = Console.ReadLine();
+                            if (instruction == "Get")
+                            {
+                                PrintSponsorships("Get", " ");
+                                continue;
+                            }
+                            string values = Console.ReadLine();
+                            PrintSponsorships(instruction, values);
+                            continue;
                         }
-                        Done(click, instruction, values);
+                        Done(click, "Get", " ");
                     }
-                }
-            }
-           
-            else if (login == "Viewer")
-            {
-                while (true)
-                {
-                    Console.WriteLine("If you want to see, click, sportsmans - 1, commands - 2, competitions - 3, results of competitions - 4, sponsorships - 5");
-                    int click = Convert.ToInt32(Console.ReadLine());
-                    Done(click, "Get", " ");
                 }
             }
 
@@ -92,7 +103,7 @@ namespace Console_Project
 
         private static void Done(int click, string command, string values)
         {
-            switch(click)
+            switch (click)
             {
                 case 1:
                     PrintSportsmans(command, values);
@@ -111,7 +122,7 @@ namespace Console_Project
                     break;
 
                 case 5:
-                    PrintSponsorships(command);
+                    PrintSponsorshipsViewer(command);
                     break;
             }
         }
@@ -129,7 +140,8 @@ namespace Console_Project
                     }
                     break;
                 case "Add":
-                    ConnectionSportsmans.AddSportsman(new Sportsman() {
+                    ConnectionSportsmans.AddSportsman(new Sportsman()
+                    {
                         Name = value[0],
                         Surname = value[1],
                         Title = value[2],
@@ -139,7 +151,8 @@ namespace Console_Project
                     });
                     break;
                 case "Update":
-                    ConnectionSportsmans.UpdateSportsman(new Sportsman() {
+                    ConnectionSportsmans.UpdateSportsman(new Sportsman()
+                    {
                         ID = Convert.ToInt32(value[0]),
                         Name = value[1],
                         Surname = value[2],
@@ -196,10 +209,10 @@ namespace Console_Project
             switch (command)
             {
                 case "Get":
-                    List<Result> res = ConnectionResults.GetResults();
-                    foreach (Result i in res)
+                    List<Competition> compet = ConnectionCompetitions.GetCompetition();
+                    foreach (Competition i in compet)
                     {
-                        Console.WriteLine($"{i.Command} {i.Compet} {i.Rank}");
+                        Console.WriteLine($"{i.Name} {i.NameVenue} {i.Street} {i.Home} {i.City} {i.Date}");
                     }
                     break;
                 case "Add":
@@ -240,7 +253,7 @@ namespace Console_Project
                     List<Result> results = ConnectionResults.GetResults();
                     foreach (Result i in results)
                     {
-                        Console.WriteLine($"{i.Command}, {i.Compet}, {i.Rank}");
+                        Console.WriteLine($"{i.Command} {i.Compet} {i.Rank}");
                     }
                     break;
                 case "Add":
@@ -266,7 +279,34 @@ namespace Console_Project
             }
         }
 
-        private static void PrintSponsorships(string command)
+        private static void PrintSponsorships(string command, string values)
+        {
+            string[] value = values.Split(' ');
+            switch (command)
+            {
+                case "Get":
+                    List<Sponsorship> sponsorships = ConnectionSponsorship.GetSponsorship(Connection.idUser);
+                    foreach (Sponsorship i in sponsorships)
+                    {
+                        Console.WriteLine($"{i.SponsorName} - {i.Command}, {i.Amount}, {i.teamContract}");
+                    }
+                    break;
+
+                case "Add":
+                    ConnectionSponsorship.RemoveSponsorship(Convert.ToInt32(value[0]));
+                    break;
+                case "Remove":
+                    ConnectionSponsorship.AddSponsorship(new Sponsorship()
+                    {
+                        Command = value[0],
+                        Amount = Convert.ToInt32(value[1]),
+                        teamContract = Convert.ToInt32(value[2]),
+                    });
+                    break;
+            }
+        }
+
+        private static void PrintSponsorshipsViewer(string command)
         {
             switch (command)
             {
@@ -274,11 +314,10 @@ namespace Console_Project
                     List<Sponsorship> sponsorships = ConnectionSponsorship.GetSponsorshipViewerAdmin();
                     foreach (Sponsorship i in sponsorships)
                     {
-                        Console.WriteLine($"{i.SponsorName}, {i.Command}");
+                        Console.WriteLine($"{i.SponsorName} - {i.Command}");
                     }
                     break;
             }
         }
     }
-
 }

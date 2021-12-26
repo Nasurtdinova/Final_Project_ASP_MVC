@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Core;
+using Final_Project_ASP_MVC.Core;
 
 namespace Final_Project_ASP_MVC.Controllers
 {
@@ -11,18 +12,18 @@ namespace Final_Project_ASP_MVC.Controllers
     {
         public IActionResult Index()
         {
-            var sponsorships = SponsorshipStorage.sponsorships;
+            var sponsorships = ConnectionSponsorship.GetSponsorship(Connection.idUser);
             return View(sponsorships);
         }
 
         public IActionResult IndexAdmin()
         {
-            var sponsorships = SponsorshipStorage.sponsorshipsViewerAdmin;
+            var sponsorships = ConnectionSponsorship.GetSponsorshipViewerAdmin();
             return View(sponsorships);
         }
         public IActionResult IndexViewer()
         {
-            var sponsorships = SponsorshipStorage.sponsorshipsViewerAdmin;
+            var sponsorships = ConnectionSponsorship.GetSponsorshipViewerAdmin();
             return View(sponsorships);
         }
 
@@ -32,30 +33,16 @@ namespace Final_Project_ASP_MVC.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(Sponsorship ship)
+        public IActionResult Add(Sponsorship sponship)
         {
-            SponsorshipStorage.Add(ship);
+            ConnectionSponsorship.AddSponsorship(sponship);
             return RedirectToAction("Index");
         }
 
         public IActionResult Remove(int id)
         {
-            SponsorshipStorage.RemoveByName(id);
+            ConnectionSponsorship.RemoveSponsorship(id);
             return RedirectToAction("Index");
         }
-
-        //[HttpGet]
-        //public IActionResult Update(int id)
-        //{
-        //    Result result = Connection.GetResultsId(id);
-        //    return View(result);
-        //}
-
-        //[HttpPost]
-        //public IActionResult Update(Result result)
-        //{
-        //    ResultStorage.Update(result);
-        //    return RedirectToAction("Index");
-        //}
     }
 }

@@ -11,7 +11,7 @@ namespace Core
         public static string connStr = ConfigurationManager.AppSettings["connection"].ToString();
         public static MySqlConnection conn;
 
-        public static List<Sponsorship> GetSponsorship()
+        public static List<Sponsorship> GetSponsorship(int idUser)
         {
             conn = new MySqlConnection(connStr);
             conn.Open();
@@ -19,7 +19,7 @@ namespace Core
 
             try
             {
-                string sql = $"SELECT id, Competition.User.Name, Competition.User.Surname, Competition.Command.Name, teamContract, amount from Competition.SponsorCommand join Competition.User on Competition.SponsorCommand.idSponsor = Competition.User.idUser join Competition.Command on Competition.SponsorCommand.idCom = Competition.Command.idCommand where Competition.SponsorCommand.idSponsor = {Connection.idUser}; ";
+                string sql = $"SELECT id, Competition.User.Name, Competition.User.Surname, Competition.Command.Name, teamContract, amount from Competition.SponsorCommand join Competition.User on Competition.SponsorCommand.idSponsor = Competition.User.idUser join Competition.Command on Competition.SponsorCommand.idCom = Competition.Command.idCommand where Competition.SponsorCommand.idSponsor = {idUser}; ";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 MySqlDataReader res = cmd.ExecuteReader();
 
@@ -65,8 +65,36 @@ namespace Core
             return sponsorship;
         }
 
+        public static List<Sponsorship> GetSponsorshipId(int id)
+        {
+            conn = new MySqlConnection(connStr);
+            conn.Open();
+            List<Sponsorship> sponsorship = new List<Sponsorship>();
+
+            try
+            {
+                string sql = $"SELECT id, Competition.User.Name, Competition.User.Surname, Competition.Command.Name, teamContract, amount from Competition.SponsorCommand join Competition.User on Competition.SponsorCommand.idSponsor = Competition.User.idUser join Competition.Command on Competition.SponsorCommand.idCom = Competition.Command.idCommand where Competition.SponsorCommand.id = {id}; ";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                MySqlDataReader res = cmd.ExecuteReader();
+
+                while (res.Read())
+                {
+                    sponsorship.Add(new Sponsorship { ID = Convert.ToInt32(res[0]), SponsorName = res[1].ToString(), SponsorSurname = res[2].ToString(), Command = res[3].ToString(), teamContract = Convert.ToInt32(res[4]), Amount = Convert.ToInt32(res[5]) });
+                }
+                res.Close();
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            conn.Close();
+            return sponsorship;
+        }
+
         public static void AddSponsorship(Sponsorship sponsorship)
         {
+            conn = new MySqlConnection(connStr);
             conn.Open();
             try
             {
@@ -82,6 +110,7 @@ namespace Core
 
         public static void RemoveSponsorship(int id)
         {
+            conn = new MySqlConnection(connStr);
             conn.Open();
             try
             {

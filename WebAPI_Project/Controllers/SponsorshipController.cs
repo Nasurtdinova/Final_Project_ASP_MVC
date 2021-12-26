@@ -16,14 +16,14 @@ namespace WebAPI_Project.Controllers
         public SponsorshipController() { }
 
         [HttpGet]
-        public ActionResult<List<Sponsorship>> GetAll() => ConnectionSponsorship.GetSponsorship();
+        public ActionResult<List<Sponsorship>> GetAll() => ConnectionSponsorship.GetSponsorshipViewerAdmin();
 
         //[HttpGet("{id}")]
         //public ActionResult<Sponsorship> Get(int id)
         //{
-        //    //var compet = ConnectionSponsorship.GetCompetId(id);
+        //    //var sponship = ConnectionSponsorship.GetCompetId(id);
 
-        //    if (compet == null)
+        //    if (sponship == null)
         //        return NotFound();
 
         //    return compet;
@@ -36,32 +36,17 @@ namespace WebAPI_Project.Controllers
             return NoContent();
         }
 
-        //[HttpPut("{id}")]
-        //public IActionResult Update(int id, Sponsorship competition)
-        //{
-        //    if (id != competition.ID)
-        //        return BadRequest();
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            var sponship = ConnectionSponsorship.GetSponsorshipId(id);
 
-        //    var existingCompet = ConnectionCompetitions.GetCompetId(id);
-        //    if (existingCompet is null)
-        //        return NotFound();
+            if (sponship is null)
+                return NotFound();
 
-        //    ConnectionCompetitions.UpdateCompet(competition);
+            ConnectionSponsorship.RemoveSponsorship(id);
 
-        //    return NoContent();
-        //}
-
-        //[HttpDelete("{id}")]
-        //public IActionResult Delete(int id)
-        //{
-        //    //var compet = ConnectionSponsorship.(id);
-
-        //    //if (compet is null)
-        //    //    return NotFound();
-
-        //    //ConnectionCompetitions.RemoveCompetition(id);
-
-        //    //return NoContent();
-        //}
+            return NoContent();
+        }
     }
 }

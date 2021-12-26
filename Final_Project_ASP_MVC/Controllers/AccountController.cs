@@ -16,6 +16,7 @@ namespace Final_Project_ASP_MVC.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public IActionResult Register(RegisterViewModel model)
         {

@@ -65,6 +65,7 @@ namespace Core
 
         public static void AddCompetition(Competition compet)
         {
+            conn = new MySqlConnection(connStr);
             conn.Open();
             try
             {
@@ -80,6 +81,7 @@ namespace Core
 
         public static void RemoveCompetition(int id)
         {
+            conn = new MySqlConnection(connStr);
             conn.Open();
             try
             {
@@ -95,6 +97,7 @@ namespace Core
 
         public static void UpdateCompet(Competition compet)
         {
+            conn = new MySqlConnection(connStr);
             conn.Open();
             try
             {

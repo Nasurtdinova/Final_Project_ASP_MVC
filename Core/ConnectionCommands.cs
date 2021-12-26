@@ -125,7 +125,12 @@ namespace Core
 
                 while (res.Read())
                 {
-                    command = new Command { ID = Convert.ToInt32(res[0]), Name = res[1].ToString(), Count = Convert.ToInt32(res[2]), Image = res[3].ToString(), City = res[4].ToString() };
+                    command = new Command { 
+                        ID = Convert.ToInt32(res[0]), 
+                        Name = res[1].ToString(), 
+                        Count = Convert.ToInt32(res[2]), 
+                        Image = res[3].ToString(), 
+                        City = res[4].ToString() };
                 }
                 res.Close();
             }
