@@ -12,8 +12,15 @@ namespace Core
 
         public static void Add(Result result)
         {
-            ConnectionResults.AddResult(result);
-            results.Add(result);
+            if (ConnectionResults.isTrue(result.Command,result.Compet))
+            {
+                throw new Exception("!!!!");
+            }
+            else
+            {
+                ConnectionResults.AddResult(result);
+                results.Add(result);
+            }         
         }
 
         public static void RemoveByName(int idCommand, int idCompetition)

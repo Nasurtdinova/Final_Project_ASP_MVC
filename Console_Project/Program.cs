@@ -54,16 +54,16 @@ namespace Console_Project
                         switch (click)
                         {
                             case 1:
-                                Console.WriteLine("Input values: Name Surname Title Height Cost Command");
+                                Console.WriteLine("Input values: Name,Surname,Title,Image,Height,Cost,Command");
                                 break;
                             case 2:
-                                Console.WriteLine("Input values: Name City Count");
+                                Console.WriteLine("Input values: Name,City,Count");
                                 break;
                             case 3:
-                                Console.WriteLine("Input values: Name NameVenue Street Home City Date");
+                                Console.WriteLine("Input values: Name,NameVenue,Street,Home,City,Date");
                                 break;
                             case 4:
-                                Console.WriteLine("Input values: Command Compet Rank");
+                                Console.WriteLine("Input values: Command,Compet,Rank");
                                 break;
                         }
                         string values = Console.ReadLine();
@@ -133,14 +133,14 @@ namespace Console_Project
 
         private static void PrintSportsmans(string command, string values)
         {
-            string[] value = values.Split(' ');
+            string[] value = values.Split(',');
             switch (command)
             {
                 case "Get":
                     List<Sportsman> sportsmans = ConnectionSportsmans.GetSportsmans();
                     foreach (Sportsman i in sportsmans)
                     {
-                        Console.WriteLine($"{i.Name}, {i.Surname}, {i.Title}, {i.Height}, {i.Cost}, {i.Command}");
+                        Console.WriteLine($"{i.ID}, {i.Name}, {i.Surname}, {i.Title}, {i.Height}, {i.Cost}, {i.Command}");
                     }
                     break;
                 case "Add":
@@ -149,9 +149,10 @@ namespace Console_Project
                         Name = value[0],
                         Surname = value[1],
                         Title = value[2],
-                        Height = Convert.ToInt32(value[3]),
-                        Cost = Convert.ToInt32(value[4]),
-                        Command = value[5]
+                        Image = value[3],
+                        Height = Convert.ToInt32(value[4]),
+                        Cost = Convert.ToInt32(value[5]),
+                        Command = value[6]
                     });
                     break;
                 case "Update":
@@ -161,9 +162,10 @@ namespace Console_Project
                         Name = value[1],
                         Surname = value[2],
                         Title = value[3],
-                        Height = Convert.ToInt32(value[4]),
-                        Cost = Convert.ToInt32(value[5]),
-                        Command = value[6]
+                        Image = value[4],
+                        Height = Convert.ToInt32(value[5]),
+                        Cost = Convert.ToInt32(value[6]),
+                        Command = value[7]
                     });
                     break;
                 case "Remove":
@@ -174,14 +176,14 @@ namespace Console_Project
 
         private static void PrintCommands(string command, string values)
         {
-            string[] value = values.Split(' ');
+            string[] value = values.Split(',');
             switch (command)
             {
                 case "Get":
                     List<Command> commands = ConnectionCommands.GetCommands();
                     foreach (Command i in commands)
                     {
-                        Console.WriteLine($"{i.Name} {i.City} {i.Count}");
+                        Console.WriteLine($"{i.ID},{i.Name} {i.City} {i.Count}");
                     }
                     break;
                 case "Add":
@@ -209,14 +211,14 @@ namespace Console_Project
 
         private static void PrintCompetitions(string command, string values)
         {
-            string[] value = values.Split(' ');
+            string[] value = values.Split(',');
             switch (command)
             {
                 case "Get":
                     List<Competition> compet = ConnectionCompetitions.GetCompetition();
                     foreach (Competition i in compet)
                     {
-                        Console.WriteLine($"{i.Name} {i.NameVenue} {i.Street} {i.Home} {i.City} {i.Date}");
+                        Console.WriteLine($"{i.ID},{i.Name} {i.NameVenue} {i.Street} {i.Home} {i.City} {i.Date}");
                     }
                     break;
                 case "Add":
@@ -250,18 +252,18 @@ namespace Console_Project
 
         private static void PrintResults(string command, string values)
         {
-            string[] value = values.Split(' ');
+            string[] value = values.Split(',');
             switch (command)
             {
                 case "Get":
                     List<Result> results = ConnectionResults.GetResults();
                     foreach (Result i in results)
                     {
-                        Console.WriteLine($"{i.Command} {i.Compet} {i.Rank}");
+                        Console.WriteLine($"{i.idCommand},{i.idCompet},{i.Command} {i.Compet} {i.Rank}");
                     }
                     break;
                 case "Add":
-                    ConnectionResults.AddResult(new Result()
+                    ResultStorage.Add(new Result()
                     {
                         Command = value[0],
                         Compet = value[1],
@@ -284,14 +286,14 @@ namespace Console_Project
 
         private static void PrintSponsorships(string command, string values)
         {
-            string[] value = values.Split(' ');
+            string[] value = values.Split(',');
             switch (command)
             {
                 case "Get":
                     List<Sponsorship> sponsorships = ConnectionSponsorship.GetSponsorship(Connection.idUser);
                     foreach (Sponsorship i in sponsorships)
                     {
-                        Console.WriteLine($"{i.SponsorName} - {i.Command}, {i.Amount}, {i.teamContract}");
+                        Console.WriteLine($"{i.ID},{i.SponsorName} - {i.Command}, {i.Amount}, {i.teamContract}");
                     }
                     break;
 
@@ -317,7 +319,7 @@ namespace Console_Project
                     List<Sponsorship> sponsorships = ConnectionSponsorship.GetSponsorshipViewerAdmin();
                     foreach (Sponsorship i in sponsorships)
                     {
-                        Console.WriteLine($"{i.SponsorName} - {i.Command}");
+                        Console.WriteLine($"{i.ID},{i.SponsorName} - {i.Command}");
                     }
                     break;
             }

@@ -110,22 +110,16 @@ namespace Core
         {
             conn = new MySqlConnection(connStr);
             conn.Open();
-            if (isTrue(result.Command, result.Compet))
+
+            try
             {
-                throw new Exception("!!!!");
+                MySqlCommand cmd = new MySqlCommand($"INSERT INTO Competition.ResultCompetition (Competition.ResultCompetition.idCommand, Competition.ResultCompetition.idCompetition, Competition.ResultCompetition.Rank) values ((select Competition.Command.idCommand from Competition.Command where Competition.Command.Name = '{result.Command}'), (select Competition.Competition.idCompetition from Competition.Competition where Competition.Competition.Name = '{result.Compet}'), {result.Rank});", conn);
+                cmd.ExecuteNonQuery();
             }
-            else
+            catch (Exception ex)
             {
-                try
-                {
-                    MySqlCommand cmd = new MySqlCommand($"INSERT INTO Competition.ResultCompetition (Competition.ResultCompetition.idCommand, Competition.ResultCompetition.idCompetition, Competition.ResultCompetition.Rank) values ((select Competition.Command.idCommand from Competition.Command where Competition.Command.Name = '{result.Command}'), (select Competition.Competition.idCompetition from Competition.Competition where Competition.Competition.Name = '{result.Compet}'), {result.Rank});", conn);
-                    cmd.ExecuteNonQuery();
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
-            }          
+                Console.WriteLine(ex.Message);
+            }
             conn.Close();
         }
 

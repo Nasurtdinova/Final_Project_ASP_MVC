@@ -32,7 +32,14 @@ namespace WebAPI_Project.Controllers
         [HttpPost]
         public IActionResult Create(Result result)
         {
-            ConnectionResults.AddResult(result);
+            if (ConnectionResults.isTrue(result.Command, result.Compet))
+            {
+                throw new Exception("!!!!");
+            }
+            else
+            {
+                ConnectionResults.AddResult(result);
+            }
             return NoContent();
         }
 
