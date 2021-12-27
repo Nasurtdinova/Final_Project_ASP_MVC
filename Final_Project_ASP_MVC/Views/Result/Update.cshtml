@@ -10,7 +10,7 @@
 @using (Html.BeginForm("Update", "Result", FormMethod.Post))
 {
 <fieldset>
-    @Html.HiddenFor(m => m.ID)
+    @Html.HiddenFor(m => m.Command)
     <p>
         @Html.LabelFor(m => m.Command, "Command")
         <br />

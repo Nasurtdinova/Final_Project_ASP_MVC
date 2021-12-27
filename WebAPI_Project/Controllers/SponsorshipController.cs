@@ -18,21 +18,21 @@ namespace WebAPI_Project.Controllers
         [HttpGet]
         public ActionResult<List<Sponsorship>> GetAll() => ConnectionSponsorship.GetSponsorshipViewerAdmin();
 
-        //[HttpGet("{id}")]
-        //public ActionResult<Sponsorship> Get(int id)
-        //{
-        //    //var sponship = ConnectionSponsorship.GetCompetId(id);
+        [HttpGet("{id}")]
+        public ActionResult<Sponsorship> Get(int id)
+        {
+            var sponship = ConnectionSponsorship.GetSponsorshipId(id);
 
-        //    if (sponship == null)
-        //        return NotFound();
+            if (sponship == null)
+                return NotFound();
 
-        //    return compet;
-        //}
+            return sponship;
+        }
 
         [HttpPost]
         public IActionResult Create(Sponsorship compet)
         {
-            ConnectionSponsorship.AddSponsorship(compet);
+            ConnectionSponsorship.AddSponsorshipApi(compet);
             return NoContent();
         }
 

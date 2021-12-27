@@ -18,10 +18,10 @@ namespace WebAPI_Project.Controllers
         [HttpGet]
         public ActionResult<List<Result>> GetAll() => ConnectionResults.GetResults();
 
-        [HttpGet("{id}")]
-        public ActionResult<Result> Get(int id)
+        [HttpGet("{idCommand},{idCompetition}")]
+        public ActionResult<Result> Get(int idCommand, int idCompetition)
         {
-            var result = ConnectionResults.GetResultsId(id);
+            var result = ConnectionResults.GetResultsId(idCommand, idCompetition);
 
             if (result == null)
                 return NotFound();
@@ -36,30 +36,30 @@ namespace WebAPI_Project.Controllers
             return NoContent();
         }
 
-        [HttpPut("{id}")]
-        public IActionResult Update(int id, Result result)
+        [HttpPut("{idCommand},{idCompetition}")]
+        public IActionResult Update(int idCommand, int idCompetition, Result result)
         {
-            if (id != result.ID)
+            if (idCommand != result.idCommand && idCompetition != result.idCompet)
                 return BadRequest();
 
-            var existingResult = ConnectionResults.GetResultsId(id);
+            var existingResult = ConnectionResults.GetResultsId(idCommand, idCompetition);
             if (existingResult is null)
                 return NotFound();
 
-            ConnectionResults.UpdateResult(existingResult);
+            ConnectionResults.UpdateResult(result);
 
             return NoContent();
         }
 
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        [HttpDelete("{idCommand},{idCompetition}")]
+        public IActionResult Delete(int idCommand, int idCompetition)
         {
-            var result = ConnectionResults.GetResultsId(id);
+            var result = ConnectionResults.GetResultsId(idCommand, idCompetition);
 
             if (result is null)
                 return NotFound();
 
-            ConnectionResults.RemoveResult(id);
+            ConnectionResults.RemoveResult(idCommand, idCompetition);
 
             return NoContent();
         }

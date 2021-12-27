@@ -65,11 +65,11 @@ namespace Core
             return sponsorship;
         }
 
-        public static List<Sponsorship> GetSponsorshipId(int id)
+        public static Sponsorship GetSponsorshipId(int id)
         {
             conn = new MySqlConnection(connStr);
             conn.Open();
-            List<Sponsorship> sponsorship = new List<Sponsorship>();
+            Sponsorship sponsorship = null;
 
             try
             {
@@ -79,7 +79,7 @@ namespace Core
 
                 while (res.Read())
                 {
-                    sponsorship.Add(new Sponsorship { ID = Convert.ToInt32(res[0]), SponsorName = res[1].ToString(), SponsorSurname = res[2].ToString(), Command = res[3].ToString(), teamContract = Convert.ToInt32(res[4]), Amount = Convert.ToInt32(res[5]) });
+                    sponsorship = new Sponsorship { ID = Convert.ToInt32(res[0]), SponsorName = res[1].ToString(), SponsorSurname = res[2].ToString(), Command = res[3].ToString(), teamContract = Convert.ToInt32(res[4]), Amount = Convert.ToInt32(res[5]) };
                 }
                 res.Close();
             }
@@ -99,6 +99,22 @@ namespace Core
             try
             {
                 MySqlCommand cmd = new MySqlCommand($"INSERT INTO Competition.SponsorCommand (idSponsor, idCom, teamContract, amount) values ({Connection.idUser}, (select Competition.Command.idCommand from Competition.Command where Competition.Command.Name = '{sponsorship.Command}'), {sponsorship.teamContract}, {sponsorship.Amount});", conn);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            conn.Close();
+        }
+
+        public static void AddSponsorshipApi(Sponsorship sponsorship)
+        {
+            conn = new MySqlConnection(connStr);
+            conn.Open();
+            try
+            {
+                MySqlCommand cmd = new MySqlCommand($"INSERT INTO Competition.SponsorCommand (idSponsor, idCom, teamContract, amount) values ((select Competition.User.idUser from Competition.User where Competition.User.Name = '{sponsorship.SponsorName}' and Competition.User.Surname = '{sponsorship.SponsorSurname}'), (select Competition.Command.idCommand from Competition.Command where Competition.Command.Name = '{sponsorship.Command}'), {sponsorship.teamContract}, {sponsorship.Amount});", conn);
                 cmd.ExecuteNonQuery();
             }
             catch (Exception ex)

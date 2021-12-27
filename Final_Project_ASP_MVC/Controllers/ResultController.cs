@@ -41,9 +41,9 @@ namespace Final_Project_ASP_MVC.Controllers
         }
 
         [HttpGet]
-        public IActionResult Update(int id)
+        public IActionResult Update(int idCommand, int idCompetition)
         {
-            Result result = ConnectionResults.GetResultsId(id);
+            Result result = ConnectionResults.GetResultsId(idCommand, idCompetition);
             return View(result);
         }
 
@@ -54,9 +54,9 @@ namespace Final_Project_ASP_MVC.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult Remove(int id)
+        public IActionResult Remove(int idCommand, int idCompetition)
         {
-            ResultStorage.RemoveByName(id);
+            ResultStorage.RemoveByName(idCommand, idCompetition);
             return RedirectToAction("Index");
         }
     }

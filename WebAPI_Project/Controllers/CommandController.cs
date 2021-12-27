@@ -46,7 +46,7 @@ namespace WebAPI_Project.Controllers
             if (existingCommand is null)
                 return NotFound();
 
-            ConnectionCommands.UpdateCommand(existingCommand);
+            ConnectionCommands.UpdateCommand(command);
 
             return NoContent();
         }

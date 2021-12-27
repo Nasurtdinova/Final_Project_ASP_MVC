@@ -77,6 +77,10 @@ namespace Console_Project
                         Connection con = new Connection(login, password);
                         Console.WriteLine("If you want to see, click, sportsmans - 1, commands - 2, competitions - 3, results of competitions - 4, sponsorships - 5");
                         int click = Convert.ToInt32(Console.ReadLine());
+                        if (click == 6)
+                        {
+                            continue;
+                        }
                         if (click == 5)
                         {
                             Console.WriteLine("What do you want to do 'Get', 'Add', 'Remove'?");
@@ -267,14 +271,13 @@ namespace Console_Project
                 case "Update":
                     ConnectionResults.UpdateResult(new Result()
                     {
-                        ID = Convert.ToInt32(value[0]),
-                        Command = value[1],
-                        Compet = value[2],
-                        Rank = Convert.ToInt32(value[3]),
+                        Command = value[0],
+                        Compet = value[1],
+                        Rank = Convert.ToInt32(value[2]),
                     });
                     break;
                 case "Remove":
-                    ConnectionResults.RemoveResult(Convert.ToInt32(value[0]));
+                    ConnectionResults.RemoveResult(Convert.ToInt32(value[0]), Convert.ToInt32(value[1]));
                     break;
             }
         }
@@ -292,10 +295,10 @@ namespace Console_Project
                     }
                     break;
 
-                case "Add":
+                case "Remove":
                     ConnectionSponsorship.RemoveSponsorship(Convert.ToInt32(value[0]));
                     break;
-                case "Remove":
+                case "Add":
                     ConnectionSponsorship.AddSponsorship(new Sponsorship()
                     {
                         Command = value[0],

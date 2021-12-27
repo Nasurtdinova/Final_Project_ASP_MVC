@@ -3,13 +3,12 @@
     ViewData["Title"] = "Sponsorship";
 }
 @model List<Core.Sponsorship>
-<h2>Sponsorship</h2>
+<h2>My sponsorships</h2>
 <div class="row justify-content-end">
     <a class="btn btn-primary" asp-controller="Sponsorship"
        asp-action="Add" role="button">Add</a>
 </div>
 <br />
-
 
 <div class="row">
     @foreach (var sponsorship in Model)
@@ -33,10 +32,6 @@
                     <a class="btn btn-danger" asp-controller="Sponsorship"
                        asp-action="Remove" asp-route-id="@sponsorship.ID" role="button">
                         Remove
-                    </a>
-                    <a class="btn btn-primary" asp-controller="Sponsorship"
-                       asp-action="Update" asp-route-id="@sponsorship.ID" role="button">
-                        Update
                     </a>
                 </div>
             </div>

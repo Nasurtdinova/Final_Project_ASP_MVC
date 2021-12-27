@@ -53,6 +53,7 @@ namespace Core
 
         public static Sportsman GetSportsmansId(int id)
         {
+            conn = new MySqlConnection(connStr);
             conn.Open();
             Sportsman sportsman = null;
             try
@@ -88,6 +89,7 @@ namespace Core
 
         public static void RemoveSportsman(int id)
         {
+            conn = new MySqlConnection(connStr);
             conn.Open();
             try
             {
@@ -103,6 +105,7 @@ namespace Core
 
         public static void AddSportsman(Sportsman sportsman)
         {
+            conn = new MySqlConnection(connStr);
             conn.Open();
             try
             {
@@ -118,6 +121,7 @@ namespace Core
 
         public static void UpdateSportsman(Sportsman sportsman)
         {
+            conn = new MySqlConnection(connStr);
             conn.Open();
             try
             {
