@@ -1,19 +1,17 @@
-﻿
-using Core;
+﻿using Dapper;
 using Final_Project_ASP_MVC.Models;
-using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace Final_Project_ASP_MVC.Core
 {
     public class Connection
     {
-        public static string connStr = ConfigurationManager.AppSettings["connection"].ToString();
-        public static MySqlConnection conn;
+        private static string connStr = ConfigurationManager.ConnectionStrings["Competition"].ConnectionString;
+        private static IDbConnection connection = new SqlConnection(connStr);
         public static List<string> images;
         public static List<string> cities;
         public static List<string> titles;
@@ -32,163 +30,87 @@ namespace Final_Project_ASP_MVC.Core
 
         public static int GetIdUser(string email, string password)
         {
-            conn = new MySqlConnection(connStr);
-            conn.Open();
-            string sql = $"SELECT idUser FROM Competition.User where '{email}' = Email and '{password}' = Password;";
-            MySqlCommand cmd = new MySqlCommand(sql, conn);
-            MySqlDataReader res = cmd.ExecuteReader();
-            while (res.Read())
-            {
-                return Convert.ToInt32(res[0]);
-            }
-            res.Close();
-            conn.Close();
-            return Convert.ToInt32(res[0]);
+            return connection.Query<int>( $"SELECT idUser FROM Users where '{email}' = Email and '{password}' = Password;").AsList()[0];
         }
 
         public static void GetUser(int idUser)
         {
-            conn = new MySqlConnection(connStr);
-            conn.Open();
-            string sql = $"SELECT Name, Surname FROM Competition.User where '{idUser}' = idUser;";
-            MySqlCommand cmd = new MySqlCommand(sql, conn);
-            MySqlDataReader res = cmd.ExecuteReader();
-            while (res.Read())
-            {
-                Name = res[0].ToString();
-                Surname = res[1].ToString();
-            }
-            res.Close();
-            conn.Close();
+            Name =connection.Query<string>($"SELECT Name, Surname FROM Users where '{idUser}' = idUser;").AsList()[0];
+            Surname = connection.Query<string>($"SELECT Name, Surname FROM Users where '{idUser}' = idUser;").AsList()[1];
         }
 
         public static void AddUser(User user)
-        {
-            conn = new MySqlConnection(connStr);
-            conn.Open();
+        {   
             try
             {
-                MySqlCommand cmd = new MySqlCommand($"INSERT INTO `Competition`.`User` (`Email`, `Password`, `Year`, Competition.User.Name, Competition.User.Surname) Values ('{user.Email}','{user.Password}', {user.Year}, '{user.UserName}', '{user.Surname}')", conn);
-                cmd.ExecuteNonQuery();
+                connection.Query($"INSERT Users Values ('{user.Email}','{user.Password}', {user.Year}, '{user.UserName}', '{user.Surname}');");
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-            }
-            conn.Close();
+            }        
         }
 
         public static List<string> GetImages()
         {
-            conn = new MySqlConnection(connStr);
-            conn.Open();
             images = new List<string>();
-            string sql = "SELECT Name FROM Images";
-            MySqlCommand cmd = new MySqlCommand(sql, conn);
-            MySqlDataReader img = cmd.ExecuteReader();
-
-            while (img.Read())
+            foreach (var i in connection.Query("SELECT Name FROM Images").AsList())
             {
-                images.Add(img[0].ToString());
+                images.Add(i);
             }
-            img.Close();
-            conn.Close();
             return images;          
         }
 
         public static List<string> GetTitles()
-        {
-            conn = new MySqlConnection(connStr);
-            conn.Open();
+        {       
             titles = new List<string>();
-            string sql = "SELECT Name FROM Title";
-            MySqlCommand cmd = new MySqlCommand(sql, conn);
-            MySqlDataReader tit = cmd.ExecuteReader();
-
-            while (tit.Read())
+            foreach (var i in connection.Query("SELECT Name FROM Title").AsList())
             {
-                titles.Add(tit[0].ToString());
+                titles.Add(i);
             }
-            tit.Close();
-            conn.Close();
             return titles;
         }
 
         public static List<string> GetNameCommands()
         {
-            conn = new MySqlConnection(connStr);
-            conn.Open();
             commands = new List<string>();
-            string sql = "SELECT Name FROM Command";
-            MySqlCommand cmd = new MySqlCommand(sql, conn);
-            MySqlDataReader com = cmd.ExecuteReader();
-
-            while (com.Read())
+            foreach (var i in connection.Query("SELECT Name FROM Command").AsList())
             {
-                commands.Add(com[0].ToString());
+                commands.Add(i);
             }
-            com.Close();
-            conn.Close();
             return commands;
         }
 
         public static List<string> GetNameCompets()
-        {
-            conn = new MySqlConnection(connStr);
-            conn.Open();
+        {        
             competitions = new List<string>();
-            string sql = "SELECT Name FROM Competition.Competition";
-            MySqlCommand cmd = new MySqlCommand(sql, conn);
-            MySqlDataReader com = cmd.ExecuteReader();
-
-            while (com.Read())
+            foreach (var i in connection.Query("SELECT Name FROM Competition").AsList())
             {
-                competitions.Add(com[0].ToString());
+                competitions.Add(i);
             }
-            com.Close();
-            conn.Close();
             return competitions;
         }
 
         public static List<string> GetCities()
         {
-            conn = new MySqlConnection(connStr);
-            conn.Open();
             cities = new List<string>();
-            string sql = "SELECT Name FROM City";
-            MySqlCommand cmd = new MySqlCommand(sql, conn);
-            MySqlDataReader city = cmd.ExecuteReader();
-
-            while (city.Read())
+            foreach (var i in connection.Query("SELECT Name FROM City").AsList())
             {
-                cities.Add(city[0].ToString());
+                cities.Add(i);
             }
-            city.Close();
-            conn.Close();
             return cities;
         }
 
         public static bool IsLogin(string email, string password)
         {
-            conn = new MySqlConnection(connStr);
-            conn.Open();
-            string sql = $"SELECT Email,Password FROM Competition.User where '{email}' = Email and '{password}' = Password;";
-            MySqlCommand cmd = new MySqlCommand(sql, conn);
-            MySqlDataReader res = cmd.ExecuteReader();
-            while (res.Read())
+            if (connection.Query<string>($"SELECT Email FROM Users where '{email}' = Email and '{password}' = Password;").AsList()[0] == email && connection.Query<string>($"SELECT Password FROM Users where '{email}' = Email and '{password}' = Password;").AsList()[0] == password)
             {
-                if (res[0].ToString() == email && res[1].ToString() == password)
-                {                   
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }              
-            }           
-            res.Close();
-            conn.Close();
-            return false;
+                return true;
+            }
+            else
+            {
+                return false;
+            }             
         }       
     }
 }
