@@ -54,7 +54,7 @@ namespace Final_Project_ASP_MVC.Core
         public static List<string> GetImages()
         {
             images = new List<string>();
-            foreach (var i in connection.Query("SELECT Name FROM Images").AsList())
+            foreach (var i in connection.Query<string>("SELECT Name FROM Images").AsList())
             {
                 images.Add(i);
             }
@@ -64,7 +64,7 @@ namespace Final_Project_ASP_MVC.Core
         public static List<string> GetTitles()
         {       
             titles = new List<string>();
-            foreach (var i in connection.Query("SELECT Name FROM Title").AsList())
+            foreach (var i in connection.Query<string>("SELECT Name FROM Title").AsList())
             {
                 titles.Add(i);
             }
@@ -74,7 +74,7 @@ namespace Final_Project_ASP_MVC.Core
         public static List<string> GetNameCommands()
         {
             commands = new List<string>();
-            foreach (var i in connection.Query("SELECT Name FROM Command").AsList())
+            foreach (var i in connection.Query<string>("SELECT Name FROM Command").AsList())
             {
                 commands.Add(i);
             }
@@ -84,7 +84,7 @@ namespace Final_Project_ASP_MVC.Core
         public static List<string> GetNameCompets()
         {        
             competitions = new List<string>();
-            foreach (var i in connection.Query("SELECT Name FROM Competition").AsList())
+            foreach (var i in connection.Query<string>("SELECT Name FROM Competition").AsList())
             {
                 competitions.Add(i);
             }
@@ -94,7 +94,7 @@ namespace Final_Project_ASP_MVC.Core
         public static List<string> GetCities()
         {
             cities = new List<string>();
-            foreach (var i in connection.Query("SELECT Name FROM City").AsList())
+            foreach (var i in connection.Query<string>("SELECT Name FROM City").AsList())
             {
                 cities.Add(i);
             }
