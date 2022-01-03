@@ -17,28 +17,52 @@ namespace Core
 
         public static List<Sportsman> GetSportsmans()
         {
+            List<Sportsman> sportsman = new List<Sportsman>();
             try
             {
-                return connection.Query<Sportsman>("SELECT ID,Surname,Sportsman.Name, Images.Name, Title.Name,Height,Cost,Command.Name FROM Sportsman join Images  on ID_Image = idImages join Title on Title.idTitle = Sportsman.idTitle join Command on Command.idCommand = Sportsman.idCommand;").AsList();
+                for (int i = 0; i< connection.Query<int>($"SELECT * FROM Sportsman join Images on ID_Image = idImages join Title on Title.idTitle = Sportsman.idTitle join Command on Command.idCommand = Sportsman.idCommand;").Count();i++)
+                {
+                    sportsman.Add(new Sportsman
+                    {
+                        ID = connection.Query<int>($"SELECT ID FROM Sportsman join Images on ID_Image = idImages join Title on Title.idTitle = Sportsman.idTitle join Command on Command.idCommand = Sportsman.idCommand;").AsList()[i],
+                        Surname = connection.Query<string>($"SELECT Surname FROM Sportsman join Images on ID_Image = idImages join Title on Title.idTitle = Sportsman.idTitle join Command on Command.idCommand = Sportsman.idCommand;").AsList()[i],
+                        Name = connection.Query<string>($"SELECT Sportsman.Name FROM Sportsman join Images on ID_Image = idImages join Title on Title.idTitle = Sportsman.idTitle join Command on Command.idCommand = Sportsman.idCommand;").AsList()[i],
+                        Image = connection.Query<string>($"SELECT Images.Name FROM Sportsman join Images on ID_Image = idImages join Title on Title.idTitle = Sportsman.idTitle join Command on Command.idCommand = Sportsman.idCommand;").AsList()[i],
+                        Title = connection.Query<string>($"SELECT Title.Name FROM Sportsman join Images on ID_Image = idImages join Title on Title.idTitle = Sportsman.idTitle join Command on Command.idCommand = Sportsman.idCommand;").AsList()[i],
+                        Height = connection.Query<int>($"SELECT Height FROM Sportsman join Images on ID_Image = idImages join Title on Title.idTitle = Sportsman.idTitle join Command on Command.idCommand = Sportsman.idCommand;").AsList()[i],
+                        Cost = connection.Query<int>($"SELECT Cost FROM Sportsman join Images on ID_Image = idImages join Title on Title.idTitle = Sportsman.idTitle join Command on Command.idCommand = Sportsman.idCommand;").AsList()[i],
+                        Command = connection.Query<string>($"SELECT Command.Name FROM Sportsman join Images on ID_Image = idImages join Title on Title.idTitle = Sportsman.idTitle join Command on Command.idCommand = Sportsman.idCommand;").AsList()[i]
+                    });
+                }
             }
             catch
             {
                 return null;
             }
+            return sportsman;
         }
 
         public static Sportsman GetSportsmansId(int id)
         {
+            Sportsman sportsman = null;
             try
             {
-                //return new Sportsman();
-                return connection.Query<Sportsman>($"SELECT ID,Surname,Sportsman.Name, Images.Name, Title.Name,Height,Cost,Command.Name FROM Sportsman join Images on ID_Image = idImages join Title on Title.idTitle = Sportsman.idTitle join Command on Command.idCommand = Sportsman.idCommand where Sportsman.ID = {id};").AsList().FirstOrDefault();
-            }
+                sportsman = new Sportsman {
+                 ID = connection.Query<int>($"SELECT ID FROM Sportsman join Images on ID_Image = idImages join Title on Title.idTitle = Sportsman.idTitle join Command on Command.idCommand = Sportsman.idCommand where Sportsman.ID = {id};").AsList().FirstOrDefault(),
+                 Surname = connection.Query<string>($"SELECT Surname FROM Sportsman join Images on ID_Image = idImages join Title on Title.idTitle = Sportsman.idTitle join Command on Command.idCommand = Sportsman.idCommand where Sportsman.ID = {id};").AsList().FirstOrDefault(),
+                 Name = connection.Query<string>($"SELECT Sportsman.Name FROM Sportsman join Images on ID_Image = idImages join Title on Title.idTitle = Sportsman.idTitle join Command on Command.idCommand = Sportsman.idCommand where Sportsman.ID = {id};").AsList().FirstOrDefault(),
+                 Image = connection.Query<string>($"SELECT Images.Name FROM Sportsman join Images on ID_Image = idImages join Title on Title.idTitle = Sportsman.idTitle join Command on Command.idCommand = Sportsman.idCommand where Sportsman.ID = {id};").AsList().FirstOrDefault(),
+                 Title = connection.Query<string>($"SELECT Title.Name FROM Sportsman join Images on ID_Image = idImages join Title on Title.idTitle = Sportsman.idTitle join Command on Command.idCommand = Sportsman.idCommand where Sportsman.ID = {id};").AsList().FirstOrDefault(),
+                 Height = connection.Query<int>($"SELECT Height FROM Sportsman join Images on ID_Image = idImages join Title on Title.idTitle = Sportsman.idTitle join Command on Command.idCommand = Sportsman.idCommand where Sportsman.ID = {id};").AsList().FirstOrDefault(),
+                 Cost = connection.Query<int>($"SELECT Cost FROM Sportsman join Images on ID_Image = idImages join Title on Title.idTitle = Sportsman.idTitle join Command on Command.idCommand = Sportsman.idCommand where Sportsman.ID = {id};").AsList().FirstOrDefault(),
+                 Command = connection.Query<string>($"SELECT Command.Name FROM Sportsman join Images on ID_Image = idImages join Title on Title.idTitle = Sportsman.idTitle join Command on Command.idCommand = Sportsman.idCommand where Sportsman.ID = {id};").AsList().FirstOrDefault()
+            };}
 
             catch
             {
                 return null;
             }
+            return sportsman;
         }
 
         public static void RemoveSportsman(int id)
@@ -57,7 +81,7 @@ namespace Core
         {
             try
             {
-                connection.Query($"INSERT INTO Sportsman(surname,Sportsman.Name,ID_Image,idTitle,Cost,Height, idCommand) values('{sportsman.Surname}', '{sportsman.Name}', (select Competition.Images.idImages FROM Competition.Images where '{sportsman.Image}' = Competition.Images.Name), (select Competition.Title.idTitle FROM Competition.Title where '{sportsman.Title}' = Competition.Title.Name),{sportsman.Cost}, {sportsman.Height}, (select Competition.Command.idCommand from Competition.Command where Competition.Command.Name = '{sportsman.Command}'));");
+                connection.Query($"INSERT Sportsman values('{sportsman.Surname}', '{sportsman.Name}', (select Images.idImages FROM Images where '{sportsman.Image}' = Images.Name), (select Title.idTitle FROM Title where '{sportsman.Title}' = Title.Name),{sportsman.Cost}, {sportsman.Height}, (select Command.idCommand from Command where Command.Name = '{sportsman.Command}'));");
             }
             catch (Exception ex)
             {

@@ -8,8 +8,8 @@ namespace Core
 {
     public class ConnectionCompetitions
     {
-        public static string connStr = ConfigurationManager.AppSettings["connection"].ToString();
-        public static MySqlConnection conn;
+        private static string connStr = ConfigurationManager.AppSettings["connection"].ToString();
+        private static MySqlConnection conn;
 
         public static Competition GetCompetId(int id)
         {

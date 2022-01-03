@@ -12,11 +12,11 @@ namespace Final_Project_ASP_MVC.Core
     {
         private static string connStr = ConfigurationManager.ConnectionStrings["Competition"].ConnectionString;
         private static IDbConnection connection = new SqlConnection(connStr);
-        public static List<string> images;
-        public static List<string> cities;
-        public static List<string> titles;
-        public static List<string> commands;
-        public static List<string> competitions;
+        private static List<string> images;
+        private static List<string> cities;
+        private static List<string> titles;
+        private static List<string> commands;
+        private static List<string> competitions;
 
         public static int idUser { get; set; }
         public static string Name { get; set; }
