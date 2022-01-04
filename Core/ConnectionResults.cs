@@ -1,142 +1,118 @@
-﻿using Final_Project_ASP_MVC.Core;
+﻿using Dapper;
+using Final_Project_ASP_MVC.Core;
 using System;
 using System.Collections.Generic;
-using MySql.Data.MySqlClient;
 using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
 
 namespace Core
 {
     public class ConnectionResults
     {
-        public static string connStr = ConfigurationManager.AppSettings["connection"].ToString();
-        public static MySqlConnection conn;
+        private static string connStr = ConfigurationManager.ConnectionStrings["Competition"].ConnectionString;
+        private static IDbConnection connection = new SqlConnection(connStr);
 
         public static List<Result> GetResults()
         {
-            conn = new MySqlConnection(connStr);
-            conn.Open();
             List<Result> results = new List<Result>();
 
             try
             {
-                string sql = "SELECT Competition.Command.idCommand, Competition.Competition.idCompetition, Competition.Command.Name, Competition.Competition.Name, Competition.ResultCompetition.Rank " +
-                    "from Competition.ResultCompetition " +
-                    "join Competition.Command on Competition.ResultCompetition.idCommand = Competition.Command.idCommand " +
-                    "join Competition.Competition on Competition.ResultCompetition.idCompetition = Competition.Competition.idCompetition;";
-                MySqlCommand cmd = new MySqlCommand(sql, conn);
-                MySqlDataReader res = cmd.ExecuteReader();
-
-                while (res.Read())
+                for (int i = 0; i < connection.Query<int>($"SELECT * FROM ResultCompetition;").Count(); i++)
                 {
-                    results.Add(new Result { idCommand = Convert.ToInt32(res[0]), idCompet = Convert.ToInt32(res[1]), Command = res[2].ToString(), Compet = res[3].ToString(), Rank = Convert.ToInt32(res[4]) });
+                    results.Add(new Result
+                    {
+                        idCommand = connection.Query<int>("SELECT Command.idCommand from ResultCompetition join Command on ResultCompetition.idCommand = Command.idCommand join Competition on ResultCompetition.idCompetition = Competition.idCompetition;").AsList()[i],
+                        idCompet = connection.Query<int>("SELECT Competition.idCompetition from ResultCompetition join Command on ResultCompetition.idCommand = Command.idCommand join Competition on ResultCompetition.idCompetition = Competition.idCompetition;").AsList()[i],
+                        Command = connection.Query<string>("SELECT Command.Name from ResultCompetition join Command on ResultCompetition.idCommand = Command.idCommand join Competition on ResultCompetition.idCompetition = Competition.idCompetition;").AsList()[i],
+                        Compet = connection.Query<string>("SELECT Competition.Name from ResultCompetition join Command on ResultCompetition.idCommand = Command.idCommand join Competition on ResultCompetition.idCompetition = Competition.idCompetition;").AsList()[i],
+                        Rank = connection.Query<int>("SELECT ResultCompetition.Rank from ResultCompetition join Command on ResultCompetition.idCommand = Command.idCommand join Competition on ResultCompetition.idCompetition = Competition.idCompetition;").AsList()[i]
+                    });
                 }
-                res.Close();
+
             }
 
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
-            conn.Close();
             return results;
         }
 
         public static Result GetResultsId(int idCommand, int idCompet)
         {
-            conn.Open();
             Result results = null;
 
             try
             {
-                string sql = $"SELECT Competition.Command.Name, Competition.Competition.Name, Competition.ResultCompetition.Rank from Competition.ResultCompetition join Competition.Command on Competition.ResultCompetition.idCommand = Competition.Command.idCommand join Competition.Competition on Competition.ResultCompetition.idCompetition = Competition.Competition.idCompetition where Competition.ResultCompetition.idCommand = {idCommand} and Competition.ResultCompetition.idCompetition = {idCompet};";
-                MySqlCommand cmd = new MySqlCommand(sql, conn);
-                MySqlDataReader res = cmd.ExecuteReader();
-
-                while (res.Read())
+                results = new Result
                 {
-                    results = new Result { idCommand = idCommand, idCompet = idCompet,  Command = res[0].ToString(), Compet = res[1].ToString(), Rank = Convert.ToInt32(res[2]) };
-                }
-                res.Close();
+                    idCommand = idCommand,
+                    idCompet = idCompet,
+                    Command = connection.Query<string>($"SELECT Command.Name from ResultCompetition join Command on ResultCompetition.idCommand = Command.idCommand join Competition on ResultCompetition.idCompetition = Competition.idCompetition where ResultCompetition.idCommand = {idCommand} and ResultCompetition.idCompetition = {idCompet};").AsList().FirstOrDefault(),
+                    Compet = connection.Query<string>($"SELECT Competition.Name from ResultCompetition join Command on ResultCompetition.idCommand = Command.idCommand join Competition on ResultCompetition.idCompetition = Competition.idCompetition where ResultCompetition.idCommand = {idCommand} and ResultCompetition.idCompetition = {idCompet};").AsList().FirstOrDefault(),
+                    Rank = connection.Query<int>($"SELECT ResultCompetition.Rank from ResultCompetition join Command on ResultCompetition.idCommand = Command.idCommand join Competition on ResultCompetition.idCompetition = Competition.idCompetition where ResultCompetition.idCommand = {idCommand} and ResultCompetition.idCompetition = {idCompet};").AsList().FirstOrDefault()
+                };
             }
 
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
-            conn.Close();
+           
             return results;
         }
 
         public static void RemoveResult(int idCommand, int idCompetition)
         {
-            conn.Open();
             try
             {
-                MySqlCommand cmd = new MySqlCommand($"DELETE from Competition.ResultCompetition WHERE (Competition.ResultCompetition.idCommand = {idCommand} && Competition.ResultCompetition.idCompetition = {idCompetition});", conn);
-                cmd.ExecuteNonQuery();
+                connection.Query($"DELETE from ResultCompetition WHERE (ResultCompetition.idCommand = {idCommand} && ResultCompetition.idCompetition = {idCompetition});");
+
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
-            conn.Close();
         }
 
         public static bool isTrue(string Command,string Competition)
         {
-            conn = new MySqlConnection(connStr);
-            conn.Open();
-                string sql = $"SELECT Competition.Command.idCommand, Competition.Competition.idCompetition from Competition.ResultCompetition join Competition.Competition on Competition.ResultCompetition.idCompetition = Competition.Competition.idCompetition join Competition.Command on Competition.ResultCompetition.idCommand = Competition.Command.idCommand where Competition.Competition.Name = '{Competition}' and Competition.Command.Name = '{Command}';";
-                MySqlCommand cmd = new MySqlCommand(sql, conn);
-                MySqlDataReader res = cmd.ExecuteReader();
 
-            while (res.Read())
+            if (connection.Query<string>($"SELECT Command.Name, Competition.Name from ResultCompetition join Competition on ResultCompetition.idCompetition = Competition.idCompetition join Command on ResultCompetition.idCommand = Command.idCommand where Competition.Name = '{Competition}' and Command.Name = '{Command}';").AsList().FirstOrDefault() == Command && connection.Query<string>($"SELECT Competition.Name from ResultCompetition join Competition on ResultCompetition.idCompetition = Competition.idCompetition join Command on ResultCompetition.idCommand = Command.idCommand where Competition.Name = '{Competition}' and Command.Name = '{Command}';").AsList().FirstOrDefault() == Competition)
             {
-                if (res[0].ToString() == Command && res[1].ToString() == Competition)
-                {
-                    return false;
-                }
-                else
-                {
-                    return true;
-                }
+                return true;
             }
-            res.Close();
-            conn.Close();
-            return false;
+            else
+            {
+                return false;
+            }
         }
 
         public static void AddResult(Result result)
         {
-            conn = new MySqlConnection(connStr);
-            conn.Open();
-
             try
             {
-                MySqlCommand cmd = new MySqlCommand($"INSERT INTO Competition.ResultCompetition (Competition.ResultCompetition.idCommand, Competition.ResultCompetition.idCompetition, Competition.ResultCompetition.Rank) values ((select Competition.Command.idCommand from Competition.Command where Competition.Command.Name = '{result.Command}'), (select Competition.Competition.idCompetition from Competition.Competition where Competition.Competition.Name = '{result.Compet}'), {result.Rank});", conn);
-                cmd.ExecuteNonQuery();
+                connection.Query($"INSERT ResultCompetition values ((select Command.idCommand from Command where Command.Name = '{result.Command}'), (select Competition.idCompetition from Competition where Competition.Name = '{result.Compet}'), {result.Rank});");
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
-            conn.Close();
         }
 
         public static void UpdateResult(Result result)
         {
-            conn = new MySqlConnection(connStr);
-            conn.Open();
             try
             {
-                MySqlCommand cmd = new MySqlCommand($"update Competition.ResultCompetition set Competition.ResultCompetition.idCompetition=(select Competition.Competition.idCompetition from Competition.Competition where Competition.Competition.Name = '{result.Compet}'), Competition.ResultCompetition.idCommand=(select Competition.Command.idCommand from Competition.Command where Competition.Command.Name = '{result.Command}'), Competition.ResultCompetition.Rank = {result.Rank} where Competition.ResultCompetition.idCommand =(select Competition.Command.idCommand from Competition.Command where Competition.Command.Name = '{result.Command}') and Competition.ResultCompetition.idCompetition =(select Competition.Competition.idCompetition from Competition.Competition where Competition.Competition.Name = '{result.Compet}');", conn);
-                cmd.ExecuteNonQuery();
+                connection.Query($"update ResultCompetition set ResultCompetition.idCompetition=(select Competition.idCompetition from Competition where Competition.Name = '{result.Compet}'), ResultCompetition.idCommand=(select Command.idCommand from Command where Command.Name = '{result.Command}'), ResultCompetition.Rank = {result.Rank} where ResultCompetition.idCommand =(select Command.idCommand from Command where Command.Name = '{result.Command}') and ResultCompetition.idCompetition =(select Competition.idCompetition from Competition where Competition.Name = '{result.Compet}');");
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
-            conn.Close();
         }
     }
 }

@@ -20,7 +20,7 @@ namespace Core
             List<Sportsman> sportsman = new List<Sportsman>();
             try
             {
-                for (int i = 0; i< connection.Query<int>($"SELECT * FROM Sportsman join Images on ID_Image = idImages join Title on Title.idTitle = Sportsman.idTitle join Command on Command.idCommand = Sportsman.idCommand;").Count();i++)
+                for (int i = 0; i< connection.Query<int>($"SELECT * FROM Sportsman;").Count();i++)
                 {
                     sportsman.Add(new Sportsman
                     {
