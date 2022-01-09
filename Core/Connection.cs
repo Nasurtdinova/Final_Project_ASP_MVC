@@ -35,8 +35,8 @@ namespace Final_Project_ASP_MVC.Core
 
         public static void GetUser(int idUser)
         {
-            Name =connection.Query<string>($"SELECT Name, Surname FROM Users where '{idUser}' = idUser;").AsList()[0];
-            Surname = connection.Query<string>($"SELECT Name, Surname FROM Users where '{idUser}' = idUser;").AsList()[1];
+            Name =connection.Query<string>($"SELECT Name FROM Users where '{idUser}' = idUser;").AsList()[0];
+            Surname = connection.Query<string>($"SELECT Surname FROM Users where '{idUser}' = idUser;").AsList()[0];
         }
 
         public static void AddUser(User user)
