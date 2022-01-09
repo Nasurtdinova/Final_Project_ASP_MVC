@@ -1,145 +1,126 @@
-﻿using Final_Project_ASP_MVC.Core;
+﻿using Dapper;
+using Final_Project_ASP_MVC.Core;
+using Final_Project_ASP_MVC.Models;
 using System;
 using System.Collections.Generic;
-using MySql.Data.MySqlClient;
 using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
 
 namespace Core
 {
     public class ConnectionCommands
     {
-        public static string connStr = ConfigurationManager.AppSettings["connection"].ToString();
-        public static MySqlConnection conn;
+        private static string connStr = ConfigurationManager.ConnectionStrings["Competition"].ConnectionString;
+        private static IDbConnection connection = new SqlConnection(connStr);
+
         public static List<Sportsman> sporCom;
 
         public static List<Sportsman> GetSporCom(int id)
         {
-            conn = new MySqlConnection(connStr);
-            conn.Open();
             sporCom = new List<Sportsman>();
             try
             {
-                string sql = $"select * from Competition.Sportsman where idCommand = {id};";
-                MySqlCommand cmd = new MySqlCommand(sql, conn);
-                MySqlDataReader res = cmd.ExecuteReader();
-
-                while (res.Read())
+                for (int i = 0; i < connection.Query<int>($"select * from Sportsman where idCommand = {id};").Count(); i++)
                 {
-                    sporCom.Add(new Sportsman { ID = Convert.ToInt32(res[0]), Surname = res[1].ToString(), Name = res[2].ToString() });
+                    sporCom.Add(new Sportsman
+                    {
+                        ID = connection.Query<int>($"select idCommand from Sportsman where idCommand = {id};").AsList()[i],
+                        Surname = connection.Query<string>($"select Surname from Sportsman where idCommand = {id};").AsList()[i],
+                        Name = connection.Query<string>($"select Sportsman.Name from Sportsman where idCommand = {id};").AsList()[i]
+                    });
                 }
-                res.Close();
             }
 
-            catch (Exception ex)
+            catch
             {
-                Console.WriteLine(ex.Message);
+                return null;
             }
-            conn.Close();
             return sporCom;
         }
 
         public static List<Command> GetCommands()
         {
-            conn = new MySqlConnection(connStr);
-            conn.Open();
             List<Command> commands = new List<Command>();
 
             try
             {
-                string sql = "SELECT idCommand, Competition.Command.Name, Count,Image,Competition.City.Name FROM Competition.Command  join Competition.City  on ID_city = idCity;";
-                MySqlCommand cmd = new MySqlCommand(sql, conn);
-                MySqlDataReader res = cmd.ExecuteReader();
-
-                while (res.Read())
+                for (int i = 0; i < connection.Query<int>($"select * from Command;").Count(); i++)
                 {
-                    commands.Add(new Command { ID = Convert.ToInt32(res[0]), Name = res[1].ToString(), Count = Convert.ToInt32(res[2]), Image = res[3].ToString(), City = res[4].ToString() });
+                    commands.Add(new Command
+                    {
+                        ID = connection.Query<int>("SELECT idCommand FROM Command join City  on ID_city = idCity;").AsList()[i],
+                        Name = connection.Query<string>("SELECT Command.Name FROM Command join City  on ID_city = idCity;").AsList()[i],
+                        Count = connection.Query<int>("SELECT Count FROM Command join City  on ID_city = idCity;").AsList()[i],
+                        Image = connection.Query<string>("SELECT Image FROM Command join City  on ID_city = idCity;").AsList()[i],
+                        City = connection.Query<string>("SELECT City.Name FROM Command join City  on ID_city = idCity;").AsList()[i]
+                    });
                 }
-                res.Close();
             }
 
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
-            conn.Close();
             return commands;
         }
 
         public static void AddCommand(Command command)
         {
-            conn = new MySqlConnection(connStr);
-            conn.Open();
             try
             {
-                MySqlCommand cmd = new MySqlCommand($"INSERT INTO `Competition`.`Command` (`Name`, `Count`, `Image`,ID_city) SELECT '{command.Name}', {command.Count}, '{command.Image}', idCity  FROM Competition.City where '{command.City}' = Competition.City.Name;", conn);
-                cmd.ExecuteNonQuery();
+                connection.Query($"INSERT INTO Command (Name, Count, Image,ID_city) SELECT '{command.Name}', {command.Count}, '{command.Image}', idCity  FROM City where '{command.City}' = City.Name;");
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
-            conn.Close();
         }
 
         public static void RemoveCommand(int id)
         {
-            conn = new MySqlConnection(connStr);
-            conn.Open();
             try
             {
-                MySqlCommand cmd = new MySqlCommand($"DELETE from Competition.Command WHERE (idCommand = '{id}')", conn);
-                cmd.ExecuteNonQuery();
+                connection.Query($"DELETE from Command WHERE (idCommand = '{id}')");
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
-            conn.Close();
         }
 
         public static void UpdateCommand(Command command)
         {
-            conn.Open();
             try
             {
-                MySqlCommand cmd = new MySqlCommand($"update Competition.Command set Name='{command.Name}',Count={command.Count},Image='{command.Image}', ID_city = (select Competition.City.idCity from Competition.City where Competition.City.Name = '{command.City}') where idCommand = {command.ID};", conn);
-                cmd.ExecuteNonQuery();
+                connection.Query($"update Command set Name='{command.Name}',Count={command.Count},Image='{command.Image}', ID_city = (select City.idCity from City where City.Name = '{command.City}') where idCommand = {command.ID};");
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
-            conn.Close();
         }
 
         public static Command GetCommandsId(int id)
         {
-            conn = new MySqlConnection(connStr);
-            conn.Open();
             Command command = null;
             try
             {
-                string sql = $"SELECT idCommand,Competition.Command.Name,Count,Image, Competition.City.Name FROM Competition.Command  join Competition.City  on ID_city = idCity where Competition.Command.idCommand = {id};";
-                MySqlCommand cmd = new MySqlCommand(sql, conn);
-                MySqlDataReader res = cmd.ExecuteReader();
-
-                while (res.Read())
+                command = new Command
                 {
-                    command = new Command { 
-                        ID = Convert.ToInt32(res[0]), 
-                        Name = res[1].ToString(), 
-                        Count = Convert.ToInt32(res[2]), 
-                        Image = res[3].ToString(), 
-                        City = res[4].ToString() };
-                }
-                res.Close();
+                    ID = connection.Query<int>($"SELECT idCommand FROM Command join City on ID_city = idCity where Command.idCommand = {id};").AsList().FirstOrDefault(),
+                    Name = connection.Query<string>($"SELECT Command.Name FROM Command join City on ID_city = idCity where Command.idCommand = {id};").AsList().FirstOrDefault(),
+                    Count = connection.Query<int>($"SELECT Count FROM Command join City on ID_city = idCity where Command.idCommand = {id};").AsList().FirstOrDefault(),
+                    Image = connection.Query<string>($"SELECT Image FROM Command join City on ID_city = idCity where Command.idCommand = {id};").AsList().FirstOrDefault(),
+                    City = connection.Query<string>($"SELECT City.Name FROM Command join City on ID_city = idCity where Command.idCommand = {id};").AsList().FirstOrDefault()
+                };
             }
 
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
-            conn.Close();
             return command;
         }
     }
