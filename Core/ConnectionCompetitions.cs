@@ -1,6 +1,5 @@
 ﻿using Dapper;
 using Final_Project_ASP_MVC.Core;
-using Final_Project_ASP_MVC.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -98,7 +97,7 @@ namespace Core
         {
             try
             {
-                connection.Query($"update Competition set Competition.Name ='{compet.Name}',NameVenue='{compet.NameVenue}',Street='{compet.Street}', Home={compet.Home},idCity = (select idCity from City where City.Name = '{compet.City}'), Competition.Date ='{compet.Date.ToString("yyyy-MM-dd hh:mm:ss")}' where idCompetition = {compet.ID};");
+                connection.Query($"update Competition set Competition.Name ='{compet.Name}',NameVenue='{compet.NameVenue}',Street='{compet.Street}', Home={compet.Home},idCity = (select idCity from City where City.Name = '{compet.City}'), Competition.Date ='{compet.Date.ToString("dd.MM.yyyy hh:mm:ss")}' where idCompetition = {compet.ID};");
             }
             catch (Exception ex)
             {

@@ -12,7 +12,7 @@ namespace Core
 
         public static void Add(Result result)
         {
-            if (ConnectionResults.isTrue(result.Command,result.Compet))
+            if (ConnectionResults.isTrue(result.Command,result.Compet) || ConnectionResults.isRankTrue(result.Rank, result.Compet))
             {
                 throw new Exception("!!!!");
             }

@@ -69,7 +69,7 @@ namespace Core
         {
             try
             {
-                connection.Query($"DELETE from ResultCompetition WHERE (ResultCompetition.idCommand = {idCommand} && ResultCompetition.idCompetition = {idCompetition});");
+                connection.Query($"DELETE from ResultCompetition WHERE (ResultCompetition.idCommand = {idCommand} and ResultCompetition.idCompetition = {idCompetition});");
 
             }
             catch (Exception ex)
@@ -80,9 +80,20 @@ namespace Core
 
         public static bool isTrue(string Command,string Competition)
         {
-
             if (connection.Query<string>($"SELECT Command.Name, Competition.Name from ResultCompetition join Competition on ResultCompetition.idCompetition = Competition.idCompetition join Command on ResultCompetition.idCommand = Command.idCommand where Competition.Name = '{Competition}' and Command.Name = '{Command}';").AsList().FirstOrDefault() == Command && connection.Query<string>($"SELECT Competition.Name from ResultCompetition join Competition on ResultCompetition.idCompetition = Competition.idCompetition join Command on ResultCompetition.idCommand = Command.idCommand where Competition.Name = '{Competition}' and Command.Name = '{Command}';").AsList().FirstOrDefault() == Competition)
             {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static bool isRankTrue(int rank, string compet)
+        {
+            if (connection.Query<int>($"select ResultCompetition.Rank from ResultCompetition where (select Competition.idCompetition from Competition where Name = '{compet}')= ResultCompetition.idCompetition and ResultCompetition.Rank = {rank};").AsList().FirstOrDefault() == rank)
+            { 
                 return true;
             }
             else
