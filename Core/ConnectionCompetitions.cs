@@ -98,7 +98,7 @@ namespace Core
         {
             try
             {
-                connection.Query($"update Competition set Competition.Name ='{compet.Name}',NameVenue='{compet.NameVenue}',Street='{compet.Street}', Home='{compet.Home}',idCity = (select idCity from City where City.Name = '{compet.City}'), Date ='{compet.Date.ToString("yyyy-MM-dd hh:mm:ss")}' where idCompetition = {compet.ID};");
+                connection.Query($"update Competition set Competition.Name ='{compet.Name}',NameVenue='{compet.NameVenue}',Street='{compet.Street}', Home={compet.Home},idCity = (select idCity from City where City.Name = '{compet.City}'), Competition.Date ='{compet.Date.ToString("yyyy-MM-dd hh:mm:ss")}' where idCompetition = {compet.ID};");
             }
             catch (Exception ex)
             {
