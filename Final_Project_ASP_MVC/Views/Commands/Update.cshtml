@@ -2,7 +2,7 @@
     Layout = "~/Views/Shared/_LayoutCopy.cshtml";
     ViewData["Title"] = "Update command";
 }
-@model Final_Project_ASP_MVC.Core.Command
+@model Core.Command
 
 <div class="row justify-content-lg-cehter">
     <h1>Update command</h1>
@@ -27,7 +27,7 @@
         <br />
         <select asp-for="Image" class="form-control">
             <option selected="selected" value=" @Html.EditorFor(m => m.Image)">  </option>
-            @foreach (string image in Final_Project_ASP_MVC.Core.Connection.GetImages())
+            @foreach (string image in Core.Connection.GetImages())
             {
                 <option>@image</option>
             }
@@ -39,7 +39,7 @@
         <br />
         <select asp-for="City" class="form-control">
             <option selected="selected" value=" @Html.EditorFor(m => m.City)">  </option>
-            @foreach (string city in Final_Project_ASP_MVC.Core.Connection.GetCities())
+            @foreach (string city in Core.Connection.GetCities())
             {
                 <option>@city</option>
             }

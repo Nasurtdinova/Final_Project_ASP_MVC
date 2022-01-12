@@ -6,7 +6,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace Final_Project_ASP_MVC.Core
+namespace Core
 {
     public class Connection
     {

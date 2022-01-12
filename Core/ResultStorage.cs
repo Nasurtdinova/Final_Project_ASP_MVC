@@ -1,5 +1,5 @@
 ﻿
-using Final_Project_ASP_MVC.Core;
+using Core;
 using System;
 using System.Collections.Generic;
 using System.Text;

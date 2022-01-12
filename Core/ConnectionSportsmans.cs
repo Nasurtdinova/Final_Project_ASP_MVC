@@ -1,5 +1,4 @@
 ﻿using Dapper;
-using Final_Project_ASP_MVC.Core;
 using Final_Project_ASP_MVC.Models;
 using System;
 using System.Collections.Generic;
@@ -35,16 +34,18 @@ namespace Core
                     });
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                return null;
+                Console.WriteLine(ex.Message);
             }
+
             return sportsman;
         }
 
         public static Sportsman GetSportsmansId(int id)
         {
             Sportsman sportsman = null;
+
             try
             {
                 sportsman = new Sportsman {
@@ -58,10 +59,8 @@ namespace Core
                  Command = connection.Query<string>($"SELECT Command.Name FROM Sportsman join Images on ID_Image = idImages join Title on Title.idTitle = Sportsman.idTitle join Command on Command.idCommand = Sportsman.idCommand where Sportsman.ID = {id};").AsList().FirstOrDefault()
             };}
 
-            catch
-            {
-                return null;
-            }
+            catch { return null; }
+
             return sportsman;
         }
 
@@ -69,7 +68,7 @@ namespace Core
         {
             try
             {
-                connection.Query($"DELETE from Competition.Sportsman WHERE (ID = '{id}')");
+                connection.Query($"DELETE from Sportsman WHERE (ID = '{id}')");
             }
             catch (Exception ex)
             {

@@ -1,5 +1,4 @@
 ﻿using Dapper;
-using Final_Project_ASP_MVC.Core;
 using Final_Project_ASP_MVC.Models;
 using System;
 using System.Collections.Generic;

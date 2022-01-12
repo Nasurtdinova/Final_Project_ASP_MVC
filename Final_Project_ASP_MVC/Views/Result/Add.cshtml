@@ -15,7 +15,7 @@
                 <label asp-for="Command" class="control-label">Command</label>
                 <select asp-for="Command" class=" form-control">
                     <option selected="selected">  </option>
-                    @foreach (string command in Final_Project_ASP_MVC.Core.Connection.GetNameCommands())
+                    @foreach (string command in Core.Connection.GetNameCommands())
                     {
                         <option>@command</option>
                     }
@@ -25,7 +25,7 @@
                 <label asp-for="Compet" class="control-label">Competition</label>
                 <select asp-for="Compet" class=" form-control">
                     <option selected="selected">  </option>
-                    @foreach (string compet in Final_Project_ASP_MVC.Core.Connection.GetNameCompets())
+                    @foreach (string compet in Core.Connection.GetNameCompets())
                     {
                         <option>@compet</option>
                     }

@@ -2,7 +2,7 @@
     Layout = "~/Views/Shared/_LayoutCopy.cshtml";
     ViewData["Title"] = "Add sportsman";
 }
-@model Final_Project_ASP_MVC.Core.Sportsman
+@model Core.Sportsman
 
 <div class="row justify-content-lg-cehter">
     <h1>Add new sportsman</h1>
@@ -23,7 +23,7 @@
                 <label asp-for="Image" class="control-label">Image</label>
                 <select asp-for="Image" class=" form-control">
                     <option selected="selected">  </option>
-                    @foreach (string image in Final_Project_ASP_MVC.Core.Connection.GetImages())
+                    @foreach (string image in Core.Connection.GetImages())
                     {
                         <option>@image</option>
                     }
@@ -34,7 +34,7 @@
                 <label asp-for="Title" class="control-label">Title</label>
                 <select asp-for="Title" class=" form-control">
                     <option selected="selected">  </option>
-                    @foreach (string title in Final_Project_ASP_MVC.Core.Connection.GetTitles())
+                    @foreach (string title in Core.Connection.GetTitles())
                     {
                         <option>@title</option>
                     }
@@ -54,7 +54,7 @@
                 <label asp-for="Command" class="control-label">Command</label>
                 <select asp-for="Command" class=" form-control">
                     <option selected="selected">  </option>
-                    @foreach (string command in Final_Project_ASP_MVC.Core.Connection.GetNameCommands())
+                    @foreach (string command in Core.Connection.GetNameCommands())
                     {
                         <option>@command</option>
                     }

@@ -15,7 +15,7 @@
                 <label asp-for="Command" class="control-label">Command</label>
                 <select asp-for="Command" class=" form-control">
                     <option selected="selected">  </option>
-                    @foreach (string command in Final_Project_ASP_MVC.Core.Connection.GetNameCommands())
+                    @foreach (string command in Core.Connection.GetNameCommands())
                     {
                         <option>@command</option>
                     }
@@ -23,11 +23,11 @@
             </div>
             <div class="form-group">
                 <label asp-for="SponsorName" class="control-label">Name</label>
-                <input asp-for="SponsorName" class=" form-control" value=@Final_Project_ASP_MVC.Core.Connection.Name />
+                <input asp-for="SponsorName" class=" form-control" value=@Core.Connection.Name />
             </div>
             <div class="form-group">
                 <label asp-for="SponsorSurname" class="control-label">Surname</label>
-                <input asp-for="SponsorName" class=" form-control" value=@Final_Project_ASP_MVC.Core.Connection.Surname />
+                <input asp-for="SponsorName" class=" form-control" value=@Core.Connection.Surname />
             </div>
             <div class="form-group">
                 <label asp-for="Amount" class="control-label">Amount</label>

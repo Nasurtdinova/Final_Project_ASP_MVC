@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Core;
-using Final_Project_ASP_MVC.Core;
 
 namespace Final_Project_ASP_MVC.Controllers
 {

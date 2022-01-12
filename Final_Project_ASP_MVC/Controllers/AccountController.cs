@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Final_Project_ASP_MVC.Models;
 using Final_Project_ASP_MVC.ViewModels;
-using Final_Project_ASP_MVC.Core;
+using Core;
 
 namespace Final_Project_ASP_MVC.Controllers
 {

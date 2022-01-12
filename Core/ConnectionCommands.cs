@@ -1,5 +1,4 @@
 ﻿using Dapper;
-using Final_Project_ASP_MVC.Core;
 using Final_Project_ASP_MVC.Models;
 using System;
 using System.Collections.Generic;
@@ -15,7 +14,7 @@ namespace Core
         private static string connStr = ConfigurationManager.ConnectionStrings["Competition"].ConnectionString;
         private static IDbConnection connection = new SqlConnection(connStr);
 
-        public static List<Sportsman> sporCom;
+        private static List<Sportsman> sporCom;
 
         public static List<Sportsman> GetSporCom(int id)
         {
