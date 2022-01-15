@@ -1,5 +1,4 @@
 ﻿using Core;
-using Final_Project_ASP_MVC.Core;
 using System;
 using System.Collections.Generic;
 using System.Security;
@@ -16,8 +15,10 @@ namespace Console_Project
             {
                 while (true)
                 {
-                    Console.WriteLine("If you want to see, click, sportsmans - 1, commands - 2, competitions - 3, results of competitions - 4, sponsorships - 5");
+                    Console.WriteLine("If you want to see, click, sportsmans - 1, commands - 2, competitions - 3, results of competitions - 4, sponsorships - 5, exit - 6");
                     int click = Convert.ToInt32(Console.ReadLine());
+                    if (click == 6)
+                        return;
                     Done(click, "Get", " ");
                 }
             }
@@ -36,8 +37,10 @@ namespace Console_Project
                 {
                     while (true)
                     {
-                        Console.WriteLine("If you want to see, click, sportsmans - 1, commands - 2, competitions - 3, results of competitions - 4, sponsorships - 5");
+                        Console.WriteLine("If you want to see, click, sportsmans - 1, commands - 2, competitions - 3, results of competitions - 4, sponsorships - 5, exit - 6");
                         int click = Convert.ToInt32(Console.ReadLine());
+                        if (click == 6)
+                            return;
                         if (click == 5)
                         {
                             PrintSponsorshipsViewer("Get");
@@ -45,6 +48,7 @@ namespace Console_Project
                         }
                         Console.WriteLine("What do you want to do 'Get', 'Add', 'Remove', 'Update'?");
                         string instruction = Console.ReadLine();
+
                         if (instruction == "Get")
                         {
                             Done(click, "Get", " ");
@@ -70,17 +74,17 @@ namespace Console_Project
                         Done(click, instruction, values);
                     }
                 }
+
                 else
                 {
                     while (true)
                     {
                         Connection con = new Connection(login, password);
-                        Console.WriteLine("If you want to see, click, sportsmans - 1, commands - 2, competitions - 3, results of competitions - 4, sponsorships - 5");
+                        Console.WriteLine("If you want to see, click, sportsmans - 1, commands - 2, competitions - 3, results of competitions - 4, sponsorships - 5, exit - 6");
                         int click = Convert.ToInt32(Console.ReadLine());
                         if (click == 6)
-                        {
-                            continue;
-                        }
+                            return;
+
                         if (click == 5)
                         {
                             Console.WriteLine("What do you want to do 'Get', 'Add', 'Remove'?");
