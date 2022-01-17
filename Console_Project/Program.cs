@@ -13,7 +13,7 @@ namespace Console_Project
             string login = Console.ReadLine();
             if (login == "Viewer")
             {
-                while (true)
+                while (true)//
                 {
                     Console.WriteLine("If you want to see, click, sportsmans - 1, commands - 2, competitions - 3, results of competitions - 4, sponsorships - 5, exit - 6");
                     int click = Convert.ToInt32(Console.ReadLine());

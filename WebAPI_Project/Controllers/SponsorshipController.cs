@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Final_Project_ASP_MVC.Core;
 using Core;
 
 namespace WebAPI_Project.Controllers

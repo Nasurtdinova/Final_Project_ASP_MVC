@@ -14,7 +14,7 @@ namespace Core
         {
             if (ConnectionResults.isTrue(result.Command,result.Compet) || ConnectionResults.isRankTrue(result.Rank, result.Compet))
             {
-                throw new Exception("!!!!");
+                throw new Exception("Such data already exists!!!");
             }
             else
             {
