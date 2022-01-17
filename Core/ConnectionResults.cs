@@ -6,10 +6,10 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-
+//лишние библиотеки убрать
 namespace Core
 {
-    public class ConnectionResults
+    public class ConnectionResults //разнести классы по папочкам
     {
         private static string connStr = ConfigurationManager.ConnectionStrings["Competition"].ConnectionString;
         private static IDbConnection connection = new SqlConnection(connStr);
@@ -32,7 +32,10 @@ namespace Core
                     });
                 }
             }
-            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            catch (Exception ex) // Exception исправить
+            { 
+                Console.WriteLine(ex.Message); 
+            }
 
             return results;
         }
@@ -50,10 +53,13 @@ namespace Core
                     Command = connection.Query<string>($"SELECT Command.Name from ResultCompetition join Command on ResultCompetition.idCommand = Command.idCommand join Competition on ResultCompetition.idCompetition = Competition.idCompetition where ResultCompetition.idCommand = {idCommand} and ResultCompetition.idCompetition = {idCompet};").AsList().FirstOrDefault(),
                     Compet = connection.Query<string>($"SELECT Competition.Name from ResultCompetition join Command on ResultCompetition.idCommand = Command.idCommand join Competition on ResultCompetition.idCompetition = Competition.idCompetition where ResultCompetition.idCommand = {idCommand} and ResultCompetition.idCompetition = {idCompet};").AsList().FirstOrDefault(),
                     Rank = connection.Query<int>($"SELECT ResultCompetition.Rank from ResultCompetition join Command on ResultCompetition.idCommand = Command.idCommand join Competition on ResultCompetition.idCompetition = Competition.idCompetition where ResultCompetition.idCommand = {idCommand} and ResultCompetition.idCompetition = {idCompet};").AsList().FirstOrDefault()
-                };
+                }; //запросы разделить на несколько строк
             }
 
-            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            catch (Exception ex) // Exception исправить
+            { 
+                Console.WriteLine(ex.Message); 
+            }
            
             return results;
         }
@@ -65,11 +71,15 @@ namespace Core
                 connection.Query($"DELETE from ResultCompetition WHERE (ResultCompetition.idCommand = {idCommand} and ResultCompetition.idCompetition = {idCompetition});");
 
             }
-            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            catch (Exception ex) // Exception исправить
+            { 
+                Console.WriteLine(ex.Message); 
+            }
         }
 
         public static bool isTrue(string Command,string Competition)
         {
+            //запросы разделить на несколько строк
             if (connection.Query<string>($"SELECT Command.Name, Competition.Name from ResultCompetition join Competition on ResultCompetition.idCompetition = Competition.idCompetition join Command on ResultCompetition.idCommand = Command.idCommand where Competition.Name = '{Competition}' and Command.Name = '{Command}';").AsList().FirstOrDefault() == Command && connection.Query<string>($"SELECT Competition.Name from ResultCompetition join Competition on ResultCompetition.idCompetition = Competition.idCompetition join Command on ResultCompetition.idCommand = Command.idCommand where Competition.Name = '{Competition}' and Command.Name = '{Command}';").AsList().FirstOrDefault() == Competition)
                 return true;
             else
@@ -91,7 +101,10 @@ namespace Core
                 connection.Query($"INSERT ResultCompetition values ((select Command.idCommand from Command where Command.Name = '{result.Command}')," +
                     $"(select Competition.idCompetition from Competition where Competition.Name = '{result.Compet}'), {result.Rank});");
             }
-            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            catch (Exception ex) // Exception исправить
+            { 
+                Console.WriteLine(ex.Message); 
+            }
         }
 
         public static void UpdateResult(Result result)
@@ -103,7 +116,10 @@ namespace Core
                     $"ResultCompetition.Rank = {result.Rank} where ResultCompetition.idCommand =(select Command.idCommand from Command where Command.Name = '{result.Command}')" +
                     $"and ResultCompetition.idCompetition =(select Competition.idCompetition from Competition where Competition.Name = '{result.Compet}');");
             }
-            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            catch (Exception ex) // Exception исправить
+            { 
+                Console.WriteLine(ex.Message); 
+            }
         }
     }
 }

@@ -6,10 +6,10 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-
+//лишние библиотеки убрать
 namespace Core
 {
-    public class ConnectionSponsorship
+    public class ConnectionSponsorship //разнести классы по папочкам
     {
         private static string connStr = ConfigurationManager.ConnectionStrings["Competition"].ConnectionString;
         private static IDbConnection connection = new SqlConnection(connStr);
@@ -34,7 +34,7 @@ namespace Core
                 }
             }
 
-            catch (Exception ex)
+            catch (Exception ex) // Exception исправить
             {
                 Console.WriteLine(ex.Message);
             }
@@ -61,7 +61,7 @@ namespace Core
                 }
             }
 
-            catch (Exception ex)
+            catch (Exception ex) // Exception исправить
             {
                 Console.WriteLine(ex.Message);
             }
@@ -84,7 +84,7 @@ namespace Core
                     };
             }
 
-            catch (Exception ex)
+            catch (Exception ex) // Exception исправить
             {
                 Console.WriteLine(ex.Message);
             }
@@ -94,10 +94,10 @@ namespace Core
         public static void AddSponsorship(Sponsorship sponsorship)
         {
             try
-            {
+            {//запросы разделить на несколько строк
                 connection.Query($"INSERT SponsorCommand values ({Connection.idUser}, (select Command.idCommand from Command where Command.Name = '{sponsorship.Command}'), {sponsorship.teamContract}, {sponsorship.Amount});");
             }
-            catch (Exception ex)
+            catch (Exception ex) // Exception исправить
             {
                 Console.WriteLine(ex.Message);
             }
@@ -106,10 +106,10 @@ namespace Core
         public static void AddSponsorshipApi(Sponsorship sponsorship)
         {
             try
-            {
+            {//запросы разделить на несколько строк
                 connection.Query($"INSERT SponsorCommand values ((select User.idUser from Users where Users.Name = '{sponsorship.SponsorName}' and Users.Surname = '{sponsorship.SponsorSurname}'), (select Command.idCommand from Command where Command.Name = '{sponsorship.Command}'), {sponsorship.teamContract}, {sponsorship.Amount});");
             }
-            catch (Exception ex)
+            catch (Exception ex) // Exception исправить
             {
                 Console.WriteLine(ex.Message);
             }
@@ -120,8 +120,8 @@ namespace Core
             try
             {
                 connection.Query($"DELETE from SponsorCommand WHERE (SponsorCommand.id = '{id}')");
-            }
-            catch (Exception ex)
+            } 
+            catch (Exception ex) // Exception исправить
             {
                 Console.WriteLine(ex.Message);
             }

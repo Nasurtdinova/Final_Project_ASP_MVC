@@ -1,5 +1,5 @@
 using System;
-
+//удалить лишний класс
 namespace WebAPI_Project
 {
     public class WeatherForecast

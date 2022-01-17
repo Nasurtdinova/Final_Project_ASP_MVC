@@ -6,10 +6,10 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-
+//лишние библиотеки убрать
 namespace Core
 {
-    public class ConnectionCommands
+    public class ConnectionCommands //разнести классы по папочкам
     {
         private static string connStr = ConfigurationManager.ConnectionStrings["Competition"].ConnectionString;
         private static IDbConnection connection = new SqlConnection(connStr);
@@ -32,7 +32,7 @@ namespace Core
                 }
             }
 
-            catch
+            catch // Exception исправить
             {
                 return null;
             }
@@ -58,7 +58,7 @@ namespace Core
                 }
             }
 
-            catch (Exception ex)
+            catch (Exception ex) // Exception исправить
             {
                 Console.WriteLine(ex.Message);
             }
@@ -71,7 +71,7 @@ namespace Core
             {
                 connection.Query($"INSERT INTO Command (Name, Count, Image,ID_city) SELECT '{command.Name}', {command.Count}, '{command.Image}', idCity  FROM City where '{command.City}' = City.Name;");
             }
-            catch (Exception ex)
+            catch (Exception ex) // Exception исправить
             {
                 Console.WriteLine(ex.Message);
             }
@@ -83,7 +83,7 @@ namespace Core
             {
                 connection.Query($"DELETE from Command WHERE (idCommand = '{id}')");
             }
-            catch (Exception ex)
+            catch (Exception ex) // Exception исправить
             {
                 Console.WriteLine(ex.Message);
             }
@@ -95,7 +95,7 @@ namespace Core
             {
                 connection.Query($"update Command set Name='{command.Name}',Count={command.Count},Image='{command.Image}', ID_city = (select City.idCity from City where City.Name = '{command.City}') where idCommand = {command.ID};");
             }
-            catch (Exception ex)
+            catch (Exception ex) // Exception исправить
             {
                 Console.WriteLine(ex.Message);
             }
@@ -116,7 +116,7 @@ namespace Core
                 };
             }
 
-            catch (Exception ex)
+            catch (Exception ex) // Exception исправить
             {
                 Console.WriteLine(ex.Message);
             }

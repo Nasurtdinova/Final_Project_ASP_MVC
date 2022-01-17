@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Final_Project_ASP_MVC.Core;
 using Core;
-
+//лишние библиотеки убрать
 namespace WebAPI_Project.Controllers
 {
     [ApiController]

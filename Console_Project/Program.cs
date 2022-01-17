@@ -3,13 +3,14 @@ using Final_Project_ASP_MVC.Core;
 using System;
 using System.Collections.Generic;
 using System.Security;
-
+//лишние библиотеки убрать
 namespace Console_Project
 {
     class Program
     {
         static void Main(string[] args)
         {
+            //исправить выход из программы
             Console.WriteLine("Hello, input login and password, else write Viewer");
             string login = Console.ReadLine();
             if (login == "Viewer")
@@ -29,7 +30,7 @@ namespace Console_Project
                     break;
                 password += key.KeyChar;
             }
-
+            //убрать лишние условия
             if (Connection.IsLogin(login, password))
             {
                 if (login == "nasurtdinovaguz@mail.ru" && password == "2003")
