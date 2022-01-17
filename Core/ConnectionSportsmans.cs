@@ -82,7 +82,7 @@ namespace Core
         public static void AddSportsman(Sportsman sportsman)
         {
             try
-            {//запросы разделить на несколько строк
+            {//слишком длинная строка
                 connection.Query($"INSERT Sportsman values('{sportsman.Surname}', '{sportsman.Name}', (select Images.idImages FROM Images where '{sportsman.Image}' = Images.Name), (select Title.idTitle FROM Title where '{sportsman.Title}' = Title.Name),{sportsman.Cost}, {sportsman.Height}, (select Command.idCommand from Command where Command.Name = '{sportsman.Command}'));");
             }
             catch (Exception ex) // Exception исправить
@@ -94,7 +94,7 @@ namespace Core
         public static void UpdateSportsman(Sportsman sportsman)
         {
             try
-            {//запросы разделить на несколько строк
+            {//слишком длинная строка
                 connection.Query($"update Sportsman set Sportsman.Surname='{sportsman.Surname}',Sportsman.Name='{sportsman.Name}', Sportsman.ID_Image = (select idImages  from Images where '{sportsman.Image}' = Images.Name), Sportsman.idTitle = (select idTitle from Title where '{sportsman.Title}' = Title.Name), Sportsman.Height = {sportsman.Height}, Sportsman.Cost = {sportsman.Cost},Sportsman.idCommand =(select Command.idCommand from Command where Command.Name = '{sportsman.Command}') where ID = {sportsman.ID};");
             }
             catch (Exception ex) // Exception исправить

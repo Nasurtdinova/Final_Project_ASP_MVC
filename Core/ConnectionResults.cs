@@ -53,7 +53,7 @@ namespace Core
                     Command = connection.Query<string>($"SELECT Command.Name from ResultCompetition join Command on ResultCompetition.idCommand = Command.idCommand join Competition on ResultCompetition.idCompetition = Competition.idCompetition where ResultCompetition.idCommand = {idCommand} and ResultCompetition.idCompetition = {idCompet};").AsList().FirstOrDefault(),
                     Compet = connection.Query<string>($"SELECT Competition.Name from ResultCompetition join Command on ResultCompetition.idCommand = Command.idCommand join Competition on ResultCompetition.idCompetition = Competition.idCompetition where ResultCompetition.idCommand = {idCommand} and ResultCompetition.idCompetition = {idCompet};").AsList().FirstOrDefault(),
                     Rank = connection.Query<int>($"SELECT ResultCompetition.Rank from ResultCompetition join Command on ResultCompetition.idCommand = Command.idCommand join Competition on ResultCompetition.idCompetition = Competition.idCompetition where ResultCompetition.idCommand = {idCommand} and ResultCompetition.idCompetition = {idCompet};").AsList().FirstOrDefault()
-                }; //запросы разделить на несколько строк
+                }; //слишком длинная строка
             }
 
             catch (Exception ex) // Exception исправить
@@ -79,7 +79,7 @@ namespace Core
 
         public static bool isTrue(string Command,string Competition)
         {
-            //запросы разделить на несколько строк
+            //слишком длинная строка
             if (connection.Query<string>($"SELECT Command.Name, Competition.Name from ResultCompetition join Competition on ResultCompetition.idCompetition = Competition.idCompetition join Command on ResultCompetition.idCommand = Command.idCommand where Competition.Name = '{Competition}' and Command.Name = '{Command}';").AsList().FirstOrDefault() == Command && connection.Query<string>($"SELECT Competition.Name from ResultCompetition join Competition on ResultCompetition.idCompetition = Competition.idCompetition join Command on ResultCompetition.idCommand = Command.idCommand where Competition.Name = '{Competition}' and Command.Name = '{Command}';").AsList().FirstOrDefault() == Competition)
                 return true;
             else

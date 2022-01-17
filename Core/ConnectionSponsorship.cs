@@ -94,7 +94,7 @@ namespace Core
         public static void AddSponsorship(Sponsorship sponsorship)
         {
             try
-            {//запросы разделить на несколько строк
+            {//слишком длинная строка
                 connection.Query($"INSERT SponsorCommand values ({Connection.idUser}, (select Command.idCommand from Command where Command.Name = '{sponsorship.Command}'), {sponsorship.teamContract}, {sponsorship.Amount});");
             }
             catch (Exception ex) // Exception исправить
@@ -106,7 +106,7 @@ namespace Core
         public static void AddSponsorshipApi(Sponsorship sponsorship)
         {
             try
-            {//запросы разделить на несколько строк
+            {//слишком длинная строка
                 connection.Query($"INSERT SponsorCommand values ((select User.idUser from Users where Users.Name = '{sponsorship.SponsorName}' and Users.Surname = '{sponsorship.SponsorSurname}'), (select Command.idCommand from Command where Command.Name = '{sponsorship.Command}'), {sponsorship.teamContract}, {sponsorship.Amount});");
             }
             catch (Exception ex) // Exception исправить

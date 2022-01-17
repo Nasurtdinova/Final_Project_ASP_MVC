@@ -71,7 +71,7 @@ namespace Core
         public static void AddCompetition(Competition compet)
         {
             try
-            { //запросы разделить на несколько строк
+            { //слишком длинная строка
                 connection.Query($"INSERT INTO Competition (Name, NameVenue, Street,Home,Date,idCity) SELECT '{compet.Name}', '{compet.NameVenue}', '{compet.Street}', {compet.Home}, '{compet.Date.ToString("yyyy-MM-dd hh:mm:ss")}', idCity FROM City where '{compet.City}' = City.Name;");
 
             }
@@ -96,7 +96,7 @@ namespace Core
         public static void UpdateCompet(Competition compet)
         {
             try
-            { //запросы разделить на несколько строк
+            { //слишком длинная строка
                 connection.Query($"update Competition set Competition.Name ='{compet.Name}',NameVenue='{compet.NameVenue}',Street='{compet.Street}', Home={compet.Home},idCity = (select idCity from City where City.Name = '{compet.City}'), Competition.Date ='{compet.Date.ToString("dd.MM.yyyy hh:mm:ss")}' where idCompetition = {compet.ID};");
             }
             catch (Exception ex) // Exception исправить

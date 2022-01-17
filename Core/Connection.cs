@@ -12,6 +12,7 @@ namespace Core
     {
         private static string connStr = ConfigurationManager.ConnectionStrings["Competition"].ConnectionString;
         private static IDbConnection connection = new SqlConnection(connStr);
+
         private static List<string> images;
         private static List<string> cities;
         private static List<string> titles;
