@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Final_Project_ASP_MVC.Core;
 using Core;
 
 namespace WebAPI_Project.Controllers
@@ -16,7 +15,7 @@ namespace WebAPI_Project.Controllers
         public SponsorshipController() { }
 
         [HttpGet]
-        public ActionResult<List<Sponsorship>> GetAll() => ConnectionSponsorship.GetSponsorshipViewerAdmin();
+        public ActionResult<List<Sponsorships>> GetAll() => ConnectionSponsorship.GetSponsorshipViewerAdmin();
 
         [HttpGet("{id}")]
         public ActionResult<Sponsorship> Get(int id)

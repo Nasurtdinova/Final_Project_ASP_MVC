@@ -2,7 +2,8 @@
     Layout = "~/Views/Shared/_LayoutSponsor.cshtml";
     ViewData["Title"] = "Sportsmans";
 }
-@model List<Core.Sportsman>
+@using System.Collections.ObjectModel;
+@model ObservableCollection<Core.Sportsmans>
 <h2>Sportsmans</h2>
 <div class="row">
     @foreach (var sportsman in Model)
@@ -15,7 +16,7 @@
                              alt="@sportsman.Name" />
                     </div>
                     <div>
-                        @sportsman.Surname <br/>
+                        @sportsman.Surname <br />
                         @sportsman.Name
                     </div>
                     <div class="text-center">

@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Core;
-using Final_Project_ASP_MVC.Core;
+using CoreFramework;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,10 +15,10 @@ namespace WebAPI_Project.Controllers
         public ResultController() { }
 
         [HttpGet]
-        public ActionResult<List<Result>> GetAll() => ConnectionResults.GetResults();
+        public ActionResult<List<ResultCompetition>> GetAll() => ConnectionResults.GetResults();
 
         [HttpGet("{idCommand},{idCompetition}")]
-        public ActionResult<Result> Get(int idCommand, int idCompetition)
+        public ActionResult<ResultCompetition> Get(int idCommand, int idCompetition)
         {
             var result = ConnectionResults.GetResultsId(idCommand, idCompetition);
 
@@ -30,9 +29,9 @@ namespace WebAPI_Project.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Result result)
+        public IActionResult Create(ResultCompetition result)
         {
-            if (ConnectionResults.isTrue(result.Command, result.Compet))
+            if (ConnectionResults.isTrue(result.Command.Name, result.Competition.Name))
             {
                 throw new Exception("!!!!");
             }
@@ -44,9 +43,9 @@ namespace WebAPI_Project.Controllers
         }
 
         [HttpPut("{idCommand},{idCompetition}")]
-        public IActionResult Update(int idCommand, int idCompetition, Result result)
+        public IActionResult Update(int idCommand, int idCompetition, ResultCompetition result)
         {
-            if (idCommand != result.idCommand && idCompetition != result.idCompet)
+            if (idCommand != result.idCommand && idCompetition != result.idCompetition)
                 return BadRequest();
 
             var existingResult = ConnectionResults.GetResultsId(idCommand, idCompetition);

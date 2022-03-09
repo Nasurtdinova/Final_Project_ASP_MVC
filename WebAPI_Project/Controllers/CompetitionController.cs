@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Final_Project_ASP_MVC.Core;
 using Core;
 //лишние библиотеки убрать
 namespace WebAPI_Project.Controllers
@@ -16,7 +15,7 @@ namespace WebAPI_Project.Controllers
         public CompetitionController() { }
 
         [HttpGet]
-        public ActionResult<List<Competition>> GetAll() => ConnectionCompetitions.GetCompetition();
+        public ActionResult<List<Competitions>> GetAll() => ConnectionCompetitions.GetCompetition();
 
         [HttpGet("{id}")]
         public ActionResult<Competition> Get(int id)

@@ -11,7 +11,7 @@ namespace Final_Project_ASP_MVC.Controllers
     {
         public IActionResult Index()
         {
-            var sponsorships = ConnectionSponsorship.GetSponsorship(Connection.idUser);
+            var sponsorships = ConnectionSponsorship.GetSponsorship(Connection.IdUser);
             return View(sponsorships);
         }
 

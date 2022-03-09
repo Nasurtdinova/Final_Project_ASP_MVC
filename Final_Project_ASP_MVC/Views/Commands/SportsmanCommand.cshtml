@@ -1,7 +1,8 @@
 ﻿@{
     ViewData["Title"] = "Command";
 }
-@model List<Core.Sportsman>
+@using System.Collections.ObjectModel;
+@model ObservableCollection<Core.Sportsman>
 <h2>Sportsmans</h2>
 <div class="row">
     @foreach (var sportsman in Model)
@@ -21,8 +22,8 @@
                         </a>
                     </div>
                 </div>
-                </div>
             </div>
+        </div>
     }
 </div>
 <div>

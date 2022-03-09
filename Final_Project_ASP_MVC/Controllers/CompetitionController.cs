@@ -11,14 +11,14 @@ namespace Final_Project_ASP_MVC.Controllers
     {
         public IActionResult Index()
         {
-           var competitions = CompetitionStorage.competition;
-            return View(competitions);
+           var compet = CompetitionStorage.competition;
+            return View(compet);
         }
 
         public IActionResult Viewer()
         {
-            var competitions = CompetitionStorage.competition;
-            return View(competitions);
+            var compet = CompetitionStorage.competition;
+            return View(compet);
         }
 
         public IActionResult Sponsor()

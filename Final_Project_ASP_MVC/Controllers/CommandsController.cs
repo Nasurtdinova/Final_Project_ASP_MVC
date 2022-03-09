@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Core;
@@ -62,7 +63,7 @@ namespace Final_Project_ASP_MVC.Controllers
         [HttpGet]
         public IActionResult SportsmanCommand(int id)
         {
-            List<Sportsman> sportCom = ConnectionCommands.GetSporCom(id);
+            ObservableCollection<Sportsman> sportCom = ConnectionCommands.GetSporCom(id);
             return View(sportCom);
         }
     }

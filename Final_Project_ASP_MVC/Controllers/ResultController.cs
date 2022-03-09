@@ -42,7 +42,7 @@ namespace Final_Project_ASP_MVC.Controllers
         [HttpGet]
         public IActionResult Update(int idCommand, int idCompetition)
         {
-            Result result = ConnectionResults.GetResultsId(idCommand, idCompetition);
+            Results result = ConnectionResults.GetResultsId(idCommand, idCompetition);
             return View(result);
         }
 

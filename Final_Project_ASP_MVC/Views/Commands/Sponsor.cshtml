@@ -2,7 +2,8 @@
     Layout = "~/Views/Shared/_LayoutSponsor.cshtml";
     ViewData["Title"] = "Command";
 }
-@model List<Core.Command>
+@using System.Collections.ObjectModel;
+@model ObservableCollection<Core.Commands>
 <h2>Commands</h2>
 <div class="row">
     @foreach (var command in Model)
@@ -18,7 +19,7 @@
                     <div>
                         Название команды: @command.Name <br />
                         Количество человек: @command.Count <br />
-                        Город: @command.City <br/> <br/>
+                        Город:@command.City @*@CoreFramework.Connection.GetCitiesId(Convert.ToInt32(command.ID_city))*@ <br /> <br />
                     </div>
 
                     <div class="text-center">

@@ -1,5 +1,4 @@
 ﻿using Core;
-using Final_Project_ASP_MVC.Core;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -16,7 +15,7 @@ namespace WebAPI_Project.Controllers
         public SportsmanController() {}
 
         [HttpGet]
-        public ActionResult<List<Sportsman>> GetAll() => ConnectionSportsmans.GetSportsmans();
+        public ActionResult<List<Sportsmans>> GetAll() => ConnectionSportsmans.GetSportsmans();
 
         [HttpGet("{id}")]
         public ActionResult<Sportsman> Get(int id)

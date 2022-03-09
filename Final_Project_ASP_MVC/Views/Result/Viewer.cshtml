@@ -1,7 +1,8 @@
 ﻿@{
     ViewData["Title"] = "Result competition";
 }
-@model List<Core.Result>
+@using System.Collections.ObjectModel;
+@model ObservableCollection<Core.Results>
 <h2>Result competitions</h2>
 <br />
 <table border="1" style="border-collapse:collapse;" width=100% cellpadding="4" cellspacing="20">

@@ -22,7 +22,7 @@ namespace Final_Project_ASP_MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = new User { Email = model.Email, Password = model.Password, Year = model.Year, Surname = model.Surname, UserName= model.Name };
+                User user = new User { Email = model.Email, Password = model.Password, Year = model.Year, Surname = model.Surname, UserName= model.Name, idType = 2 };
                 Connection.AddUser(user);
                 return RedirectToAction("Index", "Home");
             }
@@ -48,7 +48,7 @@ namespace Final_Project_ASP_MVC.Controllers
                     {
                         return Redirect(model.ReturnUrl);
                     }
-                    else if (model.Email == "nasurtdinovaguz@mail.ru" && model.Password == "2003")
+                    if (Connection.GetIdType(model.Email,model.Password))
                     {
                         return RedirectToAction("IndexHome", "Home");
                     }

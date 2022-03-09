@@ -2,7 +2,8 @@
     Layout = "~/Views/Shared/_LayoutCopy.cshtml";
     ViewData["Title"] = "Result competition";
 }
-@model List<Core.Result>
+@using System.Collections.ObjectModel;
+@model ObservableCollection<Core.Results>
 <h2>Result competitions</h2>
 <div class="row justify-content-end">
     <a class="btn btn-primary" asp-controller="Result"
@@ -19,7 +20,7 @@
                         <p class="font-weight-normal">Название команды: @result.Command</p>
                     </div>
                     <div>
-                        <p class="font-weight-normal">Название соревнования: @result.Compet</p>
+                        <p class="font-weight-normal">Название соревнования:@result.Compet</p>
                     </div>
                     <div>
                         <p class="font-weight-normal">Место: @result.Rank</p>

@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Core;
-using Final_Project_ASP_MVC.Core;
+using CoreFramework;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 //лишние библиотеки убрать
@@ -39,7 +38,7 @@ namespace WebAPI_Project.Controllers
         [HttpPut("{id}")]
         public IActionResult Update(int id, Command command)
         {
-            if (id != command.ID)
+            if (id != command.idCommand)
                 return BadRequest();
 
             var existingCommand = ConnectionCommands.GetCommandsId(id);

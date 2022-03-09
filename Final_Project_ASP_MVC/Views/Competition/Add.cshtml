@@ -23,7 +23,7 @@
                 <label asp-for="City" class="control-label">City</label>
                 <select asp-for="City" class=" form-control">
                     <option selected="selected">  </option>
-                    @foreach (string city in Core.Connection.GetCities())
+                    @foreach (var city in Core.Connection.GetCities())
                     {
                         <option>@city</option>
                     }
