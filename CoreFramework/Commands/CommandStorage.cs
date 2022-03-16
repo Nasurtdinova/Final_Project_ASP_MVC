@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,7 +10,7 @@ namespace CoreFramework
 {
     public class CommandStorage : IEnumerable
     {
-        public static List<Command> commands { get; private set; } = ConnectionCommands.GetCommands();
+        public static ObservableCollection<Command> commands { get; private set; } = ConnectionCommands.GetCommands();
 
         public IEnumerator GetEnumerator()
         {
@@ -25,7 +26,7 @@ namespace CoreFramework
         public static void RemoveByName(int id)
         {
             ConnectionCommands.RemoveCommand(id);
-            commands.RemoveAll(p => p.idCommand == id);
+             commands = ConnectionCommands.GetCommands();
         }
 
         public static void Update(Command command)

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using Core;
+using CoreFramework;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Final_Project_ASP_MVC.Controllers

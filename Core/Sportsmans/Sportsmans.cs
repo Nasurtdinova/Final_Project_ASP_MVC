@@ -18,8 +18,10 @@ namespace Core
         [StringLength(16, ErrorMessage = "Must be between 2 and 16 characters", MinimumLength = 2)]
         public string Name { get; set; }
 
+        public int ID_Image { get; set; }
         public string Image { get; set; }
 
+        public int idTitle { get; set; }
         public string Title { get; set; }
 
         [Range(150, 210)]
@@ -28,6 +30,7 @@ namespace Core
         public int Cost { get; set; }
 
         [Required(ErrorMessage = "Name command is required")]
+        public int idCommand { get; set; }
         public string Command { get; set; }
 
         public override string ToString()

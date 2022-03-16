@@ -48,7 +48,7 @@ namespace Final_Project_ASP_MVC.Controllers
         [HttpGet]
         public IActionResult Update(int id)
         {
-            Sportsman sportsman = ConnectionSportsmans.GetSportsmansId(id);
+            Sportsmans sportsman = ConnectionSportsmans.GetSportsmansId(id);
             return View(sportsman);
         }
 
@@ -62,7 +62,7 @@ namespace Final_Project_ASP_MVC.Controllers
         [HttpGet]
         public IActionResult ViewerView(int id)
         {
-            Sportsman sportsman = ConnectionSportsmans.GetSportsmansId(id);
+            Sportsmans sportsman = ConnectionSportsmans.GetSportsmansId(id);
             return View(sportsman);
         }
     }

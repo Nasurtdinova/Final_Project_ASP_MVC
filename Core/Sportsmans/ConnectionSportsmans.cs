@@ -20,20 +20,14 @@ namespace Core
             ObservableCollection<Sportsmans> sportsman = new ObservableCollection<Sportsmans>();
             try
             {
-                for (int i = 0; i< connection.Query<int>($"SELECT * FROM Sportsman;").Count();i++)
+                List<Sportsmans> list = connection.Query<Sportsmans>("select * from Sportsman").AsList();
+                foreach (var i in list)
                 {
-                    sportsman.Add(new Sportsmans
-                    {
-                        ID = connection.Query<int>($"SELECT ID FROM Sportsman join Images on ID_Image = idImages join Title on Title.idTitle = Sportsman.idTitle join Command on Command.idCommand = Sportsman.idCommand;").AsList()[i],
-                        Surname = connection.Query<string>($"SELECT Surname FROM Sportsman join Images on ID_Image = idImages join Title on Title.idTitle = Sportsman.idTitle join Command on Command.idCommand = Sportsman.idCommand;").AsList()[i],
-                        Name = connection.Query<string>($"SELECT Sportsman.Name FROM Sportsman join Images on ID_Image = idImages join Title on Title.idTitle = Sportsman.idTitle join Command on Command.idCommand = Sportsman.idCommand;").AsList()[i],
-                        Image = connection.Query<string>($"SELECT Images.Name FROM Sportsman join Images on ID_Image = idImages join Title on Title.idTitle = Sportsman.idTitle join Command on Command.idCommand = Sportsman.idCommand;").AsList()[i],
-                        Title = connection.Query<string>($"SELECT Title.Name FROM Sportsman join Images on ID_Image = idImages join Title on Title.idTitle = Sportsman.idTitle join Command on Command.idCommand = Sportsman.idCommand;").AsList()[i],
-                        Height = connection.Query<int>($"SELECT Height FROM Sportsman join Images on ID_Image = idImages join Title on Title.idTitle = Sportsman.idTitle join Command on Command.idCommand = Sportsman.idCommand;").AsList()[i],
-                        Cost = connection.Query<int>($"SELECT Cost FROM Sportsman join Images on ID_Image = idImages join Title on Title.idTitle = Sportsman.idTitle join Command on Command.idCommand = Sportsman.idCommand;").AsList()[i],
-                        Command = connection.Query<string>($"SELECT Command.Name FROM Sportsman join Images on ID_Image = idImages join Title on Title.idTitle = Sportsman.idTitle join Command on Command.idCommand = Sportsman.idCommand;").AsList()[i]
-                    });
+                    i.Image = Connection.GetNameImage(i.ID_Image);
+                    i.Command = Connection.GetNameCommand(i.idCommand);
+                    i.Title = Connection.GetNameTitle(i.idTitle);
                 }
+                sportsman = new ObservableCollection<Sportsmans>(list);
             }
             catch (Exception ex) // Exception исправить
             {
@@ -43,22 +37,15 @@ namespace Core
             return sportsman;
         }
 
-        public static Sportsman GetSportsmansId(int id)
+        public static Sportsmans GetSportsmansId(int id)
         {
-            Sportsman sportsman = null;
+            Sportsmans sportsman = null;
 
             try
             {
-                sportsman = new Sportsman {
-                 ID = connection.Query<int>($"SELECT ID FROM Sportsman join Images on ID_Image = idImages join Title on Title.idTitle = Sportsman.idTitle join Command on Command.idCommand = Sportsman.idCommand where Sportsman.ID = {id};").AsList().FirstOrDefault(),
-                 Surname = connection.Query<string>($"SELECT Surname FROM Sportsman join Images on ID_Image = idImages join Title on Title.idTitle = Sportsman.idTitle join Command on Command.idCommand = Sportsman.idCommand where Sportsman.ID = {id};").AsList().FirstOrDefault(),
-                 Name = connection.Query<string>($"SELECT Sportsman.Name FROM Sportsman join Images on ID_Image = idImages join Title on Title.idTitle = Sportsman.idTitle join Command on Command.idCommand = Sportsman.idCommand where Sportsman.ID = {id};").AsList().FirstOrDefault(),
-                 Image = connection.Query<string>($"SELECT Images.Name FROM Sportsman join Images on ID_Image = idImages join Title on Title.idTitle = Sportsman.idTitle join Command on Command.idCommand = Sportsman.idCommand where Sportsman.ID = {id};").AsList().FirstOrDefault(),
-                 Title = connection.Query<string>($"SELECT Title.Name FROM Sportsman join Images on ID_Image = idImages join Title on Title.idTitle = Sportsman.idTitle join Command on Command.idCommand = Sportsman.idCommand where Sportsman.ID = {id};").AsList().FirstOrDefault(),
-                 Height = connection.Query<int>($"SELECT Height FROM Sportsman join Images on ID_Image = idImages join Title on Title.idTitle = Sportsman.idTitle join Command on Command.idCommand = Sportsman.idCommand where Sportsman.ID = {id};").AsList().FirstOrDefault(),
-                 Cost = connection.Query<int>($"SELECT Cost FROM Sportsman join Images on ID_Image = idImages join Title on Title.idTitle = Sportsman.idTitle join Command on Command.idCommand = Sportsman.idCommand where Sportsman.ID = {id};").AsList().FirstOrDefault(),
-                 Command = connection.Query<string>($"SELECT Command.Name FROM Sportsman join Images on ID_Image = idImages join Title on Title.idTitle = Sportsman.idTitle join Command on Command.idCommand = Sportsman.idCommand where Sportsman.ID = {id};").AsList().FirstOrDefault()
-            };}
+                ObservableCollection<Sportsmans> sportsmans = GetSportsmans();
+                sportsman =  sportsmans.Where(t => t.ID == id).FirstOrDefault();
+            }
 
             catch // Exception исправить
             { 
@@ -83,8 +70,9 @@ namespace Core
         public static void AddSportsman(Sportsman sportsman)
         {
             try
-            {//слишком длинная строка
-                connection.Query($"INSERT Sportsman values('{sportsman.Surname}', '{sportsman.Name}', (select Images.idImages FROM Images where '{sportsman.Image}' = Images.Name), (select Title.idTitle FROM Title where '{sportsman.Title}' = Title.Name),{sportsman.Cost}, {sportsman.Height}, (select Command.idCommand from Command where Command.Name = '{sportsman.Command}'));");
+            {
+                connection.Query($"INSERT Sportsman values('{sportsman.Surname}', '{sportsman.Name}', {Connection.GetIdImage(sportsman.Image)}," +
+                    $"{Connection.GetIdTitle(sportsman.Title)},{sportsman.Cost}, {sportsman.Height}, {Connection.GetIdCommand(sportsman.Command)});");
             }
             catch (Exception ex) // Exception исправить
             {
@@ -95,8 +83,11 @@ namespace Core
         public static void UpdateSportsman(Sportsman sportsman)
         {
             try
-            {//слишком длинная строка
-                connection.Query($"update Sportsman set Sportsman.Surname='{sportsman.Surname}',Sportsman.Name='{sportsman.Name}', Sportsman.ID_Image = (select idImages  from Images where '{sportsman.Image}' = Images.Name), Sportsman.idTitle = (select idTitle from Title where '{sportsman.Title}' = Title.Name), Sportsman.Height = {sportsman.Height}, Sportsman.Cost = {sportsman.Cost},Sportsman.idCommand =(select Command.idCommand from Command where Command.Name = '{sportsman.Command}') where ID = {sportsman.ID};");
+            {
+                connection.Query($"update Sportsman set Sportsman.Surname='{sportsman.Surname}',Sportsman.Name='{sportsman.Name}', " +
+                    $"Sportsman.ID_Image = {Connection.GetIdImage(sportsman.Image)}, Sportsman.idTitle = {Connection.GetIdTitle(sportsman.Title)}, " +
+                    $"Sportsman.Height = {sportsman.Height}, Sportsman.Cost = {sportsman.Cost},Sportsman.idCommand ={Connection.GetIdCommand(sportsman.Command)} " +
+                    $"where ID = {sportsman.ID};");
             }
             catch (Exception ex) // Exception исправить
             {

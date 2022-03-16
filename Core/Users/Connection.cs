@@ -110,10 +110,40 @@ namespace Core
             return cities;
         }
 
+        public static string GetNameCommand(int id)
+        {
+            return connection.Query<string>($"SELECT Name FROM Command where '{id}' = idCommand;").AsList()[0];
+        }
+
+        public static string GetNameTitle(int id)
+        {
+            return connection.Query<string>($"SELECT Name FROM Title where '{id}' = idTitle;").AsList()[0];
+        }
+
+        public static string GetNameImage(int id)
+        {
+            return connection.Query<string>($"SELECT Name FROM Images where '{id}' = idImages;").AsList()[0];
+        }
+
+        public static int GetIdCommand(string name)
+        {
+            return connection.Query<int>($"SELECT idCommand FROM Command where '{name}' = Name;").AsList()[0];
+        }
+
+        public static int GetIdTitle(string name)
+        {
+            return connection.Query<int>($"SELECT idTitle FROM Title where '{name}' = Name;").AsList()[0];
+        }
+
+        public static int GetIdImage(string name)
+        {
+            return connection.Query<int>($"SELECT idImages FROM Images where '{name}' = Name;").AsList()[0];
+        }
+
         public static bool IsLogin(string email, string password)
         {
-            if (connection.Query<string>($"SELECT Email FROM Users where '{email}' = Email and '{password}' = Password;").AsList()[0] == email 
-            && connection.Query<string>($"SELECT Password FROM Users where '{email}' = Email and '{password}' = Password;").AsList()[0] == password)
+            if (connection.Query<string>($"SELECT Email FROM Users where '{email}' = Email and '{password}' = Password;").AsList()[0] != null 
+            && connection.Query<string>($"SELECT Password FROM Users where '{email}' = Email and '{password}' = Password;").AsList()[0] != null)
             {
                 return true;
             }

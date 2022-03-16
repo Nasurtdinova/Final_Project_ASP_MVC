@@ -18,6 +18,7 @@ namespace Core
 
         public string Image { get; set; }
 
+        [Range(1, 10)]
         public int Count { get; set; }
 
         public override string ToString()

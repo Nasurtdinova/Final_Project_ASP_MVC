@@ -1,0 +1,46 @@
+﻿<Page x:Class="RunningCompetitionWPF.ViewerMainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:RunningCompetitionWPF"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ViewerMainPage">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="13*">
+            </ColumnDefinition>
+            <ColumnDefinition Width="70*"/>
+            <ColumnDefinition Width="70*">
+            </ColumnDefinition>
+
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50">
+            </RowDefinition>
+            <RowDefinition Height="50">
+            </RowDefinition>
+            <RowDefinition Height="60">
+            </RowDefinition>
+            <RowDefinition >
+            </RowDefinition>
+           
+        </Grid.RowDefinitions>
+        <Button x:Name="registrSponsor"  FontSize="18" Grid.Row="0" FontFamily="Lucida Calligraphy" Content="Sign up as sponsor" Click="registrSponsor_Click" Grid.Column="2" Background="#FFA0D0F1" Height="40" Width="250"/>
+        <Button x:Name="registrCommand" Grid.Row="1"  FontSize="18" FontFamily="Lucida Calligraphy" Content="Sign up as command" Click="registrCommand_Click" Grid.Column="2" Background="#FFA0D0F1" Height="40" Width="250"/>
+        <Button x:Name="login" FontFamily="Lucida Calligraphy" Grid.Row="2"  FontSize="18" Content="Sign in" Click="login_Click" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" Width="180"/>
+        <Image Source="C:\Users\nasur\source\repos\RunningCompetitions\RunningCompetitions\img\image 1.jpg"  Grid.Row="3" Width="500" Height="255" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2"/>
+        <Menu FontSize="30" VerticalAlignment="Top" Background="#FFCAEAF4" Grid.RowSpan="2">
+            <MenuItem Background="#FFCAEAF4" Width="100" Height="70">
+                <MenuItem.Icon>
+                    <Image Source="C:\Users\nasur\source\repos\RunningCompetitions\RunningCompetitions\img\main_menu.png" Margin="-103,-41,-143,-44" />
+                </MenuItem.Icon>
+                <MenuItem Header="Competitions" FontFamily="Lucida Calligraphy" x:Name="competition" Click="competition_click"/>
+                <MenuItem Header="Sportsmans" FontFamily="Lucida Calligraphy" x:Name="sportsman" Click="sportsman_click"/>
+                <MenuItem Header="Commands" FontFamily="Lucida Calligraphy" x:Name="command" Click="command_click"/>
+            </MenuItem>
+        </Menu>
+    </Grid>
+</Page>
