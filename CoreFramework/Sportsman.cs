@@ -23,10 +23,17 @@ namespace CoreFramework
         public int ID { get; set; }
         public string Surname { get; set; }
         public string Name { get; set; }
+
         public Nullable<int> ID_Image { get; set; }
+        public string NameImage { get; set; }
+
         public Nullable<int> idTitle { get; set; }
+        public string NameTitle { get; set; }
+
         public Nullable<int> Cost { get; set; }
         public Nullable<int> Height { get; set; }
+
+        public string NameCommand { get; set; }
         public Nullable<int> idCommand { get; set; }
     
         public virtual Command Command { get; set; }

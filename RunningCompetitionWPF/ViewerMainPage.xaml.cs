@@ -30,7 +30,7 @@ namespace RunningCompetitionWPF
 
         private void command_click(object sender, RoutedEventArgs e)
         {
-            //NavigationService.Navigate(new page_command());
+            NavigationService.Navigate(new CommandsPage());
         }
 
         private void competition_click(object sender, RoutedEventArgs e)
@@ -50,7 +50,7 @@ namespace RunningCompetitionWPF
 
         private void login_Click(object sender, RoutedEventArgs e)
         {
-
+            NavigationService.Navigate(new AuthorizationPage());
         }
     }
 }

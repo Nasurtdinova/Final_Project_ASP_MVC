@@ -10,16 +10,33 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition>
             </ColumnDefinition>
-            <ColumnDefinition Width="4*"></ColumnDefinition>
+            <ColumnDefinition Width="*">
+            </ColumnDefinition>
+            <ColumnDefinition Width="2*">
+            </ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
-            <RowDefinition Height="4*"></RowDefinition>
+            <RowDefinition Height="70"></RowDefinition>
+            <RowDefinition Height="5*"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="1" Grid.Column="1" Background="#FFCAEAF4">
-            <Frame x:Name="frame_auto_reg" NavigationUIVisibility="Hidden"></Frame>
+        <StackPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Background="#FFCAEAF4">
+            <Menu FontSize="30" VerticalAlignment="Top" Background="#FFCAEAF4" Name="menu" Grid.RowSpan="2">
+                <MenuItem Background="#FFCAEAF4" Width="100" Height="70">
+                    <MenuItem.Icon>
+                        <Image Source="C:\Users\nasur\source\repos\RunningCompetitions\RunningCompetitions\img\main_menu.png" Margin="-103,-41,-143,-44" />
+                    </MenuItem.Icon>
+                    <MenuItem Header="Competitions" FontFamily="Lucida Calligraphy" x:Name="competition" Click="competition_click"/>
+                    <MenuItem Header="Sportsmans" FontFamily="Lucida Calligraphy" x:Name="sportsman" Click="sportsman_click"/>
+                    <MenuItem Header="Commands" FontFamily="Lucida Calligraphy" x:Name="command" Click="command_click"/>
+                </MenuItem>
+            </Menu>
         </StackPanel>
+        <Button x:Name="registr"  FontSize="18" FontFamily="Lucida Calligraphy" Content="Sign up" Click="registrCommand_Click" Grid.Column="3" Background="#FFA0D0F1" Height="40" Width="150" Grid.Row="1"/>
+        <Button x:Name="login" FontFamily="Lucida Calligraphy" Grid.Row="1"  FontSize="18" Content="Sign in" Click="login_Click" Grid.Column="2" Height="40" Width="150"/>
+        <Frame x:Name="frame_auto_reg" NavigationUIVisibility="Hidden" Grid.ColumnSpan="3" Background="#FFCAEAF4" Grid.Row="2" Grid.Column="1"></Frame>
     </Grid>
 </Window>

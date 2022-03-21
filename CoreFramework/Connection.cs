@@ -10,12 +10,13 @@ namespace CoreFramework
 {
     public class Connection
     {
+        public static List<Command> Commands { get; set; }
         public static List<Competition> compet { get; set; }
-        public static List<Users> user { get; set; }
+        public static List<Users> Users { get; set; }
         private static List<string> images;
         private static List<string> cities;
         private static List<string> titles;
-        private static List<string> commands;
+        private static List<string> commands { get; set; }
         private static List<string> competitions;
 
         public static int IdUser { get; set; }
@@ -30,13 +31,13 @@ namespace CoreFramework
 
         public static int GetIdUser(string email, string password)
         {
-            var type = user.Where(tt => tt.Email == email && tt.Password == password).FirstOrDefault();
+            var type = Users.Where(tt => tt.Email == email && tt.Password == password).FirstOrDefault();
             return type.idUser;
         }
 
         public static bool GetIdType(string email, string password)
         {
-            if (user.Where(tt => tt.Email == email && tt.Password == password).FirstOrDefault().idType == 1)
+            if (Users.Where(tt => tt.Email == email && tt.Password == password).FirstOrDefault().idType == 1)
                 return true;
             else
                 return false;
@@ -44,13 +45,18 @@ namespace CoreFramework
 
         public static void GetUser(int idUser)
         {
-            Name = user.Where(tt => tt.idUser == idUser).FirstOrDefault().Name;
-            Surname = user.Where(tt => tt.idUser == idUser).FirstOrDefault().Surname;
+            Name = Users.Where(tt => tt.idUser == idUser).FirstOrDefault().Name;
+            Surname = Users.Where(tt => tt.idUser == idUser).FirstOrDefault().Surname;
         }
 
         public static List<Users> GetUser()
         {
-            return user = new List<Users>(bdConnection.connection.Users.ToList());
+            return Users = new List<Users>(bdConnection.connection.Users.ToList());
+        }
+
+        public static List<Command> GetCommand()
+        {
+            return Commands = new List<Command>(bdConnection.connection.Command.ToList());
         }
 
         public static void AddUser(Users user)
@@ -128,18 +134,41 @@ namespace CoreFramework
             return cities.Name;
         }
 
-        public static bool IsLogin(string email, string password)
+        public static int IsLogin(string email, string password)
         {
-            user = GetUser();
-            if (user.Where(tt => tt.Email == email && tt.Password == password).FirstOrDefault().Email != null
-            && user.Where(tt => tt.Email == email && tt.Password == password).FirstOrDefault().Password != null)
+            Users = GetUser();
+            var admin = from usrs in Users
+                          where email == usrs.Email && password == usrs.Password && usrs.idType == 1
+                          select usrs;
+
+            var sponsor = from usrs in Users
+                       where email == usrs.Email && password== usrs.Password && usrs.idType == 2
+                       select usrs;
+
+            Commands = GetCommand();
+            var command = from usrs in Commands
+                       where email == usrs.Email && password== usrs.Password
+                       select usrs;
+
+            if (sponsor.Count() == 1)
             {
-                return true;
+                CurrentUser.user = sponsor.FirstOrDefault();
+                return 2;
+            }
+            else if (command.Count() == 1)
+            {
+                CurrentUser.command = command.FirstOrDefault();
+                return 3;
+            }
+            else if (admin.Count() == 1)
+            {
+                CurrentUser.user = admin.FirstOrDefault();
+                return 1;
             }
             else
             {
-                return false;
-            }             
+                return 0;
+            }
         }       
     }
 }

@@ -1,5 +1,4 @@
-﻿using CoreFramework;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
@@ -12,16 +11,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CoreFramework;
 
 namespace RunningCompetitionWPF
 {
-    public partial class SportsmanPage : Page
+    public partial class CommandsPage : Page
     {
-        public static ObservableCollection<Sportsman> infoSportsman { get; set; }
-        public SportsmanPage()
+        public static ObservableCollection<Command> infoCommands { get; set; }
+        public CommandsPage()
         {
             InitializeComponent();
-            infoSportsman = ConnectionSportsmans.GetSportsmans();
+            infoCommands = ConnectionCommands.GetCommands();
             this.DataContext = this;
         }
 

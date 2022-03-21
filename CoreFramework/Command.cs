@@ -27,7 +27,9 @@ namespace CoreFramework
         public Nullable<int> Count { get; set; }
         public string Image { get; set; }
         public Nullable<int> ID_city { get; set; }
-    public string CityName { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public string CityName { get; set; }
         public virtual City City { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ResultCompetition> ResultCompetition { get; set; }

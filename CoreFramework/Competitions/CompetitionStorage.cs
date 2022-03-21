@@ -10,7 +10,7 @@ namespace CoreFramework
 {
     public class CompetitionStorage
     {
-        public static List<Competition> competition { get; private set; } = ConnectionCompetitions.GetCompetition();
+        public static ObservableCollection<Competition> competition { get; private set; } = ConnectionCompetitions.GetCompetition();
 
         public static void Add(Competition compet)
         {

@@ -101,15 +101,6 @@ namespace CoreFramework
         {
             ObservableCollection<Command> commands = GetCommands();
             var com = commands.Where(tt => tt.idCommand == id).FirstOrDefault();
-            //Command command = new Command
-            //{
-            //    idCommand = id,
-            //    Name = com.Name,
-            //    Count = com.Count,
-            //    Image = com.Image,
-            //    CityName = com.City.Name,
-            //    ID_city = com.City.idCity
-            //};
             return com;
         }
 

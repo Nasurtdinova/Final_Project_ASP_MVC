@@ -91,6 +91,7 @@
     <Compile Include="Competitions\CompetitionStorage.cs" />
     <Compile Include="Connection.cs" />
     <Compile Include="Competitions\ConnectionCompetitions.cs" />
+    <Compile Include="CurrentUser.cs" />
     <Compile Include="Images.cs">
       <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
@@ -125,6 +126,9 @@
     <Compile Include="Sportsman.cs">
       <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
+    <Compile Include="Sportsmans\ConnectionSportsmans.cs" />
+    <Compile Include="Sportsmans\Sportsman.cs" />
+    <Compile Include="Sportsmans\SportsmanStorage.cs" />
     <Compile Include="sysdiagrams.cs">
       <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
