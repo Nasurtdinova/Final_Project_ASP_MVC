@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
@@ -10,15 +11,15 @@ namespace CoreFramework
 {
     public class ConnectionResults //разнести классы по папочкам
     {
-        public static List<ResultCompetition> GetResults()
+        public static ObservableCollection<ResultCompetition> GetResults()
         {
-            List<ResultCompetition> results = new List<ResultCompetition>(bdConnection.connection.ResultCompetition.ToList());
+            ObservableCollection<ResultCompetition> results = new ObservableCollection<ResultCompetition>(bdConnection.connection.ResultCompetition.ToList());
             return results;
         }
 
         public static ResultCompetition GetResultsId(int idCommand, int idCompet)
         {
-            List<ResultCompetition> results = GetResults();
+            ObservableCollection<ResultCompetition> results = GetResults();
             var com = results.Where(tt => tt.idCommand == idCommand && tt.idCompetition == idCompet).FirstOrDefault();
             ResultCompetition command = new ResultCompetition
             {

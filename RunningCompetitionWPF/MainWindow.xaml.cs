@@ -41,7 +41,7 @@ namespace RunningCompetitionWPF
 
         private void registrSponsor_Click(object sender, RoutedEventArgs e)
         {
-
+            Manager.MainFrame.Navigate(new ResultCompetitionsPage());
         }
 
         private void registrCommand_Click(object sender, RoutedEventArgs e)
@@ -54,6 +54,11 @@ namespace RunningCompetitionWPF
             Manager.MainFrame.NavigationService.Navigate(new AuthorizationPage());
             registr.Visibility = Visibility.Hidden;
             login.Visibility = Visibility.Hidden;
+        }
+
+        private void resultCompetition_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
