@@ -11,4 +11,9 @@
     <ProjectReference Include="..\Core\Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Sponsor\" />
+    <Folder Include="Trainer\" />
+  </ItemGroup>
+
 </Project>

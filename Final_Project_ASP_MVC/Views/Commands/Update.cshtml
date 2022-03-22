@@ -39,7 +39,7 @@
         <br />
         <select asp-for="City.Name" class="form-control">
             <option selected="selected" value=" @Html.EditorFor(m => m.City.Name)">  </option>
-            @foreach (string city in CoreFramework.Connection.GetCities())
+            @foreach (string city in CoreFramework.Connection.GetNameCities())
             {
                 <option>@city</option>
             }

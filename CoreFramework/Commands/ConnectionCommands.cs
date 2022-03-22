@@ -45,8 +45,9 @@ namespace CoreFramework
             try
             {
                 ObservableCollection<City> city = new ObservableCollection<City>(bdConnection.connection.City);
-                var type = city.Where(tt => tt.Name == command.CityName).FirstOrDefault();
-                command.ID_city = type.idCity;
+                //var type = city.Where(tt => tt.Name == command.CityName).FirstOrDefault();
+                command.ID_city = city.Where(a=>a.Name == command.City.Name).FirstOrDefault().idCity;
+                command.City.idCity = city.Where(a => a.Name == command.City.Name).FirstOrDefault().idCity;
                 bdConnection.connection.Command.Add(command);
                 bdConnection.connection.SaveChanges();
             }

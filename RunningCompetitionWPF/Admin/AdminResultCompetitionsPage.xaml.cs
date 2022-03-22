@@ -1,7 +1,6 @@
 ﻿using CoreFramework;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -16,30 +15,29 @@ using System.Windows.Shapes;
 
 namespace RunningCompetitionWPF
 {
-    public partial class AdminCompetitionsPage : Page
+    public partial class AdminResultCompetitionsPage : Page
     {
-        public static List<Competition> infoCompet { get; set; }
-        public AdminCompetitionsPage()
+        public AdminResultCompetitionsPage()
         {
             InitializeComponent();
-            dgCompetitions.ItemsSource = ConnectionCompetitions.GetCompetition().ToList();
+            dgResultCompetitions.ItemsSource = ConnectionResults.GetResults();
         }
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
-            Manager.MainFrame.Navigate(new AddCompetitionsPage((sender as Button).DataContext as Competition));
+            Manager.MainFrame.Navigate(new AddEditResulCompetPage((sender as Button).DataContext as ResultCompetition));
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            Manager.MainFrame.Navigate(new AddCompetitionsPage(null));
+            Manager.MainFrame.Navigate(new AddEditResulCompetPage(null));
         }
 
         private void btnRemove_Click(object sender, RoutedEventArgs e)
         {
-            var competsForRemoving = dgCompetitions.SelectedItems.Cast<Competition>().ToList();
+            var competsForRemoving = dgResultCompetitions.SelectedItems.Cast<Competition>().ToList();
 
-            if(MessageBox.Show($"Вы точно хотите удалить следующие {competsForRemoving.Count()} элементов","Внимание",MessageBoxButton.YesNo, MessageBoxImage.Question)==MessageBoxResult.Yes)
+            if (MessageBox.Show($"Вы точно хотите удалить следующие {competsForRemoving.Count()} элементов", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
                 try
                 {
@@ -47,21 +45,14 @@ namespace RunningCompetitionWPF
                     {
                         ConnectionCompetitions.RemoveCompetition(i.idCompetition);
                     }
-                    dgCompetitions.ItemsSource = ConnectionCompetitions.GetCompetition().ToList();
+
+                    dgResultCompetitions.ItemsSource = ConnectionCompetitions.GetCompetition();
                     MessageBox.Show("Данные удалены");
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message.ToString());
                 }
-            }
-        }
-
-        private void Page_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            if (Visibility == Visibility.Visible)
-            {
-                dgCompetitions.ItemsSource = ConnectionCompetitions.GetCompetition();
             }
         }
     }

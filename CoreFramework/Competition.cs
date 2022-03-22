@@ -27,7 +27,7 @@ namespace CoreFramework
         public Nullable<int> Home { get; set; }
         public Nullable<System.DateTime> Date { get; set; }
         public Nullable<int> idCity { get; set; }
-        public string CityName { get; set; }
+    
         public virtual City City { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ResultCompetition> ResultCompetition { get; set; }

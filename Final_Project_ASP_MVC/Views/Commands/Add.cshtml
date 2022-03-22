@@ -20,10 +20,10 @@
                 <input asp-for="Count" class=" form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="CityName" class="control-label">City</label>
-                <select asp-for="CityName" class=" form-control">
+                <label asp-for="City.Name" class="control-label">City</label>
+                <select asp-for="City.Name" class=" form-control">
                     <option selected="selected">  </option>
-                    @foreach (string city in CoreFramework.Connection.GetCities())
+                    @foreach (string city in CoreFramework.Connection.GetNameCities())
                     {
                         <option>@city</option>
                     }

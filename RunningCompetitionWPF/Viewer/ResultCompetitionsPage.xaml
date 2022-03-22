@@ -14,7 +14,9 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="60">
             </RowDefinition>
-            <RowDefinition Height="380">
+            <RowDefinition Height="340">
+            </RowDefinition>
+            <RowDefinition Height="60">
             </RowDefinition>
         </Grid.RowDefinitions>
         <TextBlock Text="Result competition" FontFamily="Lucida Calligraphy" FontWeight="Bold" FontSize="35" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
@@ -25,5 +27,6 @@
                 <DataGridTextColumn Header="Место" Binding="{Binding Rank}" Width="*"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
+      
     </Grid>
 </Page>

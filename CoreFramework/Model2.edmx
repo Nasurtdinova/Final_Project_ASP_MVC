@@ -520,7 +520,7 @@
             <End Role="Command" EntitySet="Command" />
             <End Role="Sportsman" EntitySet="Sportsman" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="Command">
           <Key>
             <PropertyRef Name="idCommand" />
@@ -583,7 +583,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>

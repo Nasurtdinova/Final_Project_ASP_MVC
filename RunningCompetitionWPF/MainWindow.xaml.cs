@@ -58,7 +58,7 @@ namespace RunningCompetitionWPF
 
         private void resultCompetition_Click(object sender, RoutedEventArgs e)
         {
-            Manager.MainFrame.Navigate(new ResultCompetitionsPage());
+            Manager.MainFrame.Navigate(new AdminResultCompetitionsPage());
         }
     }
 }

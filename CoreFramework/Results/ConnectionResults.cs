@@ -76,11 +76,11 @@ namespace CoreFramework
         {
             try
             {
-                List<Command> com = new List<Command>(bdConnection.connection.Command);
+                //List<Command> com = new List<Command>(bdConnection.connection.Command);
                 //var type = com.Where(tt => tt.Name == result.NameCommand).FirstOrDefault();
                 //result.idCommand = type.idCommand;
 
-                List<Competition> compet = new List<Competition>(bdConnection.connection.Competition);
+                //List<Competition> compet = new List<Competition>(bdConnection.connection.Competition);
                 //var type1 = compet.Where(tt => tt.Name == result.NameCompetition).FirstOrDefault();
                 //result.idCompetition = type1.idCompetition;
                 bdConnection.connection.ResultCompetition.Add(result);
@@ -96,12 +96,13 @@ namespace CoreFramework
         {
             try
             {
-                //var res = bdConnection.connection.ResultCompetition.SingleOrDefault(tt => tt.NameCommand == result.NameCommand && tt.NameCompetition == result.NameCompetition);
+                var res = bdConnection.connection.ResultCompetition.SingleOrDefault(tt => tt.Command.Name == result.Command.Name && tt.Competition.Name == result.Competition.Name);
                 //var com = bdConnection.connection.ResultCompetition.SingleOrDefault(tt => tt.NameCommand == result.NameCommand);
-                //var compet = bdConnection.connection.ResultCompetition.SingleOrDefault(tt=>tt.NameCompetition == result.NameCompetition);
-                //res.idCommand = com.idCommand;
-                //res.idCompetition = compet.idCompetition;
-                //bdConnection.connection.SaveChanges();
+                //var compet = bdConnection.connection.ResultCompetition.SingleOrDefault(tt => tt.NameCompetition == result.NameCompetition);
+                res.idCommand = result.idCommand;
+                res.idCompetition = result.idCompetition;
+                res.Rank = result.Rank;
+                bdConnection.connection.SaveChanges();
             }
             catch (Exception ex) // Exception исправить
             {

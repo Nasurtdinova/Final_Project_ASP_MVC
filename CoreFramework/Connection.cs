@@ -11,7 +11,7 @@ namespace CoreFramework
     public class Connection
     {
         public static List<Command> Commands { get; set; }
-        public static List<Competition> compet { get; set; }
+        public static List<Competition> Compets { get; set; }
         public static List<City> Cities { get; set; }
         public static List<Users> Users { get; set; }
         private static List<string> images;
@@ -62,6 +62,11 @@ namespace CoreFramework
         public static List<Command> GetCommand()
         {
             return Commands = new List<Command>(bdConnection.connection.Command.ToList());
+        }
+
+        public static List<Competition> GetCompetition()
+        {
+            return Compets = new List<Competition>(bdConnection.connection.Competition.ToList());
         }
 
         public static void AddUser(Users user)
