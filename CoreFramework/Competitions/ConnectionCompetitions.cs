@@ -30,9 +30,9 @@ namespace CoreFramework
         {
             try
             {
-                List<City> city = new List<City>(bdConnection.connection.City);
-                var type = city.Where(tt => tt.Name == compet.CityName).FirstOrDefault();
-                compet.idCity = type.idCity;
+                //List<City> city = new List<City>(bdConnection.connection.City);
+                //var type = city.Where(tt => tt.Name == compet.CityName).FirstOrDefault();
+                //compet.idCity = type.idCity;
                 bdConnection.connection.Competition.Add(compet);
                 bdConnection.connection.SaveChanges();
             }
@@ -64,8 +64,8 @@ namespace CoreFramework
                 competition.Name = compet.Name;
                 competition.NameVenue = compet.NameVenue;
                 competition.Date = compet.Date;
-                var cit = bdConnection.connection.City.SingleOrDefault(r => r.Name == compet.City.Name);
-                competition.idCity = cit.idCity;
+                //var cit = bdConnection.connection.City.SingleOrDefault(r => r.Name == compet.City.Name);
+                competition.idCity = compet.idCity;
                 competition.Home = compet.Home;
                 competition.Street = compet.Street;
                 bdConnection.connection.SaveChanges();

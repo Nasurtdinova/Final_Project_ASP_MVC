@@ -12,6 +12,7 @@ namespace CoreFramework
     {
         public static List<Command> Commands { get; set; }
         public static List<Competition> compet { get; set; }
+        public static List<City> Cities { get; set; }
         public static List<Users> Users { get; set; }
         private static List<string> images;
         private static List<string> cities;
@@ -52,6 +53,10 @@ namespace CoreFramework
         public static List<Users> GetUser()
         {
             return Users = new List<Users>(bdConnection.connection.Users.ToList());
+        }
+        public static List<City> GetCities()
+        {
+            return Cities = new List<City>(bdConnection.connection.City.ToList());
         }
 
         public static List<Command> GetCommand()
@@ -116,7 +121,7 @@ namespace CoreFramework
             return competitions;
         }
 
-        public static List<string> GetCities()
+        public static List<string> GetNameCities()
         {
             List<City> city = new List<City>(bdConnection.connection.City.ToList());
             cities = new List<string>();
@@ -145,19 +150,18 @@ namespace CoreFramework
                        where email == usrs.Email && password== usrs.Password && usrs.idType == 2
                        select usrs;
 
-            Commands = GetCommand();
-            var command = from usrs in Commands
-                       where email == usrs.Email && password== usrs.Password
-                       select usrs;
+            var trainer = from usrs in Users
+                          where email == usrs.Email && password== usrs.Password && usrs.idType == 3
+                          select usrs;
 
             if (sponsor.Count() == 1)
             {
                 CurrentUser.user = sponsor.FirstOrDefault();
                 return 2;
             }
-            else if (command.Count() == 1)
+            else if (trainer.Count() == 1)
             {
-                CurrentUser.command = command.FirstOrDefault();
+                CurrentUser.user = trainer.FirstOrDefault();
                 return 3;
             }
             else if (admin.Count() == 1)

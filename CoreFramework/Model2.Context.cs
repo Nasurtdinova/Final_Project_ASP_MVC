@@ -26,16 +26,15 @@ namespace CoreFramework
         }
     
         public virtual DbSet<City> City { get; set; }
-        public virtual DbSet<Command> Command { get; set; }
         public virtual DbSet<Competition> Competition { get; set; }
         public virtual DbSet<Images> Images { get; set; }
         public virtual DbSet<ResultCompetition> ResultCompetition { get; set; }
-        public virtual DbSet<ResultCompetitionSprint> ResultCompetitionSprint { get; set; }
         public virtual DbSet<SponsorCommand> SponsorCommand { get; set; }
         public virtual DbSet<Sportsman> Sportsman { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Title> Title { get; set; }
         public virtual DbSet<TypeUser> TypeUser { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<Command> Command { get; set; }
     }
 }

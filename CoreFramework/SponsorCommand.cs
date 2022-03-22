@@ -20,7 +20,7 @@ namespace CoreFramework
         public Nullable<int> teamContract { get; set; }
         public Nullable<int> amount { get; set; }
     
-        public virtual Command Command { get; set; }
         public virtual Users Users { get; set; }
+        public virtual Command Command { get; set; }
     }
 }

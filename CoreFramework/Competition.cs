@@ -18,7 +18,6 @@ namespace CoreFramework
         public Competition()
         {
             this.ResultCompetition = new HashSet<ResultCompetition>();
-            this.ResultCompetitionSprint = new HashSet<ResultCompetitionSprint>();
         }
     
         public int idCompetition { get; set; }
@@ -32,7 +31,5 @@ namespace CoreFramework
         public virtual City City { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ResultCompetition> ResultCompetition { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ResultCompetitionSprint> ResultCompetitionSprint { get; set; }
     }
 }

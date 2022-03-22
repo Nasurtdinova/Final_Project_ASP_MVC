@@ -14,32 +14,19 @@ namespace CoreFramework
     
     public partial class Sportsman
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Sportsman()
-        {
-            this.ResultCompetitionSprint = new HashSet<ResultCompetitionSprint>();
-        }
-    
         public int ID { get; set; }
         public string Surname { get; set; }
         public string Name { get; set; }
-
         public Nullable<int> ID_Image { get; set; }
-        public string NameImage { get; set; }
-
         public Nullable<int> idTitle { get; set; }
-        public string NameTitle { get; set; }
-
         public Nullable<int> Cost { get; set; }
         public Nullable<int> Height { get; set; }
-
-        public string NameCommand { get; set; }
         public Nullable<int> idCommand { get; set; }
-    
-        public virtual Command Command { get; set; }
+        public string NameCommand { get; set; }
+        public string NameTitle { get; set; }
+        public string NameImage { get; set; }
         public virtual Images Images { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ResultCompetitionSprint> ResultCompetitionSprint { get; set; }
         public virtual Title Title { get; set; }
+        public virtual Command Command { get; set; }
     }
 }

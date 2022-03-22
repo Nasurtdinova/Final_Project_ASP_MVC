@@ -114,9 +114,6 @@
     <Compile Include="ResultCompetition.cs">
       <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
-    <Compile Include="ResultCompetitionSprint.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
     <Compile Include="Results\ConnectionResults.cs" />
     <Compile Include="Results\Results.cs" />
     <Compile Include="Results\ResultStorage.cs" />

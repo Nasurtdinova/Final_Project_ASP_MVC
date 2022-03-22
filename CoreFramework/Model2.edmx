@@ -21,8 +21,6 @@
           <Property Name="Count" Type="int" />
           <Property Name="Image" Type="nvarchar" MaxLength="100" />
           <Property Name="ID_city" Type="int" />
-          <Property Name="Email" Type="nvarchar" MaxLength="50" />
-          <Property Name="Password" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Competition">
           <Key>
@@ -49,15 +47,6 @@
             <PropertyRef Name="idCompetition" />
           </Key>
           <Property Name="idCommand" Type="int" Nullable="false" />
-          <Property Name="idCompetition" Type="int" Nullable="false" />
-          <Property Name="Rank" Type="int" />
-        </EntityType>
-        <EntityType Name="ResultCompetitionSprint">
-          <Key>
-            <PropertyRef Name="idSportsman" />
-            <PropertyRef Name="idCompetition" />
-          </Key>
-          <Property Name="idSportsman" Type="int" Nullable="false" />
           <Property Name="idCompetition" Type="int" Nullable="false" />
           <Property Name="Rank" Type="int" />
         </EntityType>
@@ -168,30 +157,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ResultCompetitionSprint_Competition">
-          <End Role="Competition" Type="Self.Competition" Multiplicity="1" />
-          <End Role="ResultCompetitionSprint" Type="Self.ResultCompetitionSprint" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Competition">
-              <PropertyRef Name="idCompetition" />
-            </Principal>
-            <Dependent Role="ResultCompetitionSprint">
-              <PropertyRef Name="idCompetition" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ResultCompetitionSprint_Sportsman">
-          <End Role="Sportsman" Type="Self.Sportsman" Multiplicity="1" />
-          <End Role="ResultCompetitionSprint" Type="Self.ResultCompetitionSprint" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Sportsman">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="ResultCompetitionSprint">
-              <PropertyRef Name="idSportsman" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_SponsorCommand_Command">
           <End Role="Command" Type="Self.Command" Multiplicity="0..1" />
           <End Role="SponsorCommand" Type="Self.SponsorCommand" Multiplicity="*" />
@@ -270,7 +235,6 @@
           <EntitySet Name="Competition" EntityType="Self.Competition" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Images" EntityType="Self.Images" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ResultCompetition" EntityType="Self.ResultCompetition" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ResultCompetitionSprint" EntityType="Self.ResultCompetitionSprint" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SponsorCommand" EntityType="Self.SponsorCommand" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sportsman" EntityType="Self.Sportsman" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
@@ -292,14 +256,6 @@
           <AssociationSet Name="FK_ResultCompetition_Competition" Association="Self.FK_ResultCompetition_Competition">
             <End Role="Competition" EntitySet="Competition" />
             <End Role="ResultCompetition" EntitySet="ResultCompetition" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ResultCompetitionSprint_Competition" Association="Self.FK_ResultCompetitionSprint_Competition">
-            <End Role="Competition" EntitySet="Competition" />
-            <End Role="ResultCompetitionSprint" EntitySet="ResultCompetitionSprint" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ResultCompetitionSprint_Sportsman" Association="Self.FK_ResultCompetitionSprint_Sportsman">
-            <End Role="Sportsman" EntitySet="Sportsman" />
-            <End Role="ResultCompetitionSprint" EntitySet="ResultCompetitionSprint" />
           </AssociationSet>
           <AssociationSet Name="FK_SponsorCommand_Command" Association="Self.FK_SponsorCommand_Command">
             <End Role="Command" EntitySet="Command" />
@@ -336,24 +292,8 @@
           </Key>
           <Property Name="idCity" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Command" Relationship="Self.FK_Command_City" FromRole="City" ToRole="Command" />
           <NavigationProperty Name="Competition" Relationship="Self.FK_Competition_City1" FromRole="City" ToRole="Competition" />
-        </EntityType>
-        <EntityType Name="Command">
-          <Key>
-            <PropertyRef Name="idCommand" />
-          </Key>
-          <Property Name="idCommand" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Count" Type="Int32" />
-          <Property Name="Image" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="ID_city" Type="Int32" />
-          <NavigationProperty Name="City" Relationship="Self.FK_Command_City" FromRole="Command" ToRole="City" />
-          <NavigationProperty Name="ResultCompetition" Relationship="Self.FK_ResultCompetition_Command" FromRole="Command" ToRole="ResultCompetition" />
-          <NavigationProperty Name="SponsorCommand" Relationship="Self.FK_SponsorCommand_Command" FromRole="Command" ToRole="SponsorCommand" />
-          <NavigationProperty Name="Sportsman" Relationship="Self.FK_Sportsman_Command" FromRole="Command" ToRole="Sportsman" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Command" Relationship="CompetitionExamModel.FK_Command_City" FromRole="City" ToRole="Command" />
         </EntityType>
         <EntityType Name="Competition">
           <Key>
@@ -368,7 +308,6 @@
           <Property Name="idCity" Type="Int32" />
           <NavigationProperty Name="City" Relationship="Self.FK_Competition_City1" FromRole="Competition" ToRole="City" />
           <NavigationProperty Name="ResultCompetition" Relationship="Self.FK_ResultCompetition_Competition" FromRole="Competition" ToRole="ResultCompetition" />
-          <NavigationProperty Name="ResultCompetitionSprint" Relationship="Self.FK_ResultCompetitionSprint_Competition" FromRole="Competition" ToRole="ResultCompetitionSprint" />
         </EntityType>
         <EntityType Name="Images">
           <Key>
@@ -386,19 +325,8 @@
           <Property Name="idCommand" Type="Int32" Nullable="false" />
           <Property Name="idCompetition" Type="Int32" Nullable="false" />
           <Property Name="Rank" Type="Int32" />
-          <NavigationProperty Name="Command" Relationship="Self.FK_ResultCompetition_Command" FromRole="ResultCompetition" ToRole="Command" />
           <NavigationProperty Name="Competition" Relationship="Self.FK_ResultCompetition_Competition" FromRole="ResultCompetition" ToRole="Competition" />
-        </EntityType>
-        <EntityType Name="ResultCompetitionSprint">
-          <Key>
-            <PropertyRef Name="idSportsman" />
-            <PropertyRef Name="idCompetition" />
-          </Key>
-          <Property Name="idSportsman" Type="Int32" Nullable="false" />
-          <Property Name="idCompetition" Type="Int32" Nullable="false" />
-          <Property Name="Rank" Type="Int32" />
-          <NavigationProperty Name="Competition" Relationship="Self.FK_ResultCompetitionSprint_Competition" FromRole="ResultCompetitionSprint" ToRole="Competition" />
-          <NavigationProperty Name="Sportsman" Relationship="Self.FK_ResultCompetitionSprint_Sportsman" FromRole="ResultCompetitionSprint" ToRole="Sportsman" />
+          <NavigationProperty Name="Command" Relationship="CompetitionExamModel.FK_ResultCompetition_Command" FromRole="ResultCompetition" ToRole="Command" />
         </EntityType>
         <EntityType Name="SponsorCommand">
           <Key>
@@ -409,8 +337,8 @@
           <Property Name="idCom" Type="Int32" />
           <Property Name="teamContract" Type="Int32" />
           <Property Name="amount" Type="Int32" />
-          <NavigationProperty Name="Command" Relationship="Self.FK_SponsorCommand_Command" FromRole="SponsorCommand" ToRole="Command" />
           <NavigationProperty Name="Users" Relationship="Self.FK_SponsorCommand_User" FromRole="SponsorCommand" ToRole="Users" />
+          <NavigationProperty Name="Command" Relationship="CompetitionExamModel.FK_SponsorCommand_Command" FromRole="SponsorCommand" ToRole="Command" />
         </EntityType>
         <EntityType Name="Sportsman">
           <Key>
@@ -424,10 +352,9 @@
           <Property Name="Cost" Type="Int32" />
           <Property Name="Height" Type="Int32" />
           <Property Name="idCommand" Type="Int32" />
-          <NavigationProperty Name="Command" Relationship="Self.FK_Sportsman_Command" FromRole="Sportsman" ToRole="Command" />
           <NavigationProperty Name="Images" Relationship="Self.FK_Sportsman_Images" FromRole="Sportsman" ToRole="Images" />
-          <NavigationProperty Name="ResultCompetitionSprint" Relationship="Self.FK_ResultCompetitionSprint_Sportsman" FromRole="Sportsman" ToRole="ResultCompetitionSprint" />
           <NavigationProperty Name="Title" Relationship="Self.FK_Sportsman_Title" FromRole="Sportsman" ToRole="Title" />
+          <NavigationProperty Name="Command" Relationship="CompetitionExamModel.FK_Sportsman_Command" FromRole="Sportsman" ToRole="Command" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -469,18 +396,6 @@
           <NavigationProperty Name="SponsorCommand" Relationship="Self.FK_SponsorCommand_User" FromRole="Users" ToRole="SponsorCommand" />
           <NavigationProperty Name="TypeUser" Relationship="Self.FK_Users_TypeUser" FromRole="Users" ToRole="TypeUser" />
         </EntityType>
-        <Association Name="FK_Command_City">
-          <End Role="City" Type="Self.City" Multiplicity="0..1" />
-          <End Role="Command" Type="Self.Command" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="City">
-              <PropertyRef Name="idCity" />
-            </Principal>
-            <Dependent Role="Command">
-              <PropertyRef Name="ID_city" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Competition_City1">
           <End Role="City" Type="Self.City" Multiplicity="0..1" />
           <End Role="Competition" Type="Self.Competition" Multiplicity="*" />
@@ -490,42 +405,6 @@
             </Principal>
             <Dependent Role="Competition">
               <PropertyRef Name="idCity" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ResultCompetition_Command">
-          <End Role="Command" Type="Self.Command" Multiplicity="1" />
-          <End Role="ResultCompetition" Type="Self.ResultCompetition" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Command">
-              <PropertyRef Name="idCommand" />
-            </Principal>
-            <Dependent Role="ResultCompetition">
-              <PropertyRef Name="idCommand" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SponsorCommand_Command">
-          <End Role="Command" Type="Self.Command" Multiplicity="0..1" />
-          <End Role="SponsorCommand" Type="Self.SponsorCommand" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Command">
-              <PropertyRef Name="idCommand" />
-            </Principal>
-            <Dependent Role="SponsorCommand">
-              <PropertyRef Name="idCom" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Sportsman_Command">
-          <End Role="Command" Type="Self.Command" Multiplicity="0..1" />
-          <End Role="Sportsman" Type="Self.Sportsman" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Command">
-              <PropertyRef Name="idCommand" />
-            </Principal>
-            <Dependent Role="Sportsman">
-              <PropertyRef Name="idCommand" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -541,18 +420,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ResultCompetitionSprint_Competition">
-          <End Role="Competition" Type="Self.Competition" Multiplicity="1" />
-          <End Role="ResultCompetitionSprint" Type="Self.ResultCompetitionSprint" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Competition">
-              <PropertyRef Name="idCompetition" />
-            </Principal>
-            <Dependent Role="ResultCompetitionSprint">
-              <PropertyRef Name="idCompetition" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Sportsman_Images">
           <End Role="Images" Type="Self.Images" Multiplicity="0..1" />
           <End Role="Sportsman" Type="Self.Sportsman" Multiplicity="*" />
@@ -562,18 +429,6 @@
             </Principal>
             <Dependent Role="Sportsman">
               <PropertyRef Name="ID_Image" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ResultCompetitionSprint_Sportsman">
-          <End Role="Sportsman" Type="Self.Sportsman" Multiplicity="1" />
-          <End Role="ResultCompetitionSprint" Type="Self.ResultCompetitionSprint" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Sportsman">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="ResultCompetitionSprint">
-              <PropertyRef Name="idSportsman" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -615,52 +470,26 @@
         </Association>
         <EntityContainer Name="CompetitionExamEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="City" EntityType="Self.City" />
-          <EntitySet Name="Command" EntityType="Self.Command" />
           <EntitySet Name="Competition" EntityType="Self.Competition" />
           <EntitySet Name="Images" EntityType="Self.Images" />
           <EntitySet Name="ResultCompetition" EntityType="Self.ResultCompetition" />
-          <EntitySet Name="ResultCompetitionSprint" EntityType="Self.ResultCompetitionSprint" />
           <EntitySet Name="SponsorCommand" EntityType="Self.SponsorCommand" />
           <EntitySet Name="Sportsman" EntityType="Self.Sportsman" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Title" EntityType="Self.Title" />
           <EntitySet Name="TypeUser" EntityType="Self.TypeUser" />
           <EntitySet Name="Users" EntityType="Self.Users" />
-          <AssociationSet Name="FK_Command_City" Association="Self.FK_Command_City">
-            <End Role="City" EntitySet="City" />
-            <End Role="Command" EntitySet="Command" />
-          </AssociationSet>
           <AssociationSet Name="FK_Competition_City1" Association="Self.FK_Competition_City1">
             <End Role="City" EntitySet="City" />
             <End Role="Competition" EntitySet="Competition" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ResultCompetition_Command" Association="Self.FK_ResultCompetition_Command">
-            <End Role="Command" EntitySet="Command" />
-            <End Role="ResultCompetition" EntitySet="ResultCompetition" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SponsorCommand_Command" Association="Self.FK_SponsorCommand_Command">
-            <End Role="Command" EntitySet="Command" />
-            <End Role="SponsorCommand" EntitySet="SponsorCommand" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Sportsman_Command" Association="Self.FK_Sportsman_Command">
-            <End Role="Command" EntitySet="Command" />
-            <End Role="Sportsman" EntitySet="Sportsman" />
           </AssociationSet>
           <AssociationSet Name="FK_ResultCompetition_Competition" Association="Self.FK_ResultCompetition_Competition">
             <End Role="Competition" EntitySet="Competition" />
             <End Role="ResultCompetition" EntitySet="ResultCompetition" />
           </AssociationSet>
-          <AssociationSet Name="FK_ResultCompetitionSprint_Competition" Association="Self.FK_ResultCompetitionSprint_Competition">
-            <End Role="Competition" EntitySet="Competition" />
-            <End Role="ResultCompetitionSprint" EntitySet="ResultCompetitionSprint" />
-          </AssociationSet>
           <AssociationSet Name="FK_Sportsman_Images" Association="Self.FK_Sportsman_Images">
             <End Role="Images" EntitySet="Images" />
             <End Role="Sportsman" EntitySet="Sportsman" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ResultCompetitionSprint_Sportsman" Association="Self.FK_ResultCompetitionSprint_Sportsman">
-            <End Role="Sportsman" EntitySet="Sportsman" />
-            <End Role="ResultCompetitionSprint" EntitySet="ResultCompetitionSprint" />
           </AssociationSet>
           <AssociationSet Name="FK_SponsorCommand_User" Association="Self.FK_SponsorCommand_User">
             <End Role="Users" EntitySet="Users" />
@@ -674,7 +503,86 @@
             <End Role="TypeUser" EntitySet="TypeUser" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
+          <EntitySet Name="Command" EntityType="CompetitionExamModel.Command" />
+          <AssociationSet Name="FK_Command_City" Association="CompetitionExamModel.FK_Command_City">
+            <End Role="City" EntitySet="City" />
+            <End Role="Command" EntitySet="Command" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ResultCompetition_Command" Association="CompetitionExamModel.FK_ResultCompetition_Command">
+            <End Role="Command" EntitySet="Command" />
+            <End Role="ResultCompetition" EntitySet="ResultCompetition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SponsorCommand_Command" Association="CompetitionExamModel.FK_SponsorCommand_Command">
+            <End Role="Command" EntitySet="Command" />
+            <End Role="SponsorCommand" EntitySet="SponsorCommand" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sportsman_Command" Association="CompetitionExamModel.FK_Sportsman_Command">
+            <End Role="Command" EntitySet="Command" />
+            <End Role="Sportsman" EntitySet="Sportsman" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Command">
+          <Key>
+            <PropertyRef Name="idCommand" />
+          </Key>
+          <Property Name="idCommand" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Count" Type="Int32" />
+          <Property Name="Image" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ID_city" Type="Int32" />
+          <NavigationProperty Name="City" Relationship="CompetitionExamModel.FK_Command_City" FromRole="Command" ToRole="City" />
+          <NavigationProperty Name="ResultCompetition" Relationship="CompetitionExamModel.FK_ResultCompetition_Command" FromRole="Command" ToRole="ResultCompetition" />
+          <NavigationProperty Name="SponsorCommand" Relationship="CompetitionExamModel.FK_SponsorCommand_Command" FromRole="Command" ToRole="SponsorCommand" />
+          <NavigationProperty Name="Sportsman" Relationship="CompetitionExamModel.FK_Sportsman_Command" FromRole="Command" ToRole="Sportsman" />
+        </EntityType>
+        <Association Name="FK_Command_City">
+          <End Type="CompetitionExamModel.City" Role="City" Multiplicity="0..1" />
+          <End Type="CompetitionExamModel.Command" Role="Command" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="idCity" />
+            </Principal>
+            <Dependent Role="Command">
+              <PropertyRef Name="ID_city" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ResultCompetition_Command">
+          <End Type="CompetitionExamModel.Command" Role="Command" Multiplicity="1" />
+          <End Type="CompetitionExamModel.ResultCompetition" Role="ResultCompetition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Command">
+              <PropertyRef Name="idCommand" />
+            </Principal>
+            <Dependent Role="ResultCompetition">
+              <PropertyRef Name="idCommand" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SponsorCommand_Command">
+          <End Type="CompetitionExamModel.Command" Role="Command" Multiplicity="0..1" />
+          <End Type="CompetitionExamModel.SponsorCommand" Role="SponsorCommand" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Command">
+              <PropertyRef Name="idCommand" />
+            </Principal>
+            <Dependent Role="SponsorCommand">
+              <PropertyRef Name="idCom" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sportsman_Command">
+          <End Type="CompetitionExamModel.Command" Role="Command" Multiplicity="0..1" />
+          <End Type="CompetitionExamModel.Sportsman" Role="Sportsman" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Command">
+              <PropertyRef Name="idCommand" />
+            </Principal>
+            <Dependent Role="Sportsman">
+              <PropertyRef Name="idCommand" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -686,19 +594,6 @@
               <MappingFragment StoreEntitySet="City">
                 <ScalarProperty Name="idCity" ColumnName="idCity" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Command">
-            <EntityTypeMapping TypeName="CompetitionExamModel.Command">
-              <MappingFragment StoreEntitySet="Command">
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="idCommand" ColumnName="idCommand" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Count" ColumnName="Count" />
-                <ScalarProperty Name="Image" ColumnName="Image" />
-                <ScalarProperty Name="ID_city" ColumnName="ID_city" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -727,15 +622,6 @@
             <EntityTypeMapping TypeName="CompetitionExamModel.ResultCompetition">
               <MappingFragment StoreEntitySet="ResultCompetition">
                 <ScalarProperty Name="idCommand" ColumnName="idCommand" />
-                <ScalarProperty Name="idCompetition" ColumnName="idCompetition" />
-                <ScalarProperty Name="Rank" ColumnName="Rank" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ResultCompetitionSprint">
-            <EntityTypeMapping TypeName="CompetitionExamModel.ResultCompetitionSprint">
-              <MappingFragment StoreEntitySet="ResultCompetitionSprint">
-                <ScalarProperty Name="idSportsman" ColumnName="idSportsman" />
                 <ScalarProperty Name="idCompetition" ColumnName="idCompetition" />
                 <ScalarProperty Name="Rank" ColumnName="Rank" />
               </MappingFragment>
@@ -803,6 +689,17 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Surname" ColumnName="Surname" />
                 <ScalarProperty Name="idType" ColumnName="idType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Command">
+            <EntityTypeMapping TypeName="CompetitionExamModel.Command">
+              <MappingFragment StoreEntitySet="Command">
+                <ScalarProperty Name="ID_city" ColumnName="ID_city" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="idCommand" ColumnName="idCommand" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

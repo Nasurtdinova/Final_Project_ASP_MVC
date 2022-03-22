@@ -36,12 +36,12 @@ namespace RunningCompetitionWPF
 
         private void competition_click(object sender, RoutedEventArgs e)
         {
-            Manager.MainFrame.Navigate(new CompetitionsPage());
+            Manager.MainFrame.Navigate(new AdminCompetitionsPage());
         }
 
         private void registrSponsor_Click(object sender, RoutedEventArgs e)
         {
-            Manager.MainFrame.Navigate(new ResultCompetitionsPage());
+            
         }
 
         private void registrCommand_Click(object sender, RoutedEventArgs e)
@@ -58,7 +58,7 @@ namespace RunningCompetitionWPF
 
         private void resultCompetition_Click(object sender, RoutedEventArgs e)
         {
-
+            Manager.MainFrame.Navigate(new ResultCompetitionsPage());
         }
     }
 }

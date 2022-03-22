@@ -18,7 +18,7 @@ namespace CoreFramework
         public int idCompetition { get; set; }
         public Nullable<int> Rank { get; set; }
     
-        public virtual Command Command { get; set; }
         public virtual Competition Competition { get; set; }
+        public virtual Command Command { get; set; }
     }
 }

@@ -18,11 +18,11 @@
             </RowDefinition>
         </Grid.RowDefinitions>
         <TextBlock Text="Result competition" FontFamily="Lucida Calligraphy" FontWeight="Bold" FontSize="35" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
-        <DataGrid x:Name="dgResultCompetitions"  Grid.Row="1" FontSize="18" AutoGenerateColumns="False" ItemsSource="{Binding infoResultCompet}" IsReadOnly="True">
+        <DataGrid x:Name="dgResultCompetitions"  Grid.Row="1" FontSize="18" Width="600" AutoGenerateColumns="False" ItemsSource="{Binding infoResultCompet}" IsReadOnly="True">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Название соревнования" Binding="{Binding Competition.Name}" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Название команды" Binding="{Binding Command.Name}"  Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Место" Binding="{Binding Rank}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Название соревнования" Binding="{Binding Competition.Name}" Width="250"></DataGridTextColumn>
+                <DataGridTextColumn Header="Название команды" Binding="{Binding Command.Name}"  Width="250"></DataGridTextColumn>
+                <DataGridTextColumn Header="Место" Binding="{Binding Rank}" Width="*"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
