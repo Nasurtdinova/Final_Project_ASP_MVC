@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using CoreFramework;
@@ -15,7 +16,7 @@ namespace WebAPI_Project.Controllers
         public CommandController() { }
 
         [HttpGet]
-        public ActionResult<List<Command>> GetAll() => ConnectionCommands.GetCommands();
+        public ActionResult<ObservableCollection<Command>> GetAll() => ConnectionCommands.GetCommands();
 
         [HttpGet("{id}")]
         public ActionResult<Command> Get(int id)

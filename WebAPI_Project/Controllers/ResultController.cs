@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using CoreFramework;
@@ -15,7 +16,7 @@ namespace WebAPI_Project.Controllers
         public ResultController() { }
 
         [HttpGet]
-        public ActionResult<List<ResultCompetition>> GetAll() => ConnectionResults.GetResults();
+        public ActionResult<ObservableCollection<ResultCompetition>> GetAll() => ConnectionResults.GetResults();
 
         [HttpGet("{idCommand},{idCompetition}")]
         public ActionResult<ResultCompetition> Get(int idCommand, int idCompetition)

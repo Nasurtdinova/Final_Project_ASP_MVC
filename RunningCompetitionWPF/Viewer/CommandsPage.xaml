@@ -19,7 +19,7 @@
             </RowDefinition>
         </Grid.RowDefinitions>
         <TextBlock Text="Commands" FontFamily="Lucida Calligraphy" FontWeight="Bold" FontSize="35" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
-        <ListView Grid.Row="1" ItemsSource="{Binding infoCommands}">
+        <ListView Grid.Row="1" ItemsSource="{Binding infoCommands}" Name="lvCommands" SelectionChanged="lvCommands_SelectionChanged">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <UniformGrid Columns="3" Width="900"></UniformGrid>
@@ -39,7 +39,6 @@
                         <Image Source="{Binding Image}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="150"/>
                         <TextBlock Text="{Binding Count}" FontFamily="Lucida Calligraphy" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22"/>
                         <TextBlock Text="{Binding Name}" FontFamily="Lucida Calligraphy" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22"/>
-
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>

@@ -18,8 +18,7 @@ namespace Console_Project
                 { 3, "Input values: Name,NameVenue,Street,Home,City,Date" },
                 { 4, "Input values: Command,Compet,Rank" },
                 { 5, "If you want to see, click, sportsmans - 1, commands - 2, competitions - 3, results of competitions - 4, sponsorships - 5"},
-                { 6,"What do you want to do 'Get', 'Add', 'Remove', 'Update'?" },
-                { 7,"What do you want to do 'Get', 'Add', 'Remove'?" }
+                { 6,"What do you want to do 'Get', 'Add', 'Remove'?" }
             };
 
             Console.WriteLine(message[0]);
@@ -30,8 +29,7 @@ namespace Console_Project
                 {
                     Console.WriteLine(message[5]);
                     int click = Convert.ToInt32(Console.ReadLine());
-                    string[] emptyStringArray = new string[0];
-                    Done(click,"Get", emptyStringArray);
+                    Viewer(click);
                 }
             }
             string password = null;
@@ -49,37 +47,12 @@ namespace Console_Project
                 {
                     Console.WriteLine(message[5]);
                     int click = Convert.ToInt32(Console.ReadLine());
-                    if (Connection.GetIdType(login, password))
-                    {
-                        Console.WriteLine(message[6]);
-                        string instruction = Console.ReadLine();
-
-                        switch (click)
-                        {
-                            case 1:
-                                Console.WriteLine(message[1]);
-                                break;
-                            case 2:
-                                Console.WriteLine(message[2]);
-                                break;
-                            case 3:
-                                Console.WriteLine(message[3]);
-                                break;
-                            case 4:
-                                Console.WriteLine(message[4]);
-                                break;
-                        }
-
-                        string values = Console.ReadLine();
-                        string[] value = values.Split(',');
-                        Done(click, instruction, value);
-                    }
-                    else
+                    if (!Connection.GetIdType(login, password))
                     {
                         Connection con = new Connection(login, password);
                         if (click == 5)
                         {
-                            Console.WriteLine(message[7]);
+                            Console.WriteLine(message[6]);
                             string instruction = Console.ReadLine();
                             string values = Console.ReadLine();
                             string[] value = values.Split(',');
@@ -87,7 +60,7 @@ namespace Console_Project
                             continue;
                         }
                         string[] emptyStringArray = new string[0];
-                        Done(click, "Get", emptyStringArray);
+                        Sponsor(click, "Get", emptyStringArray);
                     }
                 }
             }
@@ -98,21 +71,40 @@ namespace Console_Project
             }
         }
 
-        private static void Done(int click, string command, string[] values)
+        private static void Viewer(int click)
         {
             switch (click)
             {
                 case 1:
-                    PrintSportsmans(command, values);
+                    PrintSportsmans();
                     break;
                 case 2:
-                    PrintCommands(command, values);
+                    PrintCommands();
                     break;
                 case 3:
-                    PrintCompetitions(command, values);
+                    PrintCompetitions();
                     break;
                 case 4:
-                    PrintResults(command, values);
+                    PrintResults();
+                    break;
+            }
+        }
+
+        private static void Sponsor(int click, string command, string[] values)
+        {
+            switch (click)
+            {
+                case 1:
+                    PrintSportsmans();
+                    break;
+                case 2:
+                    PrintCommands();
+                    break;
+                case 3:
+                    PrintCompetitions();
+                    break;
+                case 4:
+                    PrintResults();
                     break;
                 case 5:
                     PrintSponsorships(command, values);
@@ -120,95 +112,39 @@ namespace Console_Project
             }
         }
 
-        private static void PrintSportsmans(string command, string []values)
+        private static void PrintSportsmans()
         {
-            switch (command)
+            ObservableCollection<Sportsmans> sportsmans = ConnectionSportsmans.GetSportsmans();
+            foreach (Sportsmans i in sportsmans)
             {
-                case "Get":
-                    List<Sportsmans> sportsmans = ConnectionSportsmans.GetSportsmans();
-                    foreach (Sportsmans i in sportsmans)
-                    {
-                        Console.WriteLine(i);
-                    }
-                    break;
-                case "Add":
-                    ConnectionSportsmans.AddSportsman(new Sportsman(values));
-                    break;
-                case "Update":
-                    ConnectionSportsmans.UpdateSportsman(new Sportsman(values, Convert.ToInt32(values[0])));
-                    break;
-                case "Remove":
-                    ConnectionSportsmans.RemoveSportsman(Convert.ToInt32(values[0]));
-                    break;
+                Console.WriteLine(i);
             }
         }
 
-        private static void PrintCommands(string command, string[] values)
+        private static void PrintCommands()
         {
-            switch (command)
+            ObservableCollection<Commands> commands = ConnectionCommands.GetCommands();
+            foreach (Commands i in commands)
             {
-                case "Get":
-                    ObservableCollection<Commands> commands = ConnectionCommands.GetCommands();
-                    foreach (Commands i in commands)
-                    {
-                        Console.WriteLine(i);
-                    }
-                    break;
-                case "Add":
-                    ConnectionCommands.AddCommand(new Command(values));
-                    break;
-                case "Update":
-                    ConnectionCommands.UpdateCommand(new Command(values, Convert.ToInt32(values[0])));
-                    break;
-                case "Remove":
-                    ConnectionCommands.RemoveCommand(Convert.ToInt32(values[0]));
-                    break;
+                Console.WriteLine(i);
+            }             
+        }
+
+        private static void PrintCompetitions()
+        {
+            ObservableCollection<Competitions> compet = ConnectionCompetitions.GetCompetition();
+            foreach (Competitions i in compet)
+            {
+                Console.WriteLine(i);
             }
         }
 
-        private static void PrintCompetitions(string command, string []values)
+        private static void PrintResults()
         {
-            switch (command)
+            ObservableCollection<Results> results = ConnectionResults.GetResults();
+            foreach (Results i in results)
             {
-                case "Get":
-                    List<Competitions> compet = ConnectionCompetitions.GetCompetition();
-                    foreach (Competitions i in compet)
-                    {
-                        Console.WriteLine(i);
-                    }
-                    break;
-                case "Add":
-                    ConnectionCompetitions.AddCompetition(new Competition(values));
-                    break;
-                case "Update":
-                    ConnectionCompetitions.UpdateCompet(new Competition(values, Convert.ToInt32(values[0])));
-                    break;
-                case "Remove":
-                    ConnectionCompetitions.RemoveCompetition(Convert.ToInt32(values[0]));
-                    break;
-            }
-        }
-
-        private static void PrintResults(string command, string [] values)
-        {
-            switch (command)
-            {
-                case "Get":
-                    List<Results> results = ConnectionResults.GetResults();
-                    foreach (Results i in results)
-                    {
-                        Console.WriteLine(i);
-                    }
-                    break;
-                case "Add":
-                    ResultStorage.Add(new Result(values));
-                    break;
-                case "Update":
-                    ConnectionResults.UpdateResult(new Result(values));
-                    break;
-                case "Remove":
-                    ConnectionResults.RemoveResult(Convert.ToInt32(values[0]), Convert.ToInt32(values[1]));
-                    break;
+                Console.WriteLine(i);
             }
         }
 

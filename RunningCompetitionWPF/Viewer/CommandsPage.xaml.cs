@@ -29,5 +29,11 @@ namespace RunningCompetitionWPF
         {
             NavigationService.GoBack();
         }
+
+        private void lvCommands_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var a = (sender as ListView).SelectedItem as Command;
+            Manager.MainFrame.NavigationService.Navigate(new SportsmanCommandPage(a.idCommand));
+        }
     }
 }

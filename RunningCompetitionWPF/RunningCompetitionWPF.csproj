@@ -13,7 +13,6 @@
 
   <ItemGroup>
     <Folder Include="Sponsor\" />
-    <Folder Include="Trainer\" />
   </ItemGroup>
 
 </Project>

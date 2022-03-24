@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Core;
+using System.Collections.ObjectModel;
 //лишние библиотеки убрать
 namespace WebAPI_Project.Controllers
 {
@@ -15,7 +16,7 @@ namespace WebAPI_Project.Controllers
         public CompetitionController() { }
 
         [HttpGet]
-        public ActionResult<List<Competitions>> GetAll() => ConnectionCompetitions.GetCompetition();
+        public ActionResult<ObservableCollection<Competitions>> GetAll() => ConnectionCompetitions.GetCompetition();
 
         [HttpGet("{id}")]
         public ActionResult<Competition> Get(int id)

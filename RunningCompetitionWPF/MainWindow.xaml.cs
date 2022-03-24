@@ -22,6 +22,12 @@ namespace RunningCompetitionWPF
             InitializeComponent();
             frame_auto_reg.Navigate(new ViewerMainPage());
             Manager.MainFrame = frame_auto_reg;
+            Manager.MainMenu = menu;
+            Manager.CompetitionsAdmin = competitionAdmin;
+            Manager.Competitions = competition;
+
+            Manager.ResultCompetitionsAdmin = resultCompetitionAdmin;
+            Manager.ResultCompetitions = resultCompetition;
         }
 
         private void sportsman_click(object sender, RoutedEventArgs e)
@@ -36,27 +42,35 @@ namespace RunningCompetitionWPF
 
         private void competition_click(object sender, RoutedEventArgs e)
         {
-            Manager.MainFrame.Navigate(new AdminCompetitionsPage());
-        }
-
-        private void registrSponsor_Click(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
-        private void registrCommand_Click(object sender, RoutedEventArgs e)
-        {
-
+            Manager.MainFrame.Navigate(new CompetitionsPage());
         }
 
         private void login_Click(object sender, RoutedEventArgs e)
         {
             Manager.MainFrame.NavigationService.Navigate(new AuthorizationPage());
+            //Manager.MainMenu.Visibility = Visibility.Hidden;
+            //registr.Visibility = Visibility.Hidden;
+            //login.Visibility = Visibility.Hidden;
+        }
+
+        private void resultCompetition_Click(object sender, RoutedEventArgs e)
+        {
+            Manager.MainFrame.Navigate(new ResultCompetitionsPage());
+        }
+
+        private void competitionAdmin_Click(object sender, RoutedEventArgs e)
+        {
+            Manager.MainFrame.Navigate(new AdminCompetitionsPage());
             registr.Visibility = Visibility.Hidden;
             login.Visibility = Visibility.Hidden;
         }
 
-        private void resultCompetition_Click(object sender, RoutedEventArgs e)
+        private void registr_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void resultCompetitionAdmin_Click(object sender, RoutedEventArgs e)
         {
             Manager.MainFrame.Navigate(new AdminResultCompetitionsPage());
         }

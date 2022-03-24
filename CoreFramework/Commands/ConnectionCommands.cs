@@ -19,12 +19,7 @@ namespace CoreFramework
             {
                 ObservableCollection<Sportsman> sportsman = new ObservableCollection<Sportsman>(bdConnection.connection.Sportsman.ToList());
                 var spor = sportsman.Where(tt => tt.idCommand == id).FirstOrDefault();
-                sporCom.Add(new Sportsman
-                {
-                    ID = spor.ID,
-                    Surname = spor.Surname,
-                    Name = spor.Name
-                });
+                sporCom.Add(spor);
             }
 
             catch // Exception исправить

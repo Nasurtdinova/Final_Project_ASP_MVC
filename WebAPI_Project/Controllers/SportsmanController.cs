@@ -1,7 +1,8 @@
-﻿using Core;
+﻿using CoreFramework;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -15,7 +16,7 @@ namespace WebAPI_Project.Controllers
         public SportsmanController() {}
 
         [HttpGet]
-        public ActionResult<List<Sportsmans>> GetAll() => ConnectionSportsmans.GetSportsmans();
+        public ActionResult<ObservableCollection<Sportsman>> GetAll() => ConnectionSportsmans.GetSportsmans();
 
         [HttpGet("{id}")]
         public ActionResult<Sportsman> Get(int id)
