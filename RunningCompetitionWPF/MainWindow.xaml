@@ -38,8 +38,13 @@
                 </MenuItem>
             </Menu>
         </StackPanel>
-        <Button x:Name="registr"  FontSize="18" FontFamily="Lucida Calligraphy" Content="Sign up" Click="registr_Click" Grid.Column="3" Background="#FFA0D0F1" Height="40" Width="150" Grid.Row="1"/>
-        <Button x:Name="login" FontFamily="Lucida Calligraphy" Grid.Row="1"  FontSize="18" Content="Sign in" Click="login_Click" Grid.Column="2" Height="40" Width="150"/>
+        <Image Source="C:\Users\nasur\source\repos\RunningCompetitions\RunningCompetitions\img\image 1.jpg" Width="200" Height="55" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" />
+        <StackPanel Grid.Row="1"  Grid.Column="3" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Left">
+            <Button x:Name="registr" Content="Sign up" Click="registr_Click" Grid.Column="3" Height="45" Width="120" Grid.Row="1"/>
+            <Button x:Name="login" Grid.Row="1" Content="Sign in" Click="login_Click" Grid.Column="2" Height="45" Width="120"/>
+            <Button x:Name="exit" Grid.Row="1" Content="Exit" Click="exit_Click" Grid.Column="2" Height="45" Width="120" Visibility="Collapsed"/>
+        </StackPanel>
+        
         <Frame x:Name="frame_auto_reg" NavigationUIVisibility="Hidden" Grid.ColumnSpan="3" Background="#FFCAEAF4" Grid.Row="2" Grid.Column="1"></Frame>
     </Grid>
 </Window>

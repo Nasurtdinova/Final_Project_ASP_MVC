@@ -30,10 +30,7 @@ namespace RunningCompetitionWPF
         {
             if (Connection.IsLogin(txt_login.Text,txt_password.Password) == 1)
             {
-                Manager.Competitions.Visibility = Visibility.Collapsed;
-                Manager.CompetitionsAdmin.Visibility = Visibility.Visible;
-                Manager.ResultCompetitions.Visibility = Visibility.Collapsed;
-                Manager.ResultCompetitionsAdmin.Visibility = Visibility.Visible;
+                Manager.DoAdmin();
                 Manager.MainFrame.NavigationService.Navigate(new ViewerMainPage());
             }
             else if (Connection.IsLogin(txt_login.Text, txt_password.Password) == 2)
