@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RunningCompetitionWPF.Admin;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,7 +28,7 @@ namespace RunningCompetitionWPF
             Manager.SportsmansAdmin = sportsman;
             Manager.Sportsmans = sportsman;
 
-           // Manager.CommandsAdmin = commandAdmin;
+            Manager.CommandsAdmin = commandAdmin;
             Manager.Commands = command;
 
             Manager.CompetitionsAdmin = competitionAdmin;
@@ -39,8 +40,7 @@ namespace RunningCompetitionWPF
             Manager.Authorization = login;
             Manager.Registration = registr;
             Manager.Exit = exit;
-
-            
+           
             frame_auto_reg.Navigate(new ViewerMainPage());
         }
 
@@ -63,9 +63,10 @@ namespace RunningCompetitionWPF
         }
 
         private void login_Click(object sender, RoutedEventArgs e)
-        {
-            Manager.CollapsedAuthReg();
+        {           
             Manager.MainFrame.NavigationService.Navigate(new AuthorizationPage());
+            Manager.DoViewer();
+            Manager.CollapsedAuthReg();
         }
 
         private void resultCompetition_Click(object sender, RoutedEventArgs e)
@@ -76,6 +77,7 @@ namespace RunningCompetitionWPF
 
         private void competitionAdmin_Click(object sender, RoutedEventArgs e)
         {
+            Manager.CollapsedAuthReg();
             Manager.MainFrame.Navigate(new AdminCompetitionsPage());
            
         }
@@ -87,17 +89,21 @@ namespace RunningCompetitionWPF
 
         private void resultCompetitionAdmin_Click(object sender, RoutedEventArgs e)
         {
+            Manager.CollapsedAuthReg();
             Manager.MainFrame.Navigate(new AdminResultCompetitionsPage());
         }
 
         private void commandAdmin_Click(object sender, RoutedEventArgs e)
         {
-
+            Manager.CollapsedAuthReg();
+            Manager.MainFrame.Navigate(new AdminCommandPage());
         }
 
         private void exit_Click(object sender, RoutedEventArgs e)
         {
-
+            Manager.CollapsedAuthReg();
+            Manager.Exit.Visibility = Visibility.Collapsed;
+            Manager.MainFrame.NavigationService.Navigate(new AuthorizationPage());
         }
     }
 }

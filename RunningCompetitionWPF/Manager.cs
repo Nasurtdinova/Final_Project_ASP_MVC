@@ -26,20 +26,34 @@ namespace RunningCompetitionWPF
         public static MenuItem ResultCompetitionsAdmin { get; set; }
         public static MenuItem ResultCompetitions { get; set; }
 
-
         public static void DoAdmin()
         {
             CollapsedAuthReg();
             Exit.Visibility = System.Windows.Visibility.Visible;
             Sportsmans.Visibility = System.Windows.Visibility.Collapsed;
-            //Commands.Visibility = System.Windows.Visibility.Collapsed;
+            Commands.Visibility = System.Windows.Visibility.Collapsed;
             Competitions.Visibility = System.Windows.Visibility.Collapsed;
             ResultCompetitions.Visibility = System.Windows.Visibility.Collapsed;
 
             SportsmansAdmin.Visibility = System.Windows.Visibility.Visible;
-            //CommandsAdmin.Visibility = System.Windows.Visibility.Visible;
+            CommandsAdmin.Visibility = System.Windows.Visibility.Visible;
             CompetitionsAdmin.Visibility = System.Windows.Visibility.Visible;
             ResultCompetitionsAdmin.Visibility = System.Windows.Visibility.Visible;
+        }
+
+        public static void DoViewer()
+        {
+            VisibleAuthReg();
+            //Exit.Visibility = System.Windows.Visibility.;
+            Sportsmans.Visibility = System.Windows.Visibility.Visible;
+            Commands.Visibility = System.Windows.Visibility.Visible;
+            Competitions.Visibility = System.Windows.Visibility.Visible;
+            ResultCompetitions.Visibility = System.Windows.Visibility.Visible;
+
+            SportsmansAdmin.Visibility = System.Windows.Visibility.Collapsed;
+            CommandsAdmin.Visibility = System.Windows.Visibility.Collapsed;
+            CompetitionsAdmin.Visibility = System.Windows.Visibility.Collapsed;
+            ResultCompetitionsAdmin.Visibility = System.Windows.Visibility.Collapsed;
         }
 
         public static void CollapsedAuthReg()
@@ -53,6 +67,5 @@ namespace RunningCompetitionWPF
             Registration.Visibility = System.Windows.Visibility.Visible;
             Authorization.Visibility = System.Windows.Visibility.Visible;
         }
-
     }
 }
