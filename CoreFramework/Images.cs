@@ -18,6 +18,7 @@ namespace CoreFramework
         public Images()
         {
             this.Sportsman = new HashSet<Sportsman>();
+            this.Command = new HashSet<Command>();
         }
     
         public int idImages { get; set; }
@@ -25,5 +26,7 @@ namespace CoreFramework
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Sportsman> Sportsman { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Command> Command { get; set; }
     }
 }

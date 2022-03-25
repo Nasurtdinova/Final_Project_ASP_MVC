@@ -33,7 +33,7 @@
                 <label asp-for="Image" class="control-label">Image</label>
                 <select asp-for="Image" class=" form-control">
                     <option selected="selected">  </option>
-                    @foreach (string img in CoreFramework.Connection.GetImages())
+                    @foreach (string img in CoreFramework.Connection.GetNameImages())
                     {
                         <option>@img</option>
                     }

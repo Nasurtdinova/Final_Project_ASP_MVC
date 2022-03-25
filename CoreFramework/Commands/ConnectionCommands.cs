@@ -72,7 +72,7 @@ namespace CoreFramework
             {
                 var com = bdConnection.connection.Command.SingleOrDefault(r => r.idCommand == command.idCommand);
                 com.Name = command.Name;
-                com.Image = command.Image;
+                //com.Image = command.Image;
                 com.Count = command.Count;
                 var cit = bdConnection.connection.City.SingleOrDefault(r => r.Name == command.City.Name);
                 com.ID_city = cit.idCity;

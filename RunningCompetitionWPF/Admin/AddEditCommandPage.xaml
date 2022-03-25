@@ -9,6 +9,32 @@
       Title="AddEditCommandPage">
 
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition ></ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60">
+            </RowDefinition>
+            <RowDefinition Height="60">
+            </RowDefinition>
+            <RowDefinition Height="60">
+            </RowDefinition>
+
+            <RowDefinition Height="60">
+            </RowDefinition>
+            <RowDefinition Height="60">
+            </RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Название команды" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+        <TextBlock Text="Количество" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+        <TextBlock Text="Фотография" Grid.Row="2" Grid.Column="0" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+        <TextBlock Text="Город" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
         
+        <TextBox Text="{Binding Name}" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="300" Height="50"></TextBox>
+        <TextBox Text="{Binding Count}" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="300" Height="50"></TextBox>
+        <ComboBox SelectedItem="{Binding City}" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" DisplayMemberPath="Name" Name="comboCities" Width="300" Height="50"></ComboBox>
+        <Button Grid.ColumnSpan="2" Grid.Row="6" Width="200" Content="Сохранить" VerticalAlignment="Center" Click="btnSave_Click" Name="btnSave"></Button>
+        <ComboBox SelectedItem="{Binding Images}" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" DisplayMemberPath="Name" x:Name="comboImages" Width="500" Height="50"/>
     </Grid>
 </Page>

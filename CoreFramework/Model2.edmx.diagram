@@ -21,8 +21,9 @@
         <AssociationConnector Association="CompetitionExamModel.FK_SponsorCommand_User" ManuallyRouted="false" />
         <AssociationConnector Association="CompetitionExamModel.FK_Sportsman_Title" ManuallyRouted="false" />
         <AssociationConnector Association="CompetitionExamModel.FK_Users_TypeUser" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="CompetitionExamModel.Command" Width="1.5" PointX="3" PointY="5.125" />
+        <EntityTypeShape EntityType="CompetitionExamModel.Command" Width="1.5" PointX="11.25" PointY="3.625" />
         <AssociationConnector Association="CompetitionExamModel.FK_Command_City" />
+        <AssociationConnector Association="CompetitionExamModel.FK_Command_Images" />
         <AssociationConnector Association="CompetitionExamModel.FK_ResultCompetition_Command" />
         <AssociationConnector Association="CompetitionExamModel.FK_SponsorCommand_Command" />
         <AssociationConnector Association="CompetitionExamModel.FK_Sportsman_Command" />

@@ -27,7 +27,7 @@
         <br />
         <select asp-for="Image" class="form-control">
             <option selected="selected" value=" @Html.EditorFor(m => m.Image)">  </option>
-            @foreach (string image in CoreFramework.Connection.GetImages())
+            @foreach (string image in CoreFramework.Connection.GetNameImages())
             {
                 <option>@image</option>
             }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CoreFramework;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -18,9 +19,33 @@ namespace RunningCompetitionWPF.Admin
     /// </summary>
     public partial class AddEditCommandPage : Page
     {
-        public AddEditCommandPage()
+        public Command CurrentCommand = new Command();
+        public AddEditCommandPage(Command selectedCommand)
         {
             InitializeComponent();
+            if (selectedCommand != null)
+                CurrentCommand = selectedCommand;
+
+            DataContext = CurrentCommand;
+            comboCities.ItemsSource = Connection.GetCities();
+            comboImages.ItemsSource = Connection.GetImages();
+        }
+
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            if (CurrentCommand.idCommand == 0)
+                ConnectionCommands.AddCommand(CurrentCommand);
+            else
+                ConnectionCommands.UpdateCommand(CurrentCommand);
+
+            try
+            {
+                MessageBox.Show("Информация сохранена");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
         }
     }
 }

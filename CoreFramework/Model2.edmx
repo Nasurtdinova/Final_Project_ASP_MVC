@@ -19,7 +19,7 @@
           <Property Name="idCommand" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
           <Property Name="Count" Type="int" />
-          <Property Name="Image" Type="nvarchar" MaxLength="100" />
+          <Property Name="idImage" Type="int" />
           <Property Name="ID_city" Type="int" />
         </EntityType>
         <EntityType Name="Competition">
@@ -118,6 +118,18 @@
             </Principal>
             <Dependent Role="Command">
               <PropertyRef Name="ID_city" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Command_Images">
+          <End Role="Images" Type="Self.Images" Multiplicity="0..1" />
+          <End Role="Command" Type="Self.Command" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Images">
+              <PropertyRef Name="idImages" />
+            </Principal>
+            <Dependent Role="Command">
+              <PropertyRef Name="idImage" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -245,6 +257,10 @@
             <End Role="City" EntitySet="City" />
             <End Role="Command" EntitySet="Command" />
           </AssociationSet>
+          <AssociationSet Name="FK_Command_Images" Association="Self.FK_Command_Images">
+            <End Role="Images" EntitySet="Images" />
+            <End Role="Command" EntitySet="Command" />
+          </AssociationSet>
           <AssociationSet Name="FK_Competition_City1" Association="Self.FK_Competition_City1">
             <End Role="City" EntitySet="City" />
             <End Role="Competition" EntitySet="Competition" />
@@ -316,6 +332,7 @@
           <Property Name="idImages" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Sportsman" Relationship="Self.FK_Sportsman_Images" FromRole="Images" ToRole="Sportsman" />
+          <NavigationProperty Name="Command" Relationship="CompetitionExamModel.FK_Command_Images" FromRole="Images" ToRole="Command" />
         </EntityType>
         <EntityType Name="ResultCompetition">
           <Key>
@@ -508,6 +525,10 @@
             <End Role="City" EntitySet="City" />
             <End Role="Command" EntitySet="Command" />
           </AssociationSet>
+          <AssociationSet Name="FK_Command_Images" Association="CompetitionExamModel.FK_Command_Images">
+            <End Role="Images" EntitySet="Images" />
+            <End Role="Command" EntitySet="Command" />
+          </AssociationSet>
           <AssociationSet Name="FK_ResultCompetition_Command" Association="CompetitionExamModel.FK_ResultCompetition_Command">
             <End Role="Command" EntitySet="Command" />
             <End Role="ResultCompetition" EntitySet="ResultCompetition" />
@@ -528,9 +549,10 @@
           <Property Name="idCommand" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Count" Type="Int32" />
-          <Property Name="Image" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="idImage" Type="Int32" />
           <Property Name="ID_city" Type="Int32" />
           <NavigationProperty Name="City" Relationship="CompetitionExamModel.FK_Command_City" FromRole="Command" ToRole="City" />
+          <NavigationProperty Name="Images" Relationship="CompetitionExamModel.FK_Command_Images" FromRole="Command" ToRole="Images" />
           <NavigationProperty Name="ResultCompetition" Relationship="CompetitionExamModel.FK_ResultCompetition_Command" FromRole="Command" ToRole="ResultCompetition" />
           <NavigationProperty Name="SponsorCommand" Relationship="CompetitionExamModel.FK_SponsorCommand_Command" FromRole="Command" ToRole="SponsorCommand" />
           <NavigationProperty Name="Sportsman" Relationship="CompetitionExamModel.FK_Sportsman_Command" FromRole="Command" ToRole="Sportsman" />
@@ -544,6 +566,18 @@
             </Principal>
             <Dependent Role="Command">
               <PropertyRef Name="ID_city" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Command_Images">
+          <End Type="CompetitionExamModel.Images" Role="Images" Multiplicity="0..1" />
+          <End Type="CompetitionExamModel.Command" Role="Command" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Images">
+              <PropertyRef Name="idImages" />
+            </Principal>
+            <Dependent Role="Command">
+              <PropertyRef Name="idImage" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -696,7 +730,7 @@
             <EntityTypeMapping TypeName="CompetitionExamModel.Command">
               <MappingFragment StoreEntitySet="Command">
                 <ScalarProperty Name="ID_city" ColumnName="ID_city" />
-                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="idImage" ColumnName="idImage" />
                 <ScalarProperty Name="Count" ColumnName="Count" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="idCommand" ColumnName="idCommand" />
