@@ -15,7 +15,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreFramework", "CoreFramew
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Validation", "Validation\Validation.csproj", "{A4C418C9-5558-47BA-BD5F-C8BC2A70DCE9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RunningCompetitionWPF", "RunningCompetitionWPF\RunningCompetitionWPF.csproj", "{13135C4D-F9FB-4A15-8B83-E8C2F039CCD5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RunningCompetitionWPF", "RunningCompetitionWPF\RunningCompetitionWPF.csproj", "{13135C4D-F9FB-4A15-8B83-E8C2F039CCD5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RunningCompetitionsAPI", "RunningCompetitionsAPI\RunningCompetitionsAPI.csproj", "{CC76C762-27AB-48D8-B95D-5CCAD71145BE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{13135C4D-F9FB-4A15-8B83-E8C2F039CCD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{13135C4D-F9FB-4A15-8B83-E8C2F039CCD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{13135C4D-F9FB-4A15-8B83-E8C2F039CCD5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC76C762-27AB-48D8-B95D-5CCAD71145BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC76C762-27AB-48D8-B95D-5CCAD71145BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC76C762-27AB-48D8-B95D-5CCAD71145BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC76C762-27AB-48D8-B95D-5CCAD71145BE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,6 +1,6 @@
 using System;
-//удалить лишний класс
-namespace WebAPI_Project
+
+namespace RunningCompetitionsAPI
 {
     public class WeatherForecast
     {

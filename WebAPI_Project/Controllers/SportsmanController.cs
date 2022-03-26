@@ -1,4 +1,4 @@
-﻿using CoreFramework;
+﻿using Core;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -10,16 +10,15 @@ namespace WebAPI_Project.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-
     public class SportsmanController : ControllerBase
     {
         public SportsmanController() {}
 
         [HttpGet]
-        public ActionResult<ObservableCollection<Sportsman>> GetAll() => ConnectionSportsmans.GetSportsmans();
+        public ActionResult<ObservableCollection<Sportsmans>> GetAll() => ConnectionSportsmans.GetSportsmans();
 
         [HttpGet("{id}")]
-        public ActionResult<Sportsman> Get(int id)
+        public ActionResult<Sportsmans> Get(int id)
         {
             var sportsman = ConnectionSportsmans.GetSportsmansId(id);
 

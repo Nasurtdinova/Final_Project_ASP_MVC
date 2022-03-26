@@ -15,6 +15,7 @@ namespace CoreFramework
         public static List<City> Cities { get; set; }
         public static List<Images> Images { get; set; }
         public static List<Users> Users { get; set; }
+        public static List<Title> Titles { get; set; }
         private static List<string> images;
         private static List<string> cities;
         private static List<string> titles;
@@ -65,6 +66,11 @@ namespace CoreFramework
             return Images = new List<Images>(bdConnection.connection.Images.ToList());
         }
 
+        public static List<Title> GetTitles()
+        {
+            return Titles = new List<Title>(bdConnection.connection.Title.ToList());
+        }
+
         public static List<Command> GetCommand()
         {
             return Commands = new List<Command>(bdConnection.connection.Command.ToList());
@@ -99,7 +105,7 @@ namespace CoreFramework
             return images;          
         }
 
-        public static List<string> GetTitles()
+        public static List<string> GetNameTitles()
         {
             List<Title> tits = new List<Title>(bdConnection.connection.Title.ToList());
             titles = new List<string>();

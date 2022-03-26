@@ -57,5 +57,10 @@ namespace RunningCompetitionWPF
                 MessageBox.Show(ex.Message.ToString());
             }
         }
+
+        private void btnBack_Click(object sender, RoutedEventArgs e)
+        {
+            Manager.MainFrame.NavigationService.GoBack();
+        }
     }
 }

@@ -11,7 +11,8 @@ namespace CoreFramework
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Command
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,13 +22,17 @@ namespace CoreFramework
             this.SponsorCommand = new HashSet<SponsorCommand>();
             this.Sportsman = new HashSet<Sportsman>();
         }
-    
+
+        [Required(ErrorMessage = "Id is required")]
         public int idCommand { get; set; }
+        [Required(ErrorMessage = "Name command is required")]
         public string Name { get; set; }
+        [Range(1, 10)]
         public Nullable<int> Count { get; set; }
         public Nullable<int> idImage { get; set; }
         public Nullable<int> ID_city { get; set; }
         public string CityName { get; set; }
+        [Required(ErrorMessage = "City is required")]
         public virtual City City { get; set; }
         public virtual Images Images { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

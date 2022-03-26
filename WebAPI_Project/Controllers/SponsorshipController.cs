@@ -9,7 +9,6 @@ namespace WebAPI_Project.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-
     public class SponsorshipController : Controller
     {
         public SponsorshipController() { }

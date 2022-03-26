@@ -10,16 +10,14 @@ namespace CoreFramework
 {
     public class ConnectionCommands //разнести классы по папочкам
     {
-        private static ObservableCollection<Sportsman> sporCom;
+        private static List<Sportsman> sporCom;
 
-        public static ObservableCollection<Sportsman> GetSporCom(int id)
+        public static List<Sportsman> GetSporCom(int id)
         {
-            sporCom = new ObservableCollection<Sportsman>();
             try
             {
                 ObservableCollection<Sportsman> sportsman = new ObservableCollection<Sportsman>(bdConnection.connection.Sportsman.ToList());
-                var spor = sportsman.Where(tt => tt.idCommand == id).FirstOrDefault();
-                sporCom.Add(spor);
+                sporCom = sportsman.Where(tt => tt.idCommand == id).ToList();
             }
 
             catch // Exception исправить
@@ -41,8 +39,8 @@ namespace CoreFramework
             {
                 ObservableCollection<City> city = new ObservableCollection<City>(bdConnection.connection.City);
                 //var type = city.Where(tt => tt.Name == command.CityName).FirstOrDefault();
-                command.ID_city = city.Where(a=>a.Name == command.City.Name).FirstOrDefault().idCity;
-                command.City.idCity = city.Where(a => a.Name == command.City.Name).FirstOrDefault().idCity;
+                //command.ID_city = city.Where(a=>a.Name == command.City.Name).FirstOrDefault().idCity;
+                //command.City.idCity = city.Where(a => a.Name == command.City.Name).FirstOrDefault().idCity;
                 bdConnection.connection.Command.Add(command);
                 bdConnection.connection.SaveChanges();
             }
@@ -72,7 +70,7 @@ namespace CoreFramework
             {
                 var com = bdConnection.connection.Command.SingleOrDefault(r => r.idCommand == command.idCommand);
                 com.Name = command.Name;
-                //com.Image = command.Image;
+                com.Images = command.Images;
                 com.Count = command.Count;
                 var cit = bdConnection.connection.City.SingleOrDefault(r => r.Name == command.City.Name);
                 com.ID_city = cit.idCity;
@@ -99,6 +97,5 @@ namespace CoreFramework
             var com = commands.Where(tt => tt.idCommand == id).FirstOrDefault();
             return com;
         }
-
     }
 }

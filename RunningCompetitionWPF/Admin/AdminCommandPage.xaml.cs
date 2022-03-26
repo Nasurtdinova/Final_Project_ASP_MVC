@@ -58,5 +58,11 @@ namespace RunningCompetitionWPF.Admin
                 }
             }
         }
+
+        private void lvCommands_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var a = (sender as ListView).SelectedItem as Command;
+            Manager.MainFrame.NavigationService.Navigate(new AdminSportsmanCommandPage(a.idCommand));
+        }
     }
 }

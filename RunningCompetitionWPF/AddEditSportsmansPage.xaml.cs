@@ -1,7 +1,5 @@
-﻿using CoreFramework;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -15,14 +13,19 @@ using System.Windows.Shapes;
 
 namespace RunningCompetitionWPF
 {
-    public partial class SportsmanCommandPage : Page
+    /// <summary>
+    /// Логика взаимодействия для AddEditSportsmansPage.xaml
+    /// </summary>
+    public partial class AddEditSportsmansPage : Page
     {
-        public static ObservableCollection<Sportsman> infoSportsmansCommand { get; set; }
-        public SportsmanCommandPage(int id)
+        public AddEditSportsmansPage()
         {
             InitializeComponent();
-            infoSportsmansCommand = ConnectionCommands.GetSporCom(id);
-            this.DataContext = this;
+        }
+
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

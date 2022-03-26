@@ -15,4 +15,17 @@
     <Folder Include="Sponsor\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Admin\AdminSportsmanCommandPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Admin\AdminSportsmanCommandPage.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
 </Project>

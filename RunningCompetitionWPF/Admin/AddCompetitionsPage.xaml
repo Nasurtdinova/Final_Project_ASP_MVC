@@ -41,6 +41,9 @@
         <TextBox Text="{Binding Street}" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="300" Height="50"></TextBox>
         <TextBox Text="{Binding Home}" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" Width="300" Height="50"></TextBox>
         <ComboBox SelectedItem="{Binding City}" Grid.Column="1" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" DisplayMemberPath="Name" Name="comboCities" Width="300" Height="50"></ComboBox>
-        <Button Grid.ColumnSpan="2" Grid.Row="6" Width="200" Content="Сохранить" VerticalAlignment="Center" Click="btnSave_Click" Name="btnSave"></Button>
+        <StackPanel Grid.ColumnSpan="2" Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Grid.ColumnSpan="2" Grid.Row="6" Width="100" Content="Save" VerticalAlignment="Center" Click="btnSave_Click" Name="btnSave"></Button>
+            <Button Grid.ColumnSpan="2" Grid.Row="6" Width="100" Content="Back" VerticalAlignment="Center" Margin="10" Click="btnBack_Click" Name="btnBack"></Button>
+        </StackPanel>
     </Grid>
 </Page>
