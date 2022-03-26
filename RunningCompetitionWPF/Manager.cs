@@ -29,6 +29,7 @@ namespace RunningCompetitionWPF
         public static void DoAdmin()
         {
             CollapsedAuthReg();
+
             Exit.Visibility = System.Windows.Visibility.Visible;
             Sportsmans.Visibility = System.Windows.Visibility.Collapsed;
             Commands.Visibility = System.Windows.Visibility.Collapsed;
@@ -44,7 +45,7 @@ namespace RunningCompetitionWPF
         public static void DoViewer()
         {
             VisibleAuthReg();
-            //Exit.Visibility = System.Windows.Visibility.;
+ 
             Sportsmans.Visibility = System.Windows.Visibility.Visible;
             Commands.Visibility = System.Windows.Visibility.Visible;
             Competitions.Visibility = System.Windows.Visibility.Visible;
