@@ -32,6 +32,7 @@
                     <MenuItem Header="Competitions" FontFamily="Lucida Calligraphy" x:Name="competition" Click="competition_click"/>
                     <MenuItem Header="Competitions" FontFamily="Lucida Calligraphy" x:Name="competitionAdmin" Click="competitionAdmin_Click" Visibility="Collapsed"/>
                     <MenuItem Header="Sportsmans" FontFamily="Lucida Calligraphy" x:Name="sportsman" Click="sportsman_click"/>
+                    <MenuItem Header="Sportsmans" FontFamily="Lucida Calligraphy" x:Name="sportsmanAdmin" Click="sportsmanAdmin_Click" Visibility="Collapsed"/>
                     <MenuItem Header="Commands" FontFamily="Lucida Calligraphy" x:Name="command" Click="command_click"/>
                     <MenuItem Header="Commands" FontFamily="Lucida Calligraphy" x:Name="commandAdmin" Click="commandAdmin_Click" Visibility="Collapsed"/>
                     <MenuItem Header="Result competitions" FontFamily="Lucida Calligraphy" x:Name="resultCompetition" Click="resultCompetition_Click"/>

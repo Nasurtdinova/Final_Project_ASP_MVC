@@ -16,13 +16,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Admin\AdminSportsmanCommandPage.xaml.cs">
+    <Compile Update="Admin\Command\AdminSportsmanCommandPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <Page Update="Admin\AdminSportsmanCommandPage.xaml">
+    <Page Update="Admin\Command\AdminSportsmanCommandPage.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>

@@ -13,14 +13,21 @@ using System.Windows.Shapes;
 
 namespace RunningCompetitionWPF
 {
-    /// <summary>
-    /// Логика взаимодействия для AdminSportsmanPage.xaml
-    /// </summary>
-    public partial class AdminSportsmanPage : Page
+    public partial class AddEditSportsmansPage : Page
     {
-        public AdminSportsmanPage()
+        public AddEditSportsmansPage()
         {
             InitializeComponent();
+        }
+
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnBack_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

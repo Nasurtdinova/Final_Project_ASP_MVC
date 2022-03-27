@@ -37,5 +37,10 @@ namespace RunningCompetitionWPF
             var a = (sender as ListView).SelectedItem as Sportsman;
             Manager.MainFrame.Navigate(new AddEditSportsmanInCommandPage(a));
         }
+
+        private void btnBack_Click(object sender, RoutedEventArgs e)
+        {
+            Manager.MainFrame.NavigationService.GoBack();
+        }
     }
 }

@@ -25,7 +25,7 @@ namespace RunningCompetitionWPF
             Manager.MainFrame = frame_auto_reg;
             Manager.MainMenu = menu;
 
-            Manager.SportsmansAdmin = sportsman;
+            Manager.SportsmansAdmin = sportsmanAdmin;
             Manager.Sportsmans = sportsman;
 
             Manager.CommandsAdmin = commandAdmin;
@@ -78,8 +78,7 @@ namespace RunningCompetitionWPF
         private void competitionAdmin_Click(object sender, RoutedEventArgs e)
         {
             Manager.CollapsedAuthReg();
-            Manager.MainFrame.Navigate(new AdminCompetitionsPage());
-           
+            Manager.MainFrame.Navigate(new AdminCompetitionsPage());          
         }
 
         private void registr_Click(object sender, RoutedEventArgs e)
@@ -104,6 +103,12 @@ namespace RunningCompetitionWPF
             Manager.CollapsedAuthReg();
             Manager.Exit.Visibility = Visibility.Collapsed;
             Manager.MainFrame.NavigationService.Navigate(new AuthorizationPage());
+        }
+
+        private void sportsmanAdmin_Click(object sender, RoutedEventArgs e)
+        {
+            Manager.CollapsedAuthReg();
+            Manager.MainFrame.Navigate(new AdminSportsmanPage());
         }
     }
 }
