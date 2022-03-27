@@ -42,17 +42,17 @@ namespace CoreFramework
         {
             try
             {
-                ObservableCollection<Images> image = new ObservableCollection<Images>(bdConnection.connection.Images);
-                var img = image.Where(tt => tt.Name == sportsman.NameImage).FirstOrDefault();
+                //ObservableCollection<Images> image = new ObservableCollection<Images>(bdConnection.connection.Images);
+                //var img = image.Where(tt => tt.Name == sportsman.NameImage).FirstOrDefault();
 
-                ObservableCollection<Command> com = new ObservableCollection<Command>(bdConnection.connection.Command);
-                var command = com.Where(tt => tt.Name == sportsman.NameCommand).FirstOrDefault();
+                //ObservableCollection<Command> com = new ObservableCollection<Command>(bdConnection.connection.Command);
+                //var command = com.Where(tt => tt.Name == sportsman.NameCommand).FirstOrDefault();
 
-                ObservableCollection<Title> title = new ObservableCollection<Title>(bdConnection.connection.Title);
-                var tit = title.Where(tt => tt.Name == sportsman.NameTitle).FirstOrDefault();
-                sportsman.ID_Image = img.idImages;
-                sportsman.idCommand = command.idCommand;
-                sportsman.idTitle = tit.idTitle;
+                //ObservableCollection<Title> title = new ObservableCollection<Title>(bdConnection.connection.Title);
+                //var tit = title.Where(tt => tt.Name == sportsman.NameTitle).FirstOrDefault();
+                //sportsman.ID_Image = img.idImages;
+                //sportsman.idCommand = command.idCommand;
+                //sportsman.idTitle = tit.idTitle;
                 bdConnection.connection.Sportsman.Add(sportsman);
                 bdConnection.connection.SaveChanges();
             }
@@ -71,12 +71,12 @@ namespace CoreFramework
                 sports.Height = sportsman.Height;
                 sports.Cost = sportsman.Cost;
                 sports.Surname = sportsman.Surname;
-                var img = bdConnection.connection.Images.SingleOrDefault(r => r.Name == sportsman.Images.Name);
-                sports.ID_Image = img.idImages;
-                var title = bdConnection.connection.Title.SingleOrDefault(r => r.Name == sportsman.Title.Name);
-                sports.idTitle = title.idTitle;
-                var com = bdConnection.connection.Command.SingleOrDefault(r => r.Name == sportsman.Command.Name);
-                sports.idCommand = com.idCommand;
+                //var img = bdConnection.connection.Images.SingleOrDefault(r => r.Name == sportsman.Images.Name);
+                sports.Images = sportsman.Images;
+                //var title = bdConnection.connection.Title.SingleOrDefault(r => r.Name == sportsman.Title.Name);
+                sports.Title = sportsman.Title;
+                //var com = bdConnection.connection.Command.SingleOrDefault(r => r.Name == sportsman.Command.Name);
+                sports.Command = sportsman.Command;
 
                 bdConnection.connection.SaveChanges();
             }

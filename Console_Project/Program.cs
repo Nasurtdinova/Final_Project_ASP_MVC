@@ -1,4 +1,4 @@
-﻿using Core;
+﻿using CoreFramework;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -41,7 +41,7 @@ namespace Console_Project
                 password += key.KeyChar;
             }
 
-            if (Connection.IsLogin(login, password))
+            if (Connection.IsLogin(login, password)==2)
             {
                 while (true)
                 {
@@ -56,7 +56,7 @@ namespace Console_Project
                             string instruction = Console.ReadLine();
                             string values = Console.ReadLine();
                             string[] value = values.Split(',');
-                            PrintSponsorships(instruction, value);
+                            //PrintSponsorships(instruction, value);
                             continue;
                         }
                         string[] emptyStringArray = new string[0];
@@ -106,16 +106,16 @@ namespace Console_Project
                 case 4:
                     PrintResults();
                     break;
-                case 5:
-                    PrintSponsorships(command, values);
-                    break;
+                //case 5:
+                //    PrintSponsorships(command, values);
+                //    break;
             }
         }
 
         private static void PrintSportsmans()
         {
-            ObservableCollection<Sportsmans> sportsmans = ConnectionSportsmans.GetSportsmans();
-            foreach (Sportsmans i in sportsmans)
+            ObservableCollection<Sportsman> sportsmans = ConnectionSportsmans.GetSportsmans();
+            foreach (Sportsman i in sportsmans)
             {
                 Console.WriteLine(i);
             }
@@ -123,7 +123,7 @@ namespace Console_Project
 
         private static void PrintCommands()
         {
-            ObservableCollection<Commands> commands = ConnectionCommands.GetCommands();
+            ObservableCollection<Command> commands = ConnectionCommands.GetCommands();
             foreach (Commands i in commands)
             {
                 Console.WriteLine(i);
@@ -132,7 +132,7 @@ namespace Console_Project
 
         private static void PrintCompetitions()
         {
-            ObservableCollection<Competitions> compet = ConnectionCompetitions.GetCompetition();
+            ObservableCollection<Competition> compet = ConnectionCompetitions.GetCompetitions();
             foreach (Competitions i in compet)
             {
                 Console.WriteLine(i);
@@ -141,31 +141,31 @@ namespace Console_Project
 
         private static void PrintResults()
         {
-            ObservableCollection<Results> results = ConnectionResults.GetResults();
+            ObservableCollection<ResultCompetition> results = ConnectionResults.GetResults();
             foreach (Results i in results)
             {
                 Console.WriteLine(i);
             }
         }
 
-        private static void PrintSponsorships(string command, string []values)
-        {
-            switch (command)
-            {
-                case "Get":
-                    List<Sponsorships> sponsorships = ConnectionSponsorship.GetSponsorshipViewerAdmin();
-                    foreach (Sponsorships i in sponsorships)
-                    {
-                        Console.WriteLine(i);
-                    }
-                    break;
-                case "Remove":
-                    ConnectionSponsorship.RemoveSponsorship(Convert.ToInt32(values[0]));
-                    break;
-                case "Add":
-                    ConnectionSponsorship.AddSponsorship(new Sponsorship(values));
-                    break;
-            }
-        }
+        //private static void PrintSponsorships(string command, string []values)
+        //{
+        //    switch (command)
+        //    {
+        //        case "Get":
+        //            List<Sponsorships> sponsorships = ConnectionSponsorship.GetSponsorshipViewerAdmin();
+        //            foreach (Sponsorships i in sponsorships)
+        //            {
+        //                Console.WriteLine(i);
+        //            }
+        //            break;
+        //        case "Remove":
+        //            ConnectionSponsorship.RemoveSponsorship(Convert.ToInt32(values[0]));
+        //            break;
+        //        case "Add":
+        //            ConnectionSponsorship.AddSponsorship(new Sponsorship(values));
+        //            break;
+        //    }
+        //}
     }
 }

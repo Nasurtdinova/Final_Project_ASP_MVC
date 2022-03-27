@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -27,12 +28,35 @@ namespace RunningCompetitionWPF
 
         private void btnRemove_Click(object sender, RoutedEventArgs e)
         {
+            var sportsmansForRemoving = lvSportsmans.SelectedItems.Cast<Sportsman>().ToList();
 
+            if (MessageBox.Show($"Вы точно хотите удалить следующие {sportsmansForRemoving.Count()} элементов", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    foreach (var i in sportsmansForRemoving)
+                    {
+                        ConnectionSportsmans.RemoveSportsman(i.ID);
+                    }
+
+                    lvSportsmans.ItemsSource = ConnectionSportsmans.GetSportsmans().ToList();
+                    MessageBox.Show("Данные удалены");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message.ToString());
+                }
+            }
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
+            Manager.MainFrame.Navigate(new AddEditSportsmansPage(null));
+        }
 
+        private void btnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            Manager.MainFrame.NavigationService.Navigate(new AddEditSportsmansPage((sender as Button).DataContext as Sportsman));
         }
     }
 }

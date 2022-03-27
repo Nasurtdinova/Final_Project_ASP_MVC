@@ -13,8 +13,7 @@ namespace CoreFramework
     {
         public static ObservableCollection<ResultCompetition> GetResults()
         {
-            ObservableCollection<ResultCompetition> results = new ObservableCollection<ResultCompetition>(bdConnection.connection.ResultCompetition.ToList());
-            return results;
+            return new ObservableCollection<ResultCompetition>(bdConnection.connection.ResultCompetition.ToList());
         }
 
         public static ResultCompetition GetResultsId(int idCommand, int idCompet)

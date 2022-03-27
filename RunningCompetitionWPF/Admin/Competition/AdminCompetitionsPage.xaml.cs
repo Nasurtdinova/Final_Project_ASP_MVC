@@ -21,7 +21,7 @@ namespace RunningCompetitionWPF
         public AdminCompetitionsPage()
         {
             InitializeComponent();
-            dgCompetitions.ItemsSource = ConnectionCompetitions.GetCompetition().ToList();
+            dgCompetitions.ItemsSource = ConnectionCompetitions.GetCompetitions().ToList();
         }
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)
@@ -47,21 +47,13 @@ namespace RunningCompetitionWPF
                         ConnectionCompetitions.RemoveCompetition(i.idCompetition);
                     }
 
-                    dgCompetitions.ItemsSource = ConnectionCompetitions.GetCompetition().ToList();
+                    dgCompetitions.ItemsSource = ConnectionCompetitions.GetCompetitions().ToList();
                     MessageBox.Show("Данные удалены");
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message.ToString());
                 }
-            }
-        }
-
-        private void Page_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            if (Visibility == Visibility.Visible)
-            {
-                dgCompetitions.ItemsSource = ConnectionCompetitions.GetCompetition();
             }
         }
     }

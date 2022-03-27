@@ -7,23 +7,20 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 
-//лишние библиотеки убрать
 namespace CoreFramework
 {
-    public class ConnectionCompetitions //разнести классы по папочкам
+    public class ConnectionCompetitions
     {
         //public static List<Competition> compet { get; set; }
         public static Competition GetCompetId(int id)
         {
-            ObservableCollection<Competition> commands = GetCompetition();
-            var com = commands.Where(tt => tt.idCompetition == id).FirstOrDefault();
-            return com;
+            ObservableCollection<Competition> commands = GetCompetitions();
+            return commands.Where(tt => tt.idCompetition == id).FirstOrDefault();            
         }
 
-        public static ObservableCollection<Competition> GetCompetition()
+        public static ObservableCollection<Competition> GetCompetitions()
         {
-            ObservableCollection<Competition> compet = new ObservableCollection<Competition>(bdConnection.connection.Competition.ToList());
-            return compet;
+            return new ObservableCollection<Competition>(bdConnection.connection.Competition.ToList());
         }
 
         public static void AddCompetition(Competition compet)
@@ -65,7 +62,7 @@ namespace CoreFramework
                 competition.NameVenue = compet.NameVenue;
                 competition.Date = compet.Date;
                 //var cit = bdConnection.connection.City.SingleOrDefault(r => r.Name == compet.City.Name);
-                competition.idCity = compet.idCity;
+                competition.City = compet.City;
                 competition.Home = compet.Home;
                 competition.Street = compet.Street;
                 bdConnection.connection.SaveChanges();

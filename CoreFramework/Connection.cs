@@ -10,8 +10,6 @@ namespace CoreFramework
 {
     public class Connection
     {
-        public static List<Command> Commands { get; set; }
-        public static List<Competition> Compets { get; set; }
         public static List<City> Cities { get; set; }
         public static List<Images> Images { get; set; }
         public static List<Users> Users { get; set; }
@@ -71,15 +69,15 @@ namespace CoreFramework
             return Titles = new List<Title>(bdConnection.connection.Title.ToList());
         }
 
-        public static List<Command> GetCommand()
-        {
-            return Commands = new List<Command>(bdConnection.connection.Command.ToList());
-        }
+        //public static List<Command> GetCommand()
+        //{
+        //    return Commands = new List<Command>(bdConnection.connection.Command.ToList());
+        //}
 
-        public static List<Competition> GetCompetition()
-        {
-            return Compets = new List<Competition>(bdConnection.connection.Competition.ToList());
-        }
+        //public static List<Competition> GetCompetition()
+        //{
+        //    return Compets = new List<Competition>(bdConnection.connection.Competition.ToList());
+        //}
 
         public static void AddUser(Users user)
         {
@@ -167,19 +165,10 @@ namespace CoreFramework
                        where email == usrs.Email && password== usrs.Password && usrs.idType == 2
                        select usrs;
 
-            var trainer = from usrs in Users
-                          where email == usrs.Email && password== usrs.Password && usrs.idType == 3
-                          select usrs;
-
             if (sponsor.Count() == 1)
             {
                 CurrentUser.user = sponsor.FirstOrDefault();
                 return 2;
-            }
-            else if (trainer.Count() == 1)
-            {
-                CurrentUser.user = trainer.FirstOrDefault();
-                return 3;
             }
             else if (admin.Count() == 1)
             {

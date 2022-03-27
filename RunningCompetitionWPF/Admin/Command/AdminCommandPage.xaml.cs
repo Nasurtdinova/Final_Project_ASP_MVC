@@ -49,7 +49,7 @@ namespace RunningCompetitionWPF.Admin
                         ConnectionCommands.RemoveCommand(i.idCommand);
                     }
 
-                    lvCommands.ItemsSource = ConnectionCompetitions.GetCompetition().ToList();
+                    lvCommands.ItemsSource = ConnectionCompetitions.GetCompetitions().ToList();
                     MessageBox.Show("Данные удалены");
                 }
                 catch (Exception ex)

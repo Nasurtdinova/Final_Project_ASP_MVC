@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CoreFramework;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -15,9 +16,17 @@ namespace RunningCompetitionWPF
 {
     public partial class AddEditSportsmansPage : Page
     {
-        public AddEditSportsmansPage()
+        public Sportsman CurrentSportsman = new Sportsman();
+        public AddEditSportsmansPage(Sportsman selectedSportsman)
         {
             InitializeComponent();
+            if (selectedSportsman != null)
+                CurrentSportsman = selectedSportsman;
+
+            DataContext = CurrentSportsman;
+            comboImages.ItemsSource = Connection.GetImages();
+            comboTitle.ItemsSource = Connection.GetTitles();
+            comboCommand.ItemsSource = ConnectionCommands.GetCommands();
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
@@ -27,7 +36,7 @@ namespace RunningCompetitionWPF
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
-
+            Manager.MainFrame.NavigationService.GoBack();
         }
     }
 }

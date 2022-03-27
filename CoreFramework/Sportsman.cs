@@ -28,5 +28,10 @@ namespace CoreFramework
         public virtual Images Images { get; set; }
         public virtual Title Title { get; set; }
         public virtual Command Command { get; set; }
+
+        public override string ToString()
+        {
+            return $"{ID}, {Name}, {Surname}, {Title.Name}, {Height}, {Cost}, {Command.Name}";
+        }
     }
 }

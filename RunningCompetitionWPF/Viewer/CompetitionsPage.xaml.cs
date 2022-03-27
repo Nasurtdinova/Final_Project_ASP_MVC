@@ -22,7 +22,7 @@ namespace RunningCompetitionWPF
         public CompetitionsPage()
         {
             InitializeComponent();
-            infoCompet = ConnectionCompetitions.GetCompetition();
+            infoCompet = ConnectionCompetitions.GetCompetitions();
             this.DataContext = this;
         }
     }

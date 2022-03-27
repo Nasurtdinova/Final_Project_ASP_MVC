@@ -25,8 +25,8 @@ namespace RunningCompetitionWPF
                 CurrentResult = selectedResult;
 
             DataContext = CurrentResult;
-            comboCommands.ItemsSource = Connection.GetCommand();
-            comboCompets.ItemsSource = Connection.GetCompetition();
+            comboCommands.ItemsSource = ConnectionCommands.GetCommands();
+            comboCompets.ItemsSource = ConnectionCompetitions.GetCompetitions();
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)

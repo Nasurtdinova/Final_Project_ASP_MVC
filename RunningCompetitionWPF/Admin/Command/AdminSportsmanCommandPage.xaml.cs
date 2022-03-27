@@ -29,13 +29,13 @@ namespace RunningCompetitionWPF
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            Manager.MainFrame.Navigate(new AddEditSportsmanInCommandPage(null));
+            Manager.MainFrame.Navigate(new AddEditSportsmanInCommandPage(null,IdCommand));
         }
 
         private void lvCommands_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var a = (sender as ListView).SelectedItem as Sportsman;
-            Manager.MainFrame.Navigate(new AddEditSportsmanInCommandPage(a));
+            Manager.MainFrame.Navigate(new AddEditSportsmanInCommandPage(a,IdCommand));
         }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)

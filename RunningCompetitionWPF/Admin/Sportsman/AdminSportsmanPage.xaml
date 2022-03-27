@@ -41,6 +41,7 @@
                         <Image Source="{Binding Images.Name}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="150"/>
                         <TextBlock Text="{Binding Surname}" FontFamily="Lucida Calligraphy" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22"/>
                         <TextBlock Text="{Binding Name}" FontFamily="Lucida Calligraphy" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22"/>
+                        <Button Content="Edit" Name="btnEdit" Click="btnEdit_Click" Width="100"></Button>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>

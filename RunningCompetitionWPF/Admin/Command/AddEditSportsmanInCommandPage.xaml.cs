@@ -17,12 +17,16 @@ namespace RunningCompetitionWPF
     public partial class AddEditSportsmanInCommandPage : Page
     {
         public Sportsman CurrentSportsman = new Sportsman();
-        public AddEditSportsmanInCommandPage(Sportsman selectedSportsman)
+        public int IdCommand { get; set; }
+        public AddEditSportsmanInCommandPage(Sportsman selectedSportsman, int idCommand)
         {
             InitializeComponent();
-
+            IdCommand = idCommand;
             if (selectedSportsman != null)
+            {
                 CurrentSportsman = selectedSportsman;
+            }
+            CurrentSportsman.idCommand = IdCommand;
 
             DataContext = CurrentSportsman;
             comboImages.ItemsSource = Connection.GetImages();
@@ -31,7 +35,7 @@ namespace RunningCompetitionWPF
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            if (CurrentSportsman.idCommand == 0)
+            if (CurrentSportsman.ID == 0)
                 ConnectionSportsmans.AddSportsman(CurrentSportsman);
             else
                 ConnectionSportsmans.UpdateSportsman(CurrentSportsman);
@@ -44,6 +48,7 @@ namespace RunningCompetitionWPF
             {
                 MessageBox.Show(ex.Message.ToString());
             }
+            Manager.MainFrame.Navigate(new AdminSportsmanCommandPage(IdCommand));
         }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)

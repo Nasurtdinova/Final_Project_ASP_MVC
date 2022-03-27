@@ -46,7 +46,7 @@ namespace RunningCompetitionWPF
                         ConnectionCompetitions.RemoveCompetition(i.idCompetition);
                     }
 
-                    dgResultCompetitions.ItemsSource = ConnectionCompetitions.GetCompetition();
+                    dgResultCompetitions.ItemsSource = ConnectionResults.GetResults();
                     MessageBox.Show("Данные удалены");
                 }
                 catch (Exception ex)
