@@ -1,0 +1,20 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Sponsorship";
+}
+@model List<Core.Sponsorships>
+<h2>Sponsorship</h2>
+<br />
+<table border="1" style="border-collapse:collapse;" width=100% cellpadding="4" cellspacing="20">
+    <tr>
+        <th style="text-align:center">Название команды</th>
+        <th style="text-align:center">Название спонсора</th>
+    </tr>
+    @foreach (var ship in Model)
+    {
+        <tr>
+            <td align="center">@ship.Command</td>
+            <td align="center">@ship.SponsorName</td>
+        </tr>
+    }
+</table>

@@ -35,7 +35,8 @@ namespace RunningCompetitionWPF
             }
             else if (Connection.IsLogin(txt_login.Text, txt_password.Password) == 2)
             {
-
+                Manager.DoSponsor();
+                Manager.MainFrame.NavigationService.Navigate(new ViewerMainPage());
             }
             else
             {

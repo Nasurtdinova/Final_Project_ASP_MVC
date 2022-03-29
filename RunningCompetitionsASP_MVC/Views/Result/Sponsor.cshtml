@@ -1,0 +1,23 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutSponsor.cshtml";
+    ViewData["Title"] = "Result competition";
+}
+@using System.Collections.ObjectModel;
+@model ObservableCollection<Core.Results>
+<h2>Result competitions</h2>
+<br />
+<table border="1" style="border-collapse:collapse;" width=100% cellpadding="4" cellspacing="20">
+    <tr>
+        <th style="text-align:center">Название команды</th>
+        <th style="text-align:center">Название соревнования</th>
+        <th style="text-align:center">Место</th>
+    </tr>
+    @foreach (var result in Model)
+    {
+        <tr>
+            <td align="center">@result.Command</td>
+            <td align="center">@result.Compet</td>
+            <td align="center">@result.Rank</td>
+        </tr>
+    }
+</table>

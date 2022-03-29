@@ -12,7 +12,7 @@ namespace RunningCompetitionWPF
 
         public static Button Authorization { get; set; }
         public static Button Registration { get; set; }
-        public static Button Exit { get; set; }
+        public static MenuItem Exit { get; set; }
 
         public static MenuItem SportsmansAdmin { get; set; }
         public static MenuItem Sportsmans { get; set; }
@@ -57,14 +57,31 @@ namespace RunningCompetitionWPF
             ResultCompetitionsAdmin.Visibility = System.Windows.Visibility.Collapsed;
         }
 
+        public static void DoSponsor()
+        {
+            VisibleAuthReg();
+
+            Sportsmans.Visibility = System.Windows.Visibility.Visible;
+            Commands.Visibility = System.Windows.Visibility.Visible;
+            Competitions.Visibility = System.Windows.Visibility.Visible;
+            ResultCompetitions.Visibility = System.Windows.Visibility.Visible;
+
+            SportsmansAdmin.Visibility = System.Windows.Visibility.Collapsed;
+            CommandsAdmin.Visibility = System.Windows.Visibility.Collapsed;
+            CompetitionsAdmin.Visibility = System.Windows.Visibility.Collapsed;
+            ResultCompetitionsAdmin.Visibility = System.Windows.Visibility.Collapsed;
+        }
+
         public static void CollapsedAuthReg()
-        {            
+        {
+            //Exit.Visibility = System.Windows.Visibility.Collapsed;
             Registration.Visibility = System.Windows.Visibility.Collapsed;
             Authorization.Visibility = System.Windows.Visibility.Collapsed;
         }
 
         public static void VisibleAuthReg()
         {
+            
             Registration.Visibility = System.Windows.Visibility.Visible;
             Authorization.Visibility = System.Windows.Visibility.Visible;
         }

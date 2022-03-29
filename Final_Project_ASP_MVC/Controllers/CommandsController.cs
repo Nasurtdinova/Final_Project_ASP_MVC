@@ -63,7 +63,7 @@ namespace Final_Project_ASP_MVC.Controllers
         [HttpGet]
         public IActionResult SportsmanCommand(int id)
         {
-            ObservableCollection<Sportsman> sportCom = ConnectionCommands.GetSporCom(id);
+            List<Sportsman> sportCom = ConnectionCommands.GetSporCom(id);
             return View(sportCom);
         }
     }

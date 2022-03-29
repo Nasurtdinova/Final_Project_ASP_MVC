@@ -17,16 +17,17 @@ namespace CoreFramework
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Images()
         {
-            this.Sportsman = new HashSet<Sportsman>();
             this.Command = new HashSet<Command>();
+            this.Sportsman = new HashSet<Sportsman>();
         }
     
         public int idImages { get; set; }
-        public string Name { get; set; }
+        public string FileName { get; set; }
+        public byte[] ImageData { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Sportsman> Sportsman { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Command> Command { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Sportsman> Sportsman { get; set; }
     }
 }

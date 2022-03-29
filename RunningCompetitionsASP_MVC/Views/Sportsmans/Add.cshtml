@@ -1,0 +1,72 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutCopy.cshtml";
+    ViewData["Title"] = "Add sportsman";
+}
+@model Core.Sportsman
+
+<div class="row justify-content-lg-cehter">
+    <h1>Add new sportsman</h1>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Add">
+            <div class="form-group">
+                <label asp-for="Surname" class="control-label">Surname</label>
+                <input asp-for="Surname" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label">Name</label>
+                <input asp-for="Name" class=" form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Image" class="control-label">Image</label>
+                <select asp-for="Image" class=" form-control">
+                    <option selected="selected">  </option>
+                    @foreach (string image in Core.Connection.GetImages())
+                    {
+                        <option>@image</option>
+                    }
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Title" class="control-label">Title</label>
+                <select asp-for="Title" class=" form-control">
+                    <option selected="selected">  </option>
+                    @foreach (string title in Core.Connection.GetTitles())
+                    {
+                        <option>@title</option>
+                    }
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Height" class="control-label">Height</label>
+                <input asp-for="Height" class=" form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Cost" class="control-label">Cost</label>
+                <input asp-for="Cost" class=" form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Command" class="control-label">Command</label>
+                <select asp-for="Command" class=" form-control">
+                    <option selected="selected">  </option>
+                    @foreach (string command in Core.Connection.GetNameCommands())
+                    {
+                        <option>@command</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Add" class=" btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to sportsmans list</a>
+</div>

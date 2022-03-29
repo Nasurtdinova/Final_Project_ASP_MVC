@@ -15,19 +15,15 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-            <Setter Property="FontFamily" Value="Lucida Calligraphy"></Setter>
             <Setter Property="FontSize" Value="20"></Setter>
         </Style>
         <Style TargetType="TextBlock">
-            <Setter Property="FontFamily" Value="Lucida Calligraphy"></Setter>
             <Setter Property="FontSize" Value="20"></Setter>
         </Style>
         <Style TargetType="ComboBox">
-            <Setter Property="FontFamily" Value="Lucida Calligraphy"></Setter>
             <Setter Property="FontSize" Value="20"></Setter>
         </Style>
         <Style TargetType="TextBox">
-            <Setter Property="FontFamily" Value="Lucida Calligraphy"></Setter>
             <Setter Property="FontSize" Value="20"></Setter>
         </Style>
     </Application.Resources>

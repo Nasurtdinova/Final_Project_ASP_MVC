@@ -1,7 +1,9 @@
 ﻿using CoreFramework;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -26,7 +28,6 @@ namespace RunningCompetitionWPF.Admin
 
             DataContext = CurrentCommand;
             comboCities.ItemsSource = Connection.GetCities();
-            comboImages.ItemsSource = Connection.GetImages();
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
@@ -50,17 +51,41 @@ namespace RunningCompetitionWPF.Admin
                 try
                 {
                     MessageBox.Show("Информация сохранена");
+                    Manager.MainFrame.Navigate(new AdminCommandPage());
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message.ToString());
                 }
-            }          
+            }
+            
         }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
             Manager.MainFrame.NavigationService.GoBack();
+        }
+
+        private void btnLoadImage_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            byte[] imageData;
+            if (openFileDialog.ShowDialog() == true)
+            {
+                string path = openFileDialog.FileName;
+                imageData = File.ReadAllBytes(path);
+
+                var stream = new MemoryStream(imageData);
+                stream.Seek(0, SeekOrigin.Begin);
+                var image = new BitmapImage();
+                image.BeginInit();
+                image.StreamSource = stream;
+                image.EndInit();
+
+                imgCom.Source = image;
+                CurrentCommand.Image = imageData;                
+            }
+            
         }
     }
 }

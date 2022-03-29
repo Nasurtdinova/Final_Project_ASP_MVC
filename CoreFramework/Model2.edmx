@@ -21,6 +21,7 @@
           <Property Name="Count" Type="int" />
           <Property Name="idImage" Type="int" />
           <Property Name="ID_city" Type="int" />
+          <Property Name="Image" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="Competition">
           <Key>
@@ -38,8 +39,9 @@
           <Key>
             <PropertyRef Name="idImages" />
           </Key>
-          <Property Name="idImages" Type="int" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="150" />
+          <Property Name="idImages" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FileName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ImageData" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="ResultCompetition">
           <Key>
@@ -325,15 +327,6 @@
           <NavigationProperty Name="City" Relationship="Self.FK_Competition_City1" FromRole="Competition" ToRole="City" />
           <NavigationProperty Name="ResultCompetition" Relationship="Self.FK_ResultCompetition_Competition" FromRole="Competition" ToRole="ResultCompetition" />
         </EntityType>
-        <EntityType Name="Images">
-          <Key>
-            <PropertyRef Name="idImages" />
-          </Key>
-          <Property Name="idImages" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Sportsman" Relationship="Self.FK_Sportsman_Images" FromRole="Images" ToRole="Sportsman" />
-          <NavigationProperty Name="Command" Relationship="CompetitionExamModel.FK_Command_Images" FromRole="Images" ToRole="Command" />
-        </EntityType>
         <EntityType Name="ResultCompetition">
           <Key>
             <PropertyRef Name="idCommand" />
@@ -369,9 +362,9 @@
           <Property Name="Cost" Type="Int32" />
           <Property Name="Height" Type="Int32" />
           <Property Name="idCommand" Type="Int32" />
-          <NavigationProperty Name="Images" Relationship="Self.FK_Sportsman_Images" FromRole="Sportsman" ToRole="Images" />
           <NavigationProperty Name="Title" Relationship="Self.FK_Sportsman_Title" FromRole="Sportsman" ToRole="Title" />
           <NavigationProperty Name="Command" Relationship="CompetitionExamModel.FK_Sportsman_Command" FromRole="Sportsman" ToRole="Command" />
+          <NavigationProperty Name="Images" Relationship="CompetitionExamModel.FK_Sportsman_Images" FromRole="Sportsman" ToRole="Images" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -437,18 +430,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Sportsman_Images">
-          <End Role="Images" Type="Self.Images" Multiplicity="0..1" />
-          <End Role="Sportsman" Type="Self.Sportsman" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Images">
-              <PropertyRef Name="idImages" />
-            </Principal>
-            <Dependent Role="Sportsman">
-              <PropertyRef Name="ID_Image" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_SponsorCommand_User">
           <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
           <End Role="SponsorCommand" Type="Self.SponsorCommand" Multiplicity="*" />
@@ -488,7 +469,6 @@
         <EntityContainer Name="CompetitionExamEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="City" EntityType="Self.City" />
           <EntitySet Name="Competition" EntityType="Self.Competition" />
-          <EntitySet Name="Images" EntityType="Self.Images" />
           <EntitySet Name="ResultCompetition" EntityType="Self.ResultCompetition" />
           <EntitySet Name="SponsorCommand" EntityType="Self.SponsorCommand" />
           <EntitySet Name="Sportsman" EntityType="Self.Sportsman" />
@@ -503,10 +483,6 @@
           <AssociationSet Name="FK_ResultCompetition_Competition" Association="Self.FK_ResultCompetition_Competition">
             <End Role="Competition" EntitySet="Competition" />
             <End Role="ResultCompetition" EntitySet="ResultCompetition" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Sportsman_Images" Association="Self.FK_Sportsman_Images">
-            <End Role="Images" EntitySet="Images" />
-            <End Role="Sportsman" EntitySet="Sportsman" />
           </AssociationSet>
           <AssociationSet Name="FK_SponsorCommand_User" Association="Self.FK_SponsorCommand_User">
             <End Role="Users" EntitySet="Users" />
@@ -525,10 +501,6 @@
             <End Role="City" EntitySet="City" />
             <End Role="Command" EntitySet="Command" />
           </AssociationSet>
-          <AssociationSet Name="FK_Command_Images" Association="CompetitionExamModel.FK_Command_Images">
-            <End Role="Images" EntitySet="Images" />
-            <End Role="Command" EntitySet="Command" />
-          </AssociationSet>
           <AssociationSet Name="FK_ResultCompetition_Command" Association="CompetitionExamModel.FK_ResultCompetition_Command">
             <End Role="Command" EntitySet="Command" />
             <End Role="ResultCompetition" EntitySet="ResultCompetition" />
@@ -539,6 +511,15 @@
           </AssociationSet>
           <AssociationSet Name="FK_Sportsman_Command" Association="CompetitionExamModel.FK_Sportsman_Command">
             <End Role="Command" EntitySet="Command" />
+            <End Role="Sportsman" EntitySet="Sportsman" />
+          </AssociationSet>
+          <EntitySet Name="Images" EntityType="CompetitionExamModel.Images" />
+          <AssociationSet Name="FK_Command_Images" Association="CompetitionExamModel.FK_Command_Images">
+            <End Role="Images" EntitySet="Images" />
+            <End Role="Command" EntitySet="Command" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sportsman_Images" Association="CompetitionExamModel.FK_Sportsman_Images">
+            <End Role="Images" EntitySet="Images" />
             <End Role="Sportsman" EntitySet="Sportsman" />
           </AssociationSet>
           </EntityContainer>
@@ -552,10 +533,11 @@
           <Property Name="idImage" Type="Int32" />
           <Property Name="ID_city" Type="Int32" />
           <NavigationProperty Name="City" Relationship="CompetitionExamModel.FK_Command_City" FromRole="Command" ToRole="City" />
-          <NavigationProperty Name="Images" Relationship="CompetitionExamModel.FK_Command_Images" FromRole="Command" ToRole="Images" />
           <NavigationProperty Name="ResultCompetition" Relationship="CompetitionExamModel.FK_ResultCompetition_Command" FromRole="Command" ToRole="ResultCompetition" />
           <NavigationProperty Name="SponsorCommand" Relationship="CompetitionExamModel.FK_SponsorCommand_Command" FromRole="Command" ToRole="SponsorCommand" />
           <NavigationProperty Name="Sportsman" Relationship="CompetitionExamModel.FK_Sportsman_Command" FromRole="Command" ToRole="Sportsman" />
+          <NavigationProperty Name="Images" Relationship="CompetitionExamModel.FK_Command_Images" FromRole="Command" ToRole="Images" />
+          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <Association Name="FK_Command_City">
           <End Type="CompetitionExamModel.City" Role="City" Multiplicity="0..1" />
@@ -566,18 +548,6 @@
             </Principal>
             <Dependent Role="Command">
               <PropertyRef Name="ID_city" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Command_Images">
-          <End Type="CompetitionExamModel.Images" Role="Images" Multiplicity="0..1" />
-          <End Type="CompetitionExamModel.Command" Role="Command" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Images">
-              <PropertyRef Name="idImages" />
-            </Principal>
-            <Dependent Role="Command">
-              <PropertyRef Name="idImage" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -617,6 +587,40 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Images">
+          <Key>
+            <PropertyRef Name="idImages" />
+          </Key>
+          <Property Name="idImages" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FileName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ImageData" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Command" Relationship="CompetitionExamModel.FK_Command_Images" FromRole="Images" ToRole="Command" />
+          <NavigationProperty Name="Sportsman" Relationship="CompetitionExamModel.FK_Sportsman_Images" FromRole="Images" ToRole="Sportsman" />
+        </EntityType>
+        <Association Name="FK_Command_Images">
+          <End Type="CompetitionExamModel.Images" Role="Images" Multiplicity="0..1" />
+          <End Type="CompetitionExamModel.Command" Role="Command" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Images">
+              <PropertyRef Name="idImages" />
+            </Principal>
+            <Dependent Role="Command">
+              <PropertyRef Name="idImage" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sportsman_Images">
+          <End Type="CompetitionExamModel.Images" Role="Images" Multiplicity="0..1" />
+          <End Type="CompetitionExamModel.Sportsman" Role="Sportsman" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Images">
+              <PropertyRef Name="idImages" />
+            </Principal>
+            <Dependent Role="Sportsman">
+              <PropertyRef Name="ID_Image" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -641,14 +645,6 @@
                 <ScalarProperty Name="Home" ColumnName="Home" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="idCity" ColumnName="idCity" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Images">
-            <EntityTypeMapping TypeName="CompetitionExamModel.Images">
-              <MappingFragment StoreEntitySet="Images">
-                <ScalarProperty Name="idImages" ColumnName="idImages" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -729,11 +725,21 @@
           <EntitySetMapping Name="Command">
             <EntityTypeMapping TypeName="CompetitionExamModel.Command">
               <MappingFragment StoreEntitySet="Command">
+                <ScalarProperty Name="Image" ColumnName="Image" />
                 <ScalarProperty Name="ID_city" ColumnName="ID_city" />
                 <ScalarProperty Name="idImage" ColumnName="idImage" />
                 <ScalarProperty Name="Count" ColumnName="Count" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="idCommand" ColumnName="idCommand" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Images">
+            <EntityTypeMapping TypeName="CompetitionExamModel.Images">
+              <MappingFragment StoreEntitySet="Images">
+                <ScalarProperty Name="ImageData" ColumnName="ImageData" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="idImages" ColumnName="idImages" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

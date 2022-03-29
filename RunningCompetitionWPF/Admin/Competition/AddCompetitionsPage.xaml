@@ -25,22 +25,22 @@
             </RowDefinition>
             <RowDefinition Height="60">
             </RowDefinition>
-            <RowDefinition Height="60">
+            <RowDefinition Height="80">
             </RowDefinition>
         </Grid.RowDefinitions>
         <TextBlock Text="Название соревнования" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
         <TextBlock Text="Дата" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
         <TextBlock Text="Место проведения" Grid.Row="2" Grid.Column="0" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-        <TextBlock Text="Улица" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-        <TextBlock Text="Дом" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-        <TextBlock Text="Город" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+        <TextBlock Text="Улица" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+        <TextBlock Text="Дом" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+        <TextBlock Text="Город" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
         <TextBox Text="{Binding Name}" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="300" Height="50"></TextBox>
         <DatePicker SelectedDate="{Binding Date}" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="300" Height="50"></DatePicker>
         
         <TextBox Text="{Binding NameVenue}" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="300" Height="50"></TextBox>
-        <TextBox Text="{Binding Street}" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="300" Height="50"></TextBox>
-        <TextBox Text="{Binding Home}" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" Width="300" Height="50"></TextBox>
-        <ComboBox SelectedItem="{Binding City}" Grid.Column="1" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" DisplayMemberPath="Name" Name="comboCities" Width="300" Height="50"></ComboBox>
+        <TextBox Text="{Binding Street}" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" Width="300" Height="50"></TextBox>
+        <TextBox Text="{Binding Home}" Grid.Column="1" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" Width="300" Height="50"></TextBox>
+        <ComboBox SelectedItem="{Binding City}" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" DisplayMemberPath="Name" Name="comboCities" Width="300" Height="50"></ComboBox>
         <StackPanel Grid.ColumnSpan="2" Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Center">
             <Button Grid.ColumnSpan="2" Grid.Row="6" Width="100" Content="Save" VerticalAlignment="Center" Click="btnSave_Click" Name="btnSave"></Button>
             <Button Grid.ColumnSpan="2" Grid.Row="6" Width="100" Content="Back" VerticalAlignment="Center" Margin="10" Click="btnBack_Click" Name="btnBack"></Button>

@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "Command";
+}
+@using System.Collections.ObjectModel;
+@model ObservableCollection<CoreFramework.Sportsman>
+<h2>Sportsmans</h2>
+<div class="row">
+    @foreach (var sportsman in Model)
+    {
+        <div class="col-md-4 mb-5">
+            <div class="card h-100">
+                <div class="card-body">
+
+                    <div>
+                        @sportsman.Name<br>
+                        @sportsman.Surname
+                    </div>
+                    <div class="text-center">
+                        <a class="btn btn-primary" asp-controller="Sportsmans"
+                           asp-action="ViewerView" asp-route-id="@sportsman.ID" role="button">
+                            View
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<div>
+    <a asp-action="Viewer">Back to commands list</a>
+</div>

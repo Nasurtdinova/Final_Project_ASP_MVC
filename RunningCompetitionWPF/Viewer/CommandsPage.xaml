@@ -18,16 +18,16 @@
             <RowDefinition Height="380">
             </RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock Text="Commands" FontFamily="Lucida Calligraphy" FontWeight="Bold" FontSize="35" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+        <TextBlock Text="Commands" FontSize="35" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
         <ListView Grid.Row="1" ItemsSource="{Binding infoCommands}" Name="lvCommands" SelectionChanged="lvCommands_SelectionChanged">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <UniformGrid Columns="3" Width="900"></UniformGrid>
+                    <UniformGrid Columns="4" Width="900"></UniformGrid>
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel>
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                         <TextBlock>
                             <TextBlock.Text>
                                 <MultiBinding StringFormat="{}{0}|{1}">

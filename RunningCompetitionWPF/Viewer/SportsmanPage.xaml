@@ -20,7 +20,7 @@
             <RowDefinition Height="70">
             </RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock Text="Sportsmans" FontFamily="Lucida Calligraphy" FontWeight="Bold" FontSize="35" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+        <TextBlock Text="Sportsmans" FontSize="35" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
         <ListView Grid.Row="1" ItemsSource="{Binding infoSportsman}" Height="380">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>

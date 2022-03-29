@@ -94,7 +94,7 @@ namespace Core
         {
             try
             {//слишком длинная строка
-                connection.Query($"INSERT SponsorCommand values ({Connection.IdUser}, (select Command.idCommand from Command where Command.Name = '{sponsorship.Command}'), {sponsorship.teamContract}, {sponsorship.Amount});");
+                connection.Query($"INSERT SponsorCommand values ({CurrentUser.IdUser}, (select Command.idCommand from Command where Command.Name = '{sponsorship.Command}'), {sponsorship.teamContract}, {sponsorship.Amount});");
             }
             catch (Exception ex) // Exception исправить
             {

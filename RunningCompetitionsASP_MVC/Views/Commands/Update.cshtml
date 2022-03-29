@@ -1,0 +1,49 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutCopy.cshtml";
+    ViewData["Title"] = "Update command";
+}
+@model CoreFramework.Command
+
+<div class="row justify-content-lg-cehter">
+    <h1>Update command</h1>
+</div>
+@using (Html.BeginForm("Update", "Commands", FormMethod.Post))
+{
+<fieldset>
+    @Html.HiddenFor(m => m.idCommand)
+    <p>
+        @Html.LabelFor(m => m.Name, "Name")
+        <br />
+        @Html.EditorFor(m => m.Name)
+    </p>
+    <p>
+        @Html.LabelFor(m => m.Count, "Count")
+        <br />
+        @Html.EditorFor(m => m.Count)
+
+    </p>
+    <p>
+        @Html.LabelFor(m => m.Images.FileName, "Image")
+        <br />
+        @Html.Raw("<img style='width:80px; height:60px;' src=\"data:image/jpeg;base64,"
+                               + Convert.ToBase64String(Model.Images.ImageData) + "\" />")
+       
+    </p>
+    <p>
+        @Html.LabelFor(m => m.City.Name, "City")
+        <br />
+        <select asp-for="City.Name" class="form-control">
+            <option selected="selected" value=" @Html.EditorFor(m => m.City.Name)">  </option>
+            @foreach (string city in CoreFramework.Connection.GetNameCities())
+            {
+                <option>@city</option>
+            }
+
+        </select>
+    </p>
+    <p><input type="submit" value="OK" /></p>
+</fieldset>
+}
+<div>
+    <a asp-action="Index">Back to commands list</a>
+</div>

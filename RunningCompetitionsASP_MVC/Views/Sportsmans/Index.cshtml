@@ -1,0 +1,41 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutCopy.cshtml";
+    ViewData["Title"] = "Sportsmans";
+}
+@using System.Collections.ObjectModel;
+@model ObservableCollection<Core.Sportsmans>
+<h2>Sportsmans</h2>
+<div class="row justify-content-end">
+    <a class="btn btn-primary" asp-controller="Sportsmans"
+       asp-action="Add" role="button">Add sportsman</a>
+</div>
+<br />
+<div class="row">
+    @foreach (var sportsman in Model)
+    {
+        <div class="col-md-4 mb-5">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div>
+                        <img class="card-img-top" width="300" height="300" src="@sportsman.Image"
+                             alt="@sportsman.Name" />
+                    </div>
+                    <div>
+                        @sportsman.Surname <br />
+                        @sportsman.Name
+                    </div>
+                    <div class="text-center">
+                        <a class="btn btn-danger" asp-controller="Sportsmans"
+                           asp-action="Remove" asp-route-id="@sportsman.ID" role="button">
+                            Remove
+                        </a>
+                        <a class="btn btn-primary" asp-controller="Sportsmans"
+                           asp-action="Update" asp-route-id="@sportsman.ID" role="button">
+                            Update
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

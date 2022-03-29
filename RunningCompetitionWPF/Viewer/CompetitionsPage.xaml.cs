@@ -23,6 +23,10 @@ namespace RunningCompetitionWPF
         {
             InitializeComponent();
             infoCompet = ConnectionCompetitions.GetCompetitions();
+            foreach (var i in infoCompet)
+            {
+                i.Date.Value.ToString("dd.MM.yyyy hh:mm");
+            }
             this.DataContext = this;
         }
     }

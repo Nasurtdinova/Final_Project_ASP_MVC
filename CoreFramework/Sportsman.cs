@@ -22,16 +22,9 @@ namespace CoreFramework
         public Nullable<int> Cost { get; set; }
         public Nullable<int> Height { get; set; }
         public Nullable<int> idCommand { get; set; }
-        public string NameTitle { get; set; }
-        public string NameImage { get; set; }
-        public string NameCommand { get; set; }
-        public virtual Images Images { get; set; }
+    
         public virtual Title Title { get; set; }
         public virtual Command Command { get; set; }
-
-        public override string ToString()
-        {
-            return $"{ID}, {Name}, {Surname}, {Title.Name}, {Height}, {Cost}, {Command.Name}";
-        }
+        public virtual Images Images { get; set; }
     }
 }

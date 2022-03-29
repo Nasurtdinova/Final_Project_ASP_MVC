@@ -20,7 +20,12 @@ namespace CoreFramework
 
         public static ObservableCollection<Competition> GetCompetitions()
         {
-            return new ObservableCollection<Competition>(bdConnection.connection.Competition.ToList());
+            ObservableCollection<Competition> con = new ObservableCollection<Competition>(bdConnection.connection.Competition.ToList());
+            foreach (var i in con)
+            {
+                i.Date.Value.ToString("dd.MM.yyyy hh:mm");
+            }
+            return con;
         }
 
         public static void AddCompetition(Competition compet)

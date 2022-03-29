@@ -24,11 +24,11 @@
             <RowDefinition Height="100">
             </RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock Text="Authorization" FontFamily="Lucida Calligraphy" FontWeight="Bold"  Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="35" ></TextBlock>
-        <TextBlock Text="Login" FontFamily="Lucida Calligraphy" FontWeight="Bold" Grid.Column="0" Grid.Row="1" FontSize="35" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-        <TextBlock Text="Password" FontFamily="Lucida Calligraphy" FontWeight="Bold"  Grid.Column="0" Grid.Row="2" FontSize="35" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-        <TextBox x:Name="txt_login" HorizontalAlignment="Center"  VerticalAlignment="Center" FontFamily="Lucida Calligraphy" FontWeight="Bold" Height="80" FontSize="25" Width="400" Grid.Row="1" Grid.Column="1"></TextBox>
-        <PasswordBox x:Name="txt_password" HorizontalAlignment="Center"  VerticalAlignment="Center" Height="80" Width="400" FontFamily="Lucida Calligraphy" FontSize="25" FontWeight="Bold" Grid.Row="2" Grid.Column="1"></PasswordBox>
+        <TextBlock Text="Authorization" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="35" ></TextBlock>
+        <TextBlock Text="Login" Grid.Column="0" Grid.Row="1" FontSize="35" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+        <TextBlock Text="Password" Grid.Column="0" Grid.Row="2" FontSize="35" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+        <TextBox x:Name="txt_login" HorizontalAlignment="Center"  VerticalAlignment="Center" Height="80" FontSize="25" Width="400" Grid.Row="1" Grid.Column="1"></TextBox>
+        <PasswordBox x:Name="txt_password" HorizontalAlignment="Center"  VerticalAlignment="Center" Height="80" Width="400" FontSize="25" Grid.Row="2" Grid.Column="1"></PasswordBox>
         <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="4" Grid.ColumnSpan="2">
             <Button x:Name="brnLogin" Content="Sign in" Click="brnLogin_Click" Grid.Row="3" Margin="10"  Width="150" Height="70"></Button>
             <Button x:Name="btnRegister" Content="Sign up" Click="btnRegister_Click" Grid.Row="3"  Width="250" Margin="10"></Button>

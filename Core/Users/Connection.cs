@@ -142,8 +142,8 @@ namespace Core
 
         public static bool IsLogin(string email, string password)
         {
-            if (connection.Query<string>($"SELECT Email FROM Users where '{email}' = Email and '{password}' = Password;").AsList()[0] != null 
-            && connection.Query<string>($"SELECT Password FROM Users where '{email}' = Email and '{password}' = Password;").AsList()[0] != null)
+            if (connection.Query<string>($"SELECT Email FROM Users where '{email}' = Email and '{password}' = Password;").AsList()[0] == email 
+            && connection.Query<string>($"SELECT Password FROM Users where '{email}' = Email and '{password}' = Password;").AsList()[0] == password)
             {
                 return true;
             }

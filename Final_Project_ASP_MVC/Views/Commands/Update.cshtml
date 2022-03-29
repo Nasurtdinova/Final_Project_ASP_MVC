@@ -23,10 +23,10 @@
 
     </p>
     <p>
-        @Html.LabelFor(m => m.Image, "Image")
+        @Html.LabelFor(m => m.Images, "Image")
         <br />
-        <select asp-for="Image" class="form-control">
-            <option selected="selected" value=" @Html.EditorFor(m => m.Image)">  </option>
+        <select asp-for="Images" class="form-control">
+            <option selected="selected" value=" @Html.EditorFor(m => m.Images)">  </option>
             @foreach (string image in CoreFramework.Connection.GetNameImages())
             {
                 <option>@image</option>

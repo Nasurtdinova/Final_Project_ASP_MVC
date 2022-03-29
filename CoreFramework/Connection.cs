@@ -91,6 +91,12 @@ namespace CoreFramework
                 Console.WriteLine(ex.Message);
             }
         }
+        public static Images AddImages(Images img)
+        { 
+            bdConnection.connection.Images.Add(img);
+            bdConnection.connection.SaveChanges();
+            return GetImages().LastOrDefault();
+        }
 
         public static List<string> GetNameImages()
         {
@@ -98,7 +104,7 @@ namespace CoreFramework
             images = new List<string>();
             foreach (var i in imgs)
             {
-                images.Add(i.Name);
+                //images.Add(i.Name);
             }
             return images;          
         }
@@ -145,6 +151,26 @@ namespace CoreFramework
                 cities.Add(i.Name);
             }
             return cities;
+        }
+
+        public static int GetIdCommand(string name)
+        {
+            return ConnectionCommands.GetCommands().Where(a => a.Name == name).FirstOrDefault().idCommand;
+        }
+
+        public static int GetIdTitle(string name)
+        {
+            return GetTitles().Where(a => a.Name == name).FirstOrDefault().idTitle;
+        }
+
+        //public static Images GetIdImage(string name)
+        //{
+        //    return GetImages().Where(a => a.ImagePath == name).FirstOrDefault();
+        //}
+
+        public static City GetIdCity(string name)
+        {
+            return GetCities().Where(a=> a.Name == name).FirstOrDefault();
         }
 
         public static string GetCitiesId(int id)

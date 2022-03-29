@@ -110,5 +110,10 @@ namespace RunningCompetitionWPF
             Manager.CollapsedAuthReg();
             Manager.MainFrame.Navigate(new AdminSportsmanPage());
         }
+
+        private void mainPage_Click(object sender, RoutedEventArgs e)
+        {
+            Manager.MainFrame.Navigate(new ViewerMainPage());
+        }
     }
 }

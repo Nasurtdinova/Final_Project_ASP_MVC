@@ -11,7 +11,7 @@ namespace CoreFramework
         public Commands(string[] args)
         {
             Name = args[0];
-            CityName = args[1];
+            //CityName = args[1];
             Count = Convert.ToInt32(args[2]);
         }
 
@@ -19,7 +19,7 @@ namespace CoreFramework
         {
             idCommand = id;
             Name = args[1];
-            CityName = args[2];
+            //CityName = args[2];
             Count = Convert.ToInt32(args[3]);
         }
 

@@ -1,0 +1,52 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutCopy.cshtml";
+    ViewData["Title"] = "Competition";
+}
+@using System.Collections.ObjectModel;
+@model ObservableCollection<Core.Competitions>
+<h2>Competitions</h2>
+<div class="row justify-content-end">
+    <a class="btn btn-primary" asp-controller="Competition"
+       asp-action="Add" role="button">Add competition</a>
+</div>
+<br />
+
+<div class="row">
+    @foreach (var compet in Model)
+    {
+        <div class="col-md-4 mb-5">
+            <div class="card h-100">
+                <div class="card-body">
+
+                    <div>
+                        <p class="font-weight-normal">Название соревнования: @compet.Name</p>
+                    </div>
+                    <div>
+                        <p class="font-weight-normal">Место проведения: @compet.NameVenue</p>
+                    </div>
+                    <div>
+                        <p class="font-weight-normal">Улица: @compet.Street</p>
+                    </div>
+                    <div>
+                        <p class="font-weight-normal">Дом: @compet.Home</p>
+                    </div>
+                    <div>
+                        <p class="font-weight-normal">Город: @compet.City</p>
+                    </div>
+                    <div>
+                        <p class="font-weight-normal">Дата проведения: @compet.Date</p>
+                    </div>
+                    <a class="btn btn-danger" asp-controller="Competition"
+                       asp-action="Remove" asp-route-id="@compet.ID" role="button">
+                        Remove
+                    </a>
+                    <a class="btn btn-primary" asp-controller="Competition"
+                       asp-action="Update" asp-route-id="@compet.ID" role="button">
+                        Update
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+

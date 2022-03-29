@@ -5,10 +5,11 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace CoreFramework
 {
-    public class ConnectionCommands //разнести классы по папочкам
+    public class ConnectionCommands
     {
         private static List<Sportsman> sporCom;
 
@@ -37,10 +38,9 @@ namespace CoreFramework
         {
             try
             {
-                ObservableCollection<City> city = new ObservableCollection<City>(bdConnection.connection.City);
-                //var type = city.Where(tt => tt.Name == command.CityName).FirstOrDefault();
-                //command.ID_city = city.Where(a=>a.Name == command.City.Name).FirstOrDefault().idCity;
-                //command.City.idCity = city.Where(a => a.Name == command.City.Name).FirstOrDefault().idCity;
+                command.City = Connection.GetIdCity(command.City.Name);
+                command.Image = command.Image;
+
                 bdConnection.connection.Command.Add(command);
                 bdConnection.connection.SaveChanges();
             }
@@ -49,6 +49,7 @@ namespace CoreFramework
                 Console.WriteLine(ex.Message);
             }
         }
+
 
         public static void RemoveCommand(int id)
         {
@@ -70,11 +71,10 @@ namespace CoreFramework
             {
                 var com = bdConnection.connection.Command.SingleOrDefault(r => r.idCommand == command.idCommand);
                 com.Name = command.Name;
-                com.Images = command.Images;
                 com.Count = command.Count;
-                var cit = bdConnection.connection.City.SingleOrDefault(r => r.Name == command.City.Name);
-                com.ID_city = cit.idCity;
-           
+                com.City = Connection.GetIdCity(command.City.Name);
+                //com.Images = Connection.GetIdImage(command.Images.Name);
+
                 bdConnection.connection.SaveChanges();
             }
             catch (Exception ex) // Exception исправить
@@ -83,19 +83,10 @@ namespace CoreFramework
             }
         }
 
-        public static string GetCity(int id)
-        {
-            ObservableCollection<Command> commands = GetCommands();
-            List<City> city = new  List<City>(bdConnection.connection.City.ToList());
-            var type = city.Where(tt => tt.idCity == id).FirstOrDefault();
-            return type.Name;
-        }
-
         public static Command GetCommandsId(int id)
         {
             ObservableCollection<Command> commands = GetCommands();
-            var com = commands.Where(tt => tt.idCommand == id).FirstOrDefault();
-            return com;
+            return commands.Where(tt => tt.idCommand == id).FirstOrDefault();
         }
     }
 }
