@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Configuration;
 using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace CoreFramework
 {
@@ -30,16 +27,15 @@ namespace CoreFramework
 
         public static ObservableCollection<Command> GetCommands()
         {
-            ObservableCollection<Command> commands = new ObservableCollection<Command>(bdConnection.connection.Command.ToList());
-            return commands;
+            return new ObservableCollection<Command>(bdConnection.connection.Command.ToList());           
         }
 
         public static void AddCommand(Command command)
         {
             try
             {
-                command.City = Connection.GetIdCity(command.City.Name);
-                command.Image = command.Image;
+                command.City = Connection.GetCity(command.City.Name);
+                //command.Image = command.Image;
 
                 bdConnection.connection.Command.Add(command);
                 bdConnection.connection.SaveChanges();
@@ -72,8 +68,24 @@ namespace CoreFramework
                 var com = bdConnection.connection.Command.SingleOrDefault(r => r.idCommand == command.idCommand);
                 com.Name = command.Name;
                 com.Count = command.Count;
-                com.City = Connection.GetIdCity(command.City.Name);
-                //com.Images = Connection.GetIdImage(command.Images.Name);
+                com.City = Connection.GetCity(command.City.Name);
+                if (command.Image != null)
+                    com.Image = command.Image;
+
+                bdConnection.connection.SaveChanges();
+            }
+            catch (Exception ex) // Exception исправить
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        public static void UpdateImageCommand(int id, byte[] img)
+        {
+            try
+            {
+                var com = bdConnection.connection.Command.SingleOrDefault(r => r.idCommand == id);
+                com.Image = img;
 
                 bdConnection.connection.SaveChanges();
             }

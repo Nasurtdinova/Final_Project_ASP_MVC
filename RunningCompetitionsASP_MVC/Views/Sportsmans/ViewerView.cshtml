@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Sportsman";
 }
-@model Core.Sportsman
+@model CoreFramework.Sportsman
 
 @using (Html.BeginForm("ViewerView", "Sportsmans", FormMethod.Post))
 {
@@ -27,11 +27,6 @@
             @Html.LabelFor(m => m.Height, "Height")
             <br />
             @Html.EditorFor(m => m.Height)
-        </p>
-        <p>
-            @Html.LabelFor(m => m.Cost, "Cost")
-            <br />
-            @Html.EditorFor(m => m.Cost)
         </p>
     </fieldset>
 }

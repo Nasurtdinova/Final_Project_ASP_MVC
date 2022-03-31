@@ -20,20 +20,12 @@ namespace RunningCompetitionWPF
     public partial class CommandsPage : Page
     {
         public static ObservableCollection<Command> infoCommands { get; set; }
-        public static System.Drawing.Image img { get; set; }
         public CommandsPage()
         {
             InitializeComponent();
             infoCommands = ConnectionCommands.GetCommands();
             this.DataContext = this;
         }
-
-        //public static System.Drawing.Image byteArrayToImage(byte[] byteArray)
-        //{
-        //    MemoryStream ms = new System.IO.MemoryStream(byteArray);
-        //    System.Drawing.Image returnImage = System.Drawing.Image.FromStream(ms);
-        //    return returnImage;
-        //}
 
         private void btn_back_Click(object sender, RoutedEventArgs e)
         {

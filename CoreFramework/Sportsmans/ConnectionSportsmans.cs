@@ -1,27 +1,21 @@
-﻿
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Collections.ObjectModel;
-using System.Configuration;
 using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
-//лишние библиотеки убрать
+
 namespace CoreFramework
 {
-    public class ConnectionSportsmans //разнести классы по папочкам
+    public class ConnectionSportsmans
     {
         public static ObservableCollection<Sportsman> GetSportsmans()
         {
-            ObservableCollection<Sportsman> sportsmans = new ObservableCollection<Sportsman>(bdConnection.connection.Sportsman.ToList());
-            return sportsmans;
+            return new ObservableCollection<Sportsman>(bdConnection.connection.Sportsman.ToList());            
         }
 
         public static Sportsman GetSportsmansId(int id)
         {
             ObservableCollection<Sportsman> commands = GetSportsmans();
-            var com = commands.Where(tt => tt.ID == id).FirstOrDefault();
-            return com;
+            return commands.Where(tt => tt.ID == id).FirstOrDefault();
         }
 
         public static void RemoveSportsman(int id)
@@ -42,17 +36,8 @@ namespace CoreFramework
         {
             try
             {
-                //ObservableCollection<Images> image = new ObservableCollection<Images>(bdConnection.connection.Images);
-                //var img = image.Where(tt => tt.Name == sportsman.NameImage).FirstOrDefault();
-
-                //ObservableCollection<Command> com = new ObservableCollection<Command>(bdConnection.connection.Command);
-                //var command = com.Where(tt => tt.Name == sportsman.NameCommand).FirstOrDefault();
-
-                //ObservableCollection<Title> title = new ObservableCollection<Title>(bdConnection.connection.Title);
-                //var tit = title.Where(tt => tt.Name == sportsman.NameTitle).FirstOrDefault();
-                //sportsman.ID_Image = img.idImages;
-                //sportsman.idCommand = command.idCommand;
-                //sportsman.idTitle = tit.idTitle;
+                sportsman.Command = Connection.GetCommand(sportsman.Command.Name);
+                sportsman.Title = Connection.GetTitle(sportsman.Title.Name);
                 bdConnection.connection.Sportsman.Add(sportsman);
                 bdConnection.connection.SaveChanges();
             }
@@ -69,14 +54,13 @@ namespace CoreFramework
                 var sports = bdConnection.connection.Sportsman.SingleOrDefault(r => r.ID == sportsman.ID);
                 sports.Name = sportsman.Name;
                 sports.Height = sportsman.Height;
-                sports.Cost = sportsman.Cost;
                 sports.Surname = sportsman.Surname;
-                //var img = bdConnection.connection.Images.SingleOrDefault(r => r.Name == sportsman.Images.Name);
-                sports.Images = sportsman.Images;
-                //var title = bdConnection.connection.Title.SingleOrDefault(r => r.Name == sportsman.Title.Name);
-                sports.Title = sportsman.Title;
-                //var com = bdConnection.connection.Command.SingleOrDefault(r => r.Name == sportsman.Command.Name);
-                sports.Command = sportsman.Command;
+
+                if (sportsman.Image != null)
+                    sports.Image = sportsman.Image;
+
+                sportsman.Command = Connection.GetCommand(sportsman.Command.Name);
+                sportsman.Title = Connection.GetTitle(sportsman.Title.Name);
 
                 bdConnection.connection.SaveChanges();
             }

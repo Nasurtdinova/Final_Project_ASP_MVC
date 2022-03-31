@@ -21,11 +21,11 @@
             <RowDefinition Height="80">
             </RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock Text="Commands" Grid.Column="0" Grid.ColumnSpan="2" FontWeight="Bold" FontSize="35" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+        <TextBlock Text="Commands" Grid.Column="0" Grid.ColumnSpan="2" FontSize="35" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
         <ListView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{Binding infoCommands}" Name="lvCommands" SelectionChanged="lvCommands_SelectionChanged">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <UniformGrid Columns="4" Width="1000"></UniformGrid>
+                    <UniformGrid Columns="4" Width="1100"></UniformGrid>
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
             <ListView.ItemTemplate>
@@ -39,17 +39,21 @@
                                 </MultiBinding>
                             </TextBlock.Text>
                         </TextBlock>
-                        <Image Source="{Binding Image}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="400" Height="150"/>
-                        <TextBlock Text="{Binding Count}" FontFamily="Lucida Calligraphy" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22"/>
-                        <TextBlock Text="{Binding Name}" FontFamily="Lucida Calligraphy" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22"/>
+                        <Image Source="{Binding Image}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="400" Height="220"/>
+                      
+                        <TextBlock Text="{Binding Name}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22"/>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <TextBlock Text="Количество человек: "  FontSize="22"/>
+                            <TextBlock Text="{Binding Count}" FontSize="22"/>
+                        </StackPanel>
                         <Button Content="Edit" Name="btnEdit" Click="btnEdit_Click" Width="100"></Button>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
         <StackPanel Grid.Row="2" HorizontalAlignment="Center" Orientation="Horizontal" Grid.ColumnSpan="2">
-            <Button Content="Add"  HorizontalAlignment="Left" Name="btnAdd" Click="btnAdd_Click" Grid.Column="0" Margin="10" Height="50"></Button>
-            <Button Content="Remove" HorizontalAlignment="Right" Name="btnRemove" Click="btnRemove_Click" Grid.Column="1" Margin="10" Height="50"></Button>
+            <Button Content="Add"  HorizontalAlignment="Left" Name="btnAdd" Click="btnAdd_Click" Grid.Column="0" Margin="10" Height="50" Width="100"></Button>
+            <Button Content="Remove" HorizontalAlignment="Right" Name="btnRemove" Click="btnRemove_Click" Grid.Column="1" Margin="10" Height="50" Width="100"></Button>
         </StackPanel>
     </Grid>
 </Page>

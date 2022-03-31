@@ -14,7 +14,7 @@ namespace CoreFramework
         public static List<Images> Images { get; set; }
         public static List<Users> Users { get; set; }
         public static List<Title> Titles { get; set; }
-        private static List<string> images;
+
         private static List<string> cities;
         private static List<string> titles;
         private static List<string> commands { get; set; }
@@ -98,17 +98,6 @@ namespace CoreFramework
             return GetImages().LastOrDefault();
         }
 
-        public static List<string> GetNameImages()
-        {
-            List<Images> imgs = new List<Images>(bdConnection.connection.Images.ToList());
-            images = new List<string>();
-            foreach (var i in imgs)
-            {
-                //images.Add(i.Name);
-            }
-            return images;          
-        }
-
         public static List<string> GetNameTitles()
         {
             List<Title> tits = new List<Title>(bdConnection.connection.Title.ToList());
@@ -153,14 +142,14 @@ namespace CoreFramework
             return cities;
         }
 
-        public static int GetIdCommand(string name)
+        public static Command GetCommand(string name)
         {
-            return ConnectionCommands.GetCommands().Where(a => a.Name == name).FirstOrDefault().idCommand;
+            return ConnectionCommands.GetCommands().Where(a => a.Name == name).FirstOrDefault();
         }
 
-        public static int GetIdTitle(string name)
+        public static Title GetTitle(string name)
         {
-            return GetTitles().Where(a => a.Name == name).FirstOrDefault().idTitle;
+            return GetTitles().Where(a => a.Name == name).FirstOrDefault();
         }
 
         //public static Images GetIdImage(string name)
@@ -168,7 +157,7 @@ namespace CoreFramework
         //    return GetImages().Where(a => a.ImagePath == name).FirstOrDefault();
         //}
 
-        public static City GetIdCity(string name)
+        public static City GetCity(string name)
         {
             return GetCities().Where(a=> a.Name == name).FirstOrDefault();
         }
@@ -176,8 +165,7 @@ namespace CoreFramework
         public static string GetCitiesId(int id)
         {
             List<City> city = new List<City>(bdConnection.connection.City.ToList());
-            var cities = city.Where(t => t.idCity == id).FirstOrDefault();
-            return cities.Name;
+            return city.Where(t => t.idCity == id).FirstOrDefault().Name;
         }
 
         public static int IsLogin(string email, string password)

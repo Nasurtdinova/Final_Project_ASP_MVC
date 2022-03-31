@@ -14,16 +14,16 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="60">
             </RowDefinition>
-            <RowDefinition Height="340">
+            <RowDefinition Height="380">
             </RowDefinition>
-            <RowDefinition Height="60">
+            <RowDefinition Height="70">
             </RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock Text="Sportsmans in command" FontFamily="Lucida Calligraphy" FontWeight="Bold" FontSize="35" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+        <TextBlock Text="Sportsmans in command" FontSize="35" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
         <ListView Grid.Row="1" ItemsSource="{Binding infoSportsmansCommand}" Name="lvCommands" SelectionChanged="lvCommands_SelectionChanged">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <UniformGrid Columns="3" Width="900"></UniformGrid>
+                    <UniformGrid Columns="4" Width="1100"></UniformGrid>
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
             <ListView.ItemTemplate>
@@ -37,16 +37,16 @@
                                 </MultiBinding>
                             </TextBlock.Text>
                         </TextBlock>
-                        <Image Source="{Binding Images.Name}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="150"/>
-                        <TextBlock Text="{Binding Surname}" FontFamily="Lucida Calligraphy" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22"/>
-                        <TextBlock Text="{Binding Name}" FontFamily="Lucida Calligraphy" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22"/>
+                        <Image Source="{Binding Image}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="400" Height="250"/>
+                        <TextBlock Text="{Binding Surname}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22"/>
+                        <TextBlock Text="{Binding Name}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22"/>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
         <StackPanel Grid.ColumnSpan="2" Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Center" >
-            <Button Content="Add sportsman" Grid.Row="2" Margin="10" Name="btnAdd" Click="btnAdd_Click" Grid.Column="0" Height="40"></Button>
-            <Button Grid.ColumnSpan="2" Grid.Row="2" Height="40" Content="Back" Margin="10" Click="btnBack_Click" Name="btnBack"></Button>
+            <Button Content="Add sportsman" Grid.Row="2" Margin="10" Name="btnAdd" Click="btnAdd_Click" Grid.Column="0"></Button>
+            <Button Grid.ColumnSpan="2" Grid.Row="2" Content="Back" Margin="10" Click="btnBack_Click" Name="btnBack"></Button>
         </StackPanel>
     </Grid>
 </Page>

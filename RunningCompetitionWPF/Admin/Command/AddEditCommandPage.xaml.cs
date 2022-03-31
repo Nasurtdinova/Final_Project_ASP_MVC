@@ -84,8 +84,7 @@ namespace RunningCompetitionWPF.Admin
 
                 imgCom.Source = image;
                 CurrentCommand.Image = imageData;                
-            }
-            
+            }            
         }
     }
 }

@@ -1,0 +1,25 @@
+﻿@model CoreFramework.Command
+
+@{
+    ViewData["Title"] = "Редактировать изображение";
+}
+<h2>@ViewData["Title"]</h2>
+
+<form method="post" enctype="multipart/form-data">
+    <div>
+        <input type="hidden" asp-for="idCommand" />
+        @Html.Raw("<img style='width:300px; height:200px;' src=\"data:image/jpeg;base64,"
+                                   + Convert.ToBase64String(Model.Image) + "\" />")
+        <div class="form-group">
+            <label>Загрузить изображение</label>
+            <input type="file" name="ImageData" class="form-control" />
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Добавить" class="btn btn-outline-secondary" />
+        </div>
+    </div>
+</form>
+<div>
+    @Html.ActionLink("Вернуться к списку", "Index")
+</div>
+

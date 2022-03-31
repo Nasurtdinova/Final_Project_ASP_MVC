@@ -1,8 +1,8 @@
-﻿@{
+﻿Frame@{
     Layout = "~/Views/Shared/_LayoutCopy.cshtml";
     ViewData["Title"] = "Update sportsman";
 }
-@model Core.Sportsmans
+@model CoreFramework.Sportsmans
 
 <div class="row justify-content-lg-cehter">
     <h1>Update sportsman</h1>
@@ -23,18 +23,6 @@
 
     </p>
     <p>
-        @Html.LabelFor(m => m.Image, "Image")
-        <br />
-        <select asp-for="Image" class="form-control">
-            <option selected="selected" value=" @Html.EditorFor(m => m.Image)">  </option>
-            @foreach (string image in Core.Connection.GetImages())
-            {
-                <option>@image</option>
-            }
-
-        </select>
-    </p>
-    <p>
         @Html.LabelFor(m => m.Title, "Title")
         <br />
         <select asp-for="Title" class="form-control">
@@ -51,12 +39,6 @@
         <br />
         @Html.EditorFor(m => m.Height)
     </p>
-    <p>
-        @Html.LabelFor(m => m.Cost, "Cost")
-        <br />
-        @Html.EditorFor(m => m.Cost)
-    </p>
-
     <p>
         @Html.LabelFor(m => m.Command, "Command")
         <br />

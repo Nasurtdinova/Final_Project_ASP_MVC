@@ -2,7 +2,7 @@
     ViewData["Title"] = "Sportsmans";
 }
 @using System.Collections.ObjectModel;
-@model ObservableCollection<Core.Sportsmans>
+@model ObservableCollection<CoreFramework.Sportsman>
 <h2>Sportsmans</h2>
 <div class="row">
     @foreach (var sportsman in Model)
@@ -11,8 +11,8 @@
             <div class="card h-100">
                 <div class="card-body">
                     <div>
-                        <img class="card-img-top" width="300" height="300" src="@sportsman.Image"
-                             alt="@sportsman.Name" />
+                        @Html.Raw("<img style='width:300px; height:300px;' src=\"data:image/jpeg;base64,"
+                              + Convert.ToBase64String(sportsman.Image) + "\" />")
                     </div>
                     <div>
                         @sportsman.Surname <br />

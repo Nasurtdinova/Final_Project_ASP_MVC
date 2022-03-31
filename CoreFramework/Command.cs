@@ -30,12 +30,12 @@ namespace CoreFramework
         public byte[] Image { get; set; }
     
         public virtual City City { get; set; }
+        public virtual Images Images { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ResultCompetition> ResultCompetition { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SponsorCommand> SponsorCommand { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Sportsman> Sportsman { get; set; }
-        public virtual Images Images { get; set; }
     }
 }

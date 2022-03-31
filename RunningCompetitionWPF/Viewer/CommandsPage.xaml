@@ -7,7 +7,6 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="CommandsPage">
-
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
@@ -22,7 +21,7 @@
         <ListView Grid.Row="1" ItemsSource="{Binding infoCommands}" Name="lvCommands" SelectionChanged="lvCommands_SelectionChanged">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <UniformGrid Columns="4" Width="900"></UniformGrid>
+                    <UniformGrid Columns="4" Width="1100"></UniformGrid>
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
             <ListView.ItemTemplate>
@@ -36,9 +35,13 @@
                                 </MultiBinding>
                             </TextBlock.Text>
                         </TextBlock>
-                        <Image Source="{Binding Image}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="150"/>
-                        <TextBlock Text="{Binding Count}" FontFamily="Lucida Calligraphy" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22"/>
-                        <TextBlock Text="{Binding Name}" FontFamily="Lucida Calligraphy" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22"/>
+                        <Image Source="{Binding Image}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="400" Height="250"/>
+                        <TextBlock Text="{Binding Name}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22"/>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <TextBlock Text="Количество человек: "  FontSize="22"/>
+                            <TextBlock Text="{Binding Count}" FontSize="22"/>
+                        </StackPanel>
+                       
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>

@@ -39,9 +39,8 @@
             <Button Grid.ColumnSpan="2" Grid.Row="6" Width="100" Content="Back" VerticalAlignment="Center" Margin="10" Click="btnBack_Click" Name="btnBack"></Button>
         </StackPanel>
         <StackPanel HorizontalAlignment="Center"  Grid.Column="1" Grid.Row="2" Orientation="Horizontal">
-            <Image Source="{Binding Image}" Name="imgCom" HorizontalAlignment="Center" Width="200" Margin="10"></Image>
+            <Image Source="{Binding Image}" Name="imgCom" HorizontalAlignment="Center" Width="300" Margin="10"></Image>
             <Button Content="Load image" Margin="0" VerticalAlignment="Center" x:Name="btnLoadImage" Click="btnLoadImage_Click" Width="150" Height="50"/>
         </StackPanel>
-       
     </Grid>
 </Page>
