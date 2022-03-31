@@ -15,7 +15,7 @@ namespace WebAPI_Project.Controllers
         public CompetitionController() { }
 
         [HttpGet]
-        public ActionResult<ObservableCollection<Competition>> GetAll() => ConnectionCompetitions.GetCompetition();
+        public ActionResult<ObservableCollection<Competition>> GetAll() => ConnectionCompetitions.GetCompetitions();
 
         [HttpGet("{id}")]
         public ActionResult<Competition> Get(int id)

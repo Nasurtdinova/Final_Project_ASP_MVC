@@ -15,16 +15,16 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="60">
             </RowDefinition>
-            <RowDefinition Height="340">
+            <RowDefinition Height="380">
             </RowDefinition>
             <RowDefinition Height="70">
             </RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock Text="Sportsmans" FontWeight="Bold" FontSize="35" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+        <TextBlock Text="Sportsmans" FontSize="35" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
         <ListView Grid.Row="1" ItemsSource="{Binding infoSportsmans}" Name="lvSportsmans">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <UniformGrid Columns="3" Width="900"></UniformGrid>
+                    <UniformGrid Columns="4" Width="1100"></UniformGrid>
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
             <ListView.ItemTemplate>
@@ -38,17 +38,17 @@
                                 </MultiBinding>
                             </TextBlock.Text>
                         </TextBlock>
-                        <Image Source="{Binding Images.Name}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="150"/>
-                        <TextBlock Text="{Binding Surname}" FontFamily="Lucida Calligraphy" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22"/>
-                        <TextBlock Text="{Binding Name}" FontFamily="Lucida Calligraphy" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22"/>
+                        <Image Source="{Binding Image}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="400" Height="220"/>
+                        <TextBlock Text="{Binding Surname}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22"/>
+                        <TextBlock Text="{Binding Name}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22"/>
                         <Button Content="Edit" Name="btnEdit" Click="btnEdit_Click" Width="100"></Button>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <StackPanel Grid.Row="2" HorizontalAlignment="Center" Orientation="Horizontal" Grid.ColumnSpan="2">
-            <Button Content="Add"  HorizontalAlignment="Left" Name="btnAdd" Click="btnAdd_Click" Grid.Column="0" Margin="10"></Button>
-            <Button Content="Remove" HorizontalAlignment="Right" Name="btnRemove" Click="btnRemove_Click" Grid.Column="1" Margin="10"></Button>
+        <StackPanel Grid.Row="2" HorizontalAlignment="Center" Orientation="Horizontal">
+            <Button Content="Add"  HorizontalAlignment="Left" Name="btnAdd" Click="btnAdd_Click" Margin="10"></Button>
+            <Button Content="Remove" HorizontalAlignment="Right" Name="btnRemove" Click="btnRemove_Click" Margin="10"></Button>
         </StackPanel>
     </Grid>
 </Page>

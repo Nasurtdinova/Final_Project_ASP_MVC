@@ -100,9 +100,8 @@ namespace RunningCompetitionWPF
 
         private void exit_Click(object sender, RoutedEventArgs e)
         {
-            Manager.CollapsedAuthReg();
-            Manager.Exit.Visibility = Visibility.Collapsed;
-            Manager.MainFrame.NavigationService.Navigate(new AuthorizationPage());
+            Manager.DoViewer();
+            Manager.MainFrame.NavigationService.Navigate(new ViewerMainPage());
         }
 
         private void sportsmanAdmin_Click(object sender, RoutedEventArgs e)
