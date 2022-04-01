@@ -1,4 +1,4 @@
-﻿<Page x:Class="RunningCompetitionWPF.AdminCompetitionsPage"
+﻿<Page x:Class="RunningCompetitionWPF.AdminResulCompetitionPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:RunningCompetitionWPF"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="AdminCompetitionsPage">
+      Title="AdminResulCompetitionPage">
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
@@ -17,30 +18,18 @@
             </RowDefinition>
             <RowDefinition Height="340">
             </RowDefinition>
-            <RowDefinition Height="70">
+            <RowDefinition Height="60">
             </RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock Text="Competitions" FontSize="35" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="2"></TextBlock>
-        <DataGrid x:Name="dgCompetitions" Grid.ColumnSpan="2"  Grid.Row="1" FontSize="18" AutoGenerateColumns="False"  IsReadOnly="True">
+        <TextBlock Text="Result competition" Grid.ColumnSpan="2" FontSize="35" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+        <DataGrid x:Name="dgResultCompetitions" Grid.ColumnSpan="2" Grid.Row="1" FontSize="18" Width="600" AutoGenerateColumns="False" ItemsSource="{Binding infoResultCompet}" IsReadOnly="True">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Название" Binding="{Binding Name}" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Дата" Binding="{Binding Date}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Место проведения" Binding="{Binding NameVenue}" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Улица" Binding="{Binding Street}" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Дом" Binding="{Binding Home}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Город" Binding="{Binding City.Name}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Название команды" Binding="{Binding Command.Name}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Место" Binding="{Binding Rank}" Width="*"></DataGridTextColumn>
                 <DataGridTemplateColumn Width="100">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Content="Edit" Name="btnEdit" Click="btnEdit_Click"></Button>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-
-                <DataGridTemplateColumn Width="100">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Content="View result" Name="btnViewResult" Click="btnViewResult_Click"></Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

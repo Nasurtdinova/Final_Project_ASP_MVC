@@ -56,5 +56,10 @@ namespace RunningCompetitionWPF
                 }
             }
         }
+
+        private void btnViewResult_Click(object sender, RoutedEventArgs e)
+        {
+            Manager.MainFrame.Navigate(new AdminResulCompetitionPage((sender as Button).DataContext as Competition));
+        }
     }
 }

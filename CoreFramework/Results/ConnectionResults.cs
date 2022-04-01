@@ -15,6 +15,19 @@ namespace CoreFramework
         {
             return new ObservableCollection<ResultCompetition>(bdConnection.connection.ResultCompetition.ToList());
         }
+        public static List<ResultCompetition> GetResutCompet(int idCompet)
+        {
+            try
+            {
+                ObservableCollection<ResultCompetition> sportsman = new ObservableCollection<ResultCompetition>(bdConnection.connection.ResultCompetition.ToList());
+                return sportsman.Where(tt => tt.idCompetition == idCompet).ToList();
+            }
+
+            catch // Exception исправить
+            {
+                return null;
+            }
+        }
 
         public static ResultCompetition GetResultsId(int idCommand, int idCompet)
         {
