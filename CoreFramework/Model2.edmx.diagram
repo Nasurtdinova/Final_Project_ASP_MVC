@@ -27,6 +27,8 @@
         <AssociationConnector Association="CompetitionExamModel.FK_Sportsman_Command" />
         <AssociationConnector Association="CompetitionExamModel.FK_Sportsman_Images" />
         <AssociationConnector Association="CompetitionExamModel.FK_Sportsman_Title" />
+        <EntityTypeShape EntityType="CompetitionExamModel.Status" Width="1.5" PointX="5.375" PointY="0.875" />
+        <AssociationConnector Association="CompetitionExamModel.FK_SponsorCommand_Status" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -24,5 +24,10 @@ namespace RunningCompetitionWPF
             infoSportsmansCommand = ConnectionCommands.GetSporCom(id);
             this.DataContext = this;
         }
+
+        private void btnBack_Click(object sender, RoutedEventArgs e)
+        {
+            Manager.MainFrame.NavigationService.GoBack();
+        }
     }
 }

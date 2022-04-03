@@ -58,43 +58,34 @@ namespace CoreFramework
             }
         }
 
-        public static bool isTrue(string Command,string Competition)
+        public static bool isComCompetTrue(int Command,int Competition)
         {
-            List<ResultCompetition> resultCompet = new List<ResultCompetition>(bdConnection.connection.ResultCompetition);
-            //if (resultCompet.Where(t => t.NameCommand == Command).First().NameCommand == Command && resultCompet.Where(t => t.NameCompetition == Competition).First().NameCompetition == Competition)
-            //{
-            //    return true;
-            //}
-            //else
-            //{
+            if (GetResults().Where(t => t.idCommand == Command && t.idCompetition == Competition).Count() == 0)
+            {
+                return true;
+            }
+            else
+            {
                 return false;
-            //}
+            }
         }
 
-        public static bool isRankTrue(int rank, string compet)
+        public static bool isRankTrue(int rank, int compet)
         {
-            List<ResultCompetition> resultCompet = new List<ResultCompetition>(bdConnection.connection.ResultCompetition);
-            //if (resultCompet.Where(t => t.Rank == rank).First().Rank == rank && resultCompet.Where(t => t.NameCompetition == compet).First().NameCompetition == compet)
-            //{
-            //    return true;
-            //}
-            //else
-            //{
+            if (GetResults().Where(t => t.Rank == rank && t.idCompetition == compet).Count() == 0)
+            {
+                return true;
+            }
+            else
+            {
                 return false;
-            //}
+            }
         }
 
         public static void AddResult(ResultCompetition result)
         {
             try
             {
-                //List<Command> com = new List<Command>(bdConnection.connection.Command);
-                //var type = com.Where(tt => tt.Name == result.NameCommand).FirstOrDefault();
-                //result.idCommand = type.idCommand;
-
-                //List<Competition> compet = new List<Competition>(bdConnection.connection.Competition);
-                //var type1 = compet.Where(tt => tt.Name == result.NameCompetition).FirstOrDefault();
-                //result.idCompetition = type1.idCompetition;
                 bdConnection.connection.ResultCompetition.Add(result);
                 bdConnection.connection.SaveChanges();
             }
@@ -109,8 +100,6 @@ namespace CoreFramework
             try
             {
                 var res = bdConnection.connection.ResultCompetition.SingleOrDefault(tt => tt.Command.Name == result.Command.Name && tt.Competition.Name == result.Competition.Name);
-                //var com = bdConnection.connection.ResultCompetition.SingleOrDefault(tt => tt.NameCommand == result.NameCommand);
-                //var compet = bdConnection.connection.ResultCompetition.SingleOrDefault(tt => tt.NameCompetition == result.NameCompetition);
                 res.idCommand = result.idCommand;
                 res.idCompetition = result.idCompetition;
                 res.Rank = result.Rank;

@@ -61,6 +61,7 @@
           <Property Name="idCom" Type="int" />
           <Property Name="teamContract" Type="int" />
           <Property Name="amount" Type="int" />
+          <Property Name="idStatus" Type="int" />
         </EntityType>
         <EntityType Name="Sportsman">
           <Key>
@@ -74,6 +75,13 @@
           <Property Name="Height" Type="int" />
           <Property Name="idCommand" Type="int" />
           <Property Name="Image" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="idStatus" />
+          </Key>
+          <Property Name="idStatus" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -183,6 +191,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_SponsorCommand_Status">
+          <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
+          <End Role="SponsorCommand" Type="Self.SponsorCommand" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="idStatus" />
+            </Principal>
+            <Dependent Role="SponsorCommand">
+              <PropertyRef Name="idStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_SponsorCommand_User">
           <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
           <End Role="SponsorCommand" Type="Self.SponsorCommand" Multiplicity="*" />
@@ -251,6 +271,7 @@
           <EntitySet Name="ResultCompetition" EntityType="Self.ResultCompetition" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SponsorCommand" EntityType="Self.SponsorCommand" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sportsman" EntityType="Self.Sportsman" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Title" EntityType="Self.Title" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TypeUser" EntityType="Self.TypeUser" Schema="dbo" store:Type="Tables" />
@@ -277,6 +298,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_SponsorCommand_Command" Association="Self.FK_SponsorCommand_Command">
             <End Role="Command" EntitySet="Command" />
+            <End Role="SponsorCommand" EntitySet="SponsorCommand" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SponsorCommand_Status" Association="Self.FK_SponsorCommand_Status">
+            <End Role="Status" EntitySet="Status" />
             <End Role="SponsorCommand" EntitySet="SponsorCommand" />
           </AssociationSet>
           <AssociationSet Name="FK_SponsorCommand_User" Association="Self.FK_SponsorCommand_User">
@@ -349,6 +374,8 @@
           <Property Name="amount" Type="Int32" />
           <NavigationProperty Name="Users" Relationship="Self.FK_SponsorCommand_User" FromRole="SponsorCommand" ToRole="Users" />
           <NavigationProperty Name="Command" Relationship="CompetitionExamModel.FK_SponsorCommand_Command" FromRole="SponsorCommand" ToRole="Command" />
+          <Property Name="idStatus" Type="Int32" />
+          <NavigationProperty Name="Status" Relationship="CompetitionExamModel.FK_SponsorCommand_Status" FromRole="SponsorCommand" ToRole="Status" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -494,6 +521,11 @@
             <End Role="Title" EntitySet="Title" />
             <End Role="Sportsman" EntitySet="Sportsman" />
           </AssociationSet>
+          <EntitySet Name="Status" EntityType="CompetitionExamModel.Status" />
+          <AssociationSet Name="FK_SponsorCommand_Status" Association="CompetitionExamModel.FK_SponsorCommand_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="SponsorCommand" EntitySet="SponsorCommand" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Images">
           <Key>
@@ -621,6 +653,26 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="idStatus" />
+          </Key>
+          <Property Name="idStatus" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SponsorCommand" Relationship="CompetitionExamModel.FK_SponsorCommand_Status" FromRole="Status" ToRole="SponsorCommand" />
+        </EntityType>
+        <Association Name="FK_SponsorCommand_Status">
+          <End Type="CompetitionExamModel.Status" Role="Status" Multiplicity="0..1" />
+          <End Type="CompetitionExamModel.SponsorCommand" Role="SponsorCommand" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="idStatus" />
+            </Principal>
+            <Dependent Role="SponsorCommand">
+              <PropertyRef Name="idStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -660,6 +712,7 @@
           <EntitySetMapping Name="SponsorCommand">
             <EntityTypeMapping TypeName="CompetitionExamModel.SponsorCommand">
               <MappingFragment StoreEntitySet="SponsorCommand">
+                <ScalarProperty Name="idStatus" ColumnName="idStatus" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="idSponsor" ColumnName="idSponsor" />
                 <ScalarProperty Name="idCom" ColumnName="idCom" />
@@ -740,6 +793,14 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Surname" ColumnName="Surname" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Status">
+            <EntityTypeMapping TypeName="CompetitionExamModel.Status">
+              <MappingFragment StoreEntitySet="Status">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="idStatus" ColumnName="idStatus" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

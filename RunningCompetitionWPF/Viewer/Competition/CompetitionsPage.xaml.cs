@@ -23,11 +23,12 @@ namespace RunningCompetitionWPF
         {
             InitializeComponent();
             infoCompet = ConnectionCompetitions.GetCompetitions();
-            foreach (var i in infoCompet)
-            {
-                i.Date.Value.ToString("dd.MM.yyyy hh:mm");
-            }
             this.DataContext = this;
+        }
+
+        private void btnViewResult_Click(object sender, RoutedEventArgs e)
+        {
+            Manager.MainFrame.Navigate(new ResulCompetitionPage((sender as Button).DataContext as Competition));
         }
     }
 }

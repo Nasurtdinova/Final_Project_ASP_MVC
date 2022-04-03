@@ -37,5 +37,10 @@ namespace CoreFramework
         public virtual ICollection<SponsorCommand> SponsorCommand { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Sportsman> Sportsman { get; set; }
+
+        public override string ToString()
+        {
+            return $"{idCommand},{Name} {City.Name} {Count}";
+        }
     }
 }

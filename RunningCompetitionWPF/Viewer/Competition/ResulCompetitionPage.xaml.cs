@@ -14,28 +14,13 @@ using System.Windows.Shapes;
 
 namespace RunningCompetitionWPF
 {
-    public partial class AdminResulCompetitionPage : Page
+    public partial class ResulCompetitionPage : Page
     {
-        public AdminResulCompetitionPage(Competition compet)
+        public ResulCompetitionPage(Competition compet)
         {
             InitializeComponent();
             nameCompetition.Text = compet.Name;
             dgResultCompetitions.ItemsSource = ConnectionResults.GetResutCompet(compet.idCompetition);
-        }
-
-        private void btnEdit_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btnAdd_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btnRemove_Click(object sender, RoutedEventArgs e)
-        {
-
         }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)

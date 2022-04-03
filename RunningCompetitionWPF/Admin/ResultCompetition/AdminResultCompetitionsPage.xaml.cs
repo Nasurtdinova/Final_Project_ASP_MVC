@@ -25,17 +25,17 @@ namespace RunningCompetitionWPF
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
-            Manager.MainFrame.Navigate(new AddEditResulCompetPage((sender as Button).DataContext as ResultCompetition));
+            Manager.MainFrame.Navigate(new EditResulCompetPage((sender as Button).DataContext as ResultCompetition));
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            Manager.MainFrame.Navigate(new AddEditResulCompetPage(null));
+            Manager.MainFrame.Navigate(new AddResultCompetitionPage());
         }
 
         private void btnRemove_Click(object sender, RoutedEventArgs e)
         {
-            var competsForRemoving = dgResultCompetitions.SelectedItems.Cast<Competition>().ToList();
+            var competsForRemoving = dgResultCompetitions.SelectedItems.Cast<ResultCompetition>().ToList();
 
             if (MessageBox.Show($"Вы точно хотите удалить следующие {competsForRemoving.Count()} элементов", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
@@ -43,7 +43,7 @@ namespace RunningCompetitionWPF
                 {
                     foreach (var i in competsForRemoving)
                     {
-                        ConnectionCompetitions.RemoveCompetition(i.idCompetition);
+                        ConnectionResults.RemoveResult(i.idCommand, i.idCompetition);
                     }
 
                     dgResultCompetitions.ItemsSource = ConnectionResults.GetResults();

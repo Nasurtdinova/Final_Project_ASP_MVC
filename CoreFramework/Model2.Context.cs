@@ -36,5 +36,6 @@ namespace CoreFramework
         public virtual DbSet<Images> Images { get; set; }
         public virtual DbSet<Command> Command { get; set; }
         public virtual DbSet<Sportsman> Sportsman { get; set; }
+        public virtual DbSet<Status> Status { get; set; }
     }
 }

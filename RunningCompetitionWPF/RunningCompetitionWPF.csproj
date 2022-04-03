@@ -12,17 +12,20 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Sponsor\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Update="Admin\Command\AdminSportsmanCommandPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Viewer\Competition\ResulCompetitionPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
     <Page Update="Admin\Command\AdminSportsmanCommandPage.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Viewer\Competition\ResulCompetitionPage.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>

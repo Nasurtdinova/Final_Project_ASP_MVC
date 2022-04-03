@@ -12,17 +12,18 @@ namespace CoreFramework
     using System;
     using System.Collections.Generic;
     
-    public partial class SponsorCommand
+    public partial class Status
     {
-        public int id { get; set; }
-        public Nullable<int> idSponsor { get; set; }
-        public Nullable<int> idCom { get; set; }
-        public Nullable<int> teamContract { get; set; }
-        public Nullable<int> amount { get; set; }
-        public Nullable<int> idStatus { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Status()
+        {
+            this.SponsorCommand = new HashSet<SponsorCommand>();
+        }
     
-        public virtual Users Users { get; set; }
-        public virtual Command Command { get; set; }
-        public virtual Status Status { get; set; }
+        public int idStatus { get; set; }
+        public string Name { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SponsorCommand> SponsorCommand { get; set; }
     }
 }

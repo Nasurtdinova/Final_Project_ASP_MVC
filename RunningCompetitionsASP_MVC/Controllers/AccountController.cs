@@ -43,16 +43,10 @@ namespace RunningCompetitionsASP_MVC.Controllers
                 if (CoreFramework.Connection.IsLogin(model.Email,model.Password) == 1)
                 {
                     return RedirectToAction("IndexHome", "Home");
-                    // проверяем, принадлежит ли URL приложению
-                    //if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
-                    //{
-                    //    return Redirect(model.ReturnUrl);
-                    //}
-                    //if (Connection.GetIdType(model.Email,model.Password))
-                    //{
-                    //    return RedirectToAction("IndexHome", "Home");
-                    //}
-                  
+                    if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
+                    {
+                        return Redirect(model.ReturnUrl);
+                    }
                 }
                 else if (CoreFramework.Connection.IsLogin(model.Email, model.Password) == 2)
                 {

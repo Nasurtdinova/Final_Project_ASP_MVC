@@ -69,16 +69,6 @@ namespace CoreFramework
             return Titles = new List<Title>(bdConnection.connection.Title.ToList());
         }
 
-        //public static List<Command> GetCommand()
-        //{
-        //    return Commands = new List<Command>(bdConnection.connection.Command.ToList());
-        //}
-
-        //public static List<Competition> GetCompetition()
-        //{
-        //    return Compets = new List<Competition>(bdConnection.connection.Competition.ToList());
-        //}
-
         public static void AddUser(Users user)
         {
             try
@@ -151,11 +141,6 @@ namespace CoreFramework
         {
             return GetTitles().Where(a => a.Name == name).FirstOrDefault();
         }
-
-        //public static Images GetIdImage(string name)
-        //{
-        //    return GetImages().Where(a => a.ImagePath == name).FirstOrDefault();
-        //}
 
         public static City GetCity(string name)
         {

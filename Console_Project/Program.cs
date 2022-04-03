@@ -9,7 +9,7 @@ namespace Console_Project
     class Program
     {
         static void Main(string[] args)
-        {            
+        {
             Dictionary<int, string> message = new Dictionary<int, string>
             {
                 { 0, "Hello, input login and password, else write Viewer"},
@@ -21,53 +21,11 @@ namespace Console_Project
                 { 6,"What do you want to do 'Get', 'Add', 'Remove'?" }
             };
 
-            Console.WriteLine(message[0]);
-            string login = Console.ReadLine();
-            if (login == "Viewer")
-            {
-                while (true)
-                {
-                    Console.WriteLine(message[5]);
-                    int click = Convert.ToInt32(Console.ReadLine());
-                    Viewer(click);
-                }
-            }
-            string password = null;
             while (true)
             {
-                var key = System.Console.ReadKey(true);
-                if (key.Key == ConsoleKey.Enter)
-                    break;
-                password += key.KeyChar;
-            }
-
-            if (Connection.IsLogin(login, password)==2)
-            {
-                while (true)
-                {
-                    Console.WriteLine(message[5]);
-                    int click = Convert.ToInt32(Console.ReadLine());
-                    if (!Connection.GetIdType(login, password))
-                    {
-                        Connection con = new Connection(login, password);
-                        if (click == 5)
-                        {
-                            Console.WriteLine(message[6]);
-                            string instruction = Console.ReadLine();
-                            string values = Console.ReadLine();
-                            string[] value = values.Split(',');
-                            //PrintSponsorships(instruction, value);
-                            continue;
-                        }
-                        string[] emptyStringArray = new string[0];
-                        Sponsor(click, "Get", emptyStringArray);
-                    }
-                }
-            }
-
-            else
-            {
-                Console.WriteLine("No correct"); //
+                Console.WriteLine(message[5]);
+                int click = Convert.ToInt32(Console.ReadLine());
+                Viewer(click);
             }
         }
 
@@ -90,28 +48,6 @@ namespace Console_Project
             }
         }
 
-        private static void Sponsor(int click, string command, string[] values)
-        {
-            switch (click)
-            {
-                case 1:
-                    PrintSportsmans();
-                    break;
-                case 2:
-                    PrintCommands();
-                    break;
-                case 3:
-                    PrintCompetitions();
-                    break;
-                case 4:
-                    PrintResults();
-                    break;
-                //case 5:
-                //    PrintSponsorships(command, values);
-                //    break;
-            }
-        }
-
         private static void PrintSportsmans()
         {
             ObservableCollection<Sportsman> sportsmans = ConnectionSportsmans.GetSportsmans();
@@ -124,7 +60,7 @@ namespace Console_Project
         private static void PrintCommands()
         {
             ObservableCollection<Command> commands = ConnectionCommands.GetCommands();
-            foreach (Commands i in commands)
+            foreach (Command i in commands)
             {
                 Console.WriteLine(i);
             }             
@@ -147,25 +83,5 @@ namespace Console_Project
                 Console.WriteLine(i);
             }
         }
-
-        //private static void PrintSponsorships(string command, string []values)
-        //{
-        //    switch (command)
-        //    {
-        //        case "Get":
-        //            List<Sponsorships> sponsorships = ConnectionSponsorship.GetSponsorshipViewerAdmin();
-        //            foreach (Sponsorships i in sponsorships)
-        //            {
-        //                Console.WriteLine(i);
-        //            }
-        //            break;
-        //        case "Remove":
-        //            ConnectionSponsorship.RemoveSponsorship(Convert.ToInt32(values[0]));
-        //            break;
-        //        case "Add":
-        //            ConnectionSponsorship.AddSponsorship(new Sponsorship(values));
-        //            break;
-        //    }
-        //}
     }
 }

@@ -16,12 +16,14 @@
             </RowDefinition>
             <RowDefinition Height="380">
             </RowDefinition>
+            <RowDefinition Height="70">
+            </RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock Text="Sportsmans in command" FontFamily="Lucida Calligraphy" FontWeight="Bold" FontSize="35" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+        <TextBlock Text="Sportsmans in command" FontSize="35" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
         <ListView Grid.Row="1" ItemsSource="{Binding infoSportsmansCommand}" Name="lvCommands">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <UniformGrid Columns="3" Width="900"></UniformGrid>
+                    <UniformGrid Columns="4" Width="1100"></UniformGrid>
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
             <ListView.ItemTemplate>
@@ -35,12 +37,14 @@
                                 </MultiBinding>
                             </TextBlock.Text>
                         </TextBlock>
-                        <Image Source="{Binding Images.Name}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="150"/>
+                        <Image Source="{Binding Image}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="400" Height="250"/>
                         <TextBlock Text="{Binding Surname}" FontFamily="Lucida Calligraphy" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22"/>
                         <TextBlock Text="{Binding Name}" FontFamily="Lucida Calligraphy" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22"/>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+
+        <Button Content="Back" Grid.Row="2" HorizontalAlignment="Center" Name="btnBack" Click="btnBack_Click" Height="50"></Button>
     </Grid>
 </Page>

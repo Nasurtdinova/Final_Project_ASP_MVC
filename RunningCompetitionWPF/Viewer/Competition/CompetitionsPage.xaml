@@ -21,14 +21,20 @@
         <TextBlock Text="Competitions" FontSize="35" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
         <DataGrid x:Name="dgCompetitions"  Grid.Row="1" FontSize="18" AutoGenerateColumns="False" ItemsSource="{Binding infoCompet}" IsReadOnly="True">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Название соревнования" Binding="{Binding Name}" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Дата соревнования" Binding="{Binding Date}"  Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Название соревнования" Binding="{Binding Name}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Дата соревнования" Binding="{Binding Date, StringFormat ='dd.MM.yyyy hh:mm'}"  Width="*"></DataGridTextColumn>
                 <DataGridTextColumn Header="Место проведения" Binding="{Binding NameVenue}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Улица" Binding="{Binding Street}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Дом" Binding="{Binding Home}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Город проведения" Binding="{Binding City.Name}"></DataGridTextColumn>
+                <DataGridTemplateColumn  Width="150">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="View result" Name="btnViewResult" Click="btnViewResult_Click"></Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
-            
         </DataGrid>
     </Grid>
 </Page>
