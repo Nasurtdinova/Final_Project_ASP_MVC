@@ -12,21 +12,22 @@ namespace CoreFramework
     using System;
     using System.Collections.Generic;
     
-    public partial class Users
+    public partial class Sponsor
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Users()
+        public Sponsor()
         {
-            this.Sponsor = new HashSet<Sponsor>();
+            this.SponsorCommand = new HashSet<SponsorCommand>();
         }
     
-        public int idUser { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
-        public Nullable<int> idType { get; set; }
+        public int idSponsor { get; set; }
+        public string Surname { get; set; }
+        public string Name { get; set; }
+        public string Phone { get; set; }
+        public Nullable<int> idUser { get; set; }
     
+        public virtual Users Users { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Sponsor> Sponsor { get; set; }
-        public virtual TypeUser TypeUser { get; set; }
+        public virtual ICollection<SponsorCommand> SponsorCommand { get; set; }
     }
 }

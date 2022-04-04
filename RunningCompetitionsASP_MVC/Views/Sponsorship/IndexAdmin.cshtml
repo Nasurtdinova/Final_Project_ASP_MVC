@@ -2,7 +2,7 @@
     Layout = "~/Views/Shared/_LayoutCopy.cshtml";
     ViewData["Title"] = "Sponsorship";
 }
-@model List<Core.Sponsorships>
+@model List<CoreFramework.SponsorCommand>
 <h2>Sponsorship</h2>
 <br />
 <table border="1" style="border-collapse:collapse;" width=100% cellpadding="4" cellspacing="20">
@@ -13,8 +13,8 @@
     @foreach (var ship in Model)
     {
         <tr>
-            <td align="center">@ship.Command</td>
-            <td align="center">@ship.SponsorName</td>
+            <td align="center">@ship.Command.Name</td>
+            <td align="center">@ship.Sponsor.Name</td>
         </tr>
     }
 </table>

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Final_Project_ASP_MVC.Models;
 using RunningCompetitionsASP_MVC.ViewModels;
+using CoreFramework;
 
 namespace RunningCompetitionsASP_MVC.Controllers
 {
@@ -21,8 +22,23 @@ namespace RunningCompetitionsASP_MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = new User { Email = model.Email, Password = model.Password, Year = model.Year, Surname = model.Surname, UserName= model.Name, idType = 2 };
-                Core.Connection.AddUser(user);
+                Users user = new Users 
+                { 
+                    Email = model.Email, 
+                    Password = model.Password, 
+                    idType = 2 
+                };
+                Connection.AddUser(user);
+
+                Sponsor spon = new Sponsor 
+                { 
+                    Surname = model.Surname, 
+                    Name = model.Name, 
+                    Phone = model.Phone, 
+                    idUser = Connection.GetUsers().Last().idUser 
+                };
+                Connection.AddSponsor(spon);
+
                 return RedirectToAction("Index", "Home");
             }
             return View(model);
@@ -40,7 +56,7 @@ namespace RunningCompetitionsASP_MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (CoreFramework.Connection.IsLogin(model.Email,model.Password) == 1)
+                if (Connection.IsLogin(model.Email,model.Password) == 1)
                 {
                     return RedirectToAction("IndexHome", "Home");
                     if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
@@ -48,10 +64,10 @@ namespace RunningCompetitionsASP_MVC.Controllers
                         return Redirect(model.ReturnUrl);
                     }
                 }
-                else if (CoreFramework.Connection.IsLogin(model.Email, model.Password) == 2)
+                else if (Connection.IsLogin(model.Email, model.Password) == 2)
                 {
-                    Core.CurrentUser.IdUser = Core.Connection.GetIdUser(model.Email, model.Password);
-                    
+                    CurrentUser.user = Connection.GetUser(model.Email, model.Password);
+                    CurrentUser.spon = Connection.GetSponsor(CurrentUser.user.idUser);
                     return RedirectToAction("IndexSponsor", "Home");
                 }
 

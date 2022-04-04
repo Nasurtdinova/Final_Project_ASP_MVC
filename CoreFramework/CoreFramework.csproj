@@ -117,9 +117,14 @@
     <Compile Include="Results\ConnectionResults.cs" />
     <Compile Include="Results\Results.cs" />
     <Compile Include="Results\ResultStorage.cs" />
+    <Compile Include="Sponsor.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
     <Compile Include="SponsorCommand.cs">
       <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
+    <Compile Include="Sponsorship\ConnectionSponsorship.cs" />
+    <Compile Include="Sponsorship\Sponsorship.cs" />
     <Compile Include="Sportsman.cs">
       <DependentUpon>Model2.tt</DependentUpon>
     </Compile>

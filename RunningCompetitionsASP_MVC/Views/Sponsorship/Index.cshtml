@@ -2,7 +2,7 @@
     Layout = "~/Views/Shared/_LayoutSponsor.cshtml";
     ViewData["Title"] = "Sponsorship";
 }
-@model List<Core.Sponsorships>
+@model List<CoreFramework.SponsorCommand>
 <h2>My sponsorships</h2>
 <div class="row justify-content-end">
     <a class="btn btn-primary" asp-controller="Sponsorship"
@@ -18,19 +18,19 @@
                 <div class="card-body">
 
                     <div>
-                        <p class="font-weight-normal">Name sponsor: @sponsorship.SponsorName</p>
+                        <p class="font-weight-normal">Name sponsor: @sponsorship.Sponsor.Name</p>
                     </div>
                     <div>
-                        <p class="font-weight-normal">Name command: @sponsorship.Command</p>
+                        <p class="font-weight-normal">Name command: @sponsorship.Command.Name</p>
                     </div>
                     <div>
                         <p class="font-weight-normal">Team of the contract: @sponsorship.teamContract</p>
                     </div>
                     <div>
-                        <p class="font-weight-normal">Amount: @sponsorship.Amount</p>
+                        <p class="font-weight-normal">Amount: @sponsorship.amount</p>
                     </div>
                     <a class="btn btn-danger" asp-controller="Sponsorship"
-                       asp-action="Remove" asp-route-id="@sponsorship.ID" role="button">
+                       asp-action="Remove" asp-route-id="@sponsorship.id" role="button">
                         Remove
                     </a>
                 </div>

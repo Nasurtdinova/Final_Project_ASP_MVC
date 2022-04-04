@@ -13,16 +13,16 @@ namespace RunningCompetitionsASP_MVC.ViewModels
         public string Email { get; set; }
 
         [Required]
-        [Display(Name = "Year of birth")]
-        public int Year { get; set; }
-
-        [Required]
         [Display(Name = "Surname")]
         public string Surname { get; set; }
 
         [Required]
         [Display(Name = "Name")]
         public string Name { get; set; }
+
+        [Required]
+        [Display(Name = "Phone")]
+        public string Phone { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
@@ -34,5 +34,7 @@ namespace RunningCompetitionsASP_MVC.ViewModels
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
         public string PasswordConfirm { get; set; }
+
+
     }
 }

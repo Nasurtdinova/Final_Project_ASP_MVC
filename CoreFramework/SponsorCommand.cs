@@ -21,8 +21,8 @@ namespace CoreFramework
         public Nullable<int> amount { get; set; }
         public Nullable<int> idStatus { get; set; }
     
-        public virtual Users Users { get; set; }
         public virtual Command Command { get; set; }
+        public virtual Sponsor Sponsor { get; set; }
         public virtual Status Status { get; set; }
     }
 }

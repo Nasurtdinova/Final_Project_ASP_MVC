@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Core;
+using CoreFramework;
 
 namespace RunningCompetitionsASP_MVC.Controllers
 {
@@ -11,7 +11,7 @@ namespace RunningCompetitionsASP_MVC.Controllers
     {
         public IActionResult Index()
         {
-            var sponsorships = ConnectionSponsorship.GetSponsorship(CurrentUser.IdUser);
+            var sponsorships = ConnectionSponsorship.GetSponsorship(CurrentUser.user.idUser);
             return View(sponsorships);
         }
 
@@ -32,7 +32,7 @@ namespace RunningCompetitionsASP_MVC.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(Sponsorship sponship)
+        public IActionResult Add(SponsorCommand sponship)
         {
             ConnectionSponsorship.AddSponsorship(sponship);
             return RedirectToAction("Index");

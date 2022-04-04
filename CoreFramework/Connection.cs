@@ -24,49 +24,38 @@ namespace CoreFramework
         public static string Name { get; set; }
         public static string Surname { get; set; }
 
-        public Connection(string login, string password)
+        public static Users GetUser(string email, string password)
         {
-            IdUser = GetIdUser(login, password);
-            GetUser(IdUser);
+            return GetUsers().Where(tt => tt.Email == email && tt.Password == password).FirstOrDefault();
         }
 
-        public static int GetIdUser(string email, string password)
+        public static List<Users> GetUsers()
         {
-            var type = Users.Where(tt => tt.Email == email && tt.Password == password).FirstOrDefault();
-            return type.idUser;
-        }
-
-        public static bool GetIdType(string email, string password)
-        {
-            if (Users.Where(tt => tt.Email == email && tt.Password == password).FirstOrDefault().idType == 1)
-                return true;
-            else
-                return false;
-        }
-
-        public static void GetUser(int idUser)
-        {
-            Name = Users.Where(tt => tt.idUser == idUser).FirstOrDefault().Name;
-            Surname = Users.Where(tt => tt.idUser == idUser).FirstOrDefault().Surname;
-        }
-
-        public static List<Users> GetUser()
-        {
-            return Users = new List<Users>(bdConnection.connection.Users.ToList());
+            return new List<Users>(bdConnection.connection.Users.ToList());
         }
         public static List<City> GetCities()
         {
-            return Cities = new List<City>(bdConnection.connection.City.ToList());
+            return new List<City>(bdConnection.connection.City.ToList());
         }
 
         public static List<Images> GetImages()
         {
-            return Images = new List<Images>(bdConnection.connection.Images.ToList());
+            return new List<Images>(bdConnection.connection.Images.ToList());
         }
 
         public static List<Title> GetTitles()
         {
-            return Titles = new List<Title>(bdConnection.connection.Title.ToList());
+            return new List<Title>(bdConnection.connection.Title.ToList());
+        }
+
+        public static List<Sponsor> GetSponsors()
+        {
+            return new List<Sponsor>(bdConnection.connection.Sponsor.ToList());
+        }
+
+        public static Sponsor GetSponsor(int idUser)
+        {
+            return GetSponsors().Where(t => t.idUser == idUser).FirstOrDefault();
         }
 
         public static void AddUser(Users user)
@@ -81,6 +70,20 @@ namespace CoreFramework
                 Console.WriteLine(ex.Message);
             }
         }
+
+        public static void AddSponsor(Sponsor sponsor)
+        {
+            try
+            {
+                bdConnection.connection.Sponsor.Add(sponsor);
+                bdConnection.connection.SaveChanges();
+            }
+            catch (Exception ex) // Exception исправить
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
         public static Images AddImages(Images img)
         { 
             bdConnection.connection.Images.Add(img);
@@ -155,7 +158,7 @@ namespace CoreFramework
 
         public static int IsLogin(string email, string password)
         {
-            Users = GetUser();
+            Users = GetUsers();
             var admin = from usrs in Users
                           where email == usrs.Email && password == usrs.Password && usrs.idType == 1
                           select usrs;

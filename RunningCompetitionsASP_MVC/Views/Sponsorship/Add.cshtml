@@ -2,7 +2,8 @@
     Layout = "~/Views/Shared/_LayoutSponsor.cshtml";
     ViewData["Title"] = "Sponsorship";
 }
-@model Core.Sponsorship
+@using CoreFramework
+@model SponsorCommand
 
 <div class="row justify-content-lg-center">
     <h1>Add new command for sponsorship</h1>
@@ -12,26 +13,26 @@
     <div class="col-md-4">
         <form asp-action="Add">
             <div class="form-group">
-                <label asp-for="Command" class="control-label">Command</label>
-                <select asp-for="Command" class=" form-control">
+                <label asp-for="Command.Name" class="control-label">Command</label>
+                <select asp-for="Command.Name" class=" form-control">
                     <option selected="selected">  </option>
-                    @foreach (string command in Core.Connection.GetNameCommands())
+                    @foreach (string command in CoreFramework.Connection.GetNameCommands())
                     {
                         <option>@command</option>
                     }
                 </select>
             </div>
             <div class="form-group">
-                <label asp-for="SponsorName" class="control-label">Name</label>
-                <input asp-for="SponsorName" class=" form-control" value=@Core.Connection.Name />
+                <label asp-for="Sponsor.Name" class="control-label">Name</label>
+                <input asp-for="Sponsor.Name" class=" form-control" value=@CurrentUser.spon.Name />
             </div>
             <div class="form-group">
-                <label asp-for="SponsorSurname" class="control-label">Surname</label>
-                <input asp-for="SponsorSurname" class=" form-control" value=@Core.Connection.Surname />
+                <label asp-for="Sponsor.Surname" class="control-label">Surname</label>
+                <input asp-for="Sponsor.Surname" class=" form-control" value=@CurrentUser.spon.Surname />
             </div>
             <div class="form-group">
-                <label asp-for="Amount" class="control-label">Amount</label>
-                <input asp-for="Amount" class=" form-control"/>
+                <label asp-for="amount" class="control-label">Amount</label>
+                <input asp-for="amount" class=" form-control"/>
             </div>
             <div class="form-group">
                 <label asp-for="teamContract" class="control-label">Contract</label>
