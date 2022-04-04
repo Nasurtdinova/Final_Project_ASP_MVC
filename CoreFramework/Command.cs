@@ -25,15 +25,21 @@ namespace CoreFramework
     
         public int idCommand { get; set; }
 
-        [Required(ErrorMessage = "Name is required")]
+        [Required]
+        [Display(Name = "Name")]
         public string Name { get; set; }
+
+        [Required]
+        [Display(Name = "Count")]
         public Nullable<int> Count { get; set; }
+
         public Nullable<int> idImage { get; set; }       
         public Nullable<int> ID_city { get; set; }
         public byte[] Image { get; set; }
 
         [Required(ErrorMessage = "City is required")]
         public virtual City City { get; set; }
+
         public virtual Images Images { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ResultCompetition> ResultCompetition { get; set; }

@@ -14,18 +14,18 @@ namespace CoreFramework
 
         public static List<SponsorCommand> GetSponsorship(int idUser)
         {
-            ObservableCollection<SponsorCommand> commands = GetSponsorshipViewerAdmin();
+            List<SponsorCommand> commands = GetSponsorshipViewerAdmin();
             return commands.Where(tt => tt.Sponsor.idUser == idUser).ToList();
         }
 
-        public static ObservableCollection<SponsorCommand> GetSponsorshipViewerAdmin()
+        public static List<SponsorCommand> GetSponsorshipViewerAdmin()
         {
-            return new ObservableCollection<SponsorCommand>(bdConnection.connection.SponsorCommand.ToList());
+            return new List<SponsorCommand>(bdConnection.connection.SponsorCommand.ToList());
         }
 
         public static SponsorCommand GetSponsorshipId(int id)
         {
-            ObservableCollection<SponsorCommand> commands = GetSponsorshipViewerAdmin();
+            List<SponsorCommand> commands = GetSponsorshipViewerAdmin();
             return commands.Where(tt => tt.id == id).FirstOrDefault();
         }
 
