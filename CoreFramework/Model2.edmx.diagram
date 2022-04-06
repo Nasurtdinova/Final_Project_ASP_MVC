@@ -24,13 +24,13 @@
         <AssociationConnector Association="CompetitionExamModel.FK_Sportsman_Title" />
         <EntityTypeShape EntityType="CompetitionExamModel.Status" Width="1.5" PointX="5.375" PointY="0.875" />
         <EntityTypeShape EntityType="CompetitionExamModel.Sponsor" Width="1.5" PointX="5.25" PointY="13.625" />
-        <EntityTypeShape EntityType="CompetitionExamModel.SponsorCommand" Width="1.5" PointX="13.5" PointY="7" />
         <EntityTypeShape EntityType="CompetitionExamModel.Users" Width="1.5" PointX="3" PointY="13.75" />
-        <AssociationConnector Association="CompetitionExamModel.FK_SponsorCommand_Command" />
         <AssociationConnector Association="CompetitionExamModel.FK_Sponsor_Users" />
+        <AssociationConnector Association="CompetitionExamModel.FK_Users_TypeUser" />
+        <EntityTypeShape EntityType="CompetitionExamModel.SponsorCommand" Width="1.5" PointX="13.5" PointY="6.875" />
+        <AssociationConnector Association="CompetitionExamModel.FK_SponsorCommand_Command" />
         <AssociationConnector Association="CompetitionExamModel.FK_SponsorCommand_Sponsor" />
         <AssociationConnector Association="CompetitionExamModel.FK_SponsorCommand_Status" />
-        <AssociationConnector Association="CompetitionExamModel.FK_Users_TypeUser" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

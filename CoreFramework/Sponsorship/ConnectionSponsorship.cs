@@ -12,10 +12,19 @@ namespace CoreFramework
     public class ConnectionSponsorship 
     {
 
-        public static List<SponsorCommand> GetSponsorship(int idUser)
+        public static List<SponsorCommand> GetSponsorship(int idSponsor)
         {
             List<SponsorCommand> commands = GetSponsorshipViewerAdmin();
-            return commands.Where(tt => tt.Sponsor.idUser == idUser).ToList();
+            return commands.Where(tt => tt.idSponsor == idSponsor).ToList();
+        }
+
+        public static bool IsAddTrue(int idSponsor, int idCommand)
+        {
+            List<SponsorCommand> commands = GetSponsorship(idSponsor);
+            if (commands.Where(tt => tt.idSponsor == idSponsor && tt.idCom == idCommand && tt.DateEnd > DateTime.Now).Count() != 0)
+                return false;
+            else
+                return true;                
         }
 
         public static List<SponsorCommand> GetSponsorshipViewerAdmin()

@@ -38,6 +38,7 @@
                     <MenuItem Header="Commands" x:Name="commandAdmin" Click="commandAdmin_Click" Visibility="Collapsed"/>
                     <MenuItem Header="Result competitions" x:Name="resultCompetition" Click="resultCompetition_Click"/>
                     <MenuItem Header="Result competitions" x:Name="resultCompetitionAdmin" Click="resultCompetitionAdmin_Click" Visibility="Collapsed"/>
+                    <MenuItem Header="My sponsorships" x:Name="mySponsorshipsSponsor" Click="mySponsorshipsSponsor_Click" Visibility="Collapsed"/>
                     <MenuItem Header="Exit" x:Name="exit" Click="exit_Click" Visibility="Collapsed"/>
                 </MenuItem>
             </Menu>

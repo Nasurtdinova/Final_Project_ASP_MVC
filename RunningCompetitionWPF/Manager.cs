@@ -26,6 +26,8 @@ namespace RunningCompetitionWPF
         public static MenuItem ResultCompetitionsAdmin { get; set; }
         public static MenuItem ResultCompetitions { get; set; }
 
+        public static MenuItem MySponsorshipsSponsor { get; set; }
+
         public static void DoAdmin()
         {
             CollapsedAuthReg();
@@ -59,8 +61,10 @@ namespace RunningCompetitionWPF
 
         public static void DoSponsor()
         {
-            VisibleAuthReg();
+            CollapsedAuthReg();
+            Exit.Visibility = System.Windows.Visibility.Visible;
 
+            MySponsorshipsSponsor.Visibility = System.Windows.Visibility.Visible;
             Sportsmans.Visibility = System.Windows.Visibility.Visible;
             Commands.Visibility = System.Windows.Visibility.Visible;
             Competitions.Visibility = System.Windows.Visibility.Visible;

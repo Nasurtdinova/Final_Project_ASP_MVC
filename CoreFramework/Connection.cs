@@ -170,6 +170,7 @@ namespace CoreFramework
             if (sponsor.Count() == 1)
             {
                 CurrentUser.user = sponsor.FirstOrDefault();
+                CurrentUser.spon = Connection.GetSponsors().Where(a => a.idUser == CurrentUser.user.idUser).FirstOrDefault();
                 return 2;
             }
             else if (admin.Count() == 1)

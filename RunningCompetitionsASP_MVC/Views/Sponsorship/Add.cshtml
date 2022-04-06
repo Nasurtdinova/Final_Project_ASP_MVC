@@ -31,12 +31,16 @@
                 <input asp-for="Sponsor.Surname" class=" form-control" value=@CurrentUser.spon.Surname />
             </div>
             <div class="form-group">
-                <label asp-for="amount" class="control-label">Amount</label>
-                <input asp-for="amount" class=" form-control"/>
+                <label asp-for="Amount" class="control-label">Amount</label>
+                <input asp-for="Amount" class=" form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="teamContract" class="control-label">Contract</label>
-                <input asp-for="teamContract" class=" form-control"/>
+                <label asp-for="DateBegin" class="control-label">Date begin</label>
+                <input asp-for="DateBegin" class=" form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="DateEnd" class="control-label">Date end</label>
+                <input asp-for="DateEnd" class=" form-control" />
             </div>
             <div class="form-group">
                 <input type="submit" value="Add" class=" btn btn-primary" />

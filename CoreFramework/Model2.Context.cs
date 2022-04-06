@@ -36,7 +36,7 @@ namespace CoreFramework
         public virtual DbSet<Sportsman> Sportsman { get; set; }
         public virtual DbSet<Status> Status { get; set; }
         public virtual DbSet<Sponsor> Sponsor { get; set; }
-        public virtual DbSet<SponsorCommand> SponsorCommand { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<SponsorCommand> SponsorCommand { get; set; }
     }
 }

@@ -25,7 +25,7 @@
             <div>
                 <label asp-for="City.Name" class="control-label">City</label><br />
                 <select asp-for="City.Name" class=" form-control">
-                    <option selected="selected">  </option>
+                    @*<option selected="selected">  </option>*@
                     @foreach (string city in CoreFramework.Connection.GetNameCities())
                     {
                         <option>@city</option>
@@ -36,6 +36,7 @@
             <legend>Добавить изображение</legend>
             <p>
                 <input name="ImageData" type="file" class="form-control" />
+                <span asp-validation-for="Image"></span>
             </p>
             <div>
                 <input type="submit" value="Add" class=" btn btn-primary" />

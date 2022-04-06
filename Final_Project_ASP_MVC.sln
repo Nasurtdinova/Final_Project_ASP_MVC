@@ -3,10 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30517.126
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Final_Project_ASP_MVC", "Final_Project_ASP_MVC\Final_Project_ASP_MVC.csproj", "{9E4AAC26-6127-41E6-9B76-23DFCB076252}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAPI_Project", "WebAPI_Project\WebAPI_Project.csproj", "{C996697E-CB87-4027-B450-D01D25B8501C}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{BAFE9B70-0B64-428A-A4AC-1817207B7C2B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Console_Project", "Console_Project\Console_Project.csproj", "{B58B6687-3155-4BD1-AB32-F56BADDAF43F}"
@@ -27,14 +23,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9E4AAC26-6127-41E6-9B76-23DFCB076252}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9E4AAC26-6127-41E6-9B76-23DFCB076252}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9E4AAC26-6127-41E6-9B76-23DFCB076252}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9E4AAC26-6127-41E6-9B76-23DFCB076252}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C996697E-CB87-4027-B450-D01D25B8501C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C996697E-CB87-4027-B450-D01D25B8501C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C996697E-CB87-4027-B450-D01D25B8501C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C996697E-CB87-4027-B450-D01D25B8501C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BAFE9B70-0B64-428A-A4AC-1817207B7C2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BAFE9B70-0B64-428A-A4AC-1817207B7C2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BAFE9B70-0B64-428A-A4AC-1817207B7C2B}.Release|Any CPU.ActiveCfg = Release|Any CPU

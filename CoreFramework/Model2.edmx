@@ -56,10 +56,10 @@
           <Key>
             <PropertyRef Name="idSponsor" />
           </Key>
-          <Property Name="idSponsor" Type="int" Nullable="false" />
-          <Property Name="Surname" Type="nchar" MaxLength="10" />
-          <Property Name="Name" Type="nchar" MaxLength="10" />
-          <Property Name="Phone" Type="nchar" MaxLength="10" />
+          <Property Name="idSponsor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone" Type="nchar" MaxLength="11" />
           <Property Name="idUser" Type="int" />
         </EntityType>
         <EntityType Name="SponsorCommand">
@@ -69,9 +69,11 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="idSponsor" Type="int" />
           <Property Name="idCom" Type="int" />
-          <Property Name="teamContract" Type="int" />
-          <Property Name="amount" Type="int" />
+          <Property Name="Amount" Type="int" />
+          <Property Name="DateEnd" Type="date" />
+          <Property Name="DateBegin" Type="date" />
           <Property Name="idStatus" Type="int" />
+          <Property Name="MutualBenefit" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Sportsman">
           <Key>
@@ -481,15 +483,19 @@
           </AssociationSet>
           <EntitySet Name="Status" EntityType="CompetitionExamModel.Status" />
           <EntitySet Name="Sponsor" EntityType="CompetitionExamModel.Sponsor" />
-          <EntitySet Name="SponsorCommand" EntityType="CompetitionExamModel.SponsorCommand" />
           <EntitySet Name="Users" EntityType="CompetitionExamModel.Users" />
-          <AssociationSet Name="FK_SponsorCommand_Command" Association="CompetitionExamModel.FK_SponsorCommand_Command">
-            <End Role="Command" EntitySet="Command" />
-            <End Role="SponsorCommand" EntitySet="SponsorCommand" />
-          </AssociationSet>
           <AssociationSet Name="FK_Sponsor_Users" Association="CompetitionExamModel.FK_Sponsor_Users">
             <End Role="Users" EntitySet="Users" />
             <End Role="Sponsor" EntitySet="Sponsor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_TypeUser" Association="CompetitionExamModel.FK_Users_TypeUser">
+            <End Role="TypeUser" EntitySet="TypeUser" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <EntitySet Name="SponsorCommand" EntityType="CompetitionExamModel.SponsorCommand" />
+          <AssociationSet Name="FK_SponsorCommand_Command" Association="CompetitionExamModel.FK_SponsorCommand_Command">
+            <End Role="Command" EntitySet="Command" />
+            <End Role="SponsorCommand" EntitySet="SponsorCommand" />
           </AssociationSet>
           <AssociationSet Name="FK_SponsorCommand_Sponsor" Association="CompetitionExamModel.FK_SponsorCommand_Sponsor">
             <End Role="Sponsor" EntitySet="Sponsor" />
@@ -498,10 +504,6 @@
           <AssociationSet Name="FK_SponsorCommand_Status" Association="CompetitionExamModel.FK_SponsorCommand_Status">
             <End Role="Status" EntitySet="Status" />
             <End Role="SponsorCommand" EntitySet="SponsorCommand" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Users_TypeUser" Association="CompetitionExamModel.FK_Users_TypeUser">
-            <End Role="TypeUser" EntitySet="TypeUser" />
-            <End Role="Users" EntitySet="Users" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Images">
@@ -631,26 +633,12 @@
             <PropertyRef Name="idSponsor" />
           </Key>
           <Property Name="idSponsor" Type="Int32" Nullable="false" />
-          <Property Name="Surname" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="Phone" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="11" FixedLength="true" Unicode="true" />
           <Property Name="idUser" Type="Int32" />
           <NavigationProperty Name="Users" Relationship="CompetitionExamModel.FK_Sponsor_Users" FromRole="Sponsor" ToRole="Users" />
           <NavigationProperty Name="SponsorCommand" Relationship="CompetitionExamModel.FK_SponsorCommand_Sponsor" FromRole="Sponsor" ToRole="SponsorCommand" />
-        </EntityType>
-        <EntityType Name="SponsorCommand">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="idSponsor" Type="Int32" />
-          <Property Name="idCom" Type="Int32" />
-          <Property Name="teamContract" Type="Int32" />
-          <Property Name="amount" Type="Int32" />
-          <Property Name="idStatus" Type="Int32" />
-          <NavigationProperty Name="Command" Relationship="CompetitionExamModel.FK_SponsorCommand_Command" FromRole="SponsorCommand" ToRole="Command" />
-          <NavigationProperty Name="Sponsor" Relationship="CompetitionExamModel.FK_SponsorCommand_Sponsor" FromRole="SponsorCommand" ToRole="Sponsor" />
-          <NavigationProperty Name="Status" Relationship="CompetitionExamModel.FK_SponsorCommand_Status" FromRole="SponsorCommand" ToRole="Status" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -663,18 +651,6 @@
           <NavigationProperty Name="Sponsor" Relationship="CompetitionExamModel.FK_Sponsor_Users" FromRole="Users" ToRole="Sponsor" />
           <NavigationProperty Name="TypeUser" Relationship="CompetitionExamModel.FK_Users_TypeUser" FromRole="Users" ToRole="TypeUser" />
         </EntityType>
-        <Association Name="FK_SponsorCommand_Command">
-          <End Type="CompetitionExamModel.Command" Role="Command" Multiplicity="0..1" />
-          <End Type="CompetitionExamModel.SponsorCommand" Role="SponsorCommand" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Command">
-              <PropertyRef Name="idCommand" />
-            </Principal>
-            <Dependent Role="SponsorCommand">
-              <PropertyRef Name="idCom" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Sponsor_Users">
           <End Type="CompetitionExamModel.Users" Role="Users" Multiplicity="0..1" />
           <End Type="CompetitionExamModel.Sponsor" Role="Sponsor" Multiplicity="*" />
@@ -684,6 +660,46 @@
             </Principal>
             <Dependent Role="Sponsor">
               <PropertyRef Name="idUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_TypeUser">
+          <End Type="CompetitionExamModel.TypeUser" Role="TypeUser" Multiplicity="0..1" />
+          <End Type="CompetitionExamModel.Users" Role="Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeUser">
+              <PropertyRef Name="idType" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="idType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="SponsorCommand">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idSponsor" Type="Int32" />
+          <Property Name="idCom" Type="Int32" />
+          <Property Name="Amount" Type="Int32" />
+          <Property Name="DateEnd" Type="DateTime" Precision="0" />
+          <Property Name="DateBegin" Type="DateTime" Precision="0" />
+          <Property Name="idStatus" Type="Int32" />
+          <Property Name="MutualBenefit" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Command" Relationship="CompetitionExamModel.FK_SponsorCommand_Command" FromRole="SponsorCommand" ToRole="Command" />
+          <NavigationProperty Name="Sponsor" Relationship="CompetitionExamModel.FK_SponsorCommand_Sponsor" FromRole="SponsorCommand" ToRole="Sponsor" />
+          <NavigationProperty Name="Status" Relationship="CompetitionExamModel.FK_SponsorCommand_Status" FromRole="SponsorCommand" ToRole="Status" />
+        </EntityType>
+        <Association Name="FK_SponsorCommand_Command">
+          <End Type="CompetitionExamModel.Command" Role="Command" Multiplicity="0..1" />
+          <End Type="CompetitionExamModel.SponsorCommand" Role="SponsorCommand" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Command">
+              <PropertyRef Name="idCommand" />
+            </Principal>
+            <Dependent Role="SponsorCommand">
+              <PropertyRef Name="idCom" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -708,18 +724,6 @@
             </Principal>
             <Dependent Role="SponsorCommand">
               <PropertyRef Name="idStatus" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Users_TypeUser">
-          <End Type="CompetitionExamModel.TypeUser" Role="TypeUser" Multiplicity="0..1" />
-          <End Type="CompetitionExamModel.Users" Role="Users" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TypeUser">
-              <PropertyRef Name="idType" />
-            </Principal>
-            <Dependent Role="Users">
-              <PropertyRef Name="idType" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -840,18 +844,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="SponsorCommand">
-            <EntityTypeMapping TypeName="CompetitionExamModel.SponsorCommand">
-              <MappingFragment StoreEntitySet="SponsorCommand">
-                <ScalarProperty Name="idStatus" ColumnName="idStatus" />
-                <ScalarProperty Name="amount" ColumnName="amount" />
-                <ScalarProperty Name="teamContract" ColumnName="teamContract" />
-                <ScalarProperty Name="idCom" ColumnName="idCom" />
-                <ScalarProperty Name="idSponsor" ColumnName="idSponsor" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="CompetitionExamModel.Users">
               <MappingFragment StoreEntitySet="Users">
@@ -859,6 +851,20 @@
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="idUser" ColumnName="idUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SponsorCommand">
+            <EntityTypeMapping TypeName="CompetitionExamModel.SponsorCommand">
+              <MappingFragment StoreEntitySet="SponsorCommand">
+                <ScalarProperty Name="MutualBenefit" ColumnName="MutualBenefit" />
+                <ScalarProperty Name="idStatus" ColumnName="idStatus" />
+                <ScalarProperty Name="DateBegin" ColumnName="DateBegin" />
+                <ScalarProperty Name="DateEnd" ColumnName="DateEnd" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="idCom" ColumnName="idCom" />
+                <ScalarProperty Name="idSponsor" ColumnName="idSponsor" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

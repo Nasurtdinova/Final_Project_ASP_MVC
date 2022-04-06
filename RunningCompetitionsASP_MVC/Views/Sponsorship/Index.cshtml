@@ -24,10 +24,13 @@
                         <p class="font-weight-normal">Name command: @sponsorship.Command.Name</p>
                     </div>
                     <div>
-                        <p class="font-weight-normal">Team of the contract: @sponsorship.teamContract</p>
+                        <p class="font-weight-normal">Date begin: @sponsorship.DateBegin</p>
                     </div>
                     <div>
-                        <p class="font-weight-normal">Amount: @sponsorship.amount</p>
+                        <p class="font-weight-normal">Date end: @sponsorship.DateEnd</p>
+                    </div>
+                    <div>
+                        <p class="font-weight-normal">Amount: @sponsorship.Amount</p>
                     </div>
                     <a class="btn btn-danger" asp-controller="Sponsorship"
                        asp-action="Remove" asp-route-id="@sponsorship.id" role="button">

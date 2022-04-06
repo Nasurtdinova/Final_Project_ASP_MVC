@@ -11,8 +11,9 @@ namespace CoreFramework
         public Sponsorship(string[] args)
         {
             Command.Name = args[0];
-            amount = Convert.ToInt32(args[1]);
-            teamContract = Convert.ToInt32(args[2]);
+            Amount = Convert.ToInt32(args[1]);
+            DateBegin = Convert.ToDateTime(args[2]);
+            DateEnd = Convert.ToDateTime(args[2]);
         }
     }
 }

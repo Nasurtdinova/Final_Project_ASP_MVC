@@ -37,6 +37,8 @@ namespace RunningCompetitionWPF
             Manager.ResultCompetitionsAdmin = resultCompetitionAdmin;
             Manager.ResultCompetitions = resultCompetition;
 
+            Manager.MySponsorshipsSponsor = mySponsorshipsSponsor;
+
             Manager.Authorization = login;
             Manager.Registration = registr;
             Manager.Exit = exit;
@@ -113,6 +115,13 @@ namespace RunningCompetitionWPF
         private void mainPage_Click(object sender, RoutedEventArgs e)
         {
             Manager.MainFrame.Navigate(new ViewerMainPage());
+        }
+
+        private void mySponsorshipsSponsor_Click(object sender, RoutedEventArgs e)
+        {
+            
+            //Manager.DoSponsor();
+            Manager.MainFrame.Navigate(new MySponsorshipsPage());
         }
     }
 }

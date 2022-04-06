@@ -17,9 +17,11 @@ namespace CoreFramework
         public int id { get; set; }
         public Nullable<int> idSponsor { get; set; }
         public Nullable<int> idCom { get; set; }
-        public Nullable<int> teamContract { get; set; }
-        public Nullable<int> amount { get; set; }
+        public Nullable<int> Amount { get; set; }
+        public Nullable<System.DateTime> DateEnd { get; set; }
+        public Nullable<System.DateTime> DateBegin { get; set; }
         public Nullable<int> idStatus { get; set; }
+        public string MutualBenefit { get; set; }
     
         public virtual Command Command { get; set; }
         public virtual Sponsor Sponsor { get; set; }

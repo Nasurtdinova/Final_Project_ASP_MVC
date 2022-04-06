@@ -26,7 +26,7 @@ namespace RunningCompetitionWPF
 
         private void btnSendRequest_Click(object sender, RoutedEventArgs e)
         {
-
+            Manager.MainFrame.NavigationService.Navigate(new SendRequestPage());
         }
     }
 }
