@@ -38,6 +38,7 @@ namespace RunningCompetitionWPF
             Manager.ResultCompetitions = resultCompetition;
 
             Manager.MySponsorshipsSponsor = mySponsorshipsSponsor;
+            Manager.MessagesAdmin = messagesAdmin;
 
             Manager.Authorization = login;
             Manager.Registration = registr;
@@ -118,10 +119,14 @@ namespace RunningCompetitionWPF
         }
 
         private void mySponsorshipsSponsor_Click(object sender, RoutedEventArgs e)
-        {
-            
+        {             
             //Manager.DoSponsor();
             Manager.MainFrame.Navigate(new MySponsorshipsPage());
+        }
+
+        private void messagesAdmin_Click(object sender, RoutedEventArgs e)
+        {
+            Manager.MainFrame.Navigate(new AdminMessages());
         }
     }
 }

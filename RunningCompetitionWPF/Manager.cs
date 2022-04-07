@@ -27,11 +27,12 @@ namespace RunningCompetitionWPF
         public static MenuItem ResultCompetitions { get; set; }
 
         public static MenuItem MySponsorshipsSponsor { get; set; }
+        public static MenuItem MessagesAdmin { get; set; }
 
         public static void DoAdmin()
         {
             CollapsedAuthReg();
-
+            MessagesAdmin.Visibility = System.Windows.Visibility.Visible;
             Exit.Visibility = System.Windows.Visibility.Visible;
             Sportsmans.Visibility = System.Windows.Visibility.Collapsed;
             Commands.Visibility = System.Windows.Visibility.Collapsed;
