@@ -23,27 +23,22 @@
             <RowDefinition Height="9*"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Background="#FFCAEAF4">
-            <Menu FontSize="30" VerticalAlignment="Top" Background="#FFCAEAF4" Name="menu" Grid.RowSpan="2">
-                <MenuItem Background="#FFCAEAF4" Width="100" Height="70">
-                    <MenuItem.Icon>
-                        <Image Source="C:\Users\nasur\source\repos\RunningCompetitions\RunningCompetitions\img\main_menu.png" Margin="-103,-41,-143,-44" />
-                    </MenuItem.Icon>
-                    <MenuItem Header="Main page" x:Name="mainPage" Click="mainPage_Click"/>
-                    <MenuItem Header="Competitions" x:Name="competition" Click="competition_click"/>
-                    <MenuItem Header="Competitions" x:Name="competitionAdmin" Click="competitionAdmin_Click" Visibility="Collapsed"/>
-                    <MenuItem Header="Sportsmans" x:Name="sportsman" Click="sportsman_click"/>
-                    <MenuItem Header="Sportsmans" x:Name="sportsmanAdmin" Click="sportsmanAdmin_Click" Visibility="Collapsed"/>
-                    <MenuItem Header="Commands" x:Name="command" Click="command_click"/>
-                    <MenuItem Header="Commands" x:Name="commandAdmin" Click="commandAdmin_Click" Visibility="Collapsed"/>
-                    <MenuItem Header="Result competitions" x:Name="resultCompetition" Click="resultCompetition_Click"/>
-                    <MenuItem Header="Result competitions" x:Name="resultCompetitionAdmin" Click="resultCompetitionAdmin_Click" Visibility="Collapsed"/>
-                    <MenuItem Header="Messages" x:Name="messagesAdmin" Click="messagesAdmin_Click" Visibility="Collapsed"/>
-                    <MenuItem Header="My sponsorships" x:Name="mySponsorshipsSponsor" Click="mySponsorshipsSponsor_Click" Visibility="Collapsed"/>
-                    <MenuItem Header="Exit" x:Name="exit" Click="exit_Click" Visibility="Collapsed"/>
-                </MenuItem>
-            </Menu>
-        </StackPanel>
+        <Menu  Height="50" Background="#FFCAEAF4" Name="menu" Grid.Column="1" Grid.ColumnSpan="3">
+
+            <MenuItem Header="Main" x:Name="mainPage" Click="mainPage_Click"/>
+                <MenuItem Header="Competitions" x:Name="competition" Click="competition_click"/>
+                <MenuItem Header="Competitions" x:Name="competitionAdmin" Click="competitionAdmin_Click" Visibility="Collapsed"/>
+                <MenuItem Header="Sportsmans" x:Name="sportsman" Click="sportsman_click"/>
+                <MenuItem Header="Sportsmans" x:Name="sportsmanAdmin" Click="sportsmanAdmin_Click" Visibility="Collapsed"/>
+                <MenuItem Header="Commands" x:Name="command" Click="command_click"/>
+                <MenuItem Header="Commands" x:Name="commandAdmin" Click="commandAdmin_Click" Visibility="Collapsed"/>
+                <MenuItem Header="Result competitions" x:Name="resultCompetition" Click="resultCompetition_Click"/>
+                <MenuItem Header="Result competitions" x:Name="resultCompetitionAdmin" Click="resultCompetitionAdmin_Click" Visibility="Collapsed"/>
+                <MenuItem Header="Messages" x:Name="messagesAdmin" Click="messagesAdmin_Click" Visibility="Collapsed"/>
+            <MenuItem Header="Notices" x:Name="noticesSponsor" Click="noticesSponsor_Click" Visibility="Collapsed"/>
+            <MenuItem Header="My sponsorships" x:Name="mySponsorshipsSponsor" Click="mySponsorshipsSponsor_Click" Visibility="Collapsed"/>
+            <MenuItem Header="Exit" x:Name="exit" Click="exit_Click" Visibility="Collapsed"/>
+        </Menu>
         <Image Source="C:\Users\nasur\source\repos\RunningCompetitions\RunningCompetitions\img\image 1.jpg" Width="200" Height="55" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" />
         <StackPanel Grid.Row="1"  Grid.Column="3" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Left">
             <Button x:Name="registr" Content="Sign up" Click="registr_Click" Grid.Column="3" Width="120" Margin="10" Grid.Row="1"/>

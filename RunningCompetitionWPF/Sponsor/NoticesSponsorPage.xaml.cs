@@ -1,6 +1,7 @@
 ﻿using CoreFramework;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -14,19 +15,14 @@ using System.Windows.Shapes;
 
 namespace RunningCompetitionWPF
 {
-    public partial class MySponsorshipsPage : Page
+    public partial class NoticesSponsorPage : Page
     {
-        public static List<SponsorCommand> infoSponsorships { get; set; }
-        public MySponsorshipsPage()
+        public static List<SponsorCommand> infoNotices { get; set; }
+        public NoticesSponsorPage()
         {
             InitializeComponent();
-            infoSponsorships = ConnectionSponsorship.GetSponsorshipAccepted(CurrentUser.spon.idSponsor);
+            infoNotices = ConnectionSponsorship.GetSponsorships().Where(a=> a.idSponsor == CurrentUser.spon.idSponsor).ToList();
             this.DataContext = this;
-        }
-
-        private void btnSendRequest_Click(object sender, RoutedEventArgs e)
-        {
-            Manager.MainFrame.NavigationService.Navigate(new SendRequestPage());
         }
     }
 }

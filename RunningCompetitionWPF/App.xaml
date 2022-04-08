@@ -26,5 +26,8 @@
         <Style TargetType="TextBox">
             <Setter Property="FontSize" Value="20"></Setter>
         </Style>
+        <Style TargetType="MenuItem">
+            <Setter Property="FontSize" Value="18"></Setter>
+        </Style>
     </Application.Resources>
 </Application>

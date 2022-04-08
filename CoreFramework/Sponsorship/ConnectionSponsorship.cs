@@ -12,9 +12,9 @@ namespace CoreFramework
     public class ConnectionSponsorship 
     {
 
-        public static List<SponsorCommand> GetSponsorship(int idSponsor)
+        public static List<SponsorCommand> GetSponsorshipAccepted(int idSponsor)
         {
-            List<SponsorCommand> commands = GetSponsorshipViewerAdmin();
+            List<SponsorCommand> commands = GetAcceptedRequest();
             return commands.Where(tt => tt.idSponsor == idSponsor).ToList();
         }
 
@@ -23,23 +23,28 @@ namespace CoreFramework
             return new List<SponsorCommand>(bdConnection.connection.SponsorCommand.ToList()).Where(a => a.idStatus == 1).ToList();
         }
 
+        public static List<SponsorCommand> GetSponsorships()
+        {
+            return new List<SponsorCommand>(bdConnection.connection.SponsorCommand.ToList());
+        }
+
         public static bool IsAddTrue(int idSponsor, int idCommand)
         {
-            List<SponsorCommand> commands = GetSponsorship(idSponsor);
+            List<SponsorCommand> commands = GetSponsorshipAccepted(idSponsor);
             if (commands.Where(tt => tt.idSponsor == idSponsor && tt.idCom == idCommand && tt.DateEnd > DateTime.Now).Count() != 0)
                 return false;
             else
                 return true;                
         }
 
-        public static List<SponsorCommand> GetSponsorshipViewerAdmin()
+        public static List<SponsorCommand> GetAcceptedRequest()
         {
             return new List<SponsorCommand>(bdConnection.connection.SponsorCommand.ToList()).Where(a => a.idStatus == 3).ToList();
         }
 
         public static SponsorCommand GetSponsorshipId(int id)
         {
-            List<SponsorCommand> commands = GetSponsorshipViewerAdmin();
+            List<SponsorCommand> commands = GetAcceptedRequest();
             return commands.Where(tt => tt.id == id).FirstOrDefault();
         }
 

@@ -11,18 +11,18 @@ namespace RunningCompetitionsASP_MVC.Controllers
     {
         public IActionResult Index()
         {
-            var sponsorships = ConnectionSponsorship.GetSponsorship(CurrentUser.user.idUser);
+            var sponsorships = ConnectionSponsorship.GetSponsorshipAccepted(CurrentUser.user.idUser);
             return View(sponsorships);
         }
 
         public IActionResult IndexAdmin()
         {
-            var sponsorships = ConnectionSponsorship.GetSponsorshipViewerAdmin();
+            var sponsorships = ConnectionSponsorship.GetAcceptedRequest();
             return View(sponsorships);
         }
         public IActionResult IndexViewer()
         {
-            var sponsorships = ConnectionSponsorship.GetSponsorshipViewerAdmin();
+            var sponsorships = ConnectionSponsorship.GetAcceptedRequest();
             return View(sponsorships);
         }
 
