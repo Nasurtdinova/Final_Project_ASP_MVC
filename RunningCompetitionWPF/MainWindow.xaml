@@ -5,45 +5,97 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RunningCompetitionWPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid >
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition>
-            </ColumnDefinition>
-            <ColumnDefinition Width="*">
-            </ColumnDefinition>
-            <ColumnDefinition Width="4*">
-            </ColumnDefinition>
-            <ColumnDefinition Width="4*"></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition Height="70"></RowDefinition>
-            <RowDefinition Height="9*"></RowDefinition>
-            <RowDefinition></RowDefinition>
-        </Grid.RowDefinitions>
-        <Menu  Height="50" Background="#FFCAEAF4" Name="menu" Grid.Column="1" Grid.ColumnSpan="3">
+        Title="Running competitions" Height="450" Width="800"
+    WindowStartupLocation="CenterScreen" Icon="C:\Users\nasur\Source\Repos\Final_Project_ASP_MVC_Clone\RunningCompetitionWPF\icons\logoWindow.png">
+    <Grid Background="#FFD6D6D6">
+        <Frame x:Name="frame_auto_reg" Margin="33,55,0,0"/>
+        <Grid x:Name="panelHeader" VerticalAlignment="Top" Height="50" Background="#FF0F4E7A" MouseDown="panelHeader_MouseDown">
+            <TextBlock Text="Running competitions" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Century Gothic" FontSize="25" Foreground="White"/>
+        </Grid>
+        <Grid x:Name="sidePanel" Background="#FF0F4E7A" HorizontalAlignment="Left" Width="170">
+            <StackPanel>
+                <Grid Height="150" Background="White">
+                    <Image x:Name="mainIcon" Source="C:\Users\nasur\Source\Repos\Final_Project_ASP_MVC_Clone\RunningCompetitionWPF\icons\main.png" Width="130"></Image>
+                    <Button HorizontalAlignment="Right" Height="20" VerticalAlignment="Top" Background="Transparent" BorderBrush="Transparent" Click="Button_Click">
+                        <Image Source="C:\Users\nasur\Source\Repos\Final_Project_ASP_MVC_Clone\RunningCompetitionWPF\icons\menu.png"/>
+                    </Button>
+                </Grid>
+                <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" FontFamily="Century Gothic" FontSize="14" Foreground="White" BorderBrush="Transparent" Background="Transparent" FontWeight="Bold">
+                    <ListViewItem Height="30">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="C:\Users\nasur\Source\Repos\Final_Project_ASP_MVC_Clone\RunningCompetitionWPF\icons\home1.png" Height="20" VerticalAlignment="Center"/>
+                            <Button FontWeight="Bold" Margin="15 0 0 0" Content="Home" Click="mainPage_Click" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    
+                    <ListViewItem Height="30">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="C:\Users\nasur\Source\Repos\Final_Project_ASP_MVC_Clone\RunningCompetitionWPF\icons\sportsmans.png" Height="20" VerticalAlignment="Center"/>
+                            <Button FontWeight="Bold" Margin="15 0 0 0" Content="Sportsmans" Click="sportsman_click" Name="sportsman" VerticalAlignment="Center"/>
+                            <Button FontWeight="Bold" Margin="15 0 0 0" Content="Sportsmans" Click="sportsmanAdmin_Click" Name="sportsmanAdmin" VerticalAlignment="Center" Visibility="Collapsed"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Height="30">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="C:\Users\nasur\Source\Repos\Final_Project_ASP_MVC_Clone\RunningCompetitionWPF\icons\team1.png" Height="20" VerticalAlignment="Center"/>
+                            <Button FontWeight="Bold" Margin="15 0 0 0" Content="Command" Name="command" Click="command_click" VerticalAlignment="Center"/>
+                            <Button FontWeight="Bold" Margin="15 0 0 0" Content="Command" Name="commandAdmin" Click="commandAdmin_Click" VerticalAlignment="Center" Visibility="Collapsed"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Height="30">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="C:\Users\nasur\Source\Repos\Final_Project_ASP_MVC_Clone\RunningCompetitionWPF\icons\competition1.png" Height="20" VerticalAlignment="Center"/>
+                            <Button FontWeight="Bold" Margin="15 0 0 0" Content="Competition" Name="competition" Click="competition_click" VerticalAlignment="Center"/>
+                            <Button FontWeight="Bold" Margin="15 0 0 0" Content="Competition" Name="competitionAdmin" Click="competitionAdmin_Click" VerticalAlignment="Center" Visibility="Collapsed"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Height="30">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="C:\Users\nasur\Source\Repos\Final_Project_ASP_MVC_Clone\RunningCompetitionWPF\icons\result1.png" Height="20" VerticalAlignment="Center"/>
+                            <Button FontWeight="Bold" Margin="15 0 0 0" Content="Results" Name="resultCompetition" Click="resultCompetition_Click" VerticalAlignment="Center"/>
+                            <Button FontWeight="Bold" Margin="15 0 0 0" Content="Results" Name="resultCompetitionAdmin" Click="resultCompetitionAdmin_Click" Visibility="Collapsed" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Height="30" Name="noticesSponsor"  Visibility="Collapsed">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="C:\Users\nasur\Source\Repos\Final_Project_ASP_MVC_Clone\RunningCompetitionWPF\icons\messages1.png"  Height="20" VerticalAlignment="Center"/>
+                            <Button FontWeight="Bold" Margin="15 0 0 0" Content="Notices" Click="noticesSponsor_Click"  VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Height="30" Name="messagesAdmin" Visibility="Collapsed">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="C:\Users\nasur\Source\Repos\Final_Project_ASP_MVC_Clone\RunningCompetitionWPF\icons\messages1.png"  Height="20" VerticalAlignment="Center"/>
+                            <Button FontWeight="Bold" Margin="15 0 0 0" Content="Messages" Click="messagesAdmin_Click"  VerticalAlignment="Center"/>
+                          
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Height="30" Name="mySponsorshipsSponsor" Visibility="Collapsed">
+                        <StackPanel Orientation="Horizontal" >
+                            <Image Source="C:\Users\nasur\Source\Repos\Final_Project_ASP_MVC_Clone\RunningCompetitionWPF\icons\sponsorships.png" Name="mySponsorshipsIcon"  Height="20" VerticalAlignment="Center"/>
+                            <Button FontWeight="Bold" Margin="15 0 0 0" Content="My sponsorships" Click="mySponsorshipsSponsor_Click"  VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Height="30" Name="registr">
+                        <StackPanel Orientation="Horizontal" >
+                            <Image Source="C:\Users\nasur\Source\Repos\Final_Project_ASP_MVC_Clone\RunningCompetitionWPF\icons\registration.png" Name="registrIcon" Height="20" VerticalAlignment="Center"/>
+                            <Button FontWeight="Bold" Margin="15 0 0 0" Content="Sign up" Click="registr_Click"  VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Height="30" Name="login">
+                        <StackPanel Orientation="Horizontal" >
+                            <Image Source="C:\Users\nasur\Source\Repos\Final_Project_ASP_MVC_Clone\RunningCompetitionWPF\icons\authorization.png" Height="20" VerticalAlignment="Center"/>
+                            <Button FontWeight="Bold" Margin="15 0 0 0" Content="Sign in" Click="login_Click" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Height="30" Name="exit" Visibility="Collapsed">
+                        <StackPanel Orientation="Horizontal" >
+                            <Image Source="C:\Users\nasur\Source\Repos\Final_Project_ASP_MVC_Clone\RunningCompetitionWPF\icons\exit.png" Height="20" VerticalAlignment="Center"/>
 
-            <MenuItem Header="Main" x:Name="mainPage" Click="mainPage_Click"/>
-                <MenuItem Header="Competitions" x:Name="competition" Click="competition_click"/>
-                <MenuItem Header="Competitions" x:Name="competitionAdmin" Click="competitionAdmin_Click" Visibility="Collapsed"/>
-                <MenuItem Header="Sportsmans" x:Name="sportsman" Click="sportsman_click"/>
-                <MenuItem Header="Sportsmans" x:Name="sportsmanAdmin" Click="sportsmanAdmin_Click" Visibility="Collapsed"/>
-                <MenuItem Header="Commands" x:Name="command" Click="command_click"/>
-                <MenuItem Header="Commands" x:Name="commandAdmin" Click="commandAdmin_Click" Visibility="Collapsed"/>
-                <MenuItem Header="Result competitions" x:Name="resultCompetition" Click="resultCompetition_Click"/>
-                <MenuItem Header="Result competitions" x:Name="resultCompetitionAdmin" Click="resultCompetitionAdmin_Click" Visibility="Collapsed"/>
-                <MenuItem Header="Messages" x:Name="messagesAdmin" Click="messagesAdmin_Click" Visibility="Collapsed"/>
-            <MenuItem Header="Notices" x:Name="noticesSponsor" Click="noticesSponsor_Click" Visibility="Collapsed"/>
-            <MenuItem Header="My sponsorships" x:Name="mySponsorshipsSponsor" Click="mySponsorshipsSponsor_Click" Visibility="Collapsed"/>
-            <MenuItem Header="Exit" x:Name="exit" Click="exit_Click" Visibility="Collapsed"/>
-        </Menu>
-        <Image Source="C:\Users\nasur\source\repos\RunningCompetitions\RunningCompetitions\img\image 1.jpg" Width="200" Height="55" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" />
-        <StackPanel Grid.Row="1"  Grid.Column="3" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Left">
-            <Button x:Name="registr" Content="Sign up" Click="registr_Click" Grid.Column="3" Width="120" Margin="10" Grid.Row="1"/>
-            <Button x:Name="login" Grid.Row="1" Content="Sign in" Click="login_Click" Grid.Column="2" Margin="10" Width="120"/>
-        </StackPanel>
-        <Frame x:Name="frame_auto_reg" NavigationUIVisibility="Hidden" Grid.ColumnSpan="3" Background="#FFCAEAF4" Grid.Row="2" Grid.Column="1"></Frame>
+                            <Button FontWeight="Bold" Margin="15 0 0 0" Content="Exit" Click="exit_Click"  VerticalAlignment="Center" />
+                        </StackPanel>
+                    </ListViewItem>
+                </ListView>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>

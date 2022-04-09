@@ -13,17 +13,22 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace RunningCompetitionWPF
 {
     public partial class MainWindow : Window
     {
+        DispatcherTimer timer;
+
+        double panelWidth;
+        bool hidden;
         public MainWindow()
         {
             InitializeComponent();
             
             Manager.MainFrame = frame_auto_reg;
-            Manager.MainMenu = menu;
+           // Manager.MainMenu = menu;
 
             Manager.SportsmansAdmin = sportsmanAdmin;
             Manager.Sportsmans = sportsman;
@@ -44,8 +49,35 @@ namespace RunningCompetitionWPF
             Manager.Authorization = login;
             Manager.Registration = registr;
             Manager.Exit = exit;
-           
+            timer = new DispatcherTimer();
+            timer.Interval = new TimeSpan(0, 0, 0, 0, 2);
+            timer.Tick += Timer_Tick;
+
+            panelWidth = sidePanel.Width;
             frame_auto_reg.Navigate(new ViewerMainPage());
+        }
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            if (hidden)
+            {
+                mainIcon.Visibility = Visibility.Visible;
+                sidePanel.Width += 1;
+                if (sidePanel.Width >= panelWidth)
+                {
+                    timer.Stop();
+                    hidden = false;
+                }
+            }
+            else
+            {
+                mainIcon.Visibility = Visibility.Hidden;
+                sidePanel.Width -= 1;
+                if (sidePanel.Width <= 35)
+                {
+                    timer.Stop();
+                    hidden = true;
+                }
+            }
         }
 
         private void sportsman_click(object sender, RoutedEventArgs e)
@@ -82,7 +114,7 @@ namespace RunningCompetitionWPF
         private void competitionAdmin_Click(object sender, RoutedEventArgs e)
         {
             Manager.CollapsedAuthReg();
-            Manager.MainFrame.Navigate(new AdminCompetitionsPage());          
+            Manager.MainFrame.Navigate(new AdminCompetitionsPage());
         }
 
         private void registr_Click(object sender, RoutedEventArgs e)
@@ -133,6 +165,21 @@ namespace RunningCompetitionWPF
         private void noticesSponsor_Click(object sender, RoutedEventArgs e)
         {
             Manager.MainFrame.Navigate(new NoticesSponsorPage());
+        }
+
+
+        private void panelHeader_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                DragMove();
+            }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            timer.Start();
+            
         }
     }
 }

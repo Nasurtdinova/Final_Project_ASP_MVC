@@ -10,25 +10,25 @@ namespace RunningCompetitionWPF
         public static Frame MainFrame { get; set; }
         public static Menu MainMenu { get; set; }
 
-        public static Button Authorization { get; set; }
-        public static Button Registration { get; set; }
-        public static MenuItem Exit { get; set; }
+        public static ListViewItem Authorization { get; set; }
+        public static ListViewItem Registration { get; set; }
+        public static ListViewItem Exit { get; set; }
 
-        public static MenuItem SportsmansAdmin { get; set; }
-        public static MenuItem Sportsmans { get; set; }
+        public static Button SportsmansAdmin { get; set; }
+        public static Button Sportsmans { get; set; }
 
-        public static MenuItem CommandsAdmin { get; set; }
-        public static MenuItem Commands { get; set; }
+        public static Button CommandsAdmin { get; set; }
+        public static Button Commands { get; set; }
 
-        public static MenuItem CompetitionsAdmin { get; set; }
-        public static MenuItem Competitions { get; set; }
+        public static Button CompetitionsAdmin { get; set; }
+        public static Button Competitions { get; set; }
 
-        public static MenuItem ResultCompetitionsAdmin { get; set; }
-        public static MenuItem ResultCompetitions { get; set; }
+        public static Button ResultCompetitionsAdmin { get; set; }
+        public static Button ResultCompetitions { get; set; }
 
-        public static MenuItem MySponsorshipsSponsor { get; set; }
-        public static MenuItem MessagesAdmin { get; set; }
-        public static MenuItem NoticesSponsor { get; set; }
+        public static ListViewItem MySponsorshipsSponsor { get; set; }
+        public static ListViewItem MessagesAdmin { get; set; }
+        public static ListViewItem NoticesSponsor { get; set; }
 
         public static void DoAdmin()
         {

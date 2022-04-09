@@ -4,21 +4,9 @@
              xmlns:local="clr-namespace:RunningCompetitionWPF"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <Style TargetType="Button">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border CornerRadius="10" Background="#FFA0D0F1" Padding="10">
-                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
-                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Setter Property="FontSize" Value="20"></Setter>
-        </Style>
         <Style TargetType="TextBlock">
             <Setter Property="FontSize" Value="20"></Setter>
+            <Setter Property="FontFamily" Value="Century Gothic"></Setter>
         </Style>
         <Style TargetType="ComboBox">
             <Setter Property="FontSize" Value="20"></Setter>

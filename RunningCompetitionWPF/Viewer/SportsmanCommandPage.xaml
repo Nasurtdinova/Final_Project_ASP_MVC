@@ -19,7 +19,7 @@
             <RowDefinition Height="70">
             </RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock Text="Sportsmans in command" FontSize="35" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+        <TextBlock Text="Sportsmans in command" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
         <ListView Grid.Row="1" ItemsSource="{Binding infoSportsmansCommand}" Name="lvCommands">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -38,8 +38,8 @@
                             </TextBlock.Text>
                         </TextBlock>
                         <Image Source="{Binding Image}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="400" Height="250"/>
-                        <TextBlock Text="{Binding Surname}" FontFamily="Lucida Calligraphy" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22"/>
-                        <TextBlock Text="{Binding Name}" FontFamily="Lucida Calligraphy" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22"/>
+                        <TextBlock Text="{Binding Surname}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+                        <TextBlock Text="{Binding Name}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
