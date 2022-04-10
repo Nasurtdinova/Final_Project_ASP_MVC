@@ -13,14 +13,14 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="60">
+            <RowDefinition Height="40">
             </RowDefinition>
-            <RowDefinition Height="380">
+            <RowDefinition Height="540">
             </RowDefinition>
-            <RowDefinition Height="70">
+            <RowDefinition Height="50">
             </RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock Text="Sportsmans" FontSize="35" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+        <TextBlock Text="Sportsmans" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
         <ListView Grid.Row="1" ItemsSource="{Binding infoSportsmans}" Name="lvSportsmans">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -39,16 +39,16 @@
                             </TextBlock.Text>
                         </TextBlock>
                         <Image Source="{Binding Image}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="400" Height="220"/>
-                        <TextBlock Text="{Binding Surname}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22"/>
-                        <TextBlock Text="{Binding Name}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22"/>
-                        <Button Content="Edit" Name="btnEdit" Click="btnEdit_Click" Width="100"></Button>
+                        <TextBlock Text="{Binding Surname}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding Name}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Button Content="Edit" Background="#FFA0D0F1" Name="btnEdit" Click="btnEdit_Click" Margin="10" Width="100"></Button>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
         <StackPanel Grid.Row="2" HorizontalAlignment="Center" Orientation="Horizontal">
-            <Button Content="Add"  HorizontalAlignment="Left" Name="btnAdd" Click="btnAdd_Click" Margin="10"></Button>
-            <Button Content="Remove" HorizontalAlignment="Right" Name="btnRemove" Click="btnRemove_Click" Margin="10"></Button>
+            <Button Content="Add" Background="#FFA0D0F1" Width="100" HorizontalAlignment="Left" Name="btnAdd" Click="btnAdd_Click" Margin="10"></Button>
+            <Button Content="Remove" Background="#FFA0D0F1" Width="100" HorizontalAlignment="Right" Name="btnRemove" Click="btnRemove_Click" Margin="10"></Button>
         </StackPanel>
     </Grid>
 </Page>

@@ -38,18 +38,14 @@ namespace RunningCompetitionWPF.Admin
 
         private void btnRemove_Click(object sender, RoutedEventArgs e)
         {
-            var commandsForRemoving = lvCommands.SelectedItems.Cast<Command>().ToList();
+            var command = (sender as Button).DataContext as Command;
 
-            if (MessageBox.Show($"Вы точно хотите удалить следующие {commandsForRemoving.Count()} элементов", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            if (MessageBox.Show($"Вы точно хотите удалить {command.Name}?", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
                 try
                 {
-                    foreach (var i in commandsForRemoving)
-                    {
-                        ConnectionCommands.RemoveCommand(i.idCommand);
-                    }
-
-                    lvCommands.ItemsSource = ConnectionCompetitions.GetCompetitions().ToList();
+                    ConnectionCommands.RemoveCommand(command.idCommand);
+                    lvCommands.ItemsSource = ConnectionCommands.GetCommands().ToList();
                     MessageBox.Show("Данные удалены");
                 }
                 catch (Exception ex)

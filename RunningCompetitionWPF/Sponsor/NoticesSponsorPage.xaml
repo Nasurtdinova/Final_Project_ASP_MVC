@@ -13,14 +13,12 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="60">
+            <RowDefinition Height="40">
             </RowDefinition>
-            <RowDefinition Height="380">
-            </RowDefinition>
-            <RowDefinition Height="80">
+            <RowDefinition Height="550">
             </RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock Text="Notices" FontSize="35" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+        <TextBlock Text="Notices" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
         <ListView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{Binding infoNotices}" Name="lvMessages">
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -29,7 +27,6 @@
                         <TextBlock Text="{Binding Command.Name }" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         <TextBlock Text="{Binding Status.Name }" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         <TextBlock Text="вашу заявку на спонсирование команды" />
-
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>

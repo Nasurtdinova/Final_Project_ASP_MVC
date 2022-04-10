@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CoreFramework;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Controls;
@@ -43,12 +44,14 @@ namespace RunningCompetitionWPF
             SportsmansAdmin.Visibility = System.Windows.Visibility.Visible;
             CommandsAdmin.Visibility = System.Windows.Visibility.Visible;
             CompetitionsAdmin.Visibility = System.Windows.Visibility.Visible;
+            NoticesSponsor.Visibility = System.Windows.Visibility.Collapsed;
             ResultCompetitionsAdmin.Visibility = System.Windows.Visibility.Visible;
+            MySponsorshipsSponsor.Visibility = System.Windows.Visibility.Collapsed;
         }
 
         public static void DoViewer()
         {
-            VisibleAuthReg();
+            VisibleCollapsedAuthReg();
 
             Exit.Visibility = System.Windows.Visibility.Collapsed;
 
@@ -63,6 +66,7 @@ namespace RunningCompetitionWPF
             ResultCompetitionsAdmin.Visibility = System.Windows.Visibility.Collapsed;
             MessagesAdmin.Visibility = System.Windows.Visibility.Collapsed;
             NoticesSponsor.Visibility = System.Windows.Visibility.Collapsed;
+            MySponsorshipsSponsor.Visibility = System.Windows.Visibility.Collapsed;
         }
 
         public static void DoSponsor()
@@ -91,11 +95,18 @@ namespace RunningCompetitionWPF
             Authorization.Visibility = System.Windows.Visibility.Collapsed;
         }
 
-        public static void VisibleAuthReg()
+        public static void VisibleCollapsedAuthReg()
         {
-            
-            Registration.Visibility = System.Windows.Visibility.Visible;
-            Authorization.Visibility = System.Windows.Visibility.Visible;
+            if (CurrentUser.user != null)
+            {
+                Registration.Visibility = System.Windows.Visibility.Collapsed;
+                Authorization.Visibility = System.Windows.Visibility.Collapsed;
+            }
+            else
+            {
+                Registration.Visibility = System.Windows.Visibility.Visible;
+                Authorization.Visibility = System.Windows.Visibility.Visible;
+            }
         }
     }
 }

@@ -13,15 +13,13 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="60">
+            <RowDefinition Height="40">
             </RowDefinition>
-            <RowDefinition Height="380">
+            <RowDefinition Height="580">
             </RowDefinition>
-            <RowDefinition Height="80">
-            </RowDefinition>
-            
+
         </Grid.RowDefinitions>
-        <TextBlock Text="Messages" Grid.Column="0" Grid.ColumnSpan="2" FontSize="35" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+        <TextBlock Text="Messages" Grid.Column="0" Grid.ColumnSpan="2" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
         <ListView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{Binding infoMessages}" Name="lvMessages" SelectionChanged="lvMessages_SelectionChanged">
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -31,7 +29,6 @@
                         <TextBlock Text="{Binding Sponsor.Name }" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         <TextBlock Text="отправил запрос на спонсирование команды" />
                         <TextBlock Text="{Binding Command.Name }" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        <TextBlock Text="{Binding Sponsor.Name }" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>

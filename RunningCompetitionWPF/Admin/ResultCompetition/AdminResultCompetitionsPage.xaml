@@ -13,32 +13,32 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="60">
+            <RowDefinition Height="40">
             </RowDefinition>
-            <RowDefinition Height="340">
+            <RowDefinition Height="550">
             </RowDefinition>
-            <RowDefinition Height="70">
+            <RowDefinition Height="50">
             </RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock Text="Result competition" FontSize="35" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
-        <DataGrid x:Name="dgResultCompetitions" Grid.Row="1" FontSize="18" Width="800" AutoGenerateColumns="False" ItemsSource="{Binding infoResultCompet}" IsReadOnly="True">
+        <TextBlock Text="Result competition" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+        <DataGrid x:Name="dgResultCompetitions" Grid.Row="1" FontSize="18" Width="828" AutoGenerateColumns="False" ItemsSource="{Binding infoResultCompet}" IsReadOnly="True">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Название соревнования" Binding="{Binding Competition.Name}" Width="250"></DataGridTextColumn>
+                <DataGridTextColumn Header="Название соревнования" Binding="{Binding Competition.Name}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Дата проведения" Binding="{Binding Competition.Date, StringFormat='dd.MM.yyyy hh:mm'}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Название команды" Binding="{Binding Command.Name}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Место" Binding="{Binding Rank}"></DataGridTextColumn>
                 <DataGridTemplateColumn Width="100">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Edit" Name="btnEdit" Click="btnEdit_Click"></Button>
+                            <Button Content="Edit" Background="#FFA0D0F1" Name="btnEdit" Click="btnEdit_Click"></Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Grid.Row="2" HorizontalAlignment="Center" Orientation="Horizontal">
-            <Button Content="Add"  HorizontalAlignment="Left" Name="btnAdd" Click="btnAdd_Click" Grid.Column="0" Margin="10"></Button>
-            <Button Content="Remove" HorizontalAlignment="Right" Name="btnRemove" Click="btnRemove_Click" Grid.Column="1" Margin="10"></Button>
+            <Button Content="Add" Background="#FFA0D0F1" HorizontalAlignment="Left" Name="btnAdd" Click="btnAdd_Click" Grid.Column="0" Margin="10"></Button>
+            <Button Content="Remove" Background="#FFA0D0F1" HorizontalAlignment="Right" Name="btnRemove" Click="btnRemove_Click" Grid.Column="1" Margin="10"></Button>
         </StackPanel>
     </Grid>
 </Page>

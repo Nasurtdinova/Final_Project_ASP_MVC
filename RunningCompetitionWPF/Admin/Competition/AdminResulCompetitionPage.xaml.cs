@@ -33,11 +33,6 @@ namespace RunningCompetitionWPF
 
         }
 
-        private void btnRemove_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
             Manager.MainFrame.NavigationService.GoBack();

@@ -12,11 +12,11 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="60">
+            <RowDefinition Height="40">
             </RowDefinition>
-            <RowDefinition Height="380">
+            <RowDefinition Height="550">
             </RowDefinition>
-            <RowDefinition Height="70">
+            <RowDefinition Height="50">
             </RowDefinition>
         </Grid.RowDefinitions>
         <TextBlock Text="Sportsmans in command" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
@@ -45,6 +45,6 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <Button Content="Back" Grid.Row="2" HorizontalAlignment="Center" Name="btnBack" Click="btnBack_Click" Height="50"></Button>
+        <Button Content="Back" Background="#FFA0D0F1" Grid.Row="2" HorizontalAlignment="Center" Name="btnBack" Click="btnBack_Click" Height="40"></Button>
     </Grid>
 </Page>

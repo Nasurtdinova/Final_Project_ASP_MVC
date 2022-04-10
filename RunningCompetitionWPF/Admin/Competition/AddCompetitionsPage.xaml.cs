@@ -51,6 +51,7 @@ namespace RunningCompetitionWPF
             try
             {
                 MessageBox.Show("Информация сохранена");
+                Manager.MainFrame.Navigate(new AdminCompetitionsPage());
             }
             catch (Exception ex)
             {

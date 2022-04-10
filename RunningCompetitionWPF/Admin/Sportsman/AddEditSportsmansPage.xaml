@@ -10,23 +10,23 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition ></ColumnDefinition>
-            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition Width="450"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50">
+            <RowDefinition Height="80">
             </RowDefinition>
-            <RowDefinition Height="50">
+            <RowDefinition Height="80">
+            </RowDefinition>
+            <RowDefinition Height="80">
+            </RowDefinition>
+            <RowDefinition Height="80">
+            </RowDefinition>
+            <RowDefinition Height="80">
+            </RowDefinition>
+            <RowDefinition Height="170">
             </RowDefinition>
             <RowDefinition Height="60">
-            </RowDefinition>
-            <RowDefinition Height="70">
-            </RowDefinition>
-            <RowDefinition Height="60">
-            </RowDefinition>
-            <RowDefinition Height="150">
-            </RowDefinition>
-            <RowDefinition Height="70">
             </RowDefinition>
         </Grid.RowDefinitions>
         <TextBlock Text="Имя" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
@@ -44,11 +44,11 @@
         <ComboBox SelectedItem="{Binding Command}" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" DisplayMemberPath="Name" Name="comboCommand" Width="300" Height="50"></ComboBox>
         <StackPanel HorizontalAlignment="Center"  Grid.Column="1" Grid.Row="5" Orientation="Horizontal">
             <Image Source="{Binding Image}" Name="imgSportsman" HorizontalAlignment="Center" Width="300" Margin="10"></Image>
-            <Button Content="Load image" Margin="0" VerticalAlignment="Center" x:Name="btnLoadImage" Click="btnLoadImage_Click" Width="150" Height="50"/>
+            <Button Content="Load image" Background="#FFA0D0F1" Margin="0" VerticalAlignment="Center" x:Name="btnLoadImage" Click="btnLoadImage_Click" Width="150" Height="50"/>
         </StackPanel>
         <StackPanel Grid.Row="6" HorizontalAlignment="Center" Orientation="Horizontal" Grid.ColumnSpan="2">
-            <Button Content="Back" Width="100"  Name="btnBack" Click="btnBack_Click" Grid.Column="0" Margin="10"></Button>
-            <Button Width="100" Content="Save"  Click="btnSave_Click" Name="btnSave" Margin="10"></Button>
+            <Button Content="Back" Background="#FFA0D0F1" Width="100"  Name="btnBack" Click="btnBack_Click" Grid.Column="0" Margin="10"></Button>
+            <Button Width="100" Background="#FFA0D0F1" Content="Save"  Click="btnSave_Click" Name="btnSave" Margin="10"></Button>
         </StackPanel>
     </Grid>
 </Page>

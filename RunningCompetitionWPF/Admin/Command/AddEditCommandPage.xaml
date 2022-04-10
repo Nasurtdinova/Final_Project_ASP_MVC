@@ -14,16 +14,15 @@
             <ColumnDefinition Width="2*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="60">
+            <RowDefinition Height="120">
             </RowDefinition>
-            <RowDefinition Height="60">
+            <RowDefinition Height="100">
             </RowDefinition>
-            <RowDefinition Height="200">
+            <RowDefinition Height="220">
             </RowDefinition>
-
-            <RowDefinition Height="60">
+            <RowDefinition Height="100">
             </RowDefinition>
-            <RowDefinition Height="80">
+            <RowDefinition Height="100">
             </RowDefinition>
         </Grid.RowDefinitions>
         <TextBlock Text="Название команды" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
@@ -35,12 +34,12 @@
         <TextBox Text="{Binding Count}" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="300" Height="50"></TextBox>
         <ComboBox SelectedItem="{Binding City}" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" DisplayMemberPath="Name" Name="comboCities" Width="300" Height="50"></ComboBox>
         <StackPanel Grid.ColumnSpan="2" Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Grid.ColumnSpan="2" Grid.Row="6" Width="150" Content="Save" VerticalAlignment="Center" Margin="10" Click="btnSave_Click" Name="btnSave"></Button>
-            <Button Grid.ColumnSpan="2" Grid.Row="6" Width="100" Content="Back" VerticalAlignment="Center" Margin="10" Click="btnBack_Click" Name="btnBack"></Button>
+            <Button Width="100" Background="#FFA0D0F1" Content="Save" VerticalAlignment="Center" Margin="10" Click="btnSave_Click" Name="btnSave"></Button>
+            <Button Width="100" Background="#FFA0D0F1" Content="Back" VerticalAlignment="Center" Margin="10" Click="btnBack_Click" Name="btnBack"></Button>
         </StackPanel>
         <StackPanel HorizontalAlignment="Center"  Grid.Column="1" Grid.Row="2" Orientation="Horizontal">
             <Image Source="{Binding Image}" Name="imgCom" HorizontalAlignment="Center" Width="300" Margin="10"></Image>
-            <Button Content="Load image" Margin="0" VerticalAlignment="Center" x:Name="btnLoadImage" Click="btnLoadImage_Click" Width="150" Height="50"/>
+            <Button Content="Load image" Background="#FFA0D0F1" Margin="0" x:Name="btnLoadImage" Click="btnLoadImage_Click" Width="150" Height="50"/>
         </StackPanel>
     </Grid>
 </Page>

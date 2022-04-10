@@ -13,15 +13,13 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="60">
+            <RowDefinition Height="40">
             </RowDefinition>
-            <RowDefinition Height="400">
-            </RowDefinition>
-            <RowDefinition Height="70">
+            <RowDefinition Height="580">
             </RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock Text="Sportsmans" FontSize="35" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
-        <ListView Grid.Row="1" ItemsSource="{Binding infoSportsman}" Height="380">
+        <TextBlock Text="Sportsmans" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+        <ListView Grid.Row="1" ItemsSource="{Binding infoSportsman}">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <UniformGrid Columns="4" Width="1100"></UniformGrid>

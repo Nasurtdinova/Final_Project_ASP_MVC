@@ -9,6 +9,6 @@
       Title="ViewerMainPage">
 
     <Grid>
-        <Image Source="C:\Users\nasur\source\repos\RunningCompetitions\RunningCompetitions\img\image 1.jpg" Width="800" Height="255" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2"/>
+        <Image Source="C:\Users\nasur\Source\Repos\Final_Project_ASP_MVC_Clone\RunningCompetitionWPF\icons\mainLogo2.jpg" Width="700" Height="312" HorizontalAlignment="Center" VerticalAlignment="Center"/>
     </Grid>
 </Page>

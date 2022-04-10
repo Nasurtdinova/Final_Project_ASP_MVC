@@ -44,7 +44,7 @@ namespace RunningCompetitionWPF
             }
             else
             {
-                if (CurrentSportsman.idCommand == 0)
+                if (CurrentSportsman.ID == 0)
                     ConnectionSportsmans.AddSportsman(CurrentSportsman);
                 else
                     ConnectionSportsmans.UpdateSportsman(CurrentSportsman);

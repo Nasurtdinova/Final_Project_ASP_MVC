@@ -12,14 +12,14 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="60">
+            <RowDefinition Height="40">
             </RowDefinition>
-            <RowDefinition Height="380">
+            <RowDefinition Height="550">
             </RowDefinition>
-            <RowDefinition Height="70">
+            <RowDefinition Height="50">
             </RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock Text="Sportsmans in command" FontSize="35" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+        <TextBlock Text="Sportsmans in command" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
         <ListView Grid.Row="1" ItemsSource="{Binding infoSportsmansCommand}" Name="lvCommands" SelectionChanged="lvCommands_SelectionChanged">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -44,9 +44,9 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <StackPanel Grid.ColumnSpan="2" Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Center" >
-            <Button Content="Add sportsman" Grid.Row="2" Margin="10" Name="btnAdd" Click="btnAdd_Click" Grid.Column="0"></Button>
-            <Button Grid.ColumnSpan="2" Grid.Row="2" Content="Back" Margin="10" Click="btnBack_Click" Name="btnBack"></Button>
+        <StackPanel Grid.ColumnSpan="2" Grid.Row="2"  Orientation="Horizontal" HorizontalAlignment="Center" >
+            <Button Content="Add sportsman" Margin="10" Background="#FFA0D0F1" Name="btnAdd" Click="btnAdd_Click" Grid.Column="0"></Button>
+            <Button Grid.ColumnSpan="2" Grid.Row="2" Background="#FFA0D0F1" Content="Back" Margin="10" Click="btnBack_Click" Name="btnBack"></Button>
         </StackPanel>
     </Grid>
 </Page>

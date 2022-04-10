@@ -11,20 +11,20 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition ></ColumnDefinition>
-            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition ></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="80">
+            <RowDefinition Height="130">
             </RowDefinition>
-            <RowDefinition Height="80">
+            <RowDefinition Height="100">
             </RowDefinition>
-            <RowDefinition Height="80">
+            <RowDefinition Height="100">
             </RowDefinition>
-            <RowDefinition Height="80">
+            <RowDefinition Height="100">
             </RowDefinition>
-            <RowDefinition Height="80">
+            <RowDefinition Height="120">
             </RowDefinition>
-            <RowDefinition Height="80">
+            <RowDefinition Height="50">
             </RowDefinition>
         </Grid.RowDefinitions>
         <TextBlock Text="Название команды" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
@@ -39,8 +39,8 @@
         <TextBox Name="textAmount" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="300" Height="50"></TextBox>
         <TextBox Name="textBenefit" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" Width="300" Height="50"></TextBox>
         <StackPanel Grid.Row="5" HorizontalAlignment="Center" Orientation="Horizontal" Grid.ColumnSpan="2">
-            <Button Content="Back" Width="100"  Name="btnBack" Click="btnBack_Click" Margin="10"></Button>
-            <Button   Width="100" Content="Send" Click="btnSend_Click" Margin="10" Name="btnSend"></Button>
+            <Button Background="#FFA0D0F1" Content="Back" Width="100"  Name="btnBack" Click="btnBack_Click" Margin="10"></Button>
+            <Button Background="#FFA0D0F1" Width="100" Content="Send" Click="btnSend_Click" Margin="10" Name="btnSend"></Button>
         </StackPanel>
     </Grid>
 </Page>

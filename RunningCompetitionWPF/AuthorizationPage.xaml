@@ -9,19 +9,19 @@
       Title="AuthorizationPage">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition  Width="350">
+            <ColumnDefinition  Width="500">
             </ColumnDefinition>
             <ColumnDefinition>
             </ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="100">
+            <RowDefinition Height="150">
             </RowDefinition>
             <RowDefinition Height="120">
             </RowDefinition>
             <RowDefinition Height="120">
             </RowDefinition>
-            <RowDefinition Height="100">
+            <RowDefinition Height="120">
             </RowDefinition>
         </Grid.RowDefinitions>
         <TextBlock Text="Authorization" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="35" ></TextBlock>
@@ -30,8 +30,8 @@
         <TextBox x:Name="txt_login" HorizontalAlignment="Center"  VerticalAlignment="Center" Height="80" FontSize="25" Width="400" Grid.Row="1" Grid.Column="1"></TextBox>
         <PasswordBox x:Name="txt_password" HorizontalAlignment="Center"  VerticalAlignment="Center" Height="80" Width="400" FontSize="25" Grid.Row="2" Grid.Column="1"></PasswordBox>
         <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="4" Grid.ColumnSpan="2">
-            <Button x:Name="brnLogin" Content="Sign in" Click="brnLogin_Click" Grid.Row="3" Margin="10"  Width="150"></Button>
-            <Button x:Name="btnRegister" Content="Sign up" Click="btnRegister_Click" Grid.Row="3"  Width="150" Margin="10"></Button>
+            <Button x:Name="brnLogin" Background="#FFA0D0F1" Content="Sign in" Click="brnLogin_Click" Grid.Row="3" Margin="10"  Width="150"></Button>
+            <Button x:Name="btnRegister" Background="#FFA0D0F1" Content="Sign up" Click="btnRegister_Click" Grid.Row="3" Height="40" Width="150" Margin="10"></Button>
         </StackPanel>
     </Grid>
 </Page>
