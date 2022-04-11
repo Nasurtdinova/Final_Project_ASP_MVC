@@ -27,7 +27,7 @@ namespace CoreFramework
 
         public static ObservableCollection<Command> GetCommands()
         {
-            return new ObservableCollection<Command>(bdConnection.connection.Command.ToList());           
+            return new ObservableCollection<Command>(bdConnection.connection.Command.ToList().Where(a => a.IsDeleted == false));           
         }
 
         public static void AddCommand(Command command)
@@ -52,7 +52,7 @@ namespace CoreFramework
             try
             {
                 Command com = bdConnection.connection.Command.FirstOrDefault(p => p.idCommand == id);
-                bdConnection.connection.Command.Remove(com);
+                com.IsDeleted = true;
                 bdConnection.connection.SaveChanges();
             }
             catch (Exception ex) // Exception исправить

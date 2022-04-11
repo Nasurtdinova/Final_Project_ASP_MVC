@@ -52,7 +52,7 @@ namespace RunningCompetitionWPF
                 Manager.MainFrame.NavigationService.Navigate(new MySponsorshipsPage());
             }
             else
-                MessageBox.Show("Вы спонсируете эту команду");
+                MessageBox.Show("Вы спонсируете эту команду!");
           
         }
 

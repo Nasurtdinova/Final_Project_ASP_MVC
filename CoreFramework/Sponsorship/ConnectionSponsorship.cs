@@ -32,9 +32,9 @@ namespace CoreFramework
         {
             List<SponsorCommand> commands = GetSponsorshipAccepted(idSponsor);
             if (commands.Where(tt => tt.idSponsor == idSponsor && tt.idCom == idCommand && tt.DateEnd > DateTime.Now).Count() != 0)
-                return false;
+                return true;
             else
-                return true;                
+                return false;                
         }
 
         public static List<SponsorCommand> GetAcceptedRequest()

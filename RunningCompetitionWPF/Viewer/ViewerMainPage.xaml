@@ -8,7 +8,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ViewerMainPage">
 
-    <Grid>
-        <Image Source="C:\Users\nasur\Source\Repos\Final_Project_ASP_MVC_Clone\RunningCompetitionWPF\icons\mainLogo2.jpg" Width="700" Height="312" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    <Grid Background="White">
+        <Image Source="C:\Users\nasur\Source\Repos\Final_Project_ASP_MVC_Clone\RunningCompetitionWPF\icons\mainLogo2.jpg" Width="1000" Height="560" HorizontalAlignment="Center" VerticalAlignment="Center"/>
     </Grid>
 </Page>

@@ -11,7 +11,6 @@ namespace CoreFramework
     public class Connection
     {
         public static List<City> Cities { get; set; }
-        public static List<Images> Images { get; set; }
         public static List<Users> Users { get; set; }
         public static List<Title> Titles { get; set; }
 
@@ -33,14 +32,19 @@ namespace CoreFramework
         {
             return new List<Users>(bdConnection.connection.Users.ToList());
         }
+
+        public static bool IsCoinsLogin(string login)
+        {
+            List<Users> users = GetUsers();
+            if (users.Where(a => a.Email == login).ToList().Count != 0)
+                return true;
+            else
+                return false;
+        }
+
         public static List<City> GetCities()
         {
             return new List<City>(bdConnection.connection.City.ToList());
-        }
-
-        public static List<Images> GetImages()
-        {
-            return new List<Images>(bdConnection.connection.Images.ToList());
         }
 
         public static List<Title> GetTitles()
@@ -82,13 +86,6 @@ namespace CoreFramework
             {
                 Console.WriteLine(ex.Message);
             }
-        }
-
-        public static Images AddImages(Images img)
-        { 
-            bdConnection.connection.Images.Add(img);
-            bdConnection.connection.SaveChanges();
-            return GetImages().LastOrDefault();
         }
 
         public static List<string> GetNameTitles()

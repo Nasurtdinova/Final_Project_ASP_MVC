@@ -17,14 +17,13 @@ namespace CoreFramework
         public int ID { get; set; }
         public string Surname { get; set; }
         public string Name { get; set; }
-        public Nullable<int> ID_Image { get; set; }
         public Nullable<int> idTitle { get; set; }
         public Nullable<int> Height { get; set; }
         public Nullable<int> idCommand { get; set; }
         public byte[] Image { get; set; }
+        public Nullable<bool> IsDeleted { get; set; }
     
         public virtual Command Command { get; set; }
-        public virtual Images Images { get; set; }
         public virtual Title Title { get; set; }
     }
 }

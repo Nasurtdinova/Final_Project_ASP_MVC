@@ -23,8 +23,8 @@ namespace CoreFramework
         public Nullable<int> idStatus { get; set; }
         public string MutualBenefit { get; set; }
     
-        public virtual Command Command { get; set; }
         public virtual Sponsor Sponsor { get; set; }
         public virtual Status Status { get; set; }
+        public virtual Command Command { get; set; }
     }
 }

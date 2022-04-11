@@ -20,12 +20,7 @@ namespace CoreFramework
 
         public static ObservableCollection<Competition> GetCompetitions()
         {
-            ObservableCollection<Competition> con = new ObservableCollection<Competition>(bdConnection.connection.Competition.ToList());
-            foreach (var i in con)
-            {
-                i.Date.Value.ToString("dd.MM.yyyy hh:mm");
-            }
-            return con;
+           return new ObservableCollection<Competition>(bdConnection.connection.Competition.ToList().Where(a => a.IsDeleted == false));
         }
 
         public static void AddCompetition(Competition compet)
@@ -49,7 +44,7 @@ namespace CoreFramework
             try
             {
                 Competition compet = bdConnection.connection.Competition.FirstOrDefault(p => p.idCompetition == id);
-                bdConnection.connection.Competition.Remove(compet);
+                compet.IsDeleted = true;
                 bdConnection.connection.SaveChanges();
             }
             catch (Exception ex) // Exception исправить

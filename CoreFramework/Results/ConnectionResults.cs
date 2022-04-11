@@ -13,14 +13,13 @@ namespace CoreFramework
     {
         public static ObservableCollection<ResultCompetition> GetResults()
         {
-            return new ObservableCollection<ResultCompetition>(bdConnection.connection.ResultCompetition.ToList());
+            return new ObservableCollection<ResultCompetition>(bdConnection.connection.ResultCompetition.ToList().Where(a=>a.Command.IsDeleted == false && a.Competition.IsDeleted == false));
         }
         public static List<ResultCompetition> GetResutCompet(int idCompet)
         {
             try
             {
-                ObservableCollection<ResultCompetition> sportsman = new ObservableCollection<ResultCompetition>(bdConnection.connection.ResultCompetition.ToList());
-                return sportsman.Where(tt => tt.idCompetition == idCompet).ToList();
+                return GetResults().Where(tt => tt.idCompetition == idCompet).ToList();
             }
 
             catch // Exception исправить

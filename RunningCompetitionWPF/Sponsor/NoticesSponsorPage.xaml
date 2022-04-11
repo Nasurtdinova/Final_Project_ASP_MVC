@@ -19,14 +19,31 @@
             </RowDefinition>
         </Grid.RowDefinitions>
         <TextBlock Text="Notices" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
-        <ListView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{Binding infoNotices}" Name="lvMessages">
+        <ListView Grid.Row="1" ItemsSource="{Binding infoNotices}" Name="lvMessages">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="3" Width="1100" HorizontalAlignment="Center"></UniformGrid>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
-                        <TextBlock Text="Команда" />
-                        <TextBlock Text="{Binding Command.Name }" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        <TextBlock Text="{Binding Status.Name }" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        <TextBlock Text="вашу заявку на спонсирование команды" />
+                    <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
+                        <StackPanel  HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
+                            <TextBlock Text="Команда: " />
+                            <TextBlock Text="{Binding Command.Name }"/>
+                        </StackPanel>
+                        <StackPanel  HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
+                            <TextBlock Text="Дата начала: " />
+                            <TextBlock Text="{Binding DateBegin, StringFormat ='dd.MM.yyyy'}"/>
+                        </StackPanel>
+                        <StackPanel  HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
+                            <TextBlock Text="Дата конца: " />
+                            <TextBlock Text="{Binding DateEnd, StringFormat ='dd.MM.yyyy'}"/>
+                        </StackPanel>
+                        <StackPanel  HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
+                            <TextBlock Text="Статус: " />
+                            <TextBlock Text="{Binding Status.Name }" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </StackPanel>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>

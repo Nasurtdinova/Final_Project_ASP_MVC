@@ -33,9 +33,8 @@ namespace RunningCompetitionWPF
 
         public static void DoAdmin()
         {
-            CollapsedAuthReg();
+            VisibleCollapsedAuthReg();
             MessagesAdmin.Visibility = System.Windows.Visibility.Visible;
-            Exit.Visibility = System.Windows.Visibility.Visible;
             Sportsmans.Visibility = System.Windows.Visibility.Collapsed;
             Commands.Visibility = System.Windows.Visibility.Collapsed;
             Competitions.Visibility = System.Windows.Visibility.Collapsed;
@@ -53,8 +52,6 @@ namespace RunningCompetitionWPF
         {
             VisibleCollapsedAuthReg();
 
-            Exit.Visibility = System.Windows.Visibility.Collapsed;
-
             Sportsmans.Visibility = System.Windows.Visibility.Visible;
             Commands.Visibility = System.Windows.Visibility.Visible;
             Competitions.Visibility = System.Windows.Visibility.Visible;
@@ -71,10 +68,8 @@ namespace RunningCompetitionWPF
 
         public static void DoSponsor()
         {
-            CollapsedAuthReg();
-            Exit.Visibility = System.Windows.Visibility.Visible;
-
-
+            VisibleCollapsedAuthReg();
+            
             NoticesSponsor.Visibility = System.Windows.Visibility.Visible;
             MySponsorshipsSponsor.Visibility = System.Windows.Visibility.Visible;
             Sportsmans.Visibility = System.Windows.Visibility.Visible;
@@ -88,24 +83,19 @@ namespace RunningCompetitionWPF
             ResultCompetitionsAdmin.Visibility = System.Windows.Visibility.Collapsed;
         }
 
-        public static void CollapsedAuthReg()
-        {
-            //Exit.Visibility = System.Windows.Visibility.Collapsed;
-            Registration.Visibility = System.Windows.Visibility.Collapsed;
-            Authorization.Visibility = System.Windows.Visibility.Collapsed;
-        }
-
         public static void VisibleCollapsedAuthReg()
         {
             if (CurrentUser.user != null)
             {
                 Registration.Visibility = System.Windows.Visibility.Collapsed;
                 Authorization.Visibility = System.Windows.Visibility.Collapsed;
+                Exit.Visibility = System.Windows.Visibility.Visible;
             }
             else
             {
                 Registration.Visibility = System.Windows.Visibility.Visible;
                 Authorization.Visibility = System.Windows.Visibility.Visible;
+                Exit.Visibility = System.Windows.Visibility.Collapsed;
             }
         }
     }

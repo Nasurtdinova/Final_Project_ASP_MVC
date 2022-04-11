@@ -28,18 +28,18 @@ namespace RunningCompetitionWPF
         private void lvMessages_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var a = (sender as ListView).SelectedItem as SponsorCommand;
-            MessageBoxResult result = MessageBox.Show($"Вы хотите принять заявку  от {a.Sponsor.Surname} {a.Sponsor.Name} на спонсирование команды {a.Command.Name}?", "My App", MessageBoxButton.YesNoCancel);
+            MessageBoxResult result = MessageBox.Show($"Вы хотите принять заявку  от {a.Sponsor.Surname} {a.Sponsor.Name} на спонсирование команды {a.Command.Name}?", "Заявка", MessageBoxButton.YesNoCancel);
             switch (result)
             {
                 case MessageBoxResult.Yes:
                     a.idStatus = 3;
                     ConnectionSponsorship.UpdateSponsorship(a);
-                    MessageBox.Show("Заявка принята!", "My App");
+                    MessageBox.Show("Заявка принята!", "Уведомление");
                     break;
                 case MessageBoxResult.No:
                     a.idStatus = 2;
                     ConnectionSponsorship.UpdateSponsorship(a);
-                    MessageBox.Show("Заявка отклонена!", "My App");
+                    MessageBox.Show("Заявка отклонена!", "Уведомление");
                     break;
                 case MessageBoxResult.Cancel:
                     Manager.MainFrame.Navigate(new AdminMessages());

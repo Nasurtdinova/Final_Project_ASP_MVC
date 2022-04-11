@@ -49,6 +49,7 @@ namespace RunningCompetitionWPF
             Manager.Authorization = login;
             Manager.Registration = registr;
             Manager.Exit = exit;
+
             timer = new DispatcherTimer();
             timer.Interval = new TimeSpan(0, 0, 0, 0, 2);
             timer.Tick += Timer_Tick;
@@ -112,30 +113,30 @@ namespace RunningCompetitionWPF
 
         private void competitionAdmin_Click(object sender, RoutedEventArgs e)
         {
-            Manager.CollapsedAuthReg();
+            Manager.VisibleCollapsedAuthReg();
             Manager.MainFrame.Navigate(new AdminCompetitionsPage());
         }
 
         private void registr_Click(object sender, RoutedEventArgs e)
         {
-
+            Manager.MainFrame.NavigationService.Navigate(new RegistrationPage());
+            Manager.DoViewer();
         }
 
         private void resultCompetitionAdmin_Click(object sender, RoutedEventArgs e)
         {
-            Manager.CollapsedAuthReg();
+            Manager.VisibleCollapsedAuthReg();
             Manager.MainFrame.Navigate(new AdminResultCompetitionsPage());
         }
 
         private void commandAdmin_Click(object sender, RoutedEventArgs e)
         {
-            Manager.CollapsedAuthReg();
+            Manager.VisibleCollapsedAuthReg();
             Manager.MainFrame.Navigate(new AdminCommandPage());
         }
 
         private void exit_Click(object sender, RoutedEventArgs e)
-        {
-            
+        {           
             CurrentUser.user = null;
             Manager.DoViewer();
             Manager.MainFrame.NavigationService.Navigate(new ViewerMainPage());
@@ -143,7 +144,7 @@ namespace RunningCompetitionWPF
 
         private void sportsmanAdmin_Click(object sender, RoutedEventArgs e)
         {
-            Manager.CollapsedAuthReg();
+            Manager.VisibleCollapsedAuthReg();
             Manager.MainFrame.Navigate(new AdminSportsmanPage());
         }
 
@@ -154,19 +155,18 @@ namespace RunningCompetitionWPF
 
         private void mySponsorshipsSponsor_Click(object sender, RoutedEventArgs e)
         {             
-            //Manager.DoSponsor();
             Manager.MainFrame.Navigate(new MySponsorshipsPage());
         }
 
         private void messagesAdmin_Click(object sender, RoutedEventArgs e)
         {
-            Manager.CollapsedAuthReg();
+            Manager.VisibleCollapsedAuthReg();
             Manager.MainFrame.Navigate(new AdminMessages());
         }
 
         private void noticesSponsor_Click(object sender, RoutedEventArgs e)
         {
-            Manager.CollapsedAuthReg();
+            Manager.VisibleCollapsedAuthReg();
             Manager.MainFrame.Navigate(new NoticesSponsorPage());
         }
 
@@ -183,11 +183,6 @@ namespace RunningCompetitionWPF
         {
             timer.Start();
             
-        }
-
-        private void mySponsorshipsSponsor_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            Manager.MainFrame.Navigate(new MySponsorshipsPage());
         }
     }
 }

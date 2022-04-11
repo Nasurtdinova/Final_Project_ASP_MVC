@@ -9,7 +9,7 @@ namespace CoreFramework
     {
         public static ObservableCollection<Sportsman> GetSportsmans()
         {
-            return new ObservableCollection<Sportsman>(bdConnection.connection.Sportsman.ToList());            
+            return new ObservableCollection<Sportsman>(bdConnection.connection.Sportsman.ToList().Where(a => a.IsDeleted == false));            
         }
 
         public static Sportsman GetSportsmansId(int id)
@@ -22,8 +22,8 @@ namespace CoreFramework
         {
             try
             {
-                Sportsman com = bdConnection.connection.Sportsman.FirstOrDefault(p => p.ID == id);
-                bdConnection.connection.Sportsman.Remove(com);
+                Sportsman sportsman = bdConnection.connection.Sportsman.FirstOrDefault(p => p.ID == id);
+                sportsman.IsDeleted = true;
                 bdConnection.connection.SaveChanges();
             }
             catch (Exception ex) // Exception исправить
