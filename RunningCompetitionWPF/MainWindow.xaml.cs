@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace RunningCompetitionWPF
 {
@@ -181,8 +182,42 @@ namespace RunningCompetitionWPF
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            timer.Start();
-            
+            timer.Start();           
+        }
+
+        private void btnExport_Click(object sender, RoutedEventArgs e)
+        {
+            var allCommands = bdConnection.connection.Command.ToList().OrderBy(p => p.Name).ToList();
+
+            var application = new Excel.Application();
+            application.SheetsInNewWorkbook = allCommands.Count();
+
+            Excel.Workbook workbook = application.Workbooks.Add(Type.Missing);
+
+            int startRowIndex = 1;
+
+            for (int i = 0; i < allCommands.Count(); i++)
+            {
+                Excel.Worksheet worksheet = application.Worksheets.Item[i + 1];
+                worksheet.Name = allCommands[i].Name;
+
+                worksheet.Cells[1][startRowIndex] = "Название соревнования";
+                worksheet.Cells[2][startRowIndex] = "Дата соревнования";
+                worksheet.Cells[3][startRowIndex] = "Место в соревновании";
+                startRowIndex++;
+                var results = bdConnection.connection.ResultCompetition.Where(p => p.idCommand == allCommands[i].idCommand);
+                foreach (var gr in results)
+                {
+                    worksheet.Cells[2][startRowIndex] = gr.Competition.Date;
+                    worksheet.Cells[1][startRowIndex] = gr.Competition.Name;
+                    worksheet.Cells[3][startRowIndex] = gr.Rank;
+                    startRowIndex++;
+                }
+                worksheet.Columns.AutoFit();
+                worksheet.Rows.AutoFit();
+                startRowIndex = 1;
+            }
+            application.Visible = true;
         }
     }
 }

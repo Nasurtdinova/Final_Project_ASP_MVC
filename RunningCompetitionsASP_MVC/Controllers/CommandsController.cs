@@ -24,28 +24,28 @@ namespace RunningCompetitionsASP_MVC.Controllers
             return View();
         }
 
-        [HttpPost]
-        public ActionResult Create(Images pic,ImageViewModel pvm)
-        {
-            Images person = new Images {  FileName = pvm.FileName };
-            if (pvm.ImageData != null)
-            {
-                byte[] imageData = null;
-                // считываем переданный файл в массив байтов
-                using (var binaryReader = new BinaryReader(pvm.ImageData.OpenReadStream()))
-                {
-                    imageData = binaryReader.ReadBytes((int)pvm.ImageData.Length);
-                    //imagePath = pvm.ImageData.OpenReadStream().Read((int)pvm.ImageData.Length);
-                }
-                // установка массива байтов
-                //person.ImagePath = imagePath;
-                person.ImageData = imageData;
-                Connection.AddImages(person);
+        //[HttpPost]
+        //public ActionResult Create(Images pic,ImageViewModel pvm)
+        //{
+        //    Images person = new Images {  FileName = pvm.FileName };
+        //    if (pvm.ImageData != null)
+        //    {
+        //        byte[] imageData = null;
+        //        // считываем переданный файл в массив байтов
+        //        using (var binaryReader = new BinaryReader(pvm.ImageData.OpenReadStream()))
+        //        {
+        //            imageData = binaryReader.ReadBytes((int)pvm.ImageData.Length);
+        //            //imagePath = pvm.ImageData.OpenReadStream().Read((int)pvm.ImageData.Length);
+        //        }
+        //        // установка массива байтов
+        //        //person.ImagePath = imagePath;
+        //        person.ImageData = imageData;
+        //        Connection.AddImages(person);
 
-                return RedirectToAction("Add");
-            }            
-            return View();
-        }
+        //        return RedirectToAction("Add");
+        //    }            
+        //    return View();
+        //}
 
         public IActionResult Viewer()
         {

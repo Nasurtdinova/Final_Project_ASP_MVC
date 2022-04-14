@@ -1,17 +1,13 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Configuration;
 using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
 
 namespace CoreFramework
 {
     public class ConnectionCompetitions
     {
-        //public static List<Competition> compet { get; set; }
         public static Competition GetCompetId(int id)
         {
             ObservableCollection<Competition> commands = GetCompetitions();

@@ -14,7 +14,7 @@ namespace WebAPI_Project.Controllers
         public SponsorshipController() { }
 
         [HttpGet]
-        public ActionResult<List<SponsorCommand>> GetAll() => ConnectionSponsorship.GetSponsorshipViewerAdmin();
+        public ActionResult<List<SponsorCommand>> GetAll() => ConnectionSponsorship.GetSponsorships();
 
         [HttpGet("{id}")]
         public ActionResult<SponsorCommand> Get(int id)
@@ -30,7 +30,7 @@ namespace WebAPI_Project.Controllers
         [HttpPost]
         public IActionResult Create(SponsorCommand compet)
         {
-            ConnectionSponsorship.AddSponsorshipApi(compet);
+            ConnectionSponsorship.AddSponsorship(compet);
             return NoContent();
         }
 

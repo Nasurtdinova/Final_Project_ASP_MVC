@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace RunningCompetitionWPF
 {
@@ -54,6 +55,11 @@ namespace RunningCompetitionWPF
                     MessageBox.Show(ex.Message.ToString());
                 }
             }
+        }
+
+        private void btnExport_Click(object sender, RoutedEventArgs e)
+        {
+            ConnectionResults.ExportExcel();
         }
     }
 }

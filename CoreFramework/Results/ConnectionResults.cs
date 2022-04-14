@@ -1,20 +1,54 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Configuration;
 using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
-//лишние библиотеки убрать
+using Excel = Microsoft.Office.Interop.Excel;
+
 namespace CoreFramework
 {
-    public class ConnectionResults //разнести классы по папочкам
+    public class ConnectionResults
     {
         public static ObservableCollection<ResultCompetition> GetResults()
         {
             return new ObservableCollection<ResultCompetition>(bdConnection.connection.ResultCompetition.ToList().Where(a=>a.Command.IsDeleted == false && a.Competition.IsDeleted == false));
         }
+
+        public static void  ExportExcel()
+        {
+            var allCommands = ConnectionCommands.GetCommands().OrderBy(p => p.Name).ToList();
+
+            var application = new Excel.Application();
+            application.SheetsInNewWorkbook = allCommands.Count();
+
+            Excel.Workbook workbook = application.Workbooks.Add(Type.Missing);
+
+            int startRowIndex = 1;
+
+            for (int i = 0; i < allCommands.Count(); i++)
+            {
+                Excel.Worksheet worksheet = application.Worksheets.Item[i + 1];
+                worksheet.Name = allCommands[i].Name;
+
+                worksheet.Cells[1][startRowIndex] = "Название соревнования";
+                worksheet.Cells[2][startRowIndex] = "Дата соревнования";
+                worksheet.Cells[3][startRowIndex] = "Место в соревновании";
+                startRowIndex++;
+                var results = GetResults().Where(p => p.idCommand == allCommands[i].idCommand);
+                foreach (var gr in results)
+                {
+                    worksheet.Cells[2][startRowIndex] = gr.Competition.Date;
+                    worksheet.Cells[1][startRowIndex] = gr.Competition.Name;
+                    worksheet.Cells[3][startRowIndex] = gr.Rank;
+                    startRowIndex++;
+                }
+                worksheet.Columns.AutoFit();
+                worksheet.Rows.AutoFit();
+                startRowIndex = 1;
+            }
+            application.Visible = true;
+        }
+
         public static List<ResultCompetition> GetResutCompet(int idCompet)
         {
             try
