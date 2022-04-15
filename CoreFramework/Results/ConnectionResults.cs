@@ -14,11 +14,11 @@ namespace CoreFramework
             return new ObservableCollection<ResultCompetition>(bdConnection.connection.ResultCompetition.ToList().Where(a=>a.Command.IsDeleted == false && a.Competition.IsDeleted == false));
         }
 
-        public static void  ExportExcel()
+        public static void ExportExcel()
         {
-            var allCommands = ConnectionCommands.GetCommands().OrderBy(p => p.Name).ToList();
+            var allCommands = bdConnection.connection.Command.OrderBy(p => p.Name).ToList();
 
-            var application = new Excel.Application();
+            Excel.Application application = new Excel.Application();
             application.SheetsInNewWorkbook = allCommands.Count();
 
             Excel.Workbook workbook = application.Workbooks.Add(Type.Missing);

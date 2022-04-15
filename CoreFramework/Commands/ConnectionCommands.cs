@@ -35,7 +35,7 @@ namespace CoreFramework
             try
             {
                 command.City = Connection.GetCity(command.City.Name);
-                //command.Image = command.Image;
+                command.IsDeleted = false;
 
                 bdConnection.connection.Command.Add(command);
                 bdConnection.connection.SaveChanges();

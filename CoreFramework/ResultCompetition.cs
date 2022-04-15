@@ -11,14 +11,26 @@ namespace CoreFramework
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class ResultCompetition
     {
+        [Required(ErrorMessage = "Id command is required")]
         public int idCommand { get; set; }
+
+        [Required(ErrorMessage = "Id competition is required")]
         public int idCompetition { get; set; }
+
+        [Required(ErrorMessage = "Range is required")]
+        [Range(1, 100, ErrorMessage = "Недопустимое место")]
         public Nullable<int> Rank { get; set; }
     
         public virtual Command Command { get; set; }
         public virtual Competition Competition { get; set; }
+
+        public override string ToString()
+        {
+            return $"{idCommand},{idCompetition},{Command.Name} {Competition.Name} {Rank}";
+        }
     }
 }

@@ -15,6 +15,8 @@
         </ColumnDefinition>
     </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="50">
+            </RowDefinition>
             <RowDefinition Height="100">
         </RowDefinition>
         <RowDefinition Height="100">
@@ -24,20 +26,21 @@
         <RowDefinition Height="100">
         </RowDefinition>
         <RowDefinition Height="100"></RowDefinition>
-        <RowDefinition Height="100">
+        <RowDefinition Height="60">
         </RowDefinition>
     </Grid.RowDefinitions>
-    <TextBlock Text="Surname" Grid.Column="0" Grid.Row="0" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-    <TextBlock Text="Name" Grid.Column="0" Grid.Row="1" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-    <TextBlock Text="Number phone" Grid.Column="0" Grid.Row="2" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-    <TextBlock Text="Login"  Grid.Column="0" Grid.Row="3" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-    <TextBlock Text="Password" Grid.Column="0" Grid.Row="4" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-        <TextBox Grid.Column="1" Width="400" Height="40" Grid.Row="0" Name="textSurname"></TextBox>
-    <TextBox Grid.Column="1" Width="400" Height="40" Grid.Row="2" Name="textPhone"></TextBox>
-    <TextBox Grid.Column="1" Width="400" Height="40" Grid.Row="1" Name="textName"></TextBox>
-    <TextBox Grid.Column="1" Width="400" Height="40" Grid.Row="3" Name="textLogin"></TextBox>
-    <TextBox Grid.Column="1" Width="400" Height="40" Grid.Row="4" Name="textPassword"></TextBox>
-        <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="7" Grid.ColumnSpan="2">
+    <TextBlock Text="Registration" Grid.ColumnSpan="2" Grid.Row="0" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+    <TextBlock Text="Surname" Grid.Column="0" Grid.Row="1" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+    <TextBlock Text="Name" Grid.Column="0" Grid.Row="2" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+    <TextBlock Text="Number phone" Grid.Column="0" Grid.Row="3" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+    <TextBlock Text="Login"  Grid.Column="0" Grid.Row="4" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+    <TextBlock Text="Password" Grid.Column="0" Grid.Row="5" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+        <TextBox Grid.Column="1" Width="400" Height="40" Grid.Row="1" Name="textSurname"></TextBox>
+    <TextBox Grid.Column="1" Width="400" Height="40" Grid.Row="3" Name="textPhone"></TextBox>
+    <TextBox Grid.Column="1" Width="400" Height="40" Grid.Row="2" Name="textName"></TextBox>
+    <TextBox Grid.Column="1" Width="400" Height="40" Grid.Row="4" Name="textLogin"></TextBox>
+    <TextBox Grid.Column="1" Width="400" Height="40" Grid.Row="5" Name="textPassword"></TextBox>
+        <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="8" Grid.ColumnSpan="2">
             <Button Content="Sign up" Background="#FFA0D0F1" Name="btnRegistr" Margin="10" FontSize="18" Width="150" Click="btnRegistr_Click"></Button>
             <Button Content="Sign in" Background="#FFA0D0F1" Name="btnLogin" Click="btnLogin_Click" FontSize="18" Width="150" Margin="10"></Button>
     </StackPanel>

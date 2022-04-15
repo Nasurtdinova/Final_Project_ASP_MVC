@@ -62,7 +62,7 @@
                             <Button FontWeight="Bold" Margin="15 0 0 0" Content="Notices" Background="#FF0F4E7A" BorderBrush="#FF0F4E7A" Foreground="White" Click="noticesSponsor_Click"  VerticalAlignment="Center"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem Height="30" Name="messagesAdmin" Visibility="Collapsed">
+                    <ListViewItem Height="35" Name="messagesAdmin" Visibility="Collapsed">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="C:\Users\nasur\Source\Repos\Final_Project_ASP_MVC_Clone\RunningCompetitionWPF\icons\messages1.png"  Height="20" VerticalAlignment="Center"/>
                             <Button FontWeight="Bold" Margin="15 0 0 0" Content="Messages" Background="#FF0F4E7A" BorderBrush="#FF0F4E7A" Foreground="White" Click="messagesAdmin_Click"  VerticalAlignment="Center"/>

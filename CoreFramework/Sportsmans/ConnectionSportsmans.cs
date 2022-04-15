@@ -38,6 +38,7 @@ namespace CoreFramework
             {
                 sportsman.Command = Connection.GetCommand(sportsman.Command.Name);
                 sportsman.Title = Connection.GetTitle(sportsman.Title.Name);
+                sportsman.IsDeleted = false;
                 bdConnection.connection.Sportsman.Add(sportsman);
                 bdConnection.connection.SaveChanges();
             }

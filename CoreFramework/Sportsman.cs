@@ -11,19 +11,38 @@ namespace CoreFramework
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Sportsman
     {
+        [Required(ErrorMessage = "Id is required")]
         public int ID { get; set; }
+
+        [Required(ErrorMessage = "Surname is required")]
         public string Surname { get; set; }
+
+        [Required(ErrorMessage = "Name is required")]
+        [StringLength(16, ErrorMessage = "Must be between 2 and 16 characters", MinimumLength = 2)]
         public string Name { get; set; }
+
         public Nullable<int> idTitle { get; set; }
+
+        [Range(150, 210)]
         public Nullable<int> Height { get; set; }
+
         public Nullable<int> idCommand { get; set; }
+
+        [Required(ErrorMessage = "Image is required")]
         public byte[] Image { get; set; }
+
         public Nullable<bool> IsDeleted { get; set; }
     
         public virtual Command Command { get; set; }
         public virtual Title Title { get; set; }
+
+        public override string ToString()
+        {
+            return $"{ID}, {Name}, {Surname}, {Title}, {Height}, {Command}";
+        }
     }
 }

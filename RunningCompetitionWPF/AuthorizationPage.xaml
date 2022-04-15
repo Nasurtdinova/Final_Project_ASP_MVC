@@ -24,9 +24,9 @@
             <RowDefinition Height="120">
             </RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock Text="Authorization" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="35" ></TextBlock>
-        <TextBlock Text="Login" Grid.Column="0" Grid.Row="1" FontSize="35" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-        <TextBlock Text="Password" Grid.Column="0" Grid.Row="2" FontSize="35" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+        <TextBlock Text="Authorization" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" ></TextBlock>
+        <TextBlock Text="Login" Grid.Column="0" Grid.Row="1" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+        <TextBlock Text="Password" Grid.Column="0" Grid.Row="2" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
         <TextBox x:Name="txt_login" HorizontalAlignment="Center"  VerticalAlignment="Center" Height="80" FontSize="25" Width="400" Grid.Row="1" Grid.Column="1"></TextBox>
         <PasswordBox x:Name="txt_password" HorizontalAlignment="Center"  VerticalAlignment="Center" Height="80" Width="400" FontSize="25" Grid.Row="2" Grid.Column="1"></PasswordBox>
         <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="4" Grid.ColumnSpan="2">

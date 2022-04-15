@@ -68,22 +68,15 @@ namespace RunningCompetitionWPF.Admin
 
         private void btnLoadImage_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            byte[] imageData;
+            OpenFileDialog openFileDialog = new OpenFileDialog()
+            {
+                Filter = "*.png|*.png|*.jpeg|*.jpeg|*.jpg|*.jpg"
+            };
             if (openFileDialog.ShowDialog() == true)
             {
                 string path = openFileDialog.FileName;
-                imageData = File.ReadAllBytes(path);
-
-                var stream = new MemoryStream(imageData);
-                stream.Seek(0, SeekOrigin.Begin);
-                var image = new BitmapImage();
-                image.BeginInit();
-                image.StreamSource = stream;
-                image.EndInit();
-
-                imgCom.Source = image;
-                CurrentCommand.Image = imageData;                
+                imgCom.Source = new BitmapImage(new Uri(path));
+                CurrentCommand.Image = File.ReadAllBytes(path);               
             }            
         }
     }

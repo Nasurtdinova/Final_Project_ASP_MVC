@@ -23,9 +23,8 @@ namespace CoreFramework
         {
             try
             {
-                //List<City> city = new List<City>(bdConnection.connection.City);
-                //var type = city.Where(tt => tt.Name == compet.CityName).FirstOrDefault();
-                //compet.idCity = type.idCity;
+                compet.IsDeleted = false;
+
                 bdConnection.connection.Competition.Add(compet);
                 bdConnection.connection.SaveChanges();
             }

@@ -11,16 +11,29 @@ namespace CoreFramework
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class SponsorCommand
     {
+        [Required(ErrorMessage = "Id is required")]
         public int id { get; set; }
+
         public Nullable<int> idSponsor { get; set; }
+
         public Nullable<int> idCom { get; set; }
+
+        [Required(ErrorMessage = "Amount is required")]
+        [Range(500, 1000000)]
         public Nullable<int> Amount { get; set; }
+
+        [Required(ErrorMessage = "Date end is required")]
         public Nullable<System.DateTime> DateEnd { get; set; }
+
+        [Required(ErrorMessage = "Date begin is required")]
         public Nullable<System.DateTime> DateBegin { get; set; }
+
         public Nullable<int> idStatus { get; set; }
+
         public string MutualBenefit { get; set; }
     
         public virtual Sponsor Sponsor { get; set; }
