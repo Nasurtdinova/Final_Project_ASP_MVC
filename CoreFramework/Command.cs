@@ -29,7 +29,7 @@ namespace CoreFramework
         [Required(ErrorMessage = "Name command is required")]
         public string Name { get; set; }
 
-        [Range(1, 10)]
+        [Range(6, 12)]
         public Nullable<int> Count { get; set; }
 
         public Nullable<int> ID_city { get; set; }
@@ -48,5 +48,10 @@ namespace CoreFramework
         public virtual ICollection<SponsorCommand> SponsorCommand { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Sportsman> Sportsman { get; set; }
+
+        public override string ToString()
+        {
+            return $"{idCommand},{Name} {City.Name} {Count}";
+        }
     }
 }

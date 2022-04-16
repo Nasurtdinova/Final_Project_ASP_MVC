@@ -11,7 +11,8 @@ namespace CoreFramework
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Sponsor
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,9 +22,17 @@ namespace CoreFramework
         }
     
         public int idSponsor { get; set; }
+
+        [Required(ErrorMessage = "Surname is required")]
         public string Surname { get; set; }
+
+        [Required(ErrorMessage = "Name is required")]
+        [StringLength(20, MinimumLength = 3)]
         public string Name { get; set; }
+
+        [RegularExpression(@"^\+[1-9]\d{3}-\d{3}-\d{4}$")]
         public string Phone { get; set; }
+
         public Nullable<int> idUser { get; set; }
     
         public virtual Users Users { get; set; }

@@ -42,7 +42,7 @@ namespace CoreFramework
 
         public override string ToString()
         {
-            return $"{ID}, {Name}, {Surname}, {Title}, {Height}, {Command}";
+            return $"{ID}, {Name}, {Surname}, {Title.Name}, {Height}, {Command.Name}";
         }
     }
 }

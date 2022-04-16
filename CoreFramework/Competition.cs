@@ -49,7 +49,7 @@ namespace CoreFramework
 
         public override string ToString()
         {
-            return $"{idCompetition},{Name} {NameVenue} {Street} {Home} {City} {Date}";
+            return $"{idCompetition},{Name} {NameVenue} {Street} {Home} {City.Name} {Date}";
         }
     }
 }

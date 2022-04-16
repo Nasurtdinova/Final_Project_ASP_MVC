@@ -12,13 +12,11 @@ namespace Console_Project
         {
             Dictionary<int, string> message = new Dictionary<int, string>
             {
-                { 0, "Hello, input login and password, else write Viewer"},
                 { 1, "Input values: Name,Surname,Title,Image,Height,Cost,Command" },
                 { 2, "Input values: Name,City,Count" },
                 { 3, "Input values: Name,NameVenue,Street,Home,City,Date" },
                 { 4, "Input values: Command,Compet,Rank" },
                 { 5, "If you want to see, click, sportsmans - 1, commands - 2, competitions - 3, results of competitions - 4, sponsorships - 5"},
-                { 6,"What do you want to do 'Get', 'Add', 'Remove'?" }
             };
 
             while (true)
@@ -69,7 +67,7 @@ namespace Console_Project
         private static void PrintCompetitions()
         {
             ObservableCollection<Competition> compet = ConnectionCompetitions.GetCompetitions();
-            foreach (Competitions i in compet)
+            foreach (Competition i in compet)
             {
                 Console.WriteLine(i);
             }
@@ -78,7 +76,7 @@ namespace Console_Project
         private static void PrintResults()
         {
             ObservableCollection<ResultCompetition> results = ConnectionResults.GetResults();
-            foreach (Results i in results)
+            foreach (ResultCompetition i in results)
             {
                 Console.WriteLine(i);
             }

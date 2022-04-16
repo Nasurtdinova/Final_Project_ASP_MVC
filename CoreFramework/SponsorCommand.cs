@@ -39,5 +39,10 @@ namespace CoreFramework
         public virtual Sponsor Sponsor { get; set; }
         public virtual Status Status { get; set; }
         public virtual Command Command { get; set; }
+
+        public override string ToString()
+        {
+            return $"{id},{Sponsor.Name} - {Command.Name}, {Amount}, {DateBegin} - {DateEnd}";
+        }
     }
 }
