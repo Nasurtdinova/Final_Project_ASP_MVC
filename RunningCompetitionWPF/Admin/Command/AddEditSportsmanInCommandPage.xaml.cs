@@ -2,6 +2,7 @@
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Text;
 using System.Windows;
@@ -36,20 +37,32 @@ namespace RunningCompetitionWPF
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            if (CurrentSportsman.ID == 0)
-                ConnectionSportsmans.AddSportsman(CurrentSportsman);
-            else
-                ConnectionSportsmans.UpdateSportsman(CurrentSportsman);
-
-            try
+            var sportsmans = new List<System.ComponentModel.DataAnnotations.ValidationResult>();
+            var context = new ValidationContext(CurrentSportsman);
+            if (!Validator.TryValidateObject(CurrentSportsman, context, sportsmans, true))
             {
-                MessageBox.Show("Информация сохранена");
-                Manager.MainFrame.Navigate(new AdminSportsmanCommandPage(IdCommand));
+                foreach (var error in sportsmans)
+                {
+                    MessageBox.Show(error.ErrorMessage);
+                }
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show(ex.Message.ToString());
-            }           
+                if (CurrentSportsman.ID == 0)
+                    ConnectionSportsmans.AddSportsman(CurrentSportsman);
+                else
+                    ConnectionSportsmans.UpdateSportsman(CurrentSportsman);
+
+                try
+                {
+                    MessageBox.Show("Информация сохранена");
+                    Manager.MainFrame.Navigate(new AdminSportsmanCommandPage(IdCommand));
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message.ToString());
+                }
+            }
         }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)

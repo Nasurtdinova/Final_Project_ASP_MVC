@@ -1,6 +1,7 @@
 ﻿using CoreFramework;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -15,9 +16,6 @@ using System.Windows.Shapes;
 
 namespace RunningCompetitionWPF
 {
-    /// <summary>
-    /// Логика взаимодействия для RegistrationPage.xaml
-    /// </summary>
     public partial class RegistrationPage : Page
     {
         public RegistrationPage()
@@ -32,44 +30,46 @@ namespace RunningCompetitionWPF
 
         private void btnRegistr_Click(object sender, RoutedEventArgs e)
         {
-            bool isLetter = false;
-            bool isDigit = false;
-            bool isSymbol = false;
-            char[] chars = { '!', '@', '#', '$', '%', '^' };
-            foreach (var i in textPassword.Text)
-            {
-                if (Char.IsLetter(i))
-                    isLetter = true;
-                if (Char.IsNumber(i))
-                    isDigit = true;
-                if (chars.Contains(i))
-                    isSymbol = true;
-            }
+           
 
-            if (Connection.IsCoinsLogin(textLogin.Text))
-                MessageBox.Show("Такой логин уже существует");
-            else if (!(textPassword.Text.Length >= 6 && isLetter && isDigit && isSymbol))
-                MessageBox.Show("Пароль не соответствует требованиям");
+            Users user = new Users()
+            {
+                Email = textLogin.Text,
+                Password = textPassword.Text,
+                idType = 2
+            };
+
+            Sponsor sponsor = new Sponsor()
+            {
+                idUser = Connection.GetUsers().Last().idUser,
+                Surname = textSurname.Text,
+                Name = textName.Text,
+                Phone = textPhone.Text
+            };
+
+            var valid = new List<System.ComponentModel.DataAnnotations.ValidationResult>();
+            var contextUser = new ValidationContext(user);
+            var contextSponsor = new ValidationContext(sponsor);
+            if (!Validator.TryValidateObject(user, contextUser, valid, true) || !Validator.TryValidateObject(sponsor, contextSponsor, valid, true))
+            {
+                foreach (var error in valid)
+                {
+                    MessageBox.Show(error.ErrorMessage);
+                }
+            }
             else
             {
-                Users user = new Users()
-                {
-                    Email = textLogin.Text,
-                    Password = textPassword.Text,
-                     idType = 2
-                };
-                Connection.AddUser(user);
-
-                Sponsor sponsor = new Sponsor()
-                {
-                    idUser = Connection.GetUsers().Last().idUser,
-                    Surname = textSurname.Text,
-                    Name = textName.Text,
-                    Phone = textPhone.Text
-                };
-                Connection.AddSponsor(sponsor);
-                MessageBox.Show("Вы зарегистрированы!");
-                NavigationService.Navigate(new AuthorizationPage());
+                if (Connection.IsCoinsLogin(textLogin.Text))
+                    MessageBox.Show("Такой логин уже существует");
+                else if (!(textPassword.Text.Length >= 6 && Connection.IsCorrectPassword(textPassword.Text)))
+                    MessageBox.Show("Пароль не соответствует требованиям");
+                else
+                {                  
+                    Connection.AddUser(user);
+                    Connection.AddSponsor(sponsor);
+                    MessageBox.Show("Вы зарегистрированы!");
+                    NavigationService.Navigate(new AuthorizationPage());
+                }
             }
         }
     }

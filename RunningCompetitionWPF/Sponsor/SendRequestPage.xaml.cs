@@ -1,6 +1,7 @@
 ﻿using CoreFramework;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -30,29 +31,42 @@ namespace RunningCompetitionWPF
 
         private void btnSend_Click(object sender, RoutedEventArgs e)
         {
-            if (ConnectionSponsorship.IsAddTrue(CurrentUser.spon.idSponsor, IdCommand))
+            SponsorCommand sponCom = new SponsorCommand()
             {
-                SponsorCommand sponCom = new SponsorCommand()
+                Command = ConnectionCommands.GetCommandsId(IdCommand),
+                Amount = Convert.ToInt32(textAmount.Text),
+                DateBegin = DateBegin.SelectedDate,
+                DateEnd = DateEnd.SelectedDate,
+                MutualBenefit = textBenefit.Text
+            };
+
+            var sponsorCommand = new List<System.ComponentModel.DataAnnotations.ValidationResult>();
+            var context = new ValidationContext(sponCom);
+            if (!Validator.TryValidateObject(sponCom, context, sponsorCommand, true))
+            {
+                foreach (var error in sponsorCommand)
                 {
-                    Command = ConnectionCommands.GetCommandsId(IdCommand),
-                    Amount = Convert.ToInt32(textAmount.Text),
-                    DateBegin = DateBegin.SelectedDate,
-                    DateEnd = DateEnd.SelectedDate,
-                    MutualBenefit = textBenefit.Text
-                };
-                try
-                {
-                    ConnectionSponsorship.AddSponsorship(sponCom);
-                    MessageBox.Show($"Вы отправили запрос на спонсирование команды {sponCom.Command.Name}");
+                    MessageBox.Show(error.ErrorMessage);
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message.ToString());
-                }
-                Manager.MainFrame.NavigationService.Navigate(new MySponsorshipsPage());
             }
             else
-                MessageBox.Show("Вы спонсируете эту команду!");
+            {
+                if (ConnectionSponsorship.IsAddTrue(CurrentUser.spon.idSponsor, IdCommand))
+                {
+                    try
+                    {
+                        ConnectionSponsorship.AddSponsorship(sponCom);
+                        MessageBox.Show($"Вы отправили запрос на спонсирование команды {sponCom.Command.Name}");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message.ToString());
+                    }
+                    Manager.MainFrame.NavigationService.Navigate(new MySponsorshipsPage());
+                }
+                else
+                    MessageBox.Show("Вы спонсируете эту команду!");
+            }
           
         }
 

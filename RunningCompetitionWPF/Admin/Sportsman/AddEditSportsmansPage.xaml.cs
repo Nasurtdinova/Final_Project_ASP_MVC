@@ -33,11 +33,11 @@ namespace RunningCompetitionWPF
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            var results = new List<System.ComponentModel.DataAnnotations.ValidationResult>();
+            var sportsmans = new List<System.ComponentModel.DataAnnotations.ValidationResult>();
             var context = new ValidationContext(CurrentSportsman);
-            if (!Validator.TryValidateObject(CurrentSportsman, context, results, true))
+            if (!Validator.TryValidateObject(CurrentSportsman, context, sportsmans, true))
             {
-                foreach (var error in results)
+                foreach (var error in sportsmans)
                 {
                     MessageBox.Show(error.ErrorMessage);
                 }

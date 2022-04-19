@@ -30,7 +30,7 @@ namespace CoreFramework
         [StringLength(20, MinimumLength = 3)]
         public string Name { get; set; }
 
-        [RegularExpression(@"^\+[1-9]\d{3}-\d{3}-\d{4}$")]
+        //[RegularExpression(@"^\+[1-9]\d{3}-\d{3}-\d{4}$")]
         public string Phone { get; set; }
 
         public Nullable<int> idUser { get; set; }

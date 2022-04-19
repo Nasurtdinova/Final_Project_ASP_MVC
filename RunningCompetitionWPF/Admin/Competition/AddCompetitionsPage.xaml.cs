@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -30,32 +31,27 @@ namespace RunningCompetitionWPF
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            StringBuilder errors = new StringBuilder();
-
-            if (string.IsNullOrWhiteSpace(CurrentCompetition.Name))
-                errors.AppendLine("Укажите название соревнования");
-            if (CurrentCompetition.City == null)
-                errors.AppendLine("Выберите город");
-
-            if (errors.Length > 0)
-            {
-                MessageBox.Show(errors.ToString());
-                return;
-            }
-
-            if (CurrentCompetition.idCompetition == 0)
-                ConnectionCompetitions.AddCompetition(CurrentCompetition);
+            var competitions = new List<System.ComponentModel.DataAnnotations.ValidationResult>();
+            var context = new ValidationContext(CurrentCompetition);
+            if (!Validator.TryValidateObject(CurrentCompetition, context, competitions, true))
+                foreach (var error in competitions)
+                    MessageBox.Show(error.ErrorMessage);
             else
-                ConnectionCompetitions.UpdateCompet(CurrentCompetition);
+            {
+                if (CurrentCompetition.idCompetition == 0)
+                    ConnectionCompetitions.AddCompetition(CurrentCompetition);
+                else
+                    ConnectionCompetitions.UpdateCompet(CurrentCompetition);
 
-            try
-            {
-                MessageBox.Show("Информация сохранена");
-                Manager.MainFrame.Navigate(new AdminCompetitionsPage());
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message.ToString());
+                try
+                {
+                    MessageBox.Show("Информация сохранена");
+                    Manager.MainFrame.Navigate(new AdminCompetitionsPage());
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message.ToString());
+                }
             }
         }
 

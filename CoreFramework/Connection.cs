@@ -20,6 +20,26 @@ namespace CoreFramework
         public static string Name { get; set; }
         public static string Surname { get; set; }
 
+        public static bool IsCorrectPassword(string password)
+        {
+            bool isLetter = false;
+            bool isDigit = false;
+            bool isSymbol = false;
+            char[] chars = { '!', '@', '#', '$', '%', '^' };
+            foreach (var i in password)
+            {
+                if (Char.IsLetter(i))
+                    isLetter = true;
+                if (Char.IsNumber(i))
+                    isDigit = true;
+                if (chars.Contains(i))
+                    isSymbol = true;
+            }
+            if (isLetter && isDigit && isSymbol)
+                return true;
+            else
+                return false;
+        }
         public static Users GetUser(string email, string password)
         {
             return GetUsers().Where(tt => tt.Email == email && tt.Password == password).FirstOrDefault();

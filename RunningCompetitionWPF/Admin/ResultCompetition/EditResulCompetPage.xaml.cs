@@ -1,6 +1,7 @@
 ﻿using CoreFramework;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -38,22 +39,34 @@ namespace RunningCompetitionWPF
                 Competition = ConnectionCompetitions.GetCompetId(IdCompet),
                 Rank = Convert.ToInt32(textRank.Text)
             };
-            if (ConnectionResults.isRankTrue(Convert.ToInt32(res.Rank), IdCompet))
-            {                
-                try
-                {
-                    ConnectionResults.UpdateResult(CurrentResult);
-                    MessageBox.Show("Информация сохранена");
-                   
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message.ToString());
-                }
-            }
+
+            var results = new List<System.ComponentModel.DataAnnotations.ValidationResult>();
+            var context = new ValidationContext(res);
+            if (!Validator.TryValidateObject(res, context, results, true))
+                foreach (var error in results)
+                    MessageBox.Show(error.ErrorMessage);
             else
             {
-                MessageBox.Show($"В соревновании {res.Competition.Name} такое место уже заняли");
+                if (ConnectionResults.isRankTrue(Convert.ToInt32(res.Rank), IdCompet))
+                {
+                    if (ConnectionResults.isComCompetTrue(IdCommand, IdCompet))
+                    {
+                        try
+                        {
+                            ConnectionResults.UpdateResult(CurrentResult);
+                            MessageBox.Show("Информация сохранена");
+
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message.ToString());
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show($"В соревновании {res.Competition.Name} такое место уже заняли");
+                }
             }
             Manager.MainFrame.NavigationService.Navigate(new AdminResultCompetitionsPage());
         }

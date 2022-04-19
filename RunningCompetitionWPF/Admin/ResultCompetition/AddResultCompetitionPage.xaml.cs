@@ -1,6 +1,7 @@
 ﻿using CoreFramework;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -28,33 +29,42 @@ namespace RunningCompetitionWPF
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             ResultCompetition res = new ResultCompetition()
-            { 
+            {
                 Command = ConnectionCommands.GetCommandsId(IdCommand),
                 Competition = ConnectionCompetitions.GetCompetId(IdCompet),
                 Rank = Convert.ToInt32(textRank.Text)
             };
-            if (ConnectionResults.isRankTrue(Convert.ToInt32(textRank.Text), IdCompet))
+
+            var results = new List<System.ComponentModel.DataAnnotations.ValidationResult>();
+            var context = new ValidationContext(res);
+            if (!Validator.TryValidateObject(res, context, results, true))
+                foreach (var error in results)
+                    MessageBox.Show(error.ErrorMessage);
+            else
             {
-                if (ConnectionResults.isComCompetTrue(IdCommand, IdCompet))
-                {                 
-                    try
+                if (ConnectionResults.isRankTrue(Convert.ToInt32(textRank.Text), IdCompet))
+                {
+                    if (ConnectionResults.isComCompetTrue(IdCommand, IdCompet))
                     {
-                        ConnectionResults.AddResult(res);
-                        MessageBox.Show("Информация сохранена");
+                        try
+                        {
+                            ConnectionResults.AddResult(res);
+                            MessageBox.Show("Информация сохранена");
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message.ToString());
+                        }
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        MessageBox.Show(ex.Message.ToString());
+                        MessageBox.Show($"Такие данные уже существуют");
                     }
                 }
                 else
                 {
-                    MessageBox.Show($"Такие данные уже существуют");
+                    MessageBox.Show($"В соревновании {res.Competition.Name} такое место уже заняли");
                 }
-            }
-            else
-            {
-                MessageBox.Show($"В соревновании {res.Competition.Name} такое место уже заняли");
             }
             Manager.MainFrame.NavigationService.Navigate(new AdminResultCompetitionsPage());
         }

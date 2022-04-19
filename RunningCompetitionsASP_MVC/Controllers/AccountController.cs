@@ -28,7 +28,6 @@ namespace RunningCompetitionsASP_MVC.Controllers
                     Password = model.Password, 
                     idType = 2 
                 };
-                Connection.AddUser(user);
 
                 Sponsor spon = new Sponsor 
                 { 
@@ -37,9 +36,18 @@ namespace RunningCompetitionsASP_MVC.Controllers
                     Phone = model.Phone, 
                     idUser = Connection.GetUsers().Last().idUser 
                 };
-                Connection.AddSponsor(spon);
 
-                return RedirectToAction("Index", "Home");
+                if (Connection.IsCoinsLogin(model.Password))
+                    ViewBag.Message = "Такой логин уже существует";
+                else if (!(model.Password.Length >= 6 && Connection.IsCorrectPassword(model.Password)))
+                    ViewBag.Message = string.Format("Hello {0}.\\nCurrent Date and Time: {1}", "fgfg", "пароль должен отвечать следующим требованиям:Минимум 6 символов.Минимум 1 прописная буква.Минимум 1 цифра.Минимум один символ из набора: ! @ # $ % ^. ");
+                else
+                {
+                    Connection.AddUser(user);
+                    Connection.AddSponsor(spon);
+                    ViewBag.Message = "Вы зарегистрированы!";
+                }
+
             }
             return View(model);
         }
