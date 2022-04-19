@@ -40,7 +40,7 @@ namespace RunningCompetitionsASP_MVC.Controllers
                 if (Connection.IsCoinsLogin(model.Password))
                     ViewBag.Message = "Такой логин уже существует";
                 else if (!(model.Password.Length >= 6 && Connection.IsCorrectPassword(model.Password)))
-                    ViewBag.Message = string.Format("Hello {0}.\\nCurrent Date and Time: {1}", "fgfg", "пароль должен отвечать следующим требованиям:Минимум 6 символов.Минимум 1 прописная буква.Минимум 1 цифра.Минимум один символ из набора: ! @ # $ % ^. ");
+                    ViewBag.Message = string.Format("Hello {0}.\\nCurrent Date and Time: {1}", "fgfg", "пароль должен отвечать следующим требованиям Минимум 6 символов Минимум 1 прописная буква Минимум 1 цифра Минимум один символ из набора: ! @ # $ % ^. ");
                 else
                 {
                     Connection.AddUser(user);

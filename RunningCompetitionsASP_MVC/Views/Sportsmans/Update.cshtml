@@ -1,8 +1,8 @@
-﻿Frame@{
+﻿@{
     Layout = "~/Views/Shared/_LayoutCopy.cshtml";
     ViewData["Title"] = "Update sportsman";
 }
-@model CoreFramework.Sportsmans
+@model CoreFramework.Sportsman
 
 <div class="row justify-content-lg-cehter">
     <h1>Update sportsman</h1>
@@ -23,11 +23,11 @@
 
     </p>
     <p>
-        @Html.LabelFor(m => m.Title, "Title")
+        @Html.LabelFor(m => m.Title.Name, "Title")
         <br />
-        <select asp-for="Title" class="form-control">
-            <option selected="selected" value=" @Html.EditorFor(m => m.Title)">  </option>
-            @foreach (string title in Core.Connection.GetTitles())
+        <select asp-for="Title.Name" class="form-control">
+            <option selected="selected" value=" @Html.EditorFor(m => m.Title.Name)">  </option>
+            @foreach (string title in CoreFramework.Connection.GetNameTitles())
             {
                 <option>@title</option>
             }
@@ -40,11 +40,11 @@
         @Html.EditorFor(m => m.Height)
     </p>
     <p>
-        @Html.LabelFor(m => m.Command, "Command")
+        @Html.LabelFor(m => m.Command.Name, "Command")
         <br />
-        <select asp-for="Command" class="form-control">
-            <option selected="selected" value=" @Html.EditorFor(m => m.Command)">  </option>
-            @foreach (string command in Core.Connection.GetNameCommands())
+        <select asp-for="Command.Name" class="form-control">
+            <option selected="selected" value=" @Html.EditorFor(m => m.Command.Name)">  </option>
+            @foreach (string command in CoreFramework.Connection.GetNameCommands())
             {
                 <option>@command</option>
             }

@@ -65,16 +65,7 @@ namespace CoreFramework
         public static ResultCompetition GetResultsId(int idCommand, int idCompet)
         {
             ObservableCollection<ResultCompetition> results = GetResults();
-            var com = results.Where(tt => tt.idCommand == idCommand && tt.idCompetition == idCompet).FirstOrDefault();
-            ResultCompetition command = new ResultCompetition
-            {
-                idCommand = idCommand,
-                idCompetition = idCompet,
-                //NameCommand = com.Command.Name,
-                //NameCompetition = com.Competition.Name,
-                Rank = com.Rank               
-            };
-            return command;
+            return results.Where(tt => tt.idCommand == idCommand && tt.idCompetition == idCompet).FirstOrDefault();
         }
 
         public static void RemoveResult(int idCommand, int idCompetition)
@@ -133,8 +124,8 @@ namespace CoreFramework
             try
             {
                 var res = bdConnection.connection.ResultCompetition.SingleOrDefault(tt => tt.Command.Name == result.Command.Name && tt.Competition.Name == result.Competition.Name);
-                res.idCommand = result.idCommand;
-                res.idCompetition = result.idCompetition;
+                res.Command = Connection.GetCommand(result.Command.Name);
+                res.Competition = Connection.GetCompetition(result.Competition.Name);
                 res.Rank = result.Rank;
                 bdConnection.connection.SaveChanges();
             }

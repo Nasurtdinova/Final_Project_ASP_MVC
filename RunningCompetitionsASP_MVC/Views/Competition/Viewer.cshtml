@@ -2,7 +2,7 @@
     ViewData["Title"] = "Competition";
 }
 @using System.Collections.ObjectModel;
-@model ObservableCollection<Core.Competitions>
+@model ObservableCollection<CoreFramework.Competition>
 <h2>Competitions</h2>
 <br />
 <table border="1" style="border-collapse:collapse;" width=100% cellpadding="4" cellspacing="20">
@@ -21,7 +21,7 @@
             <td align="center">@compet.NameVenue</td>
             <td align="center">@compet.Street</td>
             <td align="center">@compet.Home</td>
-            <td align="center">@compet.City</td>
+            <td align="center">@compet.City.Name</td>
             <td align="center">@compet.Date</td>
         </tr>
     }

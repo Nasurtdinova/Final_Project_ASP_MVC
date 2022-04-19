@@ -11,13 +11,16 @@
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Add">
+            <div asp-validation-summary="ModelOnly"></div>
             <div class="form-group">
                 <label asp-for="Surname" class="control-label">Surname</label>
                 <input asp-for="Surname" class="form-control" />
+                <span asp-validation-for="Surname"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label">Name</label>
                 <input asp-for="Name" class=" form-control" />
+                <span asp-validation-for="Name"></span>
             </div>
             <legend>Добавить изображение</legend>
             <p>
@@ -25,29 +28,32 @@
             </p>
 
             <div class="form-group">
-                <label asp-for="Title" class="control-label">Title</label>
-                <select asp-for="Title" class=" form-control">
+                <label asp-for="Title.Name" class="control-label">Title</label>
+                <select asp-for="Title.Name" class=" form-control">
                     <option selected="selected">  </option>
-                    @foreach (string title in Core.Connection.GetTitles())
+                    @foreach (string title in CoreFramework.Connection.GetNameTitles())
                     {
                         <option>@title</option>
                     }
                 </select>
+                <span asp-validation-for="Title.Name"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="Height" class="control-label">Height</label>
                 <input asp-for="Height" class=" form-control" />
+                <span asp-validation-for="Height"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Command" class="control-label">Command</label>
-                <select asp-for="Command" class=" form-control">
+                <label asp-for="Command.Name" class="control-label">Command</label>
+                <select asp-for="Command.Name" class=" form-control">
                     <option selected="selected">  </option>
-                    @foreach (string command in Core.Connection.GetNameCommands())
+                    @foreach (string command in CoreFramework.Connection.GetNameCommands())
                     {
                         <option>@command</option>
                     }
                 </select>
+                <span asp-validation-for="Command.Name"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Add" class=" btn btn-primary" />

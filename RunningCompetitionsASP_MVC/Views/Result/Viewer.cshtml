@@ -2,9 +2,9 @@
     ViewData["Title"] = "Result competition";
 }
 @using System.Collections.ObjectModel;
-@model ObservableCollection<Core.Results>
+@model ObservableCollection<CoreFramework.ResultCompetition>
 <h2>Result competitions</h2>
-<br />
+<br/>
 <table border="1" style="border-collapse:collapse;" width=100% cellpadding="4" cellspacing="20">
     <tr>
         <th style="text-align:center">Название команды</th>
@@ -14,8 +14,8 @@
     @foreach (var result in Model)
     {
         <tr>
-            <td align="center">@result.Command</td>
-            <td align="center">@result.Compet</td>
+            <td align="center">@result.Command.Name</td>
+            <td align="center">@result.Competition.Name</td>
             <td align="center">@result.Rank</td>
         </tr>
     }

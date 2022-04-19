@@ -24,7 +24,7 @@ namespace CoreFramework
             sportsmans = ConnectionSportsmans.GetSportsmans();
         }
 
-            public static void Update(Sportsman sportsman)
+        public static void Update(Sportsman sportsman)
         {
             ConnectionSportsmans.UpdateSportsman(sportsman);
             sportsmans = ConnectionSportsmans.GetSportsmans();

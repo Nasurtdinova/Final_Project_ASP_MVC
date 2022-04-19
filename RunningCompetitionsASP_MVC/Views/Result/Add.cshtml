@@ -2,7 +2,7 @@
     Layout = "~/Views/Shared/_LayoutCopy.cshtml";
     ViewData["Title"] = "Result competition";
 }
-@model Core.Results
+@model CoreFramework.Results
 
 <div class="row justify-content-lg-center">
     <h1>Add new result competition</h1>
@@ -12,20 +12,20 @@
     <div class="col-md-4">
         <form asp-action="Add">
             <div class="form-group">
-                <label asp-for="Command" class="control-label">Command</label>
-                <select asp-for="Command" class=" form-control">
+                <label asp-for="Command.Name" class="control-label">Command</label>
+                <select asp-for="Command.Name" class=" form-control">
                     <option selected="selected">  </option>
-                    @foreach (string command in Core.Connection.GetNameCommands())
+                    @foreach (string command in CoreFramework.Connection.GetNameCommands())
                     {
                         <option>@command</option>
                     }
                 </select>
             </div>
             <div class="form-group">
-                <label asp-for="Compet" class="control-label">Competition</label>
-                <select asp-for="Compet" class=" form-control">
+                <label asp-for="Competition.Name" class="control-label">Competition</label>
+                <select asp-for="Competition.Name" class=" form-control">
                     <option selected="selected">  </option>
-                    @foreach (string compet in Core.Connection.GetNameCompets())
+                    @foreach (string compet in CoreFramework.Connection.GetNameCompets())
                     {
                         <option>@compet</option>
                     }

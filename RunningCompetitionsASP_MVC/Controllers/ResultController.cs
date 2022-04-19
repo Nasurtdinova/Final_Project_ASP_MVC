@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Core;
+using CoreFramework;
 using Microsoft.AspNetCore.Mvc;
 
 namespace RunningCompetitionsASP_MVC.Controllers
@@ -33,21 +33,28 @@ namespace RunningCompetitionsASP_MVC.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(Result result)
+        public IActionResult Add(ResultCompetition result)
         {
-            ResultStorage.Add(result);
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                ResultStorage.Add(result);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View(result);
+            }
         }
 
         [HttpGet]
         public IActionResult Update(int idCommand, int idCompetition)
         {
-            Results result = ConnectionResults.GetResultsId(idCommand, idCompetition);
+            ResultCompetition result = ConnectionResults.GetResultsId(idCommand, idCompetition);
             return View(result);
         }
 
         [HttpPost]
-        public IActionResult Update(Result result)
+        public IActionResult Update(ResultCompetition result)
         {
             ResultStorage.Update(result);
             return RedirectToAction("Index");

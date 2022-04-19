@@ -3,7 +3,7 @@
     ViewData["Title"] = "Sportsmans";
 }
 @using System.Collections.ObjectModel;
-@model ObservableCollection<CoreFramework.Sportsmans>
+@model ObservableCollection<CoreFramework.Sportsman>
 <h2>Sportsmans</h2>
 <div class="row justify-content-end">
     <a class="btn btn-primary" asp-controller="Sportsmans"
@@ -32,6 +32,10 @@
                         <a class="btn btn-primary" asp-controller="Sportsmans"
                            asp-action="Update" asp-route-id="@sportsman.ID" role="button">
                             Update
+                        </a>
+                        <a class="btn btn-info" asp-controller="Sportsmans"
+                           asp-action="AttachImage" asp-route-id="@sportsman.ID" role="button">
+                            Edit image
                         </a>
                     </div>
                 </div>

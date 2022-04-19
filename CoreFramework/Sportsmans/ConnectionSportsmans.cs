@@ -60,8 +60,23 @@ namespace CoreFramework
                 if (sportsman.Image != null)
                     sports.Image = sportsman.Image;
 
-                sportsman.Command = Connection.GetCommand(sportsman.Command.Name);
-                sportsman.Title = Connection.GetTitle(sportsman.Title.Name);
+                sports.Command = Connection.GetCommand(sportsman.Command.Name);
+                sports.Title = Connection.GetTitle(sportsman.Title.Name);
+
+                bdConnection.connection.SaveChanges();
+            }
+            catch (Exception ex) // Exception исправить
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        public static void UpdateImageSportsman(int id, byte[] img)
+        {
+            try
+            {
+                var com = bdConnection.connection.Sportsman.SingleOrDefault(r => r.ID == id);
+                com.Image = img;
 
                 bdConnection.connection.SaveChanges();
             }

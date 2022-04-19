@@ -3,7 +3,7 @@
     ViewData["Title"] = "Result competition";
 }
 @using System.Collections.ObjectModel;
-@model ObservableCollection<Core.Results>
+@model ObservableCollection<CoreFramework.ResultCompetition>
 <h2>Result competitions</h2>
 <div class="row justify-content-end">
     <a class="btn btn-primary" asp-controller="Result"
@@ -17,21 +17,21 @@
             <div class="card h-100">
                 <div class="card-body">
                     <div>
-                        <p class="font-weight-normal">Название команды: @result.Command</p>
+                        <p class="font-weight-normal">Название команды: @result.Command.Name</p>
                     </div>
                     <div>
-                        <p class="font-weight-normal">Название соревнования:@result.Compet</p>
+                        <p class="font-weight-normal">Название соревнования:@result.Competition.Name</p>
                     </div>
                     <div>
                         <p class="font-weight-normal">Место: @result.Rank</p>
                     </div>
 
                     <a class="btn btn-danger" asp-controller="Result"
-                       asp-action="Remove" asp-route-idCommand="@result.idCommand" asp-route-idCompetition="@result.idCompet" role="button">
+                       asp-action="Remove" asp-route-idCommand="@result.idCommand" asp-route-idCompetition="@result.idCompetition" role="button">
                         Remove
                     </a>
                     <a class="btn btn-primary" asp-controller="Result"
-                       asp-action="Update" asp-route-idCommand="@result.idCommand" asp-route-idCompetition="@result.idCompet" role="button">
+                       asp-action="Update" asp-route-idCommand="@result.idCommand" asp-route-idCompetition="@result.idCompetition" role="button">
                         Update
                     </a>
                 </div>

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using CoreFramework;
 using Microsoft.AspNetCore.Mvc;
+using RunningCompetitionsASP_MVC.ViewModels;
 
 namespace RunningCompetitionsASP_MVC.Controllers
 {
@@ -32,11 +34,42 @@ namespace RunningCompetitionsASP_MVC.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult AttachImage(int id)
+        {
+            Sportsman command = ConnectionSportsmans.GetSportsmansId(id);
+            if (command == null)
+                return NotFound();
+            return View(command);
+        }
+
+        [HttpPost]
+        public IActionResult AttachImage(int id, ImageViewModel pvm)
+        {
+            if (pvm.ImageData != null)
+            {
+                byte[] imageData = null;
+                using (var binaryReader = new BinaryReader(pvm.ImageData.OpenReadStream()))
+                {
+                    imageData = binaryReader.ReadBytes((int)pvm.ImageData.Length);
+                }
+                ConnectionSportsmans.UpdateImageSportsman(id, imageData);
+            }
+            return RedirectToAction("Index");
+        }
+
         [HttpPost]
         public IActionResult Add(Sportsman sportsman)
         {
-            SportsmanStorage.Add(sportsman);
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                SportsmanStorage.Add(sportsman);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View(sportsman);
+            }
         }
 
         public IActionResult Remove(int id)

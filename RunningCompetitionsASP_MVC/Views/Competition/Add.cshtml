@@ -2,7 +2,7 @@
     Layout = "~/Views/Shared/_LayoutCopy.cshtml";
     ViewData["Title"] = "Add competition";
 }
-@model Core.Competition
+@model CoreFramework.Competition
 
 <div class="row justify-content-lg-center">
     <h1>Add new competition</h1>
@@ -11,35 +11,42 @@
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Add">
+            <div asp-validation-summary="ModelOnly"></div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label">Name</label>
                 <input asp-for="Name" class=" form-control" />
+                <span asp-validation-for="Name"></span>
             </div>
             <div class="form-group">
                 <label asp-for="NameVenue" class="control-label">Venue</label>
                 <input asp-for="NameVenue" class=" form-control" />
+                <span asp-validation-for="NameVenue"></span>
             </div>
             <div class="form-group">
-                <label asp-for="City" class="control-label">City</label>
-                <select asp-for="City" class=" form-control">
+                <label asp-for="City.Name" class="control-label">City</label>
+                <select asp-for="City.Name" class=" form-control">
                     <option selected="selected">  </option>
-                    @foreach (var city in Core.Connection.GetCities())
+                    @foreach (var city in CoreFramework.Connection.GetNameCities())
                     {
                         <option>@city</option>
                     }
                 </select>
+                <span asp-validation-for="City.Name"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Street" class="control-label">Street</label>
                 <input asp-for="Street" class=" form-control" />
+                <span asp-validation-for="Street"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Home" class="control-label">Home</label>
                 <input asp-for="Home" class=" form-control" />
+                <span asp-validation-for="Home"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Date" class="control-label">Date</label>
                 <input asp-for="Date" class=" form-control" />
+                <span asp-validation-for="Date"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Add" class=" btn btn-primary" />

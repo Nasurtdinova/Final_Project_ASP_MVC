@@ -34,7 +34,8 @@ namespace CoreFramework
 
         public Nullable<int> ID_city { get; set; }
 
-        [Required(ErrorMessage = "Image is required")]
+        //[Required(ErrorMessage = "Image is required")]
+        //[Display(Name = "ImageData")]
         public byte[] Image { get; set; }
 
         public Nullable<bool> IsDeleted { get; set; }
