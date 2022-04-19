@@ -25,7 +25,7 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Название команды" Binding="{Binding Command.Name}"></DataGridTextColumn>
                     <DataGridTextColumn Header="Дата начала спонсирования" Binding="{Binding DateBegin, StringFormat='dd.MM.yyyy'}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Дата конца спонсирования" Binding="{Binding DateEnd, StringFormat='dd.MM.yyyy'}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Дата окончания спонсирования" Binding="{Binding DateEnd, StringFormat='dd.MM.yyyy'}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Сумма" Binding="{Binding Amount}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Взаимовыгода" Binding="{Binding MutualBenefit}" Width="*"></DataGridTextColumn>
             </DataGrid.Columns>

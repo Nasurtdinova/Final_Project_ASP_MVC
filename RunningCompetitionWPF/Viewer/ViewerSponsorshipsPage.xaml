@@ -17,17 +17,14 @@
             </RowDefinition>
             <RowDefinition Height="540">
             </RowDefinition>
-            <RowDefinition Height="50">
-            </RowDefinition>
         </Grid.RowDefinitions>
         <TextBlock Text="Sponsorships" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
         <DataGrid x:Name="dgSponsorships" Grid.Row="1" FontSize="18"  AutoGenerateColumns="False" ItemsSource="{Binding infoSponsorships}" IsReadOnly="True">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Название команды" Binding="{Binding Command.Name}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Дата начала спонсирования" Binding="{Binding DateBegin, StringFormat='dd.MM.yyyy'}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Дата конца спонсирования" Binding="{Binding DateEnd, StringFormat='dd.MM.yyyy'}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Сумма" Binding="{Binding Amount}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Взаимовыгода" Binding="{Binding MutualBenefit}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Название команды" Binding="{Binding Command.Name}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Спонсор" Binding="{Binding Sponsor.Name}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Дата начала" Binding="{Binding DateBegin, StringFormat='dd.MM.yyyy'}" Width="200"></DataGridTextColumn>
+                <DataGridTextColumn Header="Дата окончания" Binding="{Binding DateEnd, StringFormat='dd.MM.yyyy'}" Width="200"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

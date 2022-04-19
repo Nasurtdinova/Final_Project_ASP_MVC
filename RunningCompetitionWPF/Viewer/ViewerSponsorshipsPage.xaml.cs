@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CoreFramework;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -21,6 +22,7 @@ namespace RunningCompetitionWPF
         public ViewerSponsorshipsPage()
         {
             InitializeComponent();
+            dgSponsorships.ItemsSource = ConnectionSponsorship.GetAcceptedRequest();
         }
     }
 }

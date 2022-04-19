@@ -8,11 +8,11 @@
         Title="Running competitions" Height="450" Width="800"
     WindowStartupLocation="CenterScreen" Icon="C:\Users\nasur\Source\Repos\Final_Project_ASP_MVC_Clone\RunningCompetitionWPF\icons\logoWindow.png">
     <Grid Background="#FFD6D6D6">
-        <Frame Background="WhiteSmoke" x:Name="frame_auto_reg" Margin="170,50,0,0"/>
+        <Frame Background="WhiteSmoke" x:Name="frame_auto_reg" Margin="180,50,0,0"/>
         <Grid x:Name="panelHeader" VerticalAlignment="Top" Height="50" Background="#FF0F4E7A" MouseDown="panelHeader_MouseDown" Margin="170,0,0,0">
             <TextBlock Text="Running competitions" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Century Gothic" FontSize="25" Foreground="White"/>
         </Grid>
-        <Grid x:Name="sidePanel" Background="#FF0F4E7A" HorizontalAlignment="Left" Width="170">
+        <Grid x:Name="sidePanel" Background="#FF0F4E7A" HorizontalAlignment="Left" Width="180">
             <StackPanel>
                 <Grid Height="150" Background="White">
                     <Image x:Name="mainIcon" Source="C:\Users\nasur\Source\Repos\Final_Project_ASP_MVC_Clone\RunningCompetitionWPF\icons\main.png" Width="130"></Image>
@@ -27,7 +27,6 @@
                             <Button FontWeight="Bold" Margin="15 0 0 0" Content="Home" Background="#FF0F4E7A" BorderBrush="#FF0F4E7A" Foreground="White" Click="mainPage_Click" VerticalAlignment="Center"/>
                         </StackPanel>
                     </ListViewItem>
-
                     <ListViewItem Height="30">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="C:\Users\nasur\Source\Repos\Final_Project_ASP_MVC_Clone\RunningCompetitionWPF\icons\sportsmans.png" Height="20" VerticalAlignment="Center"/>
@@ -54,6 +53,12 @@
                             <Image Source="C:\Users\nasur\Source\Repos\Final_Project_ASP_MVC_Clone\RunningCompetitionWPF\icons\result1.png" Height="20" VerticalAlignment="Center"/>
                             <Button FontWeight="Bold" Margin="15 0 0 0" Content="Results" Background="#FF0F4E7A" BorderBrush="#FF0F4E7A" Foreground="White" Name="resultCompetition" Click="resultCompetition_Click" VerticalAlignment="Center"/>
                             <Button FontWeight="Bold" Margin="15 0 0 0" Content="Results" Background="#FF0F4E7A" BorderBrush="#FF0F4E7A" Foreground="White" Name="resultCompetitionAdmin" Click="resultCompetitionAdmin_Click" Visibility="Collapsed" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Height="30">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="C:\Users\nasur\Source\Repos\Final_Project_ASP_MVC_Clone\RunningCompetitionWPF\icons\sponsorshipViewer.png" Height="20" VerticalAlignment="Center"/>
+                            <Button FontWeight="Bold" Margin="15 0 0 0" Content="Sponsorships" Background="#FF0F4E7A" BorderBrush="#FF0F4E7A" Foreground="White" Name="sponsorship" Click="sponsorship_Click" VerticalAlignment="Center"/>
                         </StackPanel>
                     </ListViewItem>
                     <ListViewItem Height="30" Name="noticesSponsor"  Visibility="Collapsed">
@@ -95,7 +100,7 @@
                     </ListViewItem>
                     <ListViewItem Height="30" Name="ecportExsel">
                         <StackPanel Orientation="Horizontal" >
-                            <Image Source="C:\Users\nasur\Source\Repos\Final_Project_ASP_MVC_Clone\RunningCompetitionWPF\icons\exit.png" Height="20" VerticalAlignment="Center"/>
+                            <Image Source="C:\Users\nasur\Source\Repos\Final_Project_ASP_MVC_Clone\RunningCompetitionWPF\icons\exportExcel.png" Height="20" VerticalAlignment="Center"/>
                             <Button FontWeight="Bold" Margin="15 0 0 0" Background="#FF0F4E7A" BorderBrush="#FF0F4E7A" Foreground="White" Name="btnExport" Content="Export exsel" Click="btnExport_Click"  VerticalAlignment="Center" />
                         </StackPanel>
                     </ListViewItem>

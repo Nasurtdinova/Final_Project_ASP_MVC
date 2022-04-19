@@ -73,7 +73,7 @@ namespace RunningCompetitionWPF
             {
                 mainIcon.Visibility = Visibility.Hidden;
                 sidePanel.Width -= 1;
-                if (sidePanel.Width <= 35)
+                if (sidePanel.Width <= 45)
                 {
                     timer.Stop();
                     hidden = true;
@@ -187,6 +187,12 @@ namespace RunningCompetitionWPF
         private void btnExport_Click(object sender, RoutedEventArgs e)
         {
             ConnectionResults.ExportExcel();
+        }
+
+        private void sponsorship_Click(object sender, RoutedEventArgs e)
+        {
+            Manager.VisibleCollapsedAuthReg();
+            Manager.MainFrame.Navigate(new ViewerSponsorshipsPage());
         }
     }
 }

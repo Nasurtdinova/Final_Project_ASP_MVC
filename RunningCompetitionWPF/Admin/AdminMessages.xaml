@@ -25,9 +25,9 @@
                 <DataTemplate>
                     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
                         <TextBlock Text="Спонсор" />
-                        <TextBlock Text="{Binding Sponsor.Surname }" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding Sponsor.Surname }" Margin="10 0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         <TextBlock Text="{Binding Sponsor.Name }" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        <TextBlock Text="отправил запрос на спонсирование команды " />
+                        <TextBlock Text=" отправил запрос на спонсирование команды " />
                         <TextBlock Text="{Binding Command.Name }" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </StackPanel>
                 </DataTemplate>
