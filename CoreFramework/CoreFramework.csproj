@@ -81,13 +81,11 @@
     <Compile Include="Command.cs">
       <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
-    <Compile Include="Commands\Commands.cs" />
     <Compile Include="Commands\CommandStorage.cs" />
     <Compile Include="Commands\ConnectionCommands.cs" />
     <Compile Include="Competition.cs">
       <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
-    <Compile Include="Competitions\Competitions.cs" />
     <Compile Include="Competitions\CompetitionStorage.cs" />
     <Compile Include="Connection.cs" />
     <Compile Include="Competitions\ConnectionCompetitions.cs" />
@@ -112,7 +110,6 @@
       <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Results\ConnectionResults.cs" />
-    <Compile Include="Results\Results.cs" />
     <Compile Include="Results\ResultStorage.cs" />
     <Compile Include="Sponsor.cs">
       <DependentUpon>Model2.tt</DependentUpon>
@@ -121,12 +118,10 @@
       <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Sponsorship\ConnectionSponsorship.cs" />
-    <Compile Include="Sponsorship\Sponsorship.cs" />
     <Compile Include="Sportsman.cs">
       <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Sportsmans\ConnectionSportsmans.cs" />
-    <Compile Include="Sportsmans\Sportsman.cs" />
     <Compile Include="Sportsmans\SportsmanStorage.cs" />
     <Compile Include="Status.cs">
       <DependentUpon>Model2.tt</DependentUpon>

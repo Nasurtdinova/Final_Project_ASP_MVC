@@ -83,7 +83,7 @@
                     <ListViewItem Height="30" Name="login">
                         <StackPanel Orientation="Horizontal" >
                             <Image Source="C:\Users\nasur\Source\Repos\Final_Project_ASP_MVC_Clone\RunningCompetitionWPF\icons\authorization.png" Height="20" VerticalAlignment="Center"/>
-                            <Button FontWeight="Bold" Height="50" Margin="15 0 0 0" Background="#FF0F4E7A" BorderBrush="#FF0F4E7A" Foreground="White" Content="Sign in" Click="login_Click" VerticalAlignment="Center"/>
+                            <Button FontWeight="Bold" Height="50" Margin="15 0 0 0" Background="#FF0F4E7A" BorderBrush="#FF0F4E7A" Foreground="White" Content="Authorization" Click="login_Click" VerticalAlignment="Center"/>
                         </StackPanel>
                     </ListViewItem>
                     <ListViewItem Height="30" Name="exit" Visibility="Collapsed">

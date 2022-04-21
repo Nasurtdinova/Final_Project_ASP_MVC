@@ -85,25 +85,17 @@ namespace CoreFramework
         public static bool isComCompetTrue(int Command,int Competition)
         {
             if (GetResults().Where(t => t.idCommand == Command && t.idCompetition == Competition).Count() == 0)
-            {
                 return true;
-            }
             else
-            {
                 return false;
-            }
         }
 
         public static bool isRankTrue(int rank, int compet)
         {
             if (GetResults().Where(t => t.Rank == rank && t.idCompetition == compet).Count() == 0)
-            {
                 return true;
-            }
             else
-            {
                 return false;
-            }
         }
 
         public static void AddResult(ResultCompetition result)
