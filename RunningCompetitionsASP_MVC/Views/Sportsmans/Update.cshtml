@@ -10,6 +10,7 @@
 @using (Html.BeginForm("Update", "Sportsmans", FormMethod.Post))
 {
 <fieldset>
+    <div asp-validation-summary="ModelOnly"></div>
     @Html.HiddenFor(m => m.ID)
     <p>
         @Html.LabelFor(m => m.Surname, "Surname")
@@ -40,13 +41,13 @@
         @Html.EditorFor(m => m.Height)
     </p>
     <p>
-        @Html.LabelFor(m => m.Command.Name, "Command")
+        @Html.LabelFor(m => m.idCommand, "Command")
         <br />
-        <select asp-for="Command.Name" class="form-control">
+        <select asp-for="idCommand" class="form-control">
             <option selected="selected" value=" @Html.EditorFor(m => m.Command.Name)">  </option>
-            @foreach (string command in CoreFramework.Connection.GetNameCommands())
+            @foreach (var command in CoreFramework.ConnectionCommands.GetCommands().ToList())
             {
-                <option>@command</option>
+                <option value="@command.idCommand">@command.Name</option>
             }
 
         </select>

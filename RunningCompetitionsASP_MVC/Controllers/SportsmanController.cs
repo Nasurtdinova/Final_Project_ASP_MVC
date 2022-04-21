@@ -59,10 +59,19 @@ namespace RunningCompetitionsASP_MVC.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(Sportsman sportsman)
-        {
+        public IActionResult Add(Sportsman sportsman, ImageViewModel pvm)
+        {          
             if (ModelState.IsValid)
             {
+                if (pvm.ImageData != null)
+                {
+                    byte[] imageData = null;
+                    using (var binaryReader = new BinaryReader(pvm.ImageData.OpenReadStream()))
+                    {
+                        imageData = binaryReader.ReadBytes((int)pvm.ImageData.Length);
+                    }
+                    sportsman.Image = imageData;
+                }
                 SportsmanStorage.Add(sportsman);
                 return RedirectToAction("Index");
             }
@@ -88,8 +97,15 @@ namespace RunningCompetitionsASP_MVC.Controllers
         [HttpPost]
         public IActionResult Update(Sportsman sportsman)
         {
-            SportsmanStorage.Update(sportsman);
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                SportsmanStorage.Update(sportsman);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View(sportsman);
+            }
         }
 
         [HttpGet]

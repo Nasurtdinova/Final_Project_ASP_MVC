@@ -56,8 +56,8 @@ namespace CoreFramework
                 competition.Name = compet.Name;
                 competition.NameVenue = compet.NameVenue;
                 competition.Date = compet.Date;
-                //var cit = bdConnection.connection.City.SingleOrDefault(r => r.Name == compet.City.Name);
-                competition.City = compet.City;
+
+                competition.City = Connection.GetCity(compet.City.Name);
                 competition.Home = compet.Home;
                 competition.Street = compet.Street;
                 bdConnection.connection.SaveChanges();

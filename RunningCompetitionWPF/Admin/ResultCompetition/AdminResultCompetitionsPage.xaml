@@ -21,12 +21,12 @@
             </RowDefinition>
         </Grid.RowDefinitions>
         <TextBlock Text="Result competition" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
-        <DataGrid x:Name="dgResultCompetitions" Grid.Row="1" FontSize="18" Width="828" AutoGenerateColumns="False" ItemsSource="{Binding infoResultCompet}" IsReadOnly="True">
+        <DataGrid AlternationCount="2" x:Name="dgResultCompetitions" Grid.Row="1" FontSize="18" AutoGenerateColumns="False" ItemsSource="{Binding infoResultCompet}" IsReadOnly="True">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Название соревнования" Binding="{Binding Competition.Name}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Дата проведения" Binding="{Binding Competition.Date, StringFormat='dd.MM.yyyy hh:mm'}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Название команды" Binding="{Binding Command.Name}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Место" Binding="{Binding Rank}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Соревнование" Binding="{Binding Competition.Name}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Дата проведения" Binding="{Binding Competition.Date, StringFormat='dd.MM.yyyy hh:mm'}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Команда" Binding="{Binding Command.Name}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Место" Binding="{Binding Rank}" Width="*"></DataGridTextColumn>
                 <DataGridTemplateColumn Width="100">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

@@ -80,12 +80,6 @@
                             <Button FontWeight="Bold" Margin="15 0 0 0" Content="My sponsorships" Background="#FF0F4E7A" BorderBrush="#FF0F4E7A" Foreground="White" Click="mySponsorshipsSponsor_Click"  VerticalAlignment="Center"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem Height="30" Name="registr">
-                        <StackPanel Orientation="Horizontal" >
-                            <Image Source="C:\Users\nasur\Source\Repos\Final_Project_ASP_MVC_Clone\RunningCompetitionWPF\icons\registration.png" Name="registrIcon" Height="20" VerticalAlignment="Center"/>
-                            <Button FontWeight="Bold" Height="50" Margin="15 0 0 0" Background="#FF0F4E7A" BorderBrush="#FF0F4E7A" Foreground="White" Content="Sign up" Click="registr_Click"  VerticalAlignment="Center"/>
-                        </StackPanel>
-                    </ListViewItem>
                     <ListViewItem Height="30" Name="login">
                         <StackPanel Orientation="Horizontal" >
                             <Image Source="C:\Users\nasur\Source\Repos\Final_Project_ASP_MVC_Clone\RunningCompetitionWPF\icons\authorization.png" Height="20" VerticalAlignment="Center"/>

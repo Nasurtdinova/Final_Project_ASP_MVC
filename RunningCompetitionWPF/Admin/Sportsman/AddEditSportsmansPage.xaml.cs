@@ -59,7 +59,6 @@ namespace RunningCompetitionWPF
                     MessageBox.Show(ex.Message.ToString());
                 }
             }
-
         }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
@@ -70,21 +69,11 @@ namespace RunningCompetitionWPF
         private void btnLoadImage_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            byte[] imageData;
             if (openFileDialog.ShowDialog() == true)
             {
                 string path = openFileDialog.FileName;
-                imageData = File.ReadAllBytes(path);
-
-                var stream = new MemoryStream(imageData);
-                stream.Seek(0, SeekOrigin.Begin);
-                var image = new BitmapImage();
-                image.BeginInit();
-                image.StreamSource = stream;
-                image.EndInit();
-
-                imgSportsman.Source = image;
-                CurrentSportsman.Image = imageData;
+                imgSportsman.Source = new BitmapImage(new Uri(path));
+                CurrentSportsman.Image = File.ReadAllBytes(path);
             }
         }
     }

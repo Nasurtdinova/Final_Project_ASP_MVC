@@ -154,9 +154,19 @@ namespace CoreFramework
             return ConnectionCommands.GetCommands().Where(a => a.Name == name).FirstOrDefault();
         }
 
-        public static Competition GetCompetition(string name)
+        //public static Competition GetCompetition(string name)
+        //{
+        //    return ConnectionCompetitions.GetCompetitions().Where(a => a.Name == name).FirstOrDefault();
+        //}
+
+        public static Command GetCommand(int id)
         {
-            return ConnectionCompetitions.GetCompetitions().Where(a => a.Name == name).FirstOrDefault();
+            return ConnectionCommands.GetCommands().Where(a => a.idCommand == id).FirstOrDefault();
+        }
+
+        public static Competition GetCompetition(int id)
+        {
+            return ConnectionCompetitions.GetCompetitions().Where(a => a.idCompetition == id).FirstOrDefault();
         }
 
         public static Title GetTitle(string name)

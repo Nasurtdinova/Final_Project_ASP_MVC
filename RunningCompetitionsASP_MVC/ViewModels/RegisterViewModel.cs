@@ -23,6 +23,7 @@ namespace RunningCompetitionsASP_MVC.ViewModels
 
         [Required]
         [Display(Name = "Phone")]
+        [DataType(DataType.PhoneNumber)]
         public string Phone { get; set; }
 
         [Required]

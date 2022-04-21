@@ -3,7 +3,7 @@
     ViewData["Title"] = "Command";
 }
 @using System.Collections.ObjectModel;
-@model ObservableCollection<Core.Commands>
+@model ObservableCollection<CoreFramework.Command>
 <h2>Commands</h2>
 <div class="row">
     @foreach (var command in Model)
@@ -12,19 +12,19 @@
             <div class="card h-100">
                 <div class="card-body">
                     <div>
-                        <img class="card-img-top" width="300" height="300" src="@command.Image"
-                             alt="@command.Name" />
+                        @Html.Raw("<img style='width:300px; height:300px;' src=\"data:image/jpeg;base64,"
+                               + Convert.ToBase64String(command.Image) + "\" />")
                     </div>
 
                     <div>
                         Название команды: @command.Name <br />
                         Количество человек: @command.Count <br />
-                        Город:@command.City @*@CoreFramework.Connection.GetCitiesId(Convert.ToInt32(command.ID_city))*@ <br /> <br />
+                        Город: @command.City.Name@*@CoreFramework.Connection.GetCitiesId(Convert.ToInt32(command.ID_city))*@ <br /> <br />
                     </div>
 
                     <div class="text-center">
                         <a class="btn btn-primary" asp-controller="Commands"
-                           asp-action="SportsmanCommand" asp-route-id="@command.ID" role="button">
+                           asp-action="SportsmanCommand" asp-route-id="@command.idCommand" role="button">
                             View
                         </a>
                     </div>

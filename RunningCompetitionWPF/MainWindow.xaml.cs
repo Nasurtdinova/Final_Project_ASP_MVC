@@ -24,6 +24,7 @@ namespace RunningCompetitionWPF
 
         double panelWidth;
         bool hidden;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -47,7 +48,6 @@ namespace RunningCompetitionWPF
             Manager.NoticesSponsor = noticesSponsor;
 
             Manager.Authorization = login;
-            Manager.Registration = registr;
             Manager.Exit = exit;
 
             timer = new DispatcherTimer();
@@ -57,6 +57,7 @@ namespace RunningCompetitionWPF
             panelWidth = sidePanel.Width;
             frame_auto_reg.Navigate(new ViewerMainPage());
         }
+
         private void Timer_Tick(object sender, EventArgs e)
         {
             if (hidden)
@@ -83,55 +84,42 @@ namespace RunningCompetitionWPF
 
         private void sportsman_click(object sender, RoutedEventArgs e)
         {
-            Manager.VisibleCollapsedAuthReg();
             Manager.MainFrame.NavigationService.Navigate(new SportsmanPage());
         }
 
         private void command_click(object sender, RoutedEventArgs e)
         {
-            Manager.VisibleCollapsedAuthReg();
             Manager.MainFrame.NavigationService.Navigate(new CommandsPage());
         }
 
         private void competition_click(object sender, RoutedEventArgs e)
         {
-            Manager.VisibleCollapsedAuthReg();
             Manager.MainFrame.Navigate(new CompetitionsPage());
         }
 
         private void login_Click(object sender, RoutedEventArgs e)
         {           
             Manager.MainFrame.NavigationService.Navigate(new AuthorizationPage());
-            Manager.DoViewer();
+            //Manager.DoViewer();
         }
 
         private void resultCompetition_Click(object sender, RoutedEventArgs e)
         {
-            Manager.VisibleCollapsedAuthReg();
             Manager.MainFrame.Navigate(new ResultCompetitionsPage());
         }
 
         private void competitionAdmin_Click(object sender, RoutedEventArgs e)
         {
-            Manager.VisibleCollapsedAuthReg();
             Manager.MainFrame.Navigate(new AdminCompetitionsPage());
-        }
-
-        private void registr_Click(object sender, RoutedEventArgs e)
-        {
-            Manager.MainFrame.NavigationService.Navigate(new RegistrationPage());
-            Manager.DoViewer();
         }
 
         private void resultCompetitionAdmin_Click(object sender, RoutedEventArgs e)
         {
-            Manager.VisibleCollapsedAuthReg();
             Manager.MainFrame.Navigate(new AdminResultCompetitionsPage());
         }
 
         private void commandAdmin_Click(object sender, RoutedEventArgs e)
         {
-            Manager.VisibleCollapsedAuthReg();
             Manager.MainFrame.Navigate(new AdminCommandPage());
         }
 
@@ -144,7 +132,6 @@ namespace RunningCompetitionWPF
 
         private void sportsmanAdmin_Click(object sender, RoutedEventArgs e)
         {
-            Manager.VisibleCollapsedAuthReg();
             Manager.MainFrame.Navigate(new AdminSportsmanPage());
         }
 
@@ -160,16 +147,13 @@ namespace RunningCompetitionWPF
 
         private void messagesAdmin_Click(object sender, RoutedEventArgs e)
         {
-            Manager.VisibleCollapsedAuthReg();
             Manager.MainFrame.Navigate(new AdminMessages());
         }
 
         private void noticesSponsor_Click(object sender, RoutedEventArgs e)
         {
-            Manager.VisibleCollapsedAuthReg();
             Manager.MainFrame.Navigate(new NoticesSponsorPage());
         }
-
 
         private void panelHeader_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -191,7 +175,6 @@ namespace RunningCompetitionWPF
 
         private void sponsorship_Click(object sender, RoutedEventArgs e)
         {
-            Manager.VisibleCollapsedAuthReg();
             Manager.MainFrame.Navigate(new ViewerSponsorshipsPage());
         }
     }

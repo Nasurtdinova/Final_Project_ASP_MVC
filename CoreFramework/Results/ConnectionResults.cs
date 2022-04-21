@@ -110,6 +110,8 @@ namespace CoreFramework
         {
             try
             {
+                result.Command = Connection.GetCommand(result.idCommand);
+                result.Competition = Connection.GetCompetition(result.idCompetition);
                 bdConnection.connection.ResultCompetition.Add(result);
                 bdConnection.connection.SaveChanges();
             }
@@ -124,8 +126,8 @@ namespace CoreFramework
             try
             {
                 var res = bdConnection.connection.ResultCompetition.SingleOrDefault(tt => tt.Command.Name == result.Command.Name && tt.Competition.Name == result.Competition.Name);
-                res.Command = Connection.GetCommand(result.Command.Name);
-                res.Competition = Connection.GetCompetition(result.Competition.Name);
+                result.Command = Connection.GetCommand(result.idCommand);
+                result.Competition = Connection.GetCompetition(result.idCompetition);
                 res.Rank = result.Rank;
                 bdConnection.connection.SaveChanges();
             }

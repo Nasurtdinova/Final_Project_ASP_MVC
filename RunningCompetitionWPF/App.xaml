@@ -17,5 +17,34 @@
         <Style TargetType="MenuItem">
             <Setter Property="FontSize" Value="18"></Setter>
         </Style>
+        <Style TargetType="{x:Type DataGridColumnHeader}">
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Height" Value="35" />
+            <Setter Property="Background" Value="#FF0F4E7A"></Setter>
+            
+            <Setter Property="Foreground" Value="White" />
+            <!--<Setter Property="Template">
+                <Setter.Value>
+                    --><!-- Your Template goes here --><!--
+                </Setter.Value>
+            </Setter>-->
+        </Style>
+        <Style TargetType="{x:Type DataGridRow}">
+            <Style.Triggers>
+                <Trigger Property="AlternationIndex" Value="0">
+                    <Setter Property="Background" Value="White" />
+                </Trigger>
+                <Trigger Property="AlternationIndex" Value="1">
+                    <Setter Property="Background" Value="Azure" />
+                </Trigger>
+                <DataTrigger Binding="{Binding Path=Selectable}" Value="False">
+                    <DataTrigger.Setters>
+                        <Setter Property="Background" Value="LightGray" />
+                    </DataTrigger.Setters>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+
     </Application.Resources>
 </Application>

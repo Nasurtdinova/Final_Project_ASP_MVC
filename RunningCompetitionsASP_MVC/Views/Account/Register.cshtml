@@ -3,14 +3,9 @@
 <form method="post" asp-controller="Account" asp-action="Register">
     <div asp-validation-summary="ModelOnly"></div>
     <div>
-        <label asp-for="Email"></label><br />
-        <input asp-for="Email" />
-        <span asp-validation-for="Email"></span>
-    </div>
-    <div>
-        <label asp-for="Phone"></label><br />
-        <input asp-for="Phone" />
-        <span asp-validation-for="Phone"></span>
+        <label asp-for="Surname"></label><br />
+        <input asp-for="Surname" />
+        <span asp-validation-for="Surname"></span>
     </div>
     <div>
         <label asp-for="Name"></label><br />
@@ -18,9 +13,14 @@
         <span asp-validation-for="Name"></span>
     </div>
     <div>
-        <label asp-for="Surname"></label><br />
-        <input asp-for="Surname" />
-        <span asp-validation-for="Surname"></span>
+        <label asp-for="Phone"></label><br />
+        <input asp-for="Phone" />
+        <span asp-validation-for="Phone"></span>
+    </div>
+    <div>
+        <label asp-for="Email"></label><br />
+        <input asp-for="Email" />
+        <span asp-validation-for="Email"></span>
     </div>
     <div>
         <label asp-for="Password"></label><br />

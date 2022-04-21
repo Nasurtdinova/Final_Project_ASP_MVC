@@ -5,12 +5,12 @@
 @model CoreFramework.Sportsman
 
 <div class="row justify-content-lg-cehter">
-    <h1>Add new sportsman</h1>
+    <h2>Add new sportsman</h2>
 </div>
 
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Add">
+        <form asp-action="Add" asp-controller="Sportsmans" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly"></div>
             <div class="form-group">
                 <label asp-for="Surname" class="control-label">Surname</label>
@@ -22,10 +22,7 @@
                 <input asp-for="Name" class=" form-control" />
                 <span asp-validation-for="Name"></span>
             </div>
-            <legend>Добавить изображение</legend>
-            <p>
-                <input name="ImageData" type="file" class="form-control" />
-            </p>
+
 
             <div class="form-group">
                 <label asp-for="Title.Name" class="control-label">Title</label>
@@ -36,25 +33,27 @@
                         <option>@title</option>
                     }
                 </select>
-                <span asp-validation-for="Title.Name"></span>
-            </div>
 
+            </div>
             <div class="form-group">
                 <label asp-for="Height" class="control-label">Height</label>
                 <input asp-for="Height" class=" form-control" />
                 <span asp-validation-for="Height"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Command.Name" class="control-label">Command</label>
-                <select asp-for="Command.Name" class=" form-control">
+                <label asp-for="idCommand" class="control-label">Command</label>
+                <select asp-for="idCommand" class=" form-control">
                     <option selected="selected">  </option>
-                    @foreach (string command in CoreFramework.Connection.GetNameCommands())
+                    @foreach (var command in CoreFramework.ConnectionCommands.GetCommands().ToList())
                     {
-                        <option>@command</option>
+                        <option value="@command.idCommand">@command.Name</option>
                     }
                 </select>
-                <span asp-validation-for="Command.Name"></span>
             </div>
+            <legend>Добавить изображение</legend>
+            <p>
+                <input name="ImageData" type="file" class="form-control" />
+            </p>
             <div class="form-group">
                 <input type="submit" value="Add" class=" btn btn-primary" />
             </div>

@@ -44,17 +44,17 @@ namespace RunningCompetitionsASP_MVC.Controllers
         [HttpPost]
         public IActionResult Add(Command command, ImageViewModel pvm)
         {
-            if (ModelState.IsValid)
+            if (pvm.ImageData != null)
             {
-                if (pvm.ImageData != null)
+                byte[] imageData = null;
+                using (var binaryReader = new BinaryReader(pvm.ImageData.OpenReadStream()))
                 {
-                    byte[] imageData = null;
-                    using (var binaryReader = new BinaryReader(pvm.ImageData.OpenReadStream()))
-                    {
-                        imageData = binaryReader.ReadBytes((int)pvm.ImageData.Length);
-                    }
-                    command.Image = imageData;
+                    imageData = binaryReader.ReadBytes((int)pvm.ImageData.Length);
                 }
+                command.Image = imageData;
+            }
+            if (ModelState.IsValid)
+            {               
                 CommandStorage.Add(command);
                 return RedirectToAction("Index");
             }

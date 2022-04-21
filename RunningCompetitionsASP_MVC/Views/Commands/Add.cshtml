@@ -5,7 +5,7 @@
 @model CoreFramework.Command
 
 <div class="row justify-content-lg-cehter">
-    <h1>Add new command</h1>
+    <h2>Add new command</h2>
 </div>
 
 <div class="row">
@@ -25,7 +25,7 @@
             <div>
                 <label asp-for="City.Name" class="control-label">City</label><br />
                 <select asp-for="City.Name" class=" form-control">
-                    @*<option selected="selected">  </option>*@
+                    <option selected="selected">  </option>
                     @foreach (string city in CoreFramework.Connection.GetNameCities())
                     {
                         <option>@city</option>
@@ -35,8 +35,7 @@
             </div>
             <legend>Добавить изображение</legend>
             <p>
-                <input name="ImageData" type="file" class="form-control" />
-                <span asp-validation-for="Image"></span>
+                <input name="ImageData" type="file" asp-for="Image" class="form-control" />
             </p>
             <div>
                 <input type="submit" value="Add" class=" btn btn-primary" />

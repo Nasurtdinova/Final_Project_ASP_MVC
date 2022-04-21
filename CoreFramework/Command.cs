@@ -33,14 +33,12 @@ namespace CoreFramework
         public Nullable<int> Count { get; set; }
 
         public Nullable<int> ID_city { get; set; }
-
-        //[Required(ErrorMessage = "Image is required")]
-        //[Display(Name = "ImageData")]
+    
         public byte[] Image { get; set; }
 
         public Nullable<bool> IsDeleted { get; set; }
 
-        [Required(ErrorMessage = "City is required")]
+        [Required(ErrorMessage = "Name city is required")]
         public virtual City City { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
