@@ -24,13 +24,13 @@
 
     </p>
     <p>
-        @Html.LabelFor(m => m.Title.Name, "Title")
+        @Html.LabelFor(m => m.idTitle, "Title")
         <br />
-        <select asp-for="Title.Name" class="form-control">
+        <select asp-for="idTitle" class="form-control">
             <option selected="selected" value=" @Html.EditorFor(m => m.Title.Name)">  </option>
-            @foreach (string title in CoreFramework.Connection.GetNameTitles())
+            @foreach (var title in CoreFramework.Connection.GetTitles().ToList())
             {
-                <option>@title</option>
+                <option value="@title.idTitle">@title.Name</option>
             }
 
         </select>
@@ -49,7 +49,7 @@
             {
                 <option value="@command.idCommand">@command.Name</option>
             }
-
+           
         </select>
     </p>
     <p><input type="submit" value="OK" /></p>

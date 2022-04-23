@@ -56,8 +56,15 @@ namespace RunningCompetitionsASP_MVC.Controllers
         [HttpPost]
         public IActionResult Update(ResultCompetition result)
         {
-            ResultStorage.Update(result);
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                ResultStorage.Update(result);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View(result);
+            }
         }
 
         public IActionResult Remove(int idCommand, int idCompetition)

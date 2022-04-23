@@ -35,9 +35,7 @@ namespace CoreFramework
         public static void AddSportsman(Sportsman sportsman)
         {
             try
-            {
-                sportsman.Command = Connection.GetCommand(Convert.ToInt32(sportsman.idCommand));
-                sportsman.Title = Connection.GetTitle(sportsman.Title.Name);
+            {               
                 sportsman.IsDeleted = false;
                 bdConnection.connection.Sportsman.Add(sportsman);
                 bdConnection.connection.SaveChanges();
@@ -61,7 +59,9 @@ namespace CoreFramework
                     sports.Image = sportsman.Image;
 
                 sports.Command = Connection.GetCommand(Convert.ToInt32(sportsman.idCommand));
-                sports.Title = Connection.GetTitle(sportsman.Title.Name);
+
+                if (sportsman.idTitle != null)
+                    sports.Title = Connection.GetTitle(Convert.ToInt32(sportsman.idTitle));
 
                 bdConnection.connection.SaveChanges();
             }

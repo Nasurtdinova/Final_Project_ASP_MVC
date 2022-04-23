@@ -32,6 +32,8 @@ namespace RunningCompetitionWPF
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             var competitions = new List<System.ComponentModel.DataAnnotations.ValidationResult>();
+            if (CurrentCompetition.City != null)
+                CurrentCompetition.idCity = CurrentCompetition.City.idCity;
             var context = new ValidationContext(CurrentCompetition);
             if (!Validator.TryValidateObject(CurrentCompetition, context, competitions, true))
                 foreach (var error in competitions)

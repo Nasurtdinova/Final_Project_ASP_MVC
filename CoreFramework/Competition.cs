@@ -37,11 +37,12 @@ namespace CoreFramework
         [Required(ErrorMessage = "Date is required")]
         public Nullable<System.DateTime> Date { get; set; }
 
+        [Required(ErrorMessage = "Name city is required")]
         public Nullable<int> idCity { get; set; }
 
         public Nullable<bool> IsDeleted { get; set; }
 
-        [Required(ErrorMessage = "Name city is required")]
+        
         public virtual City City { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

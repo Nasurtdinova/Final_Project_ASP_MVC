@@ -33,6 +33,8 @@ namespace RunningCompetitionWPF.Admin
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             var results = new List<System.ComponentModel.DataAnnotations.ValidationResult>();
+            if (CurrentCommand.City != null)
+                CurrentCommand.ID_city = CurrentCommand.City.idCity;
             var context = new ValidationContext(CurrentCommand);
             if (!Validator.TryValidateObject(CurrentCommand, context, results, true))
             {

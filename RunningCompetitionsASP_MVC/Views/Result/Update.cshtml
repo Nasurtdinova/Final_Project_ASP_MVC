@@ -16,9 +16,9 @@
         <br />
         <select asp-for="Command.Name" class="form-control">
             <option selected="selected" value=" @Html.EditorFor(m => m.Command.Name)">  </option>
-            @foreach (string command in CoreFramework.Connection.GetNameCommands())
+            @foreach (var command in CoreFramework.ConnectionCommands.GetCommands())
             {
-                <option>@command</option>
+                <option>@command.Name</option>
             }
 
         </select>
@@ -28,9 +28,9 @@
         <br />
         <select asp-for="Competition.Name" class="form-control">
             <option selected="selected" value=" @Html.EditorFor(m => m.Competition.Name)">  </option>
-            @foreach (string compet in CoreFramework.Connection.GetNameCompets())
+            @foreach (var compet in CoreFramework.ConnectionCompetitions.GetCompetitions())
             {
-                <option>@compet</option>
+                <option>@compet.Name</option>
             }
 
         </select>

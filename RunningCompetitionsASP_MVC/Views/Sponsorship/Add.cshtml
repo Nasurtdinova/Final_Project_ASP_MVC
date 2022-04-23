@@ -16,9 +16,9 @@
                 <label asp-for="Command.Name" class="control-label">Command</label>
                 <select asp-for="Command.Name" class=" form-control">
                     <option selected="selected">  </option>
-                    @foreach (string command in CoreFramework.Connection.GetNameCommands())
+                    @foreach (var command in CoreFramework.ConnectionCommands.GetCommands())
                     {
-                        <option>@command</option>
+                        <option>@command.Name</option>
                     }
                 </select>
             </div>

@@ -34,6 +34,8 @@ namespace RunningCompetitionWPF
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             var sportsmans = new List<System.ComponentModel.DataAnnotations.ValidationResult>();
+            if(CurrentSportsman.Command != null)
+                CurrentSportsman.idCommand = CurrentSportsman.Command.idCommand;
             var context = new ValidationContext(CurrentSportsman);
             if (!Validator.TryValidateObject(CurrentSportsman, context, sportsmans, true))
             {

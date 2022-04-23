@@ -57,7 +57,7 @@ namespace CoreFramework
                 competition.NameVenue = compet.NameVenue;
                 competition.Date = compet.Date;
 
-                competition.City = Connection.GetCity(compet.City.Name);
+                competition.idCity = compet.idCity;
                 competition.Home = compet.Home;
                 competition.Street = compet.Street;
                 bdConnection.connection.SaveChanges();

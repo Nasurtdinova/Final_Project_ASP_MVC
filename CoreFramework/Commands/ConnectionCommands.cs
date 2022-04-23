@@ -34,7 +34,7 @@ namespace CoreFramework
         {
             try
             {
-                command.City = Connection.GetCity(command.City.Name);
+                //command.City = Connection.GetCity(command.City.Name);
                 command.IsDeleted = false;
 
                 bdConnection.connection.Command.Add(command);
@@ -68,7 +68,7 @@ namespace CoreFramework
                 var com = bdConnection.connection.Command.SingleOrDefault(r => r.idCommand == command.idCommand);
                 com.Name = command.Name;
                 com.Count = command.Count;
-                com.City = Connection.GetCity(command.City.Name);
+                com.ID_city = command.ID_city;
                 if (command.Image != null)
                     com.Image = command.Image;
 

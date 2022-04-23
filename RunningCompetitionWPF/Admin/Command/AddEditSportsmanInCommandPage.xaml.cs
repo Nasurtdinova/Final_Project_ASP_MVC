@@ -29,7 +29,7 @@ namespace RunningCompetitionWPF
             {
                 CurrentSportsman = selectedSportsman;
             }
-            CurrentSportsman.Command = ConnectionCommands.GetCommandsId(IdCommand);
+            //CurrentSportsman.Command = ConnectionCommands.GetCommandsId(IdCommand);
 
             DataContext = CurrentSportsman;
             comboTitle.ItemsSource = Connection.GetTitles();
@@ -39,6 +39,7 @@ namespace RunningCompetitionWPF
         {
             var sportsmans = new List<System.ComponentModel.DataAnnotations.ValidationResult>();
             var context = new ValidationContext(CurrentSportsman);
+            CurrentSportsman.idCommand = IdCommand;
             if (!Validator.TryValidateObject(CurrentSportsman, context, sportsmans, true))
             {
                 foreach (var error in sportsmans)

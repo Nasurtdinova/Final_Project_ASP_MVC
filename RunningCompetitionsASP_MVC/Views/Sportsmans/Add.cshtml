@@ -22,18 +22,15 @@
                 <input asp-for="Name" class=" form-control" />
                 <span asp-validation-for="Name"></span>
             </div>
-
-
             <div class="form-group">
-                <label asp-for="Title.Name" class="control-label">Title</label>
-                <select asp-for="Title.Name" class=" form-control">
+                <label asp-for="idTitle" class="control-label">Title</label>
+                <select asp-for="idTitle" class=" form-control">
                     <option selected="selected">  </option>
-                    @foreach (string title in CoreFramework.Connection.GetNameTitles())
+                    @foreach (var title in CoreFramework.Connection.GetTitles().ToList())
                     {
-                        <option>@title</option>
+                        <option value="@title.idTitle">@title.Name</option>
                     }
                 </select>
-
             </div>
             <div class="form-group">
                 <label asp-for="Height" class="control-label">Height</label>

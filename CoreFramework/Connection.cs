@@ -105,54 +105,54 @@ namespace CoreFramework
             }
         }
 
-        public static List<string> GetNameTitles()
-        {
-            List<Title> tits = new List<Title>(bdConnection.connection.Title.ToList());
-            titles = new List<string>();
-            foreach (var i in tits)
-            {
-                titles.Add(i.Name);
-            }
-            return titles;
-        }
+        //public static List<string> GetNameTitles()
+        //{
+        //    List<Title> tits = new List<Title>(bdConnection.connection.Title.ToList());
+        //    titles = new List<string>();
+        //    foreach (var i in tits)
+        //    {
+        //        titles.Add(i.Name);
+        //    }
+        //    return titles;
+        //}
 
-        public static List<string> GetNameCommands()
-        {
-            List<Command> coms = new List<Command>(bdConnection.connection.Command.ToList());
-            commands = new List<string>();
-            foreach (var i in coms)
-            {
-                commands.Add(i.Name);
-            }
-            return commands;
-        }
+        //public static List<string> GetNameCommands()
+        //{
+        //    List<Command> coms = new List<Command>(bdConnection.connection.Command.ToList());
+        //    commands = new List<string>();
+        //    foreach (var i in coms)
+        //    {
+        //        commands.Add(i.Name);
+        //    }
+        //    return commands;
+        //}
 
-        public static List<string> GetNameCompets()
-        {
-            List<Competition> compets = new List<Competition>(bdConnection.connection.Competition.ToList());
-            competitions = new List<string>();
-            foreach (var i in compets)
-            {
-                competitions.Add(i.Name);
-            }
-            return competitions;
-        }
+        //public static List<string> GetNameCompets()
+        //{
+        //    List<Competition> compets = new List<Competition>(bdConnection.connection.Competition.ToList());
+        //    competitions = new List<string>();
+        //    foreach (var i in compets)
+        //    {
+        //        competitions.Add(i.Name);
+        //    }
+        //    return competitions;
+        //}
 
-        public static List<string> GetNameCities()
-        {
-            List<City> city = new List<City>(bdConnection.connection.City.ToList());
-            cities = new List<string>();
-            foreach(var i in city)
-            {
-                cities.Add(i.Name);
-            }
-            return cities;
-        }
+        //public static List<string> GetNameCities()
+        //{
+        //    List<City> city = new List<City>(bdConnection.connection.City.ToList());
+        //    cities = new List<string>();
+        //    foreach(var i in city)
+        //    {
+        //        cities.Add(i.Name);
+        //    }
+        //    return cities;
+        //}
 
-        public static Command GetCommand(string name)
-        {
-            return ConnectionCommands.GetCommands().Where(a => a.Name == name).FirstOrDefault();
-        }
+        //public static Command GetCommand(string name)
+        //{
+        //    return ConnectionCommands.GetCommands().Where(a => a.Name == name).FirstOrDefault();
+        //}
 
         //public static Competition GetCompetition(string name)
         //{
@@ -169,9 +169,9 @@ namespace CoreFramework
             return ConnectionCompetitions.GetCompetitions().Where(a => a.idCompetition == id).FirstOrDefault();
         }
 
-        public static Title GetTitle(string name)
+        public static Title GetTitle(int id)
         {
-            return GetTitles().Where(a => a.Name == name).FirstOrDefault();
+            return GetTitles().Where(a => a.idTitle == id).FirstOrDefault();
         }
 
         public static City GetCity(string name)

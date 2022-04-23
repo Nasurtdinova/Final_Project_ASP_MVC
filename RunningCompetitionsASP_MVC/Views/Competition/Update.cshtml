@@ -38,13 +38,13 @@
     </p>
 
     <p>
-        @Html.LabelFor(m => m.City.Name, "City")
+        @Html.LabelFor(m => m.idCity, "City")
         <br />
-        <select asp-for="City.Name" class="form-control">
+        <select asp-for="idCity" class="form-control">
             <option selected="selected" value=" @Html.EditorFor(m => m.City.Name)">  </option>
-            @foreach (string city in CoreFramework.Connection.GetNameCities())
+            @foreach (var city in CoreFramework.Connection.GetCities().ToList())
             {
-                <option>@city</option>
+                <option value="@city.idCity">@city.Name</option>
             }
 
         </select>

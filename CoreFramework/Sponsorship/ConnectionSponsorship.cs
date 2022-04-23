@@ -53,7 +53,7 @@ namespace CoreFramework
             try
             {
                 sponsorship.Sponsor = CurrentUser.spon;
-                sponsorship.Command = Connection.GetCommand(sponsorship.Command.Name);
+                sponsorship.Command = Connection.GetCommand(Convert.ToInt32(sponsorship.idCom));
                 sponsorship.idStatus = 1;
                 bdConnection.connection.SponsorCommand.Add(sponsorship);
                 bdConnection.connection.SaveChanges();

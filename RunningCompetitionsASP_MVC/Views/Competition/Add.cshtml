@@ -23,15 +23,14 @@
                 <span asp-validation-for="NameVenue"></span>
             </div>
             <div class="form-group">
-                <label asp-for="City.Name" class="control-label">City</label>
-                <select asp-for="City.Name" class=" form-control">
+                <label asp-for="idCity" class="control-label">City</label>
+                <select asp-for="idCity" class=" form-control">
                     <option selected="selected">  </option>
-                    @foreach (var city in CoreFramework.Connection.GetNameCities())
+                    @foreach (var city in CoreFramework.Connection.GetCities())
                     {
-                        <option>@city</option>
+                        <option value="@city.idCity">@city.Name</option>
                     }
                 </select>
-                <span asp-validation-for="City.Name"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Street" class="control-label">Street</label>

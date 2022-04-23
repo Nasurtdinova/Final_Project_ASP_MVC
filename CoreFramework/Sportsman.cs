@@ -30,13 +30,14 @@ namespace CoreFramework
         [Range(150, 210)]
         public Nullable<int> Height { get; set; }
 
+        [Required(ErrorMessage = "Command is required")]
         public Nullable<int> idCommand { get; set; }
 
         public byte[] Image { get; set; }
 
         public Nullable<bool> IsDeleted { get; set; }
 
-        [Required(ErrorMessage = "Command is required")]
+        
         public virtual Command Command { get; set; }
 
         public virtual Title Title { get; set; }

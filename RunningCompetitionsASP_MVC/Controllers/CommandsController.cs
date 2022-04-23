@@ -105,8 +105,15 @@ namespace RunningCompetitionsASP_MVC.Controllers
         [HttpPost]
         public IActionResult Update(Command command)
         {
-            CommandStorage.Update(command);
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                CommandStorage.Update(command);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View(command);
+            }
         }
 
         [HttpGet]
