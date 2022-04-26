@@ -44,7 +44,7 @@ namespace RunningCompetitionWPF
                 {
                     foreach (var i in competsForRemoving)
                     {
-                        ConnectionResults.RemoveResult(i.idCommand, i.idCompetition);
+                        ConnectionResults.RemoveResult(Convert.ToInt32(i.idCommand), Convert.ToInt32(i.idCompetition));
                     }
 
                     dgResultCompetitions.ItemsSource = ConnectionResults.GetResults();

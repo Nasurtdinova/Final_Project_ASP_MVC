@@ -37,13 +37,21 @@ namespace RunningCompetitionsASP_MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                ResultStorage.Add(result);
-                return RedirectToAction("Index");
+                if (!ConnectionResults.IsComCompetTrue(Convert.ToInt32(result.idCommand), Convert.ToInt32(result.idCompetition)))
+                {
+                    ModelState.AddModelError("", "Такие данные уже существуют");
+                }
+                else if (!ConnectionResults.IsRankTrue(Convert.ToInt32(result.Rank), Convert.ToInt32(result.idCompetition)))
+                {
+                    ModelState.AddModelError("", $"В соревновании такое место уже заняли");
+                }               
+                else
+                {
+                    ResultStorage.Add(result);
+                    return RedirectToAction("Index");
+                }
             }
-            else
-            {
-                return View(result);
-            }
+            return View(result);
         }
 
         [HttpGet]
@@ -58,13 +66,21 @@ namespace RunningCompetitionsASP_MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                ResultStorage.Update(result);
-                return RedirectToAction("Index");
+                if (!ConnectionResults.IsRankTrue(Convert.ToInt32(result.Rank), Convert.ToInt32(result.idCompetition)))
+                {
+                    ModelState.AddModelError("", $"В соревновании {result.Competition.Name} такое место уже заняли");
+                }
+                else if (!ConnectionResults.IsComCompetTrue(Convert.ToInt32(result.idCommand), Convert.ToInt32(result.idCompetition)))
+                {
+                    ModelState.AddModelError("", "Такие данные уже существуют");
+                }
+                else
+                {
+                    ResultStorage.Update(result);
+                    return RedirectToAction("Index");
+                }                  
             }
-            else
-            {
-                return View(result);
-            }
+            return View(result);
         }
 
         public IActionResult Remove(int idCommand, int idCompetition)

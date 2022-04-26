@@ -31,7 +31,7 @@ namespace CoreFramework
         public static bool IsAddTrue(int idSponsor, int idCommand)
         {
             List<SponsorCommand> commands = GetSponsorshipAccepted(idSponsor);
-            if (commands.Where(tt => tt.idSponsor == idSponsor && tt.idCom == idCommand && tt.DateEnd > DateTime.Now).Count() != 0)
+            if (commands.Where(tt => tt.idSponsor == idSponsor && tt.idCom == idCommand && tt.DateEnd > DateTime.Now).Count() == 0)
                 return true;
             else
                 return false;                

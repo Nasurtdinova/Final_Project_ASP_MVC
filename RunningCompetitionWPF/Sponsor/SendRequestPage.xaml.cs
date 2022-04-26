@@ -17,10 +17,11 @@ namespace RunningCompetitionWPF
 {
     public partial class SendRequestPage : Page
     {
-        public int IdCommand { get; set; }
+        public SponsorCommand CurrentSponsorships = new SponsorCommand();
         public SendRequestPage()
         {
             InitializeComponent();
+            DataContext = CurrentSponsorships;
             comboCommands.ItemsSource = ConnectionCommands.GetCommands();
         }
 
@@ -31,18 +32,11 @@ namespace RunningCompetitionWPF
 
         private void btnSend_Click(object sender, RoutedEventArgs e)
         {
-            SponsorCommand sponCom = new SponsorCommand()
-            {
-                Command = ConnectionCommands.GetCommandsId(IdCommand),
-                Amount = Convert.ToInt32(textAmount.Text),
-                DateBegin = DateBegin.SelectedDate,
-                DateEnd = DateEnd.SelectedDate,
-                MutualBenefit = textBenefit.Text
-            };
-
+            if (CurrentSponsorships.Command != null)
+                CurrentSponsorships.idCom = CurrentSponsorships.Command.idCommand;
             var sponsorCommand = new List<System.ComponentModel.DataAnnotations.ValidationResult>();
-            var context = new ValidationContext(sponCom);
-            if (!Validator.TryValidateObject(sponCom, context, sponsorCommand, true))
+            var context = new ValidationContext(CurrentSponsorships);
+            if (!Validator.TryValidateObject(CurrentSponsorships, context, sponsorCommand, true))
             {
                 foreach (var error in sponsorCommand)
                 {
@@ -51,12 +45,12 @@ namespace RunningCompetitionWPF
             }
             else
             {
-                if (ConnectionSponsorship.IsAddTrue(CurrentUser.spon.idSponsor, IdCommand))
+                if (ConnectionSponsorship.IsAddTrue(CurrentUser.spon.idSponsor, Convert.ToInt32(CurrentSponsorships.idCom)))
                 {
                     try
                     {
-                        ConnectionSponsorship.AddSponsorship(sponCom);
-                        MessageBox.Show($"Вы отправили запрос на спонсирование команды {sponCom.Command.Name}");
+                        ConnectionSponsorship.AddSponsorship(CurrentSponsorships);
+                        MessageBox.Show($"Вы отправили запрос на спонсирование команды {CurrentSponsorships.Command.Name}");
                     }
                     catch (Exception ex)
                     {
@@ -68,12 +62,6 @@ namespace RunningCompetitionWPF
                     MessageBox.Show("Вы спонсируете эту команду!");
             }
           
-        }
-
-        private void comboCommands_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var a = (sender as ComboBox).SelectedItem as Command;
-            IdCommand = a.idCommand;
         }
     }
 }

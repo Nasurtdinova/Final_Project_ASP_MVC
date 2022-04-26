@@ -82,7 +82,7 @@ namespace CoreFramework
             }
         }
 
-        public static bool isComCompetTrue(int Command,int Competition)
+        public static bool IsComCompetTrue(int Command,int Competition)
         {
             if (GetResults().Where(t => t.idCommand == Command && t.idCompetition == Competition).Count() == 0)
                 return true;
@@ -90,7 +90,7 @@ namespace CoreFramework
                 return false;
         }
 
-        public static bool isRankTrue(int rank, int compet)
+        public static bool IsRankTrue(int rank, int compet)
         {
             if (GetResults().Where(t => t.Rank == rank && t.idCompetition == compet).Count() == 0)
                 return true;
@@ -102,8 +102,8 @@ namespace CoreFramework
         {
             try
             {
-                result.Command = Connection.GetCommand(result.idCommand);
-                result.Competition = Connection.GetCompetition(result.idCompetition);
+                result.Command = Connection.GetCommand(Convert.ToInt32(result.idCommand));
+                result.Competition = Connection.GetCompetition(Convert.ToInt32(result.idCompetition));
                 bdConnection.connection.ResultCompetition.Add(result);
                 bdConnection.connection.SaveChanges();
             }
@@ -118,8 +118,8 @@ namespace CoreFramework
             try
             {
                 var res = bdConnection.connection.ResultCompetition.SingleOrDefault(tt => tt.Command.Name == result.Command.Name && tt.Competition.Name == result.Competition.Name);
-                result.Command = Connection.GetCommand(result.idCommand);
-                result.Competition = Connection.GetCompetition(result.idCompetition);
+                result.Command = Connection.GetCommand(Convert.ToInt32(result.idCommand));
+                result.Competition = Connection.GetCompetition(Convert.ToInt32(result.idCompetition));
                 res.Rank = result.Rank;
                 bdConnection.connection.SaveChanges();
             }

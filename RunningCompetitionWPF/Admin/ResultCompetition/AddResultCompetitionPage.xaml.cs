@@ -2,7 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -17,60 +19,14 @@ namespace RunningCompetitionWPF
 {
     public partial class AddResultCompetitionPage : Page
     {
-        public int IdCompet { get; set; }
-        public int IdCommand { get; set; }
+        public ResultCompetition CurrentResult = new ResultCompetition();
+
         public AddResultCompetitionPage()
         {
             InitializeComponent();
+            DataContext = CurrentResult;
             comboCommands.ItemsSource = ConnectionCommands.GetCommands();
             comboCompets.ItemsSource = ConnectionCompetitions.GetCompetitions();
-        }
-
-        private void btnSave_Click(object sender, RoutedEventArgs e)
-        {
-            if (IdCompet != 0 && IdCommand != 0)
-            {
-                ResultCompetition res = new ResultCompetition()
-                {
-                    idCommand = IdCommand,
-                    idCompetition = IdCompet,
-                    Rank = Convert.ToInt32(textRank.Text)
-                };
-                var results = new List<System.ComponentModel.DataAnnotations.ValidationResult>();
-                var context = new ValidationContext(res);
-                if (!Validator.TryValidateObject(res, context, results, true))
-                    foreach (var error in results)
-                        MessageBox.Show(error.ErrorMessage);
-                else
-                {
-                    if (ConnectionResults.isRankTrue(Convert.ToInt32(textRank.Text), IdCompet))
-                    {
-                        if (ConnectionResults.isComCompetTrue(IdCommand, IdCompet))
-                        {
-                            try
-                            {
-                                ConnectionResults.AddResult(res);
-                                MessageBox.Show("Информация сохранена");
-                            }
-                            catch (Exception ex)
-                            {
-                                MessageBox.Show(ex.Message.ToString());
-                            }
-                        }
-                        else
-                        {
-                            MessageBox.Show($"Такие данные уже существуют");
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show($"В соревновании {res.Competition.Name} такое место уже заняли");
-                    }
-                }
-                Manager.MainFrame.NavigationService.Navigate(new AdminResultCompetitionsPage());
-            }
-
-           
         }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
@@ -78,16 +34,43 @@ namespace RunningCompetitionWPF
             Manager.MainFrame.NavigationService.GoBack();
         }
 
-        private void comboCommands_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            var a = (sender as ComboBox).SelectedItem as Command;
-            IdCommand = a.idCommand;
-        }
+            var results = new List<System.ComponentModel.DataAnnotations.ValidationResult>();
 
-        private void comboCompets_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var a = (sender as ComboBox).SelectedItem as Competition;
-            IdCompet = a.idCompetition;
+            if (CurrentResult.Command != null)
+                CurrentResult.idCommand = CurrentResult.Command.idCommand;
+            if (CurrentResult.Competition != null)
+                CurrentResult.idCompetition = CurrentResult.Competition.idCompetition;
+
+            var context = new ValidationContext(CurrentResult);
+            if (!Validator.TryValidateObject(CurrentResult, context, results, true))
+                foreach (var error in results)
+                    MessageBox.Show(error.ErrorMessage);
+            else
+            {
+                if (ConnectionResults.IsRankTrue(Convert.ToInt32(CurrentResult.Rank), CurrentResult.Competition.idCompetition))
+                {
+                    if (ConnectionResults.IsComCompetTrue(CurrentResult.Command.idCommand, CurrentResult.Competition.idCompetition))
+                    {
+                        try
+                        {
+                            ConnectionResults.AddResult(CurrentResult);
+                            MessageBox.Show("Информация сохранена");
+                            Manager.MainFrame.NavigationService.Navigate(new AdminResultCompetitionsPage());
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message.ToString());
+                        }
+                    }
+                    else
+                        MessageBox.Show("Такие данные уже существуют");
+
+                }
+                else
+                    MessageBox.Show($"В соревновании {CurrentResult.Competition.Name} такое место уже заняли");
+            }
         }
     }
 }

@@ -20,6 +20,7 @@ namespace CoreFramework
 
         public Nullable<int> idSponsor { get; set; }
 
+        [Required(ErrorMessage = "Command Name is required")]
         public Nullable<int> idCom { get; set; }
 
         [Required(ErrorMessage = "Amount is required")]

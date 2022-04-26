@@ -9,9 +9,9 @@ namespace RunningCompetitionsASP_MVC.ViewModels
     public class RegisterViewModel
     {
         [Required]
-        [Display(Name = "Email")]
+        [Display(Name = "Login")]
         [EmailAddress]
-        public string Email { get; set; }
+        public string Login { get; set; }
 
         [Required]
         [Display(Name = "Surname")]

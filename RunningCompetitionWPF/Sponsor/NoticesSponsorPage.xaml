@@ -28,6 +28,7 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
+                        <Image Source="{Binding Command.Image}" Width="300"></Image>
                         <StackPanel  HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
                             <TextBlock Text="Команда: " />
                             <TextBlock Text="{Binding Command.Name }"/>

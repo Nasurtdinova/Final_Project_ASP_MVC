@@ -33,11 +33,11 @@
         <TextBlock Text="Сумма" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
         <TextBlock Text="Взаимовыгода" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
 
-        <DatePicker Name="DateBegin" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="300" Height="50"></DatePicker>
-        <ComboBox Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" SelectionChanged="comboCommands_SelectionChanged" DisplayMemberPath="Name" Name="comboCommands" Width="300" Height="50"></ComboBox>
-        <DatePicker Name="DateEnd" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="300" Height="50"></DatePicker>
-        <TextBox Name="textAmount" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="300" Height="50"></TextBox>
-        <TextBox Name="textBenefit" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" Width="300" Height="50"></TextBox>
+        <DatePicker SelectedDate="{Binding DateBegin}" Name="DateBegin" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="300" Height="50"></DatePicker>
+        <ComboBox SelectedItem="{Binding Command}" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"  DisplayMemberPath="Name" Name="comboCommands" Width="300" Height="50"></ComboBox>
+        <DatePicker SelectedDate="{Binding DateEnd}" Name="DateEnd" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="300" Height="50"></DatePicker>
+        <TextBox Text="{Binding Amount}" Name="textAmount" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="300" Height="50"></TextBox>
+        <TextBox Text="{Binding MutualBenefit}" Name="textBenefit" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" Width="300" Height="50"></TextBox>
         <StackPanel Grid.Row="5" HorizontalAlignment="Center" Orientation="Horizontal" Grid.ColumnSpan="2">
             <Button Background="#FFA0D0F1" Content="Back" Width="100"  Name="btnBack" Click="btnBack_Click" Margin="10"></Button>
             <Button Background="#FFA0D0F1" Width="100" Content="Send" Click="btnSend_Click" Margin="10" Name="btnSend"></Button>

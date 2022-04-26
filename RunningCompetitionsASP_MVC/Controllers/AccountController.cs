@@ -1,9 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Final_Project_ASP_MVC.Models;
 using RunningCompetitionsASP_MVC.ViewModels;
 using CoreFramework;
 
@@ -24,7 +20,7 @@ namespace RunningCompetitionsASP_MVC.Controllers
             {
                 Users user = new Users 
                 { 
-                    Email = model.Email, 
+                    Email = model.Login, 
                     Password = model.Password, 
                     idType = 2 
                 };
@@ -38,16 +34,15 @@ namespace RunningCompetitionsASP_MVC.Controllers
                 };
 
                 if (Connection.IsCoinsLogin(model.Password))
-                    ViewBag.Message = "Такой логин уже существует";
+                    ModelState.AddModelError("", "Такой логин уже существует");
                 else if (!(model.Password.Length >= 6 && Connection.IsCorrectPassword(model.Password)))
-                    ViewBag.Message = string.Format("Hello {0}.\\nCurrent Date and Time: {1}", "fgfg", "пароль должен отвечать следующим требованиям Минимум 6 символов Минимум 1 прописная буква Минимум 1 цифра Минимум один символ из набора: ! @ # $ % ^. ");
+                    ModelState.AddModelError("", "Пароль должен отвечать следующим требованиям \nМинимум 6 символов \nМинимум 1 прописная буква \nМинимум 1 цифра \nМинимум один символ из набора: ! @ # $ % ^. ");
                 else
                 {
                     Connection.AddUser(user);
                     Connection.AddSponsor(spon);
-                    ViewBag.Message = "Вы зарегистрированы!";
+                    ModelState.AddModelError("", "Вы зарегистрированы!");
                 }
-
             }
             return View(model);
         }
@@ -64,7 +59,7 @@ namespace RunningCompetitionsASP_MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (Connection.IsLogin(model.Email,model.Password) == 1)
+                if (Connection.IsLogin(model.Login,model.Password) == 1)
                 {
                     return RedirectToAction("IndexHome", "Home");
                     if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
@@ -72,13 +67,6 @@ namespace RunningCompetitionsASP_MVC.Controllers
                         return Redirect(model.ReturnUrl);
                     }
                 }
-                else if (Connection.IsLogin(model.Email, model.Password) == 2)
-                {
-                    CurrentUser.user = Connection.GetUser(model.Email, model.Password);
-                    CurrentUser.spon = Connection.GetSponsor(CurrentUser.user.idUser);
-                    return RedirectToAction("IndexSponsor", "Home");
-                }
-
                 else
                 {
                     ModelState.AddModelError("", "Неправильный логин и (или) пароль");

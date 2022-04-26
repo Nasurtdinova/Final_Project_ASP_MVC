@@ -10,29 +10,27 @@
 @using (Html.BeginForm("Update", "Result", FormMethod.Post))
 {
 <fieldset>
-    @Html.HiddenFor(m => m.Command)
+    <div asp-validation-summary="ModelOnly"></div>
     <p>
-        @Html.LabelFor(m => m.Command.Name, "Command")
+        @Html.LabelFor(m => m.idCommand, "Command")
         <br />
-        <select asp-for="Command.Name" class="form-control">
+        <select asp-for="idCommand" class="form-control">
             <option selected="selected" value=" @Html.EditorFor(m => m.Command.Name)">  </option>
-            @foreach (var command in CoreFramework.ConnectionCommands.GetCommands())
+            @foreach (var command in CoreFramework.ConnectionCommands.GetCommands().ToList())
             {
-                <option>@command.Name</option>
+                <option value="@command.idCommand">@command.Name</option>
             }
-
         </select>
     </p>
     <p>
-        @Html.LabelFor(m => m.Competition.Name, "Competition")
+        @Html.LabelFor(m => m.idCompetition, "Competition")
         <br />
-        <select asp-for="Competition.Name" class="form-control">
+        <select asp-for="idCompetition" class="form-control">
             <option selected="selected" value=" @Html.EditorFor(m => m.Competition.Name)">  </option>
-            @foreach (var compet in CoreFramework.ConnectionCompetitions.GetCompetitions())
+            @foreach (var compet in CoreFramework.ConnectionCompetitions.GetCompetitions().ToList())
             {
-                <option>@compet.Name</option>
+                <option value="@compet.idCompetition">@compet.Name</option>
             }
-
         </select>
     </p>
     <p>

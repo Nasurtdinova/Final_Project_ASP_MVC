@@ -15,11 +15,11 @@ namespace CoreFramework
 
     public partial class ResultCompetition
     {
-        [Required(ErrorMessage = "Id command is required")]
-        public int idCommand { get; set; }
+        [Required(ErrorMessage = "Name command is required")]
+        public Nullable<int> idCommand { get; set; }
 
-        [Required(ErrorMessage = "Id competition is required")]
-        public int idCompetition { get; set; }
+        [Required(ErrorMessage = "Name competition is required")]
+        public Nullable<int> idCompetition { get; set; }
 
         [Required(ErrorMessage = "Range is required")]
         [Range(1, 100, ErrorMessage = "Недопустимое место")]
