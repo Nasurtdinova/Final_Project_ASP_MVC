@@ -37,7 +37,6 @@
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Grid.Row="2" HorizontalAlignment="Center" Orientation="Horizontal">
-            <Button Content="Export" Background="#FFA0D0F1" HorizontalAlignment="Left" Name="btnExport" Click="btnExport_Click" Grid.Column="0" Margin="10"></Button>
             <Button Content="Add" Background="#FFA0D0F1" HorizontalAlignment="Left" Name="btnAdd" Click="btnAdd_Click" Grid.Column="0" Margin="10"></Button>
             <Button Content="Remove" Background="#FFA0D0F1" HorizontalAlignment="Right" Name="btnRemove" Click="btnRemove_Click" Grid.Column="1" Margin="10"></Button>
         </StackPanel>

@@ -28,7 +28,7 @@
         <br />
         <select asp-for="idTitle" class="form-control">
             <option selected="selected" value=" @Html.EditorFor(m => m.Title.Name)">  </option>
-            @foreach (var title in CoreFramework.Connection.GetTitles().ToList())
+            @foreach (var title in CoreFramework.ConnectionUser.GetTitles().ToList())
             {
                 <option value="@title.idTitle">@title.Name</option>
             }

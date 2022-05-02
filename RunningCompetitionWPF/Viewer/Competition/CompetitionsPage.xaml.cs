@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -18,17 +19,52 @@ namespace RunningCompetitionWPF
    
     public partial class CompetitionsPage : Page
     {
-        public static ObservableCollection<Competition> infoCompet { get; set; }
+        public static List<Competition> infoCompet { get; set; }
         public CompetitionsPage()
         {
             InitializeComponent();
-            infoCompet = ConnectionCompetitions.GetCompetitions();
-            this.DataContext = this;
+
+            var city = ConnectionUser.GetCities();
+            city.Insert(0, new City { Name = "Все" });
+            comboCity.ItemsSource = city;
+            comboCity.SelectedIndex = 0;
+
+            dgCompetitions.ItemsSource =  ConnectionCompetitions.GetCompetitions().ToList();
         }
 
         private void btnViewResult_Click(object sender, RoutedEventArgs e)
         {
             Manager.MainFrame.Navigate(new ResulCompetitionPage((sender as Button).DataContext as Competition));
+        }
+
+        private void UpdateCompetitions()
+        {
+            infoCompet = ConnectionCompetitions.GetCompetitions().ToList();
+
+            if (checkMonth.IsChecked == true)
+                infoCompet = infoCompet.Where(a => a.Date.Value.Month == DateTime.Today.Month).ToList();
+
+            if (comboCity.SelectedIndex > 0)
+                infoCompet = infoCompet.Where(p => p.idCity == (comboCity.SelectedItem as City).idCity).ToList();
+
+            infoCompet = infoCompet.Where(p => p.Name.ToLower().Contains(txtSearch.Text.ToLower())).ToList();
+
+            dgCompetitions.ItemsSource = infoCompet;
+        }
+
+        private void comboCity_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            UpdateCompetitions();
+        }
+
+        private void checkMonth_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateCompetitions();
+        }
+
+        private void txtSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            UpdateCompetitions();
         }
     }
 }

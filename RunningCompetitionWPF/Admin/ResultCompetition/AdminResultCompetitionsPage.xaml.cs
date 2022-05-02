@@ -12,7 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Excel = Microsoft.Office.Interop.Excel;
 
 namespace RunningCompetitionWPF
 {
@@ -40,26 +39,13 @@ namespace RunningCompetitionWPF
 
             if (MessageBox.Show($"Вы точно хотите удалить следующие {competsForRemoving.Count()} элементов", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
-                try
+                foreach (var i in competsForRemoving)
                 {
-                    foreach (var i in competsForRemoving)
-                    {
-                        ConnectionResults.RemoveResult(Convert.ToInt32(i.idCommand), Convert.ToInt32(i.idCompetition));
-                    }
-
-                    dgResultCompetitions.ItemsSource = ConnectionResults.GetResults();
-                    MessageBox.Show("Данные удалены");
+                    ConnectionResults.RemoveResult(Convert.ToInt32(i.idCommand), Convert.ToInt32(i.idCompetition));
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message.ToString());
-                }
+                dgResultCompetitions.ItemsSource = ConnectionResults.GetResults();
+                MessageBox.Show("Данные удалены");
             }
-        }
-
-        private void btnExport_Click(object sender, RoutedEventArgs e)
-        {
-            ConnectionResults.ExportExcel();
         }
     }
 }

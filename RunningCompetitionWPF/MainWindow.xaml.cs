@@ -18,7 +18,7 @@ using System.Windows.Threading;
 
 namespace RunningCompetitionWPF
 {
-    public partial class MainWindow : System.Windows.Window
+    public partial class MainWindow : Window
     {
         DispatcherTimer timer;
 
@@ -50,6 +50,8 @@ namespace RunningCompetitionWPF
             Manager.Authorization = login;
             Manager.Exit = exit;
 
+            Manager.RoleNameLabel = lbRoleName;
+
             timer = new DispatcherTimer();
             timer.Interval = new TimeSpan(0, 0, 0, 0, 2);
             timer.Tick += Timer_Tick;
@@ -62,22 +64,26 @@ namespace RunningCompetitionWPF
         {
             if (hidden)
             {
-                mainIcon.Visibility = Visibility.Visible;
+                mainIcon.Visibility = Visibility.Visible;                
                 sidePanel.Width += 1;
                 if (sidePanel.Width >= panelWidth)
                 {
                     timer.Stop();
                     hidden = false;
+                    frame_auto_reg.Margin = new Thickness(210, 50, 0, 0);
+                    panelHeader.Margin = new Thickness(210, 0, 0, 0);
                 }
             }
             else
             {
-                mainIcon.Visibility = Visibility.Hidden;
+                mainIcon.Visibility = Visibility.Hidden;                
                 sidePanel.Width -= 1;
                 if (sidePanel.Width <= 45)
                 {
                     timer.Stop();
                     hidden = true;
+                    frame_auto_reg.Margin = new Thickness(40, 50, 0, 0);
+                    panelHeader.Margin = new Thickness(40, 0, 0, 0);
                 }
             }
         }
@@ -100,7 +106,6 @@ namespace RunningCompetitionWPF
         private void login_Click(object sender, RoutedEventArgs e)
         {           
             Manager.MainFrame.NavigationService.Navigate(new AuthorizationPage());
-            //Manager.DoViewer();
         }
 
         private void resultCompetition_Click(object sender, RoutedEventArgs e)
@@ -158,9 +163,7 @@ namespace RunningCompetitionWPF
         private void panelHeader_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
-            {
                 DragMove();
-            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

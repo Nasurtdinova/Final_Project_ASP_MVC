@@ -30,17 +30,17 @@ namespace RunningCompetitionsASP_MVC.Controllers
                     Surname = model.Surname, 
                     Name = model.Name, 
                     Phone = model.Phone, 
-                    idUser = Connection.GetUsers().Last().idUser 
+                    idUser = ConnectionUser.GetUsers().Last().idUser 
                 };
 
-                if (Connection.IsCoinsLogin(model.Password))
+                if (ConnectionUser.IsCoinsLogin(model.Password))
                     ModelState.AddModelError("", "Такой логин уже существует");
-                else if (!(model.Password.Length >= 6 && Connection.IsCorrectPassword(model.Password)))
+                else if (!(model.Password.Length >= 6 && ConnectionUser.IsCorrectPassword(model.Password)))
                     ModelState.AddModelError("", "Пароль должен отвечать следующим требованиям \nМинимум 6 символов \nМинимум 1 прописная буква \nМинимум 1 цифра \nМинимум один символ из набора: ! @ # $ % ^. ");
                 else
                 {
-                    Connection.AddUser(user);
-                    Connection.AddSponsor(spon);
+                    ConnectionUser.AddUser(user);
+                    ConnectionUser.AddSponsor(spon);
                     ModelState.AddModelError("", "Вы зарегистрированы!");
                 }
             }
@@ -59,13 +59,14 @@ namespace RunningCompetitionsASP_MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (Connection.IsLogin(model.Login,model.Password) == 1)
+                if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
                 {
+                    return Redirect(model.ReturnUrl);
+                }
+
+                if (ConnectionUser.IsLogin(model.Login,model.Password) == 1)
+                {                                   
                     return RedirectToAction("IndexHome", "Home");
-                    if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
-                    {
-                        return Redirect(model.ReturnUrl);
-                    }
                 }
                 else
                 {

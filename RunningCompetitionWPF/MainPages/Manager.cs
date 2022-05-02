@@ -11,6 +11,8 @@ namespace RunningCompetitionWPF
         public static Frame MainFrame { get; set; }
         public static Menu MainMenu { get; set; }
 
+        public static Label RoleNameLabel { get; set; }
+
         public static ListViewItem Authorization { get; set; }
         public static ListViewItem Exit { get; set; }
 
@@ -33,6 +35,8 @@ namespace RunningCompetitionWPF
         public static void DoAdmin()
         {
             VisibleCollapsedAuthReg();
+            RoleNameLabel.Content = "Админ";
+
             MessagesAdmin.Visibility = System.Windows.Visibility.Visible;
             Sportsmans.Visibility = System.Windows.Visibility.Collapsed;
             Commands.Visibility = System.Windows.Visibility.Collapsed;
@@ -50,6 +54,7 @@ namespace RunningCompetitionWPF
         public static void DoViewer()
         {
             VisibleCollapsedAuthReg();
+            RoleNameLabel.Content = "";
 
             Sportsmans.Visibility = System.Windows.Visibility.Visible;
             Commands.Visibility = System.Windows.Visibility.Visible;
@@ -68,7 +73,8 @@ namespace RunningCompetitionWPF
         public static void DoSponsor()
         {
             VisibleCollapsedAuthReg();
-            
+            RoleNameLabel.Content = "Спонсор";
+
             NoticesSponsor.Visibility = System.Windows.Visibility.Visible;
             MySponsorshipsSponsor.Visibility = System.Windows.Visibility.Visible;
             Sportsmans.Visibility = System.Windows.Visibility.Visible;

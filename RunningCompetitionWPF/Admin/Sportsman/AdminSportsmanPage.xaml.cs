@@ -19,6 +19,7 @@ namespace RunningCompetitionWPF
     public partial class AdminSportsmanPage : Page
     {
         public static ObservableCollection<Sportsman> infoSportsmans { get; set; }
+
         public AdminSportsmanPage()
         {
             InitializeComponent();
@@ -32,20 +33,13 @@ namespace RunningCompetitionWPF
 
             if (MessageBox.Show($"Вы точно хотите удалить следующие {sportsmansForRemoving.Count()} элементов", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
-                try
+                foreach (var i in sportsmansForRemoving)
                 {
-                    foreach (var i in sportsmansForRemoving)
-                    {
-                        ConnectionSportsmans.RemoveSportsman(i.ID);
-                    }
+                    ConnectionSportsmans.RemoveSportsman(i.ID);
+                }
 
-                    lvSportsmans.ItemsSource = ConnectionSportsmans.GetSportsmans().ToList();
-                    MessageBox.Show("Данные удалены");
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message.ToString());
-                }
+                lvSportsmans.ItemsSource = ConnectionSportsmans.GetSportsmans().ToList();
+                MessageBox.Show("Данные удалены");
             }
         }
 

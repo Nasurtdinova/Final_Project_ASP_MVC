@@ -20,6 +20,7 @@ namespace RunningCompetitionWPF.Admin
     public partial class AddEditCommandPage : Page
     {
         public Command CurrentCommand = new Command();
+
         public AddEditCommandPage(Command selectedCommand)
         {
             InitializeComponent();
@@ -27,15 +28,17 @@ namespace RunningCompetitionWPF.Admin
                 CurrentCommand = selectedCommand;
 
             DataContext = CurrentCommand;
-            comboCities.ItemsSource = Connection.GetCities();
+            comboCities.ItemsSource = ConnectionUser.GetCities();
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            var results = new List<System.ComponentModel.DataAnnotations.ValidationResult>();
             if (CurrentCommand.City != null)
                 CurrentCommand.ID_city = CurrentCommand.City.idCity;
+
+            var results = new List<System.ComponentModel.DataAnnotations.ValidationResult>();           
             var context = new ValidationContext(CurrentCommand);
+
             if (!Validator.TryValidateObject(CurrentCommand, context, results, true))
             {
                 foreach (var error in results)
@@ -49,16 +52,8 @@ namespace RunningCompetitionWPF.Admin
                     ConnectionCommands.AddCommand(CurrentCommand);
                 else
                     ConnectionCommands.UpdateCommand(CurrentCommand);
-
-                try
-                {
-                    MessageBox.Show("Информация сохранена");
-                    Manager.MainFrame.Navigate(new AdminCommandPage());
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message.ToString());
-                }
+                MessageBox.Show("Информация сохранена");
+                Manager.MainFrame.Navigate(new AdminCommandPage());
             }
             
         }
@@ -74,6 +69,7 @@ namespace RunningCompetitionWPF.Admin
             {
                 Filter = "*.png|*.png|*.jpeg|*.jpeg|*.jpg|*.jpg"
             };
+
             if (openFileDialog.ShowDialog() == true)
             {
                 string path = openFileDialog.FileName;

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Data;
 using System.Linq;
 
 namespace CoreFramework
@@ -14,8 +13,7 @@ namespace CoreFramework
 
         public static Sportsman GetSportsmansId(int id)
         {
-            ObservableCollection<Sportsman> commands = GetSportsmans();
-            return commands.Where(tt => tt.ID == id).FirstOrDefault();
+            return GetSportsmans().Where(tt => tt.ID == id).FirstOrDefault();
         }
 
         public static void RemoveSportsman(int id)
@@ -58,10 +56,10 @@ namespace CoreFramework
                 if (sportsman.Image != null)
                     sports.Image = sportsman.Image;
 
-                sports.Command = Connection.GetCommand(Convert.ToInt32(sportsman.idCommand));
+                sports.Command = ConnectionCommands.GetCommandsId(Convert.ToInt32(sportsman.idCommand));
 
                 if (sportsman.idTitle != null)
-                    sports.Title = Connection.GetTitle(Convert.ToInt32(sportsman.idTitle));
+                    sports.Title = ConnectionUser.GetTitle(Convert.ToInt32(sportsman.idTitle));
 
                 bdConnection.connection.SaveChanges();
             }

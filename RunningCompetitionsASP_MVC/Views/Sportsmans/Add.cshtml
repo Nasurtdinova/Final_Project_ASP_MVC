@@ -26,7 +26,7 @@
                 <label asp-for="idTitle" class="control-label">Title</label>
                 <select asp-for="idTitle" class=" form-control">
                     <option selected="selected">  </option>
-                    @foreach (var title in CoreFramework.Connection.GetTitles().ToList())
+                    @foreach (var title in CoreFramework.ConnectionUser.GetTitles().ToList())
                     {
                         <option value="@title.idTitle">@title.Name</option>
                     }

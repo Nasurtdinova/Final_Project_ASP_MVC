@@ -16,7 +16,7 @@ namespace CoreFramework
 
         public static void ExportExcel()
         {
-            var allCommands = bdConnection.connection.Command.OrderBy(p => p.Name).ToList();
+            var allCommands = ConnectionCommands.GetCommands().OrderBy(p => p.Name).ToList();
 
             Excel.Application application = new Excel.Application();
             application.SheetsInNewWorkbook = allCommands.Count();
@@ -29,17 +29,29 @@ namespace CoreFramework
             {
                 Excel.Worksheet worksheet = application.Worksheets.Item[i + 1];
                 worksheet.Name = allCommands[i].Name;
+                worksheet.Cells[1][startRowIndex] = "Город";
+                worksheet.Cells[2][startRowIndex] = allCommands[i].City.Name;
+                startRowIndex = 2;
 
                 worksheet.Cells[1][startRowIndex] = "Название соревнования";
                 worksheet.Cells[2][startRowIndex] = "Дата соревнования";
                 worksheet.Cells[3][startRowIndex] = "Место в соревновании";
                 startRowIndex++;
-                var results = GetResults().Where(p => p.idCommand == allCommands[i].idCommand);
-                foreach (var gr in results)
+                var results = allCommands[i].ResultCompetition.OrderBy(p => p.Competition.Date).GroupBy(p => p.Competition.Date);
+                foreach (var result in results)
                 {
-                    worksheet.Cells[2][startRowIndex] = gr.Competition.Date;
-                    worksheet.Cells[1][startRowIndex] = gr.Competition.Name;
-                    worksheet.Cells[3][startRowIndex] = gr.Rank;
+                    Excel.Range headerRange = worksheet.Range[worksheet.Cells[1][startRowIndex], worksheet.Cells[3][startRowIndex]];
+                    headerRange.Merge();
+                    headerRange.Value = result.Key.Value;
+                    headerRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+                    headerRange.Font.Italic = true;
+                    startRowIndex++;
+                    foreach (var j in result)
+                    {
+                        worksheet.Cells[1][startRowIndex] = j.Competition.Name;
+                        worksheet.Cells[2][startRowIndex] = j.Competition.NameVenue;
+                        worksheet.Cells[3][startRowIndex] = j.Rank;
+                    }
                     startRowIndex++;
                 }
                 worksheet.Columns.AutoFit();
@@ -51,21 +63,12 @@ namespace CoreFramework
 
         public static List<ResultCompetition> GetResutCompet(int idCompet)
         {
-            try
-            {
-                return GetResults().Where(tt => tt.idCompetition == idCompet).ToList();
-            }
-
-            catch // Exception исправить
-            {
-                return null;
-            }
+            return GetResults().Where(tt => tt.idCompetition == idCompet).ToList();
         }
 
         public static ResultCompetition GetResultsId(int idCommand, int idCompet)
         {
-            ObservableCollection<ResultCompetition> results = GetResults();
-            return results.Where(tt => tt.idCommand == idCommand && tt.idCompetition == idCompet).FirstOrDefault();
+            return GetResults().Where(tt => tt.idCommand == idCommand && tt.idCompetition == idCompet).FirstOrDefault();
         }
 
         public static void RemoveResult(int idCommand, int idCompetition)
@@ -102,8 +105,8 @@ namespace CoreFramework
         {
             try
             {
-                result.Command = Connection.GetCommand(Convert.ToInt32(result.idCommand));
-                result.Competition = Connection.GetCompetition(Convert.ToInt32(result.idCompetition));
+                result.Command = ConnectionCommands.GetCommandsId(Convert.ToInt32(result.idCommand));
+                result.Competition = ConnectionCompetitions.GetCompetId(Convert.ToInt32(result.idCompetition));
                 bdConnection.connection.ResultCompetition.Add(result);
                 bdConnection.connection.SaveChanges();
             }
@@ -118,8 +121,8 @@ namespace CoreFramework
             try
             {
                 var res = bdConnection.connection.ResultCompetition.SingleOrDefault(tt => tt.Command.Name == result.Command.Name && tt.Competition.Name == result.Competition.Name);
-                result.Command = Connection.GetCommand(Convert.ToInt32(result.idCommand));
-                result.Competition = Connection.GetCompetition(Convert.ToInt32(result.idCompetition));
+                result.Command = ConnectionCommands.GetCommandsId(Convert.ToInt32(result.idCommand));
+                result.Competition = ConnectionCompetitions.GetCompetId(Convert.ToInt32(result.idCompetition));
                 res.Rank = result.Rank;
                 bdConnection.connection.SaveChanges();
             }

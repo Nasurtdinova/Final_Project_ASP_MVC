@@ -18,6 +18,7 @@ namespace RunningCompetitionWPF
     public partial class AdminMessages : Page
     {
         public static List<SponsorCommand> infoMessages { get; set; }
+
         public AdminMessages()
         {
             InitializeComponent();
@@ -43,8 +44,7 @@ namespace RunningCompetitionWPF
                     break;
                 case MessageBoxResult.Cancel:
                     Manager.MainFrame.Navigate(new AdminMessages());
-                    break;
-                
+                    break;               
             }
             Manager.MainFrame.Navigate(new AdminMessages());
         }

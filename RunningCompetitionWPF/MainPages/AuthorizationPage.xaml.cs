@@ -28,12 +28,12 @@ namespace RunningCompetitionWPF
 
         private void brnLogin_Click(object sender, RoutedEventArgs e)
         {
-            if (Connection.IsLogin(txt_login.Text,txt_password.Password) == 1)
+            if (ConnectionUser.IsLogin(txt_login.Text,txt_password.Password) == 1)
             {
                 Manager.DoAdmin();
                 Manager.MainFrame.NavigationService.Navigate(new ViewerMainPage());
             }
-            else if (Connection.IsLogin(txt_login.Text, txt_password.Password) == 2)
+            else if (ConnectionUser.IsLogin(txt_login.Text, txt_password.Password) == 2)
             {
                 Manager.DoSponsor();
                 Manager.MainFrame.NavigationService.Navigate(new ViewerMainPage());

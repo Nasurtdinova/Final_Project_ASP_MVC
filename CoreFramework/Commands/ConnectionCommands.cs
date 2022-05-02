@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Data;
 using System.Linq;
 
 namespace CoreFramework
@@ -14,8 +13,7 @@ namespace CoreFramework
         {
             try
             {
-                ObservableCollection<Sportsman> sportsman = new ObservableCollection<Sportsman>(bdConnection.connection.Sportsman.ToList());
-                sporCom = sportsman.Where(tt => tt.idCommand == id).ToList();
+                sporCom = ConnectionSportsmans.GetSportsmans().Where(tt => tt.idCommand == id).ToList();
             }
 
             catch // Exception исправить
@@ -45,7 +43,6 @@ namespace CoreFramework
                 Console.WriteLine(ex.Message);
             }
         }
-
 
         public static void RemoveCommand(int id)
         {
@@ -97,8 +94,7 @@ namespace CoreFramework
 
         public static Command GetCommandsId(int id)
         {
-            ObservableCollection<Command> commands = GetCommands();
-            return commands.Where(tt => tt.idCommand == id).FirstOrDefault();
+            return GetCommands().Where(tt => tt.idCommand == id).FirstOrDefault();
         }
     }
 }

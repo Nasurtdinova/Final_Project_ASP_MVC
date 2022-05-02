@@ -1,8 +1,4 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Text;
+﻿using System.Collections.ObjectModel;
 
 namespace CoreFramework
 {
@@ -12,8 +8,6 @@ namespace CoreFramework
 
         public static void Add(ResultCompetition result)
         {
-            //if (ConnectionResults.isTrue(result.NameCommand,result.NameCompetition) || ConnectionResults.isRankTrue(Convert.ToInt32(result.Rank), result.NameCompetition))
-
             ConnectionResults.AddResult(result);
             results.Add(result);
         }

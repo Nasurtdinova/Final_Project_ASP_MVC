@@ -18,6 +18,7 @@ namespace RunningCompetitionWPF
     public partial class AddCompetitionsPage : Page
     {
         public Competition CurrentCompetition = new Competition();
+
         public AddCompetitionsPage(Competition selectedCompetition)
         {
             InitializeComponent();
@@ -26,15 +27,17 @@ namespace RunningCompetitionWPF
                 CurrentCompetition = selectedCompetition;
 
             DataContext = CurrentCompetition;
-            comboCities.ItemsSource = Connection.GetCities();
+            comboCities.ItemsSource = ConnectionUser.GetCities();
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            var competitions = new List<System.ComponentModel.DataAnnotations.ValidationResult>();
             if (CurrentCompetition.City != null)
                 CurrentCompetition.idCity = CurrentCompetition.City.idCity;
+
+            var competitions = new List<System.ComponentModel.DataAnnotations.ValidationResult>();            
             var context = new ValidationContext(CurrentCompetition);
+
             if (!Validator.TryValidateObject(CurrentCompetition, context, competitions, true))
                 foreach (var error in competitions)
                     MessageBox.Show(error.ErrorMessage);
@@ -44,16 +47,9 @@ namespace RunningCompetitionWPF
                     ConnectionCompetitions.AddCompetition(CurrentCompetition);
                 else
                     ConnectionCompetitions.UpdateCompet(CurrentCompetition);
-
-                try
-                {
-                    MessageBox.Show("Информация сохранена");
-                    Manager.MainFrame.Navigate(new AdminCompetitionsPage());
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message.ToString());
-                }
+                
+                MessageBox.Show("Информация сохранена");
+                Manager.MainFrame.Navigate(new AdminCompetitionsPage());
             }
         }
 

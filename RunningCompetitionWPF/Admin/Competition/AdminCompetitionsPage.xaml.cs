@@ -38,22 +38,15 @@ namespace RunningCompetitionWPF
         {
             var competsForRemoving = dgCompetitions.SelectedItems.Cast<Competition>().ToList();
 
-            if(MessageBox.Show($"Вы точно хотите удалить следующие {competsForRemoving.Count()} элементов","Внимание",MessageBoxButton.YesNo, MessageBoxImage.Question)==MessageBoxResult.Yes)
+            if (MessageBox.Show($"Вы точно хотите удалить следующие {competsForRemoving.Count()} элементов", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
-                try
+                foreach (var i in competsForRemoving)
                 {
-                    foreach (var i in competsForRemoving)
-                    {
-                        ConnectionCompetitions.RemoveCompetition(i.idCompetition);
-                    }
+                    ConnectionCompetitions.RemoveCompetition(i.idCompetition);
+                }
 
-                    dgCompetitions.ItemsSource = ConnectionCompetitions.GetCompetitions().ToList();
-                    MessageBox.Show("Данные удалены");
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message.ToString());
-                }
+                dgCompetitions.ItemsSource = ConnectionCompetitions.GetCompetitions().ToList();
+                MessageBox.Show("Данные удалены");
             }
         }
 

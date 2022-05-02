@@ -21,25 +21,25 @@ namespace RunningCompetitionWPF
     {
         public Sportsman CurrentSportsman = new Sportsman();
         public int IdCommand { get; set; }
+
         public AddEditSportsmanInCommandPage(Sportsman selectedSportsman, int idCommand)
         {
             InitializeComponent();
             IdCommand = idCommand;
             if (selectedSportsman != null)
-            {
                 CurrentSportsman = selectedSportsman;
-            }
-            //CurrentSportsman.Command = ConnectionCommands.GetCommandsId(IdCommand);
 
             DataContext = CurrentSportsman;
-            comboTitle.ItemsSource = Connection.GetTitles();
+            comboTitle.ItemsSource = ConnectionUser.GetTitles();
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             var sportsmans = new List<System.ComponentModel.DataAnnotations.ValidationResult>();
             var context = new ValidationContext(CurrentSportsman);
+
             CurrentSportsman.idCommand = IdCommand;
+
             if (!Validator.TryValidateObject(CurrentSportsman, context, sportsmans, true))
             {
                 foreach (var error in sportsmans)
@@ -53,16 +53,8 @@ namespace RunningCompetitionWPF
                     ConnectionSportsmans.AddSportsman(CurrentSportsman);
                 else
                     ConnectionSportsmans.UpdateSportsman(CurrentSportsman);
-
-                try
-                {
-                    MessageBox.Show("Информация сохранена");
-                    Manager.MainFrame.Navigate(new AdminSportsmanCommandPage(IdCommand));
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message.ToString());
-                }
+                MessageBox.Show("Информация сохранена");
+                Manager.MainFrame.Navigate(new AdminSportsmanCommandPage(IdCommand));
             }
         }
 
@@ -73,23 +65,17 @@ namespace RunningCompetitionWPF
 
         private void btnLoadImage_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            byte[] imageData;
+            OpenFileDialog openFileDialog = new OpenFileDialog()
+            {
+                Filter = "*.png|*.png|*.jpeg|*.jpeg|*.jpg|*.jpg"
+            };
+
             if (openFileDialog.ShowDialog() == true)
             {
                 string path = openFileDialog.FileName;
-                imageData = File.ReadAllBytes(path);
-
-                var stream = new MemoryStream(imageData);
-                stream.Seek(0, SeekOrigin.Begin);
-                var image = new BitmapImage();
-                image.BeginInit();
-                image.StreamSource = stream;
-                image.EndInit();
-
-                imgCom.Source = image;
-                CurrentSportsman.Image = imageData;
-            }
+                imgCom.Source = new BitmapImage(new Uri(path));
+                CurrentSportsman.Image = File.ReadAllBytes(path);
+            }           
         }
     }
 }

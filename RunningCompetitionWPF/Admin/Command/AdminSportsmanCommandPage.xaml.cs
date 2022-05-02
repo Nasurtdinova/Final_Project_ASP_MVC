@@ -19,6 +19,7 @@ namespace RunningCompetitionWPF
     {
         public static List<Sportsman> infoSportsmansCommand { get; set; }
         public int IdCommand { get; set; }
+
         public AdminSportsmanCommandPage(int idCommand)
         {
             InitializeComponent();

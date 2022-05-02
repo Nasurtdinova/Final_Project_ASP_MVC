@@ -8,17 +8,21 @@
         Title="Running competitions" Height="450" Width="800"
     WindowStartupLocation="CenterScreen" Icon="C:\Users\nasur\Source\Repos\Final_Project_ASP_MVC_Clone\RunningCompetitionWPF\icons\logoWindow.png">
     <Grid Background="#FFD6D6D6">
-        <Frame Background="WhiteSmoke" x:Name="frame_auto_reg" Margin="180,50,0,0"/>
-        <Grid x:Name="panelHeader" VerticalAlignment="Top" Height="50" Background="#FF0F4E7A" MouseDown="panelHeader_MouseDown" Margin="170,0,0,0">
+        <Frame Background="WhiteSmoke" x:Name="frame_auto_reg" Margin="210,50,0,0"/>
+        <Grid x:Name="panelHeader" VerticalAlignment="Top" Height="50" Background="#0F4E7A" MouseDown="panelHeader_MouseDown" Margin="210,0,0,0">
             <TextBlock Text="Running competitions" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Century Gothic" FontSize="25" Foreground="White"/>
         </Grid>
-        <Grid x:Name="sidePanel" Background="#FF0F4E7A" HorizontalAlignment="Left" Width="180">
+        <Grid x:Name="sidePanel" Background="#FF0F4E7A" HorizontalAlignment="Left" Width="210">
             <StackPanel>
-                <Grid Height="150" Background="White">
+                <Grid Height="190" Background="White">
                     <Image x:Name="mainIcon" Source="C:\Users\nasur\Source\Repos\Final_Project_ASP_MVC_Clone\RunningCompetitionWPF\icons\main.png" Width="130"></Image>
                     <Button HorizontalAlignment="Right" Height="20" VerticalAlignment="Top" Background="Transparent" BorderBrush="Transparent" Click="Button_Click">
                         <Image Source="C:\Users\nasur\Source\Repos\Final_Project_ASP_MVC_Clone\RunningCompetitionWPF\icons\menu.png"/>
                     </Button>
+                    <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Center" Orientation="Horizontal">
+                        <Label  Content="Welcome," FontFamily="Century Gothic" FontSize="25" Foreground="#FF0F4E7A" FontWeight="Normal"></Label>
+                        <Label Content="viewer" Name="lbRoleName" FontFamily="Century Gothic" FontSize="25" Foreground="#FF0F4E7A" FontWeight="Normal"></Label>
+                    </StackPanel>
                 </Grid>
                 <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" FontFamily="Century Gothic" FontSize="14" Foreground="White" BorderBrush="Transparent" Background="Transparent" FontWeight="Bold">
                     <ListViewItem Height="30">

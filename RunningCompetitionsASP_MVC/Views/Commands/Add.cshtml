@@ -26,7 +26,7 @@
                 <label asp-for="ID_city" class="control-label">City</label><br />
                 <select asp-for="ID_city" class=" form-control">
                     <option selected="selected">  </option>
-                    @foreach (var city in CoreFramework.Connection.GetCities().ToList())
+                    @foreach (var city in CoreFramework.ConnectionUser.GetCities().ToList())
                     {
                         <option value="@city.idCity">@city.Name</option>
                     }

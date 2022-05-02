@@ -1,21 +1,15 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Configuration;
-using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
 
 namespace CoreFramework
 {
     public class ConnectionSponsorship 
     {
-
         public static List<SponsorCommand> GetSponsorshipAccepted(int idSponsor)
         {
-            List<SponsorCommand> commands = GetAcceptedRequest();
-            return commands.Where(tt => tt.idSponsor == idSponsor).ToList();
+            return GetAcceptedRequest().Where(tt => tt.idSponsor == idSponsor).ToList();
         }
 
         public static List<SponsorCommand> GetSponsorshipTopical()
@@ -44,8 +38,7 @@ namespace CoreFramework
 
         public static SponsorCommand GetSponsorshipId(int id)
         {
-            List<SponsorCommand> commands = GetAcceptedRequest();
-            return commands.Where(tt => tt.id == id).FirstOrDefault();
+            return GetAcceptedRequest().Where(tt => tt.id == id).FirstOrDefault();
         }
 
         public static void AddSponsorship(SponsorCommand sponsorship)
@@ -53,7 +46,7 @@ namespace CoreFramework
             try
             {
                 sponsorship.Sponsor = CurrentUser.spon;
-                sponsorship.Command = Connection.GetCommand(Convert.ToInt32(sponsorship.idCom));
+                sponsorship.Command = ConnectionCommands.GetCommandsId(Convert.ToInt32(sponsorship.idCom));
                 sponsorship.idStatus = 1;
                 bdConnection.connection.SponsorCommand.Add(sponsorship);
                 bdConnection.connection.SaveChanges();

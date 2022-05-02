@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Data;
 using System.Linq;
 
 namespace CoreFramework
@@ -10,8 +8,7 @@ namespace CoreFramework
     {
         public static Competition GetCompetId(int id)
         {
-            ObservableCollection<Competition> commands = GetCompetitions();
-            return commands.Where(tt => tt.idCompetition == id).FirstOrDefault();            
+            return GetCompetitions().Where(tt => tt.idCompetition == id).FirstOrDefault();            
         }
 
         public static ObservableCollection<Competition> GetCompetitions()

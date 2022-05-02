@@ -49,16 +49,9 @@ namespace RunningCompetitionWPF
                 {
                     if (ConnectionResults.IsComCompetTrue(CurrentResult.Command.idCommand, CurrentResult.Competition.idCompetition))
                     {
-                        try
-                        {
-                            ConnectionResults.UpdateResult(CurrentResult);
-                            MessageBox.Show("Информация сохранена");
-                            Manager.MainFrame.NavigationService.Navigate(new AdminResultCompetitionsPage());
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show(ex.Message.ToString());
-                        }
+                        ConnectionResults.UpdateResult(CurrentResult);
+                        MessageBox.Show("Информация сохранена");
+                        Manager.MainFrame.NavigationService.Navigate(new AdminResultCompetitionsPage());
                     }
                     else
                         MessageBox.Show("Такие данные уже существуют");

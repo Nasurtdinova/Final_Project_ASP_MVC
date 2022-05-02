@@ -19,6 +19,7 @@ namespace RunningCompetitionWPF.Admin
     public partial class AdminCommandPage : Page
     {
         public static ObservableCollection<Command> infoCommands { get; set; }
+
         public AdminCommandPage()
         {
             InitializeComponent();
@@ -42,16 +43,9 @@ namespace RunningCompetitionWPF.Admin
 
             if (MessageBox.Show($"Вы точно хотите удалить {command.Name}?", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
-                try
-                {
-                    ConnectionCommands.RemoveCommand(command.idCommand);
-                    lvCommands.ItemsSource = ConnectionCommands.GetCommands().ToList();
-                    MessageBox.Show("Данные удалены");
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message.ToString());
-                }
+                ConnectionCommands.RemoveCommand(command.idCommand);
+                lvCommands.ItemsSource = ConnectionCommands.GetCommands().ToList();
+                MessageBox.Show("Данные удалены");
             }
         }
 

@@ -1,10 +1,5 @@
-﻿
-using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CoreFramework
 {
@@ -26,7 +21,7 @@ namespace CoreFramework
         public static void RemoveByName(int id)
         {
             ConnectionCommands.RemoveCommand(id);
-             commands = ConnectionCommands.GetCommands();
+            commands = ConnectionCommands.GetCommands();
         }
 
         public static void Update(Command command)

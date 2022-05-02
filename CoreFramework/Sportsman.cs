@@ -36,8 +36,7 @@ namespace CoreFramework
         public byte[] Image { get; set; }
 
         public Nullable<bool> IsDeleted { get; set; }
-
-        
+       
         public virtual Command Command { get; set; }
 
         public virtual Title Title { get; set; }

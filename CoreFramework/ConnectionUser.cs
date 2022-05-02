@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace CoreFramework
 {
-    public class Connection
+    public class ConnectionUser
     {
         public static List<City> Cities { get; set; }
         public static List<Users> Users { get; set; }
@@ -33,6 +33,7 @@ namespace CoreFramework
             else
                 return false;
         }
+
         public static Users GetUser(string email, string password)
         {
             return GetUsers().Where(tt => tt.Email == email && tt.Password == password).FirstOrDefault();
@@ -98,16 +99,6 @@ namespace CoreFramework
             }
         }
 
-        public static Command GetCommand(int id)
-        {
-            return ConnectionCommands.GetCommands().Where(a => a.idCommand == id).FirstOrDefault();
-        }
-
-        public static Competition GetCompetition(int id)
-        {
-            return ConnectionCompetitions.GetCompetitions().Where(a => a.idCompetition == id).FirstOrDefault();
-        }
-
         public static Title GetTitle(int id)
         {
             return GetTitles().Where(a => a.idTitle == id).FirstOrDefault();
@@ -120,8 +111,7 @@ namespace CoreFramework
 
         public static string GetCitiesId(int id)
         {
-            List<City> city = new List<City>(bdConnection.connection.City.ToList());
-            return city.Where(t => t.idCity == id).FirstOrDefault().Name;
+            return GetCities().Where(t => t.idCity == id).FirstOrDefault().Name;
         }
 
         public static int IsLogin(string email, string password)
@@ -138,7 +128,7 @@ namespace CoreFramework
             if (sponsor.Count() == 1)
             {
                 CurrentUser.user = sponsor.FirstOrDefault();
-                CurrentUser.spon = Connection.GetSponsors().Where(a => a.idUser == CurrentUser.user.idUser).FirstOrDefault();
+                CurrentUser.spon = ConnectionUser.GetSponsors().Where(a => a.idUser == CurrentUser.user.idUser).FirstOrDefault();
                 return 2;
             }
             else if (admin.Count() == 1)

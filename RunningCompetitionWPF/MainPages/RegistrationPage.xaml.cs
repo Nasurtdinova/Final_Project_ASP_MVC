@@ -29,9 +29,7 @@ namespace RunningCompetitionWPF
         }
 
         private void btnRegistr_Click(object sender, RoutedEventArgs e)
-        {
-           
-
+        {         
             Users user = new Users()
             {
                 Email = textLogin.Text,
@@ -41,7 +39,7 @@ namespace RunningCompetitionWPF
 
             Sponsor sponsor = new Sponsor()
             {
-                idUser = Connection.GetUsers().Last().idUser,
+                idUser = ConnectionUser.GetUsers().Last().idUser,
                 Surname = textSurname.Text,
                 Name = textName.Text,
                 Phone = textPhone.Text
@@ -59,14 +57,14 @@ namespace RunningCompetitionWPF
             }
             else
             {
-                if (Connection.IsCoinsLogin(textLogin.Text))
+                if (ConnectionUser.IsCoinsLogin(textLogin.Text))
                     MessageBox.Show("Такой логин уже существует");
-                else if (!(textPassword.Text.Length >= 6 && Connection.IsCorrectPassword(textPassword.Text)))
+                else if (!(textPassword.Text.Length >= 6 && ConnectionUser.IsCorrectPassword(textPassword.Text)))
                     MessageBox.Show("Пароль не соответствует требованиям");
                 else
                 {                  
-                    Connection.AddUser(user);
-                    Connection.AddSponsor(sponsor);
+                    ConnectionUser.AddUser(user);
+                    ConnectionUser.AddSponsor(sponsor);
                     MessageBox.Show("Вы зарегистрированы!");
                     NavigationService.Navigate(new AuthorizationPage());
                 }

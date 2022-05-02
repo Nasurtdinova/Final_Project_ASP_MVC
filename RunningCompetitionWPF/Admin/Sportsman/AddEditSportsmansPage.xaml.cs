@@ -20,6 +20,7 @@ namespace RunningCompetitionWPF
     public partial class AddEditSportsmansPage : Page
     {
         public Sportsman CurrentSportsman = new Sportsman();
+
         public AddEditSportsmansPage(Sportsman selectedSportsman)
         {
             InitializeComponent();
@@ -27,23 +28,21 @@ namespace RunningCompetitionWPF
                 CurrentSportsman = selectedSportsman;
 
             DataContext = CurrentSportsman;
-            comboTitle.ItemsSource = Connection.GetTitles();
+            comboTitle.ItemsSource = ConnectionUser.GetTitles();
             comboCommand.ItemsSource = ConnectionCommands.GetCommands();
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            var sportsmans = new List<System.ComponentModel.DataAnnotations.ValidationResult>();
-            if(CurrentSportsman.Command != null)
+            if (CurrentSportsman.Command != null)
                 CurrentSportsman.idCommand = CurrentSportsman.Command.idCommand;
+
+            var sportsmans = new List<System.ComponentModel.DataAnnotations.ValidationResult>();         
             var context = new ValidationContext(CurrentSportsman);
+
             if (!Validator.TryValidateObject(CurrentSportsman, context, sportsmans, true))
-            {
                 foreach (var error in sportsmans)
-                {
                     MessageBox.Show(error.ErrorMessage);
-                }
-            }
             else
             {
                 if (CurrentSportsman.ID == 0)
@@ -51,15 +50,8 @@ namespace RunningCompetitionWPF
                 else
                     ConnectionSportsmans.UpdateSportsman(CurrentSportsman);
 
-                try
-                {
-                    MessageBox.Show("Информация сохранена");
-                    Manager.MainFrame.Navigate(new AdminSportsmanPage());
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message.ToString());
-                }
+                MessageBox.Show("Информация сохранена");
+                Manager.MainFrame.Navigate(new AdminSportsmanPage());              
             }
         }
 

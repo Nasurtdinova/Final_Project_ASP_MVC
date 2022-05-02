@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -25,6 +24,7 @@ namespace RunningCompetitionWPF
         {
             InitializeComponent();
             DataContext = CurrentResult;
+
             comboCommands.ItemsSource = ConnectionCommands.GetCommands();
             comboCompets.ItemsSource = ConnectionCompetitions.GetCompetitions();
         }
@@ -53,20 +53,12 @@ namespace RunningCompetitionWPF
                 {
                     if (ConnectionResults.IsComCompetTrue(CurrentResult.Command.idCommand, CurrentResult.Competition.idCompetition))
                     {
-                        try
-                        {
-                            ConnectionResults.AddResult(CurrentResult);
-                            MessageBox.Show("Информация сохранена");
-                            Manager.MainFrame.NavigationService.Navigate(new AdminResultCompetitionsPage());
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show(ex.Message.ToString());
-                        }
+                        ConnectionResults.AddResult(CurrentResult);
+                        MessageBox.Show("Информация сохранена");
+                        Manager.MainFrame.NavigationService.Navigate(new AdminResultCompetitionsPage());
                     }
                     else
                         MessageBox.Show("Такие данные уже существуют");
-
                 }
                 else
                     MessageBox.Show($"В соревновании {CurrentResult.Competition.Name} такое место уже заняли");
