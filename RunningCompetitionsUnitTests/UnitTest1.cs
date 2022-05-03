@@ -8,9 +8,9 @@ namespace RunningCompetitionsUnitTests
     public class UnitTest1
     {
         [TestMethod]
-        public void TestGetCity()
+        public void TestIsLogin()
         {
-
+            Assert.AreEqual(ConnectionUser.IsLogin("2003", "2003"), 1);
         }
     }
 }

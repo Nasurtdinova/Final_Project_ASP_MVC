@@ -17,9 +17,17 @@ namespace RunningCompetitionWPF
 {
     public partial class AdminResultCompetitionsPage : Page
     {
+        public static List<ResultCompetition> infoCompet { get; set; }
+
         public AdminResultCompetitionsPage()
         {
             InitializeComponent();
+
+            var city = ConnectionCommands.GetCommands();
+            city.Insert(0, new Command { Name = "Все" });
+            comboCommand.ItemsSource = city;
+            comboCommand.SelectedIndex = 0;
+
             dgResultCompetitions.ItemsSource = ConnectionResults.GetResults();
         }
 
@@ -46,6 +54,28 @@ namespace RunningCompetitionWPF
                 dgResultCompetitions.ItemsSource = ConnectionResults.GetResults();
                 MessageBox.Show("Данные удалены");
             }
+        }
+        private void UpdateResultCompetitions()
+        {
+            infoCompet = ConnectionResults.GetResults().ToList();
+
+            if (checkMonth.IsChecked == true)
+                infoCompet = infoCompet.Where(a => a.Competition.Date.Value.Month == DateTime.Today.Month).ToList();
+
+            if (comboCommand.SelectedIndex > 0)
+                infoCompet = infoCompet.Where(p => p.idCommand == (comboCommand.SelectedItem as Command).idCommand).ToList();
+
+            dgResultCompetitions.ItemsSource = infoCompet;
+        }
+
+        private void comboCommand_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            UpdateResultCompetitions();
+        }
+
+        private void checkMonth_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateResultCompetitions();
         }
     }
 }

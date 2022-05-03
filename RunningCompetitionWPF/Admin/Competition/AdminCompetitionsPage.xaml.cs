@@ -18,10 +18,48 @@ namespace RunningCompetitionWPF
 {
     public partial class AdminCompetitionsPage : Page
     {
+        public static List<Competition> infoCompet { get; set; }
+
         public AdminCompetitionsPage()
         {
             InitializeComponent();
+
+            var city = ConnectionUser.GetCities();
+            city.Insert(0, new City { Name = "Все" });
+            comboCity.ItemsSource = city;
+            comboCity.SelectedIndex = 0;
+
             dgCompetitions.ItemsSource = ConnectionCompetitions.GetCompetitions().ToList();
+        }
+
+        private void UpdateCompetitions()
+        {
+            infoCompet = ConnectionCompetitions.GetCompetitions().ToList();
+
+            if (checkMonth.IsChecked == true)
+                infoCompet = infoCompet.Where(a => a.Date.Value.Month == DateTime.Today.Month).ToList();
+
+            if (comboCity.SelectedIndex > 0)
+                infoCompet = infoCompet.Where(p => p.idCity == (comboCity.SelectedItem as City).idCity).ToList();
+
+            infoCompet = infoCompet.Where(p => p.Name.ToLower().Contains(txtSearch.Text.ToLower())).ToList();
+
+            dgCompetitions.ItemsSource = infoCompet;
+        }
+
+        private void comboCity_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            UpdateCompetitions();
+        }
+
+        private void checkMonth_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateCompetitions();
+        }
+
+        private void txtSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            UpdateCompetitions();
         }
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)
