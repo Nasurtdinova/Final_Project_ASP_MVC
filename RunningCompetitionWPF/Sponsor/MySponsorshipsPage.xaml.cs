@@ -20,13 +20,34 @@ namespace RunningCompetitionWPF
         public MySponsorshipsPage()
         {
             InitializeComponent();
-            infoSponsorships = ConnectionSponsorship.GetSponsorshipAccepted(CurrentUser.spon.idSponsor);
+            infoSponsorships = ConnectionSponsorship.GetSponsorshipAccepted();
             this.DataContext = this;
         }
 
         private void btnSendRequest_Click(object sender, RoutedEventArgs e)
         {
             Manager.MainFrame.NavigationService.Navigate(new SendRequestPage());
+        }
+
+        private void btnEnd_Click(object sender, RoutedEventArgs e)
+        {
+            var a = dgSponsorships.SelectedItem as SponsorCommand;
+            if (a != null)
+            {
+                MessageBoxResult result = MessageBox.Show($"Вы точно хотите завершить спонсирование команды {a.Command.Name}?", "Заявка", MessageBoxButton.YesNo);
+                switch (result)
+                {
+                    case MessageBoxResult.Yes:
+                        ConnectionSponsorship.EndSponsorship(a.id);
+                        MessageBox.Show($"Вы завершили спонсирование команды {a.Command.Name}!", "Уведомление"); ;
+                        break;
+                    case MessageBoxResult.No:
+                        break;
+                }
+                Manager.MainFrame.Navigate(new MySponsorshipsPage());
+            }
+            else
+                MessageBox.Show("Вы ничего не выбрали!");
         }
     }
 }

@@ -24,9 +24,11 @@
         </Grid.RowDefinitions>
         <TextBlock Text="Result competition" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
         <StackPanel Grid.Row="1" Orientation="Horizontal" Grid.ColumnSpan="2">
+            <Image Height="30" Width="40" Source="C:\Users\nasur\Source\Repos\Final_Project_ASP_MVC_Clone\RunningCompetitionWPF\Icons\team1.png" VerticalAlignment="Center" HorizontalAlignment="Center"></Image>
+            <ComboBox Name="comboCommand" DisplayMemberPath="Name" Width="250" Height="30" Margin="0" SelectionChanged="comboCommand_SelectionChanged"></ComboBox>
+            <Image Height="30" Width="40" Source="C:\Users\nasur\Source\Repos\Final_Project_ASP_MVC_Clone\RunningCompetitionWPF\Icons\competition1.png" VerticalAlignment="Center" HorizontalAlignment="Center"></Image>
+            <ComboBox Name="comboCompet" DisplayMemberPath="Name" Width="200" Height="30" Margin="0" SelectionChanged="comboCompet_SelectionChanged"></ComboBox>
             <CheckBox Name="checkMonth" Content="Текущий месяц" HorizontalAlignment="Right" IsChecked="False" Click="checkMonth_Click"  Margin="10" VerticalAlignment="Center"></CheckBox>
-            <Image Height="30" Width="40" Source="C:\Users\nasur\Source\Repos\Final_Project_ASP_MVC_Clone\RunningCompetitionWPF\Icons\city.png" VerticalAlignment="Center" HorizontalAlignment="Center"></Image>
-            <ComboBox Name="comboCommand" DisplayMemberPath="Name" Width="200" Height="30" Margin="0" SelectionChanged="comboCommand_SelectionChanged"></ComboBox>
         </StackPanel>
         <DataGrid AlternationCount="2" x:Name="dgResultCompetitions" Grid.Row="2" FontSize="18" AutoGenerateColumns="False" ItemsSource="{Binding infoResultCompet}" IsReadOnly="True">
             <DataGrid.Columns>

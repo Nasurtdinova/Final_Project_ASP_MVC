@@ -17,16 +17,21 @@ namespace RunningCompetitionWPF
 {
     public partial class AdminResultCompetitionsPage : Page
     {
-        public static List<ResultCompetition> infoCompet { get; set; }
+        public static List<ResultCompetition> infoResultCompet { get; set; }
 
         public AdminResultCompetitionsPage()
         {
             InitializeComponent();
 
-            var city = ConnectionCommands.GetCommands();
-            city.Insert(0, new Command { Name = "Все" });
-            comboCommand.ItemsSource = city;
+            var com = ConnectionCommands.GetCommands();
+            com.Insert(0, new Command { Name = "Все" });
+            comboCommand.ItemsSource = com;
             comboCommand.SelectedIndex = 0;
+
+            var compet = ConnectionCompetitions.GetCompetitions();
+            compet.Insert(0, new Competition { Name = "Все" });
+            comboCompet.ItemsSource = compet;
+            comboCompet.SelectedIndex = 0;
 
             dgResultCompetitions.ItemsSource = ConnectionResults.GetResults();
         }
@@ -55,17 +60,21 @@ namespace RunningCompetitionWPF
                 MessageBox.Show("Данные удалены");
             }
         }
+
         private void UpdateResultCompetitions()
         {
-            infoCompet = ConnectionResults.GetResults().ToList();
+            infoResultCompet = ConnectionResults.GetResults().ToList();
 
             if (checkMonth.IsChecked == true)
-                infoCompet = infoCompet.Where(a => a.Competition.Date.Value.Month == DateTime.Today.Month).ToList();
+                infoResultCompet = infoResultCompet.Where(a => a.Competition.Date.Value.Month == DateTime.Today.Month).ToList();
 
             if (comboCommand.SelectedIndex > 0)
-                infoCompet = infoCompet.Where(p => p.idCommand == (comboCommand.SelectedItem as Command).idCommand).ToList();
+                infoResultCompet = infoResultCompet.Where(p => p.idCommand == (comboCommand.SelectedItem as Command).idCommand).ToList();
 
-            dgResultCompetitions.ItemsSource = infoCompet;
+            if (comboCompet.SelectedIndex > 0)
+                infoResultCompet = infoResultCompet.Where(p => p.idCompetition == (comboCompet.SelectedItem as Competition).idCompetition).ToList();
+
+            dgResultCompetitions.ItemsSource = infoResultCompet;
         }
 
         private void comboCommand_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -74,6 +83,11 @@ namespace RunningCompetitionWPF
         }
 
         private void checkMonth_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateResultCompetitions();
+        }
+
+        private void comboCompet_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             UpdateResultCompetitions();
         }

@@ -7,9 +7,9 @@ namespace CoreFramework
 {
     public class ConnectionSponsorship 
     {
-        public static List<SponsorCommand> GetSponsorshipAccepted(int idSponsor)
+        public static List<SponsorCommand> GetSponsorshipAccepted()
         {
-            return GetAcceptedRequest().Where(tt => tt.idSponsor == idSponsor).ToList();
+            return GetAcceptedRequest().Where(tt => tt.idSponsor == CurrentUser.spon.idSponsor).ToList();
         }
 
         public static List<SponsorCommand> GetSponsorshipTopical()
@@ -22,18 +22,25 @@ namespace CoreFramework
             return new List<SponsorCommand>(bdConnection.connection.SponsorCommand.ToList());
         }
 
-        public static bool IsAddTrue(int idSponsor, int idCommand)
+        public static bool IsAddTrue(int idCommand)
         {
-            List<SponsorCommand> commands = GetSponsorshipAccepted(idSponsor);
-            if (commands.Where(tt => tt.idSponsor == idSponsor && tt.idCom == idCommand && tt.DateEnd > DateTime.Now).Count() == 0)
+            if (GetSponsorshipAccepted().Where(tt =>tt.idCom == idCommand).Count() == 0)
                 return true;
             else
                 return false;                
         }
 
+        public static bool IsAddTopicalTrue(int idCommand)
+        {
+            if (GetSponsorshipTopical().Where(tt =>tt.idSponsor == CurrentUser.spon.idSponsor && tt.idCom == idCommand && tt.DateBegin > DateTime.Now).Count() == 0)
+                return true;
+            else
+                return false;
+        }
+
         public static List<SponsorCommand> GetAcceptedRequest()
         {
-            return new List<SponsorCommand>(bdConnection.connection.SponsorCommand.ToList()).Where(a => a.idStatus == 3).ToList();
+            return new List<SponsorCommand>(bdConnection.connection.SponsorCommand.ToList()).Where(a => a.idStatus == 3 && a.DateEnd > DateTime.Now).ToList();
         }
 
         public static SponsorCommand GetSponsorshipId(int id)
@@ -77,8 +84,11 @@ namespace CoreFramework
             }
         }
 
-        public static void RemoveSponsorship(int id)
+        public static void EndSponsorship(int id)
         {
+            SponsorCommand sponCom = bdConnection.connection.SponsorCommand.FirstOrDefault(p => p.id == id);
+            sponCom.idStatus = 4;
+            bdConnection.connection.SaveChanges();
         }
     }
 }

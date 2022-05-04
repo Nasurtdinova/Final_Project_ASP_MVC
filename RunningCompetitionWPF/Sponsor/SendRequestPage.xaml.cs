@@ -45,18 +45,25 @@ namespace RunningCompetitionWPF
             }
             else
             {
-                if (ConnectionSponsorship.IsAddTrue(CurrentUser.spon.idSponsor, Convert.ToInt32(CurrentSponsorships.idCom)))
+                if (ConnectionSponsorship.IsAddTrue(Convert.ToInt32(CurrentSponsorships.idCom)))
                 {
-                    try
+                    if (ConnectionSponsorship.IsAddTopicalTrue(Convert.ToInt32(CurrentSponsorships.idCom)))
                     {
-                        ConnectionSponsorship.AddSponsorship(CurrentSponsorships);
-                        MessageBox.Show($"Вы отправили запрос на спонсирование команды {CurrentSponsorships.Command.Name}");
+                        try
+                        {
+                            ConnectionSponsorship.AddSponsorship(CurrentSponsorships);
+                            MessageBox.Show($"Вы отправили запрос на спонсирование команды {CurrentSponsorships.Command.Name}");
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message.ToString());
+                        }
+                        Manager.MainFrame.NavigationService.Navigate(new MySponsorshipsPage());
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        MessageBox.Show(ex.Message.ToString());
+                        MessageBox.Show("Вы уже отправили запрос этой команде!");
                     }
-                    Manager.MainFrame.NavigationService.Navigate(new MySponsorshipsPage());
                 }
                 else
                     MessageBox.Show("Вы спонсируете эту команду!");

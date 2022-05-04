@@ -1,43 +1,20 @@
 ﻿@{
-    Layout = "~/Views/Shared/_LayoutSponsor.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Sponsorship";
 }
 @model List<CoreFramework.SponsorCommand>
-<h2>My sponsorships</h2>
-<div class="row justify-content-end">
-    <a class="btn btn-primary" asp-controller="Sponsorship"
-       asp-action="Add" role="button">Add</a>
-</div>
+<h2>Sponsorship</h2>
 <br />
-
-<div class="row">
-    @foreach (var sponsorship in Model)
+<table border="1" style="border-collapse:collapse;" width=100% cellpadding="4" cellspacing="20">
+    <tr>
+        <th style="text-align:center">Название команды</th>
+        <th style="text-align:center">Название спонсора</th>
+    </tr>
+    @foreach (var ship in Model)
     {
-        <div class="col-md-4 mb-5">
-            <div class="card h-100">
-                <div class="card-body">
-
-                    <div>
-                        <p class="font-weight-normal">Name sponsor: @sponsorship.Sponsor.Name</p>
-                    </div>
-                    <div>
-                        <p class="font-weight-normal">Name command: @sponsorship.Command.Name</p>
-                    </div>
-                    <div>
-                        <p class="font-weight-normal">Date begin: @sponsorship.DateBegin</p>
-                    </div>
-                    <div>
-                        <p class="font-weight-normal">Date end: @sponsorship.DateEnd</p>
-                    </div>
-                    <div>
-                        <p class="font-weight-normal">Amount: @sponsorship.Amount</p>
-                    </div>
-                    <a class="btn btn-danger" asp-controller="Sponsorship"
-                       asp-action="Remove" asp-route-id="@sponsorship.id" role="button">
-                        Remove
-                    </a>
-                </div>
-            </div>
-        </div>
+        <tr>
+            <td align="center">@ship.Command.Name</td>
+            <td align="center">@ship.Sponsor.Name</td>
+        </tr>
     }
-</div>
+</table>

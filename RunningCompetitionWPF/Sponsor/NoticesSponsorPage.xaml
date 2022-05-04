@@ -43,7 +43,7 @@
                         </StackPanel>
                         <StackPanel  HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
                             <TextBlock Text="Статус: " />
-                            <TextBlock Text="{Binding Status.Name }" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding Status.Name}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </StackPanel>
                     </StackPanel>
                 </DataTemplate>
