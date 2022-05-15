@@ -54,7 +54,7 @@ namespace RunningCompetitionWPF
         public static void DoViewer()
         {
             VisibleCollapsedAuthReg();
-            RoleNameLabel.Content = "";
+            RoleNameLabel.Content = "Зритель";
 
             Sportsmans.Visibility = System.Windows.Visibility.Visible;
             Commands.Visibility = System.Windows.Visibility.Visible;

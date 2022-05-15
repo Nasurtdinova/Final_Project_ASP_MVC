@@ -32,7 +32,7 @@ namespace WebAPI_Project.Controllers
         [HttpPost]
         public IActionResult Create(ResultCompetition result)
         {
-            if (ConnectionResults.isComCompetTrue(result.idCommand, result.idCompetition))
+            if (ConnectionResults.IsComCompetTrue(Convert.ToInt32(result.idCommand), Convert.ToInt32(result.idCompetition)))
             {
                 throw new Exception("!!!!");
             }

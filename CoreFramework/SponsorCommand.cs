@@ -43,7 +43,7 @@ namespace CoreFramework
 
         public override string ToString()
         {
-            return $"{id},{Sponsor.Name} - {Command.Name}, {Amount}, {DateBegin} - {DateEnd}";
+            return $"{id},{Sponsor.Name} - {Command.Name}, {Amount}, {DateBegin.Value.Date.ToShortDateString()} - {DateEnd.Value.Date.ToShortDateString()}";
         }
     }
 }

@@ -17,17 +17,10 @@ namespace RunningCompetitionWPF
 {
     public partial class SportsmanPage : Page
     {
-        public static ObservableCollection<Sportsman> infoSportsman { get; set; }
         public SportsmanPage()
         {
             InitializeComponent();
-            infoSportsman = ConnectionSportsmans.GetSportsmans();
-            this.DataContext = this;
-        }
-
-        private void btn_back_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.GoBack();
+            sportsmansList.ItemsSource = ConnectionSportsmans.GetSportsmans();
         }
     }
 }

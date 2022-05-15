@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CoreFramework
 {
-    public class bdConnection
+    public static class bdConnection
     {
         public static CompetitionExamEntities connection = new CompetitionExamEntities();
     }

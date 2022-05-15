@@ -11,19 +11,13 @@ namespace RunningCompetitionsASP_MVC.Controllers
     {
         public IActionResult Index()
         {
-            var results = ResultStorage.results;
+            var results = ConnectionResults.GetResults();
             return View(results);
         }
 
         public IActionResult Viewer()
         {
-            var results = ResultStorage.results;
-            return View(results);
-        }
-
-        public IActionResult Sponsor()
-        {
-            var results = ResultStorage.results;
+            var results = ConnectionResults.GetResults();
             return View(results);
         }
 
@@ -47,7 +41,7 @@ namespace RunningCompetitionsASP_MVC.Controllers
                 }               
                 else
                 {
-                    ResultStorage.Add(result);
+                    ConnectionResults.AddResult(result);
                     return RedirectToAction("Index");
                 }
             }
@@ -68,7 +62,7 @@ namespace RunningCompetitionsASP_MVC.Controllers
             {
                 if (!ConnectionResults.IsRankTrue(Convert.ToInt32(result.Rank), Convert.ToInt32(result.idCompetition)))
                 {
-                    ModelState.AddModelError("", $"В соревновании {result.Competition.Name} такое место уже заняли");
+                    ModelState.AddModelError("", $"В соревновании такое место уже заняли");
                 }
                 else if (!ConnectionResults.IsComCompetTrue(Convert.ToInt32(result.idCommand), Convert.ToInt32(result.idCompetition)))
                 {
@@ -76,7 +70,7 @@ namespace RunningCompetitionsASP_MVC.Controllers
                 }
                 else
                 {
-                    ResultStorage.Update(result);
+                    ConnectionResults.UpdateResult(result);
                     return RedirectToAction("Index");
                 }                  
             }
@@ -85,7 +79,7 @@ namespace RunningCompetitionsASP_MVC.Controllers
 
         public IActionResult Remove(int idCommand, int idCompetition)
         {
-            ResultStorage.RemoveByName(idCommand, idCompetition);
+            ConnectionResults.RemoveResult(idCommand, idCompetition);
             return RedirectToAction("Index");
         }
     }

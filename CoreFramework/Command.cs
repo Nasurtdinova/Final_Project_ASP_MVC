@@ -28,8 +28,9 @@ namespace CoreFramework
 
         [Required(ErrorMessage = "Name command is required")]
         public string Name { get; set; }
-
+     
         [Range(6, 12)]
+        //[Required(ErrorMessage = "Count is required")]
         public Nullable<int> Count { get; set; }
 
         [Required(ErrorMessage = "Name city is required")]
@@ -50,7 +51,7 @@ namespace CoreFramework
 
         public override string ToString()
         {
-            return $"{idCommand},{Name} {City.Name} {Count}";
+            return $"{idCommand},{Name} {Count}";
         }
     }
 }

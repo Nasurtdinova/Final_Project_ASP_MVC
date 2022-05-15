@@ -81,15 +81,13 @@
     <Compile Include="Command.cs">
       <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
-    <Compile Include="Commands\CommandStorage.cs" />
     <Compile Include="Commands\ConnectionCommands.cs" />
     <Compile Include="Competition.cs">
       <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
-    <Compile Include="Competitions\CompetitionStorage.cs" />
-    <Compile Include="ConnectionUser.cs" />
+    <Compile Include="User\ConnectionUser.cs" />
     <Compile Include="Competitions\ConnectionCompetitions.cs" />
-    <Compile Include="CurrentUser.cs" />
+    <Compile Include="User\CurrentUser.cs" />
     <Compile Include="Model2.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -110,7 +108,6 @@
       <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Results\ConnectionResults.cs" />
-    <Compile Include="Results\ResultStorage.cs" />
     <Compile Include="Sponsor.cs">
       <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
@@ -122,7 +119,6 @@
       <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Sportsmans\ConnectionSportsmans.cs" />
-    <Compile Include="Sportsmans\SportsmanStorage.cs" />
     <Compile Include="Status.cs">
       <DependentUpon>Model2.tt</DependentUpon>
     </Compile>

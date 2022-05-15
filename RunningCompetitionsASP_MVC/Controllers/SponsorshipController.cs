@@ -14,6 +14,7 @@ namespace RunningCompetitionsASP_MVC.Controllers
             var sponsorships = ConnectionSponsorship.GetAcceptedRequest();
             return View(sponsorships);
         }
+
         public IActionResult IndexAdmin()
         {
             var sponsorships = ConnectionSponsorship.GetAcceptedRequest();

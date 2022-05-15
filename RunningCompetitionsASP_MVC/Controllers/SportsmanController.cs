@@ -13,19 +13,13 @@ namespace RunningCompetitionsASP_MVC.Controllers
     {
         public IActionResult Index()
         {
-            var sportsmans = SportsmanStorage.sportsmans;
+            var sportsmans = ConnectionSportsmans.GetSportsmans();
             return View(sportsmans);
         }
 
         public IActionResult Viewer()
         {
-            var sportsmans = SportsmanStorage.sportsmans;
-            return View(sportsmans);
-        }
-
-        public IActionResult Sponsor()
-        {
-            var sportsmans = SportsmanStorage.sportsmans;
+            var sportsmans = ConnectionSportsmans.GetSportsmans();
             return View(sportsmans);
         }
 
@@ -72,7 +66,7 @@ namespace RunningCompetitionsASP_MVC.Controllers
                     }
                     sportsman.Image = imageData;
                 }
-                SportsmanStorage.Add(sportsman);
+                ConnectionSportsmans.AddSportsman(sportsman);
                 return RedirectToAction("Index");
             }
             else
@@ -83,7 +77,7 @@ namespace RunningCompetitionsASP_MVC.Controllers
 
         public IActionResult Remove(int id)
         {
-            SportsmanStorage.RemoveByName(id);
+            ConnectionSportsmans.RemoveSportsman(id);
             return RedirectToAction("Index");
         }
 
@@ -99,7 +93,7 @@ namespace RunningCompetitionsASP_MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                SportsmanStorage.Update(sportsman);
+                ConnectionSportsmans.UpdateSportsman(sportsman);
                 return RedirectToAction("Index");
             }
             else

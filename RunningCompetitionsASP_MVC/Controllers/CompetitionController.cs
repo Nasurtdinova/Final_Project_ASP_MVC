@@ -11,20 +11,14 @@ namespace RunningCompetitionsASP_MVC.Controllers
     {
         public IActionResult Index()
         {
-           var compet = CompetitionStorage.competition;
+           var compet = ConnectionCompetitions.GetCompetitions();
             return View(compet);
         }
 
         public IActionResult Viewer()
         {
-            var compet = CompetitionStorage.competition;
+            var compet = ConnectionCompetitions.GetCompetitions();
             return View(compet);
-        }
-
-        public IActionResult Sponsor()
-        {
-            var competitions = CompetitionStorage.competition;
-            return View(competitions);
         }
 
         public IActionResult Add()
@@ -37,7 +31,7 @@ namespace RunningCompetitionsASP_MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                CompetitionStorage.Add(compet);
+                ConnectionCompetitions.AddCompetition(compet);
                 return RedirectToAction("Index");
             }
             else
@@ -58,7 +52,7 @@ namespace RunningCompetitionsASP_MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                CompetitionStorage.Update(compet);
+                ConnectionCompetitions.UpdateCompet(compet);
                 return RedirectToAction("Index");
             }
             else
@@ -69,7 +63,7 @@ namespace RunningCompetitionsASP_MVC.Controllers
 
         public IActionResult Remove(int id)
         {
-            CompetitionStorage.RemoveByName(id);
+            ConnectionCompetitions.RemoveCompetition(id);
             return RedirectToAction("Index");
         }
     }

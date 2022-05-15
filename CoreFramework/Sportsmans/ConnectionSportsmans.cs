@@ -24,7 +24,7 @@ namespace CoreFramework
                 sportsman.IsDeleted = true;
                 bdConnection.connection.SaveChanges();
             }
-            catch (Exception ex) // Exception исправить
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
@@ -63,7 +63,7 @@ namespace CoreFramework
 
                 bdConnection.connection.SaveChanges();
             }
-            catch (Exception ex) // Exception исправить
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
@@ -78,7 +78,7 @@ namespace CoreFramework
 
                 bdConnection.connection.SaveChanges();
             }
-            catch (Exception ex) // Exception исправить
+            catch (Exception ex) 
             {
                 Console.WriteLine(ex.Message);
             }

@@ -43,6 +43,9 @@ namespace Console_Project
                 case 4:
                     PrintResults();
                     break;
+                case 5:
+                    PrintSponsorships();
+                    break;
             }
         }
 
@@ -77,6 +80,15 @@ namespace Console_Project
         {
             ObservableCollection<ResultCompetition> results = ConnectionResults.GetResults();
             foreach (ResultCompetition i in results)
+            {
+                Console.WriteLine(i);
+            }
+        }
+
+        private static void PrintSponsorships()
+        {
+            List<SponsorCommand> sponsorships = ConnectionSponsorship.GetAcceptedRequest();
+            foreach (SponsorCommand i in sponsorships)
             {
                 Console.WriteLine(i);
             }

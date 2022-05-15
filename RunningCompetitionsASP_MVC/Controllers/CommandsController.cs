@@ -15,24 +15,13 @@ namespace RunningCompetitionsASP_MVC.Controllers
     {
         public IActionResult Index()
         {
-            var commands = CommandStorage.commands;
+            var commands = ConnectionCommands.GetCommands();
             return View(commands);
-        }
-
-        public ActionResult Create()
-        {
-            return View();
         }
 
         public IActionResult Viewer()
         {
-            var commands = CommandStorage.commands;
-            return View(commands);
-        }
-
-        public IActionResult Sponsor()
-        {
-            var commands = CommandStorage.commands;
+            var commands = ConnectionCommands.GetCommands();
             return View(commands);
         }
 
@@ -54,8 +43,8 @@ namespace RunningCompetitionsASP_MVC.Controllers
                 command.Image = imageData;
             }
             if (ModelState.IsValid)
-            {               
-                CommandStorage.Add(command);
+            {
+                ConnectionCommands.AddCommand(command);
                 return RedirectToAction("Index");
             }
             else
@@ -67,7 +56,7 @@ namespace RunningCompetitionsASP_MVC.Controllers
 
         public IActionResult Remove(int id)
         {
-            CommandStorage.RemoveByName(id);
+            ConnectionCommands.RemoveCommand(id);
             return RedirectToAction("Index");
         }
 
@@ -107,7 +96,7 @@ namespace RunningCompetitionsASP_MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                CommandStorage.Update(command);
+                ConnectionCommands.UpdateCommand(command);
                 return RedirectToAction("Index");
             }
             else

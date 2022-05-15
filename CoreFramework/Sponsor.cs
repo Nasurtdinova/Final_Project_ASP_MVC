@@ -26,8 +26,7 @@ namespace CoreFramework
         [Required(ErrorMessage = "Surname is required")]
         public string Surname { get; set; }
 
-        [Required(ErrorMessage = "Name is required")]
-        [StringLength(20, MinimumLength = 3)]
+        [Required(ErrorMessage = "Name is required"),StringLength(20, MinimumLength = 3)]
         public string Name { get; set; }
 
         //[RegularExpression(@"^\+[1-9]\d{3}-\d{3}-\d{4}$")]

@@ -14,7 +14,7 @@ namespace WebAPI_Project.Controllers
         public SponsorshipController() { }
 
         [HttpGet]
-        public ActionResult<List<SponsorCommand>> GetAll() => ConnectionSponsorship.GetSponsorships();
+        public ActionResult<List<SponsorCommand>> GetAll() => ConnectionSponsorship.GetAcceptedRequest();
 
         [HttpGet("{id}")]
         public ActionResult<SponsorCommand> Get(int id)
@@ -42,7 +42,7 @@ namespace WebAPI_Project.Controllers
             if (sponship is null)
                 return NotFound();
 
-            ConnectionSponsorship.RemoveSponsorship(id);
+            ConnectionSponsorship.EndSponsorship(id);
 
             return NoContent();
         }

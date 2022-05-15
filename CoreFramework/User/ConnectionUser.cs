@@ -114,7 +114,7 @@ namespace CoreFramework
             return GetCities().Where(t => t.idCity == id).FirstOrDefault().Name;
         }
 
-        public static int IsLogin(string email, string password)
+        public static int IsCorrectUser(string email, string password)
         {
             Users = GetUsers();
             var admin = from usrs in Users

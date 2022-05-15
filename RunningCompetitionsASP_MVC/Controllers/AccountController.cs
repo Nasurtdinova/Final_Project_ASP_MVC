@@ -64,7 +64,7 @@ namespace RunningCompetitionsASP_MVC.Controllers
                     return Redirect(model.ReturnUrl);
                 }
 
-                if (ConnectionUser.IsLogin(model.Login,model.Password) == 1)
+                if (ConnectionUser.IsCorrectUser(model.Login,model.Password) == 1)
                 {                                   
                     return RedirectToAction("IndexHome", "Home");
                 }
