@@ -17,10 +17,9 @@
             </RowDefinition>
             <RowDefinition Height="580">
             </RowDefinition>
-
         </Grid.RowDefinitions>
         <TextBlock Text="Messages" Grid.Column="0" Grid.ColumnSpan="2" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
-        <ListView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{Binding infoMessages}" Name="lvMessages" SelectionChanged="lvMessages_SelectionChanged">
+        <ListView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Name="lvMessages" SelectionChanged="lvMessages_SelectionChanged">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">

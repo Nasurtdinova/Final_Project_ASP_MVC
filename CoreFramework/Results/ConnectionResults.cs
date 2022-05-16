@@ -79,7 +79,7 @@ namespace CoreFramework
                 bdConnection.connection.ResultCompetition.Remove(com);
                 bdConnection.connection.SaveChanges();
             }
-            catch (Exception ex) // Exception исправить
+            catch (Exception ex) 
             { 
                 Console.WriteLine(ex.Message); 
             }
@@ -110,7 +110,7 @@ namespace CoreFramework
                 bdConnection.connection.ResultCompetition.Add(result);
                 bdConnection.connection.SaveChanges();
             }
-            catch (Exception ex) // Exception исправить
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
@@ -126,7 +126,7 @@ namespace CoreFramework
                 res.Rank = result.Rank;
                 bdConnection.connection.SaveChanges();
             }
-            catch (Exception ex) // Exception исправить
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }

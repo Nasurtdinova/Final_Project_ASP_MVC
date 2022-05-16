@@ -15,10 +15,9 @@ namespace CoreFramework
             {
                 sporCom = ConnectionSportsmans.GetSportsmans().Where(tt => tt.idCommand == id).ToList();
             }
-
-            catch // Exception исправить
+            catch (Exception ex)
             {
-                return null;
+                Console.WriteLine(ex.Message);
             }
             return sporCom;
         }
@@ -32,7 +31,6 @@ namespace CoreFramework
         {
             try
             {
-                //command.City = Connection.GetCity(command.City.Name);
                 command.IsDeleted = false;
 
                 bdConnection.connection.Command.Add(command);
@@ -52,7 +50,7 @@ namespace CoreFramework
                 com.IsDeleted = true;
                 bdConnection.connection.SaveChanges();
             }
-            catch (Exception ex) // Exception исправить
+            catch (Exception ex) 
             {
                 Console.WriteLine(ex.Message);
             }
@@ -71,7 +69,7 @@ namespace CoreFramework
 
                 bdConnection.connection.SaveChanges();
             }
-            catch (Exception ex) // Exception исправить
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
@@ -86,7 +84,7 @@ namespace CoreFramework
 
                 bdConnection.connection.SaveChanges();
             }
-            catch (Exception ex) // Exception исправить
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }

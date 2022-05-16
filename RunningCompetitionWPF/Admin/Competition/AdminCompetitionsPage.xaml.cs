@@ -79,10 +79,7 @@ namespace RunningCompetitionWPF
             if (MessageBox.Show($"Вы точно хотите удалить следующие {competsForRemoving.Count()} элементов", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
                 foreach (var i in competsForRemoving)
-                {
                     ConnectionCompetitions.RemoveCompetition(i.idCompetition);
-                }
-
                 dgCompetitions.ItemsSource = ConnectionCompetitions.GetCompetitions().ToList();
                 MessageBox.Show("Данные удалены");
             }

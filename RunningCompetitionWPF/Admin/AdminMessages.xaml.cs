@@ -17,31 +17,28 @@ namespace RunningCompetitionWPF
 {
     public partial class AdminMessages : Page
     {
-        public static List<SponsorCommand> infoMessages { get; set; }
-
         public AdminMessages()
         {
             InitializeComponent();
-            infoMessages = ConnectionSponsorship.GetSponsorshipTopical();
-            this.DataContext = this;
+            lvMessages.ItemsSource = ConnectionSponsorship.GetSponsorshipTopical();
         }
 
         private void lvMessages_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var a = (sender as ListView).SelectedItem as SponsorCommand;
-            if (a != null)
+            var sponCom = (sender as ListView).SelectedItem as SponsorCommand;
+            if (sponCom != null)
             {
-                MessageBoxResult result = MessageBox.Show($"Вы хотите принять заявку  от {a.Sponsor.Surname} {a.Sponsor.Name} на спонсирование команды {a.Command.Name}, в период времени с {a.DateBegin.Value.Date.ToString("dd.MM.yyyy")} до {a.DateEnd.Value.Date.ToString("dd.MM.yyyy")}?{Environment.NewLine}Взаимовыгода: {a.MutualBenefit}", "Заявка", MessageBoxButton.YesNoCancel);
+                MessageBoxResult result = MessageBox.Show($"Вы хотите принять заявку  от {sponCom.Sponsor.Surname} {sponCom.Sponsor.Name} на спонсирование команды {sponCom.Command.Name}, в период времени с {sponCom.DateBegin.Value.Date.ToString("dd.MM.yyyy")} до {sponCom.DateEnd.Value.Date.ToString("dd.MM.yyyy")}?{Environment.NewLine}Взаимовыгода: {sponCom.MutualBenefit}", "Заявка", MessageBoxButton.YesNoCancel);
                 switch (result)
                 {
                     case MessageBoxResult.Yes:
-                        a.idStatus = 3;
-                        ConnectionSponsorship.UpdateSponsorship(a);
+                        sponCom.idStatus = 3;
+                        ConnectionSponsorship.UpdateSponsorship(sponCom);
                         MessageBox.Show("Заявка принята!", "Уведомление");
                         break;
                     case MessageBoxResult.No:
-                        a.idStatus = 2;
-                        ConnectionSponsorship.UpdateSponsorship(a);
+                        sponCom.idStatus = 2;
+                        ConnectionSponsorship.UpdateSponsorship(sponCom);
                         MessageBox.Show("Заявка отклонена!", "Уведомление");
                         break;
                     case MessageBoxResult.Cancel:

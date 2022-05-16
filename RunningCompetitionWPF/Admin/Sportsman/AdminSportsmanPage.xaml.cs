@@ -18,13 +18,10 @@ namespace RunningCompetitionWPF
 {
     public partial class AdminSportsmanPage : Page
     {
-        public static ObservableCollection<Sportsman> infoSportsmans { get; set; }
-
         public AdminSportsmanPage()
         {
             InitializeComponent();
-            infoSportsmans = ConnectionSportsmans.GetSportsmans();
-            this.DataContext = this;
+            lvSportsmans.ItemsSource = ConnectionSportsmans.GetSportsmans();
         }
 
         private void btnRemove_Click(object sender, RoutedEventArgs e)
@@ -34,10 +31,7 @@ namespace RunningCompetitionWPF
             if (MessageBox.Show($"Вы точно хотите удалить следующие {sportsmansForRemoving.Count()} элементов", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
                 foreach (var i in sportsmansForRemoving)
-                {
                     ConnectionSportsmans.RemoveSportsman(i.ID);
-                }
-
                 lvSportsmans.ItemsSource = ConnectionSportsmans.GetSportsmans().ToList();
                 MessageBox.Show("Данные удалены");
             }

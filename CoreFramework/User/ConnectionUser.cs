@@ -80,7 +80,7 @@ namespace CoreFramework
                 bdConnection.connection.Users.Add(user);
                 bdConnection.connection.SaveChanges();
             }
-            catch (Exception ex) // Exception исправить
+            catch (Exception ex) 
             {
                 Console.WriteLine(ex.Message);
             }
@@ -93,7 +93,7 @@ namespace CoreFramework
                 bdConnection.connection.Sponsor.Add(sponsor);
                 bdConnection.connection.SaveChanges();
             }
-            catch (Exception ex) // Exception исправить
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }

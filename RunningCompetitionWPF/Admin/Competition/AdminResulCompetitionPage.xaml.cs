@@ -23,16 +23,6 @@ namespace RunningCompetitionWPF
             dgResultCompetitions.ItemsSource = ConnectionResults.GetResutCompet(compet.idCompetition);
         }
 
-        private void btnEdit_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btnAdd_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
             Manager.MainFrame.NavigationService.GoBack();

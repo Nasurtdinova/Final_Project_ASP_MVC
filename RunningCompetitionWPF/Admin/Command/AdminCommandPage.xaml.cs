@@ -18,13 +18,10 @@ namespace RunningCompetitionWPF.Admin
 {
     public partial class AdminCommandPage : Page
     {
-        public static ObservableCollection<Command> infoCommands { get; set; }
-
         public AdminCommandPage()
         {
             InitializeComponent();
-            infoCommands = ConnectionCommands.GetCommands();
-            this.DataContext = this;
+            lvCommands.ItemsSource = ConnectionCommands.GetCommands();
         }
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)

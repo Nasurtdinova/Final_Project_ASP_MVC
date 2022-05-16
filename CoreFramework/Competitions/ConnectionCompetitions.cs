@@ -39,7 +39,7 @@ namespace CoreFramework
                 compet.IsDeleted = true;
                 bdConnection.connection.SaveChanges();
             }
-            catch (Exception ex) // Exception исправить
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
@@ -59,7 +59,7 @@ namespace CoreFramework
                 competition.Street = compet.Street;
                 bdConnection.connection.SaveChanges();
             }
-            catch (Exception ex) // Exception исправить
+            catch (Exception ex) 
             {
                 Console.WriteLine(ex.Message);
             }

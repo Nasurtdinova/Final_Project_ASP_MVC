@@ -7,7 +7,6 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="AdminSportsmanPage">
-
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
@@ -21,7 +20,7 @@
             </RowDefinition>
         </Grid.RowDefinitions>
         <TextBlock Text="Sportsmans" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
-        <ListView Grid.Row="1" ItemsSource="{Binding infoSportsmans}" Name="lvSportsmans">
+        <ListView Grid.Row="1" Name="lvSportsmans">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <UniformGrid Columns="4" Width="1100"></UniformGrid>
@@ -30,14 +29,6 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
-                        <TextBlock>
-                            <TextBlock.Text>
-                                <MultiBinding StringFormat="{}{0}|{1}">
-                                    <Binding Path="infoSportsmansCommand.Name"/>
-                                    <Binding Path="Name"/>
-                                </MultiBinding>
-                            </TextBlock.Text>
-                        </TextBlock>
                         <Image Source="{Binding Image}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="400" Height="220"/>
                         <TextBlock Text="{Binding Surname}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         <TextBlock Text="{Binding Name}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
