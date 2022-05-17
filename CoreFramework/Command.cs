@@ -23,14 +23,12 @@ namespace CoreFramework
             this.Sportsman = new HashSet<Sportsman>();
         }
 
-        [Required(ErrorMessage = "Id is required")]
         public int idCommand { get; set; }
 
         [Required(ErrorMessage = "Name command is required")]
         public string Name { get; set; }
      
         [Range(6, 12)]
-        //[Required(ErrorMessage = "Count is required")]
         public Nullable<int> Count { get; set; }
 
         [Required(ErrorMessage = "Name city is required")]

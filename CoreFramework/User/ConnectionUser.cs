@@ -77,6 +77,7 @@ namespace CoreFramework
         {
             try
             {
+                user.idType = 2;
                 bdConnection.connection.Users.Add(user);
                 bdConnection.connection.SaveChanges();
             }
@@ -90,6 +91,7 @@ namespace CoreFramework
         {
             try
             {
+                sponsor.idUser = ConnectionUser.GetUsers().Last().idUser;
                 bdConnection.connection.Sponsor.Add(sponsor);
                 bdConnection.connection.SaveChanges();
             }

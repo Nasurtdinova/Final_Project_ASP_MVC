@@ -21,8 +21,7 @@ namespace RunningCompetitionsASP_MVC.Controllers
                 Users user = new Users 
                 { 
                     Email = model.Login, 
-                    Password = model.Password, 
-                    idType = 2 
+                    Password = model.Password                    
                 };
 
                 Sponsor spon = new Sponsor 
@@ -30,7 +29,6 @@ namespace RunningCompetitionsASP_MVC.Controllers
                     Surname = model.Surname, 
                     Name = model.Name, 
                     Phone = model.Phone, 
-                    idUser = ConnectionUser.GetUsers().Last().idUser 
                 };
 
                 if (ConnectionUser.IsCoinsLogin(model.Password))

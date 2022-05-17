@@ -33,13 +33,11 @@ namespace RunningCompetitionWPF
             Users user = new Users()
             {
                 Email = textLogin.Text,
-                Password = textPassword.Text,
-                idType = 2
+                Password = textPassword.Text
             };
 
             Sponsor sponsor = new Sponsor()
             {
-                idUser = ConnectionUser.GetUsers().Last().idUser,
                 Surname = textSurname.Text,
                 Name = textName.Text,
                 Phone = textPhone.Text
