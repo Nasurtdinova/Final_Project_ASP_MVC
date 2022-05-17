@@ -30,7 +30,8 @@ namespace RunningCompetitionsUnitTests
         public void TestCommands()
         {
             ConnectionCommands.AddCommand(new Command { Name = "Алые Паруса", Count = 5, ID_city = 1 }); // добавление команды
-            ConnectionCommands.RemoveCommand(1034); //удаление команды
+
+            Assert.IsTrue(ConnectionCommands.RemoveCommandTest(1034)); //удаление команды
             ConnectionCommands.UpdateCommand(new Command { idCommand = 1035, Count = 10, Name = "Машины", ID_city = 2 }); // редактирование команды
         }
 

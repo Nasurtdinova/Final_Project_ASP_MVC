@@ -19,7 +19,7 @@
             <RowDefinition Height="50">
             </RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock Text="Sportsmans in command" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+        <TextBlock Text="Sportsmans in team" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
         <ListView Grid.Row="1" ItemsSource="{Binding infoSportsmansCommand}" Name="lvCommands">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>

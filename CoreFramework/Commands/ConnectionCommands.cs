@@ -56,6 +56,22 @@ namespace CoreFramework
             }
         }
 
+        public static bool RemoveCommandTest(int id)
+        {
+            try
+            {
+                Command com = bdConnection.connection.Command.FirstOrDefault(p => p.idCommand == id);
+                com.IsDeleted = true;
+                bdConnection.connection.SaveChanges();
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         public static void UpdateCommand(Command command)
         {
             try

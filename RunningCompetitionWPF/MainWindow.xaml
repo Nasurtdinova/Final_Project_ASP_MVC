@@ -41,8 +41,8 @@
                     <ListViewItem Height="30">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="C:\Users\nasur\Source\Repos\Final_Project_ASP_MVC_Clone\RunningCompetitionWPF\icons\team1.png" Height="20" VerticalAlignment="Center"/>
-                            <Button FontWeight="Bold" Margin="15 0 0 0" Content="Commands" Background="#FF0F4E7A" BorderBrush="#FF0F4E7A" Foreground="White" Name="command" Click="command_click" VerticalAlignment="Center"/>
-                            <Button FontWeight="Bold" Margin="15 0 0 0" Content="Commands" Background="#FF0F4E7A" BorderBrush="#FF0F4E7A" Foreground="White" Name="commandAdmin" Click="commandAdmin_Click" VerticalAlignment="Center" Visibility="Collapsed"/>
+                            <Button FontWeight="Bold" Margin="15 0 0 0" Content="Teams" Background="#FF0F4E7A" BorderBrush="#FF0F4E7A" Foreground="White" Name="command" Click="command_click" VerticalAlignment="Center"/>
+                            <Button FontWeight="Bold" Margin="15 0 0 0" Content="Teams" Background="#FF0F4E7A" BorderBrush="#FF0F4E7A" Foreground="White" Name="commandAdmin" Click="commandAdmin_Click" VerticalAlignment="Center" Visibility="Collapsed"/>
                         </StackPanel>
                     </ListViewItem>
                     <ListViewItem Height="30">

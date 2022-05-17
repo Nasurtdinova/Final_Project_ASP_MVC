@@ -21,7 +21,7 @@
             <RowDefinition Height="50">
             </RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock Text="Commands" Grid.Column="0" Grid.ColumnSpan="2" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+        <TextBlock Text="Teams" Grid.Column="0" Grid.ColumnSpan="2" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
         <ListView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{Binding infoCommands}" Name="lvCommands" SelectionChanged="lvCommands_SelectionChanged">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>

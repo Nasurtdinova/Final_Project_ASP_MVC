@@ -19,7 +19,7 @@
             </RowDefinition>
         </Grid.RowDefinitions>
         <TextBlock Text="Sponsorships" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
-        <DataGrid x:Name="dgSponsorships" Grid.Row="1" FontSize="18"  AutoGenerateColumns="False" ItemsSource="{Binding infoSponsorships}" IsReadOnly="True">
+        <DataGrid AlternationCount="2" x:Name="dgSponsorships" Grid.Row="1" FontSize="18" AutoGenerateColumns="False" ItemsSource="{Binding infoSponsorships}" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Название команды" Binding="{Binding Command.Name}" Width="*"></DataGridTextColumn>
                 <DataGridTextColumn Header="Спонсор" Binding="{Binding Sponsor.Name}" Width="*"></DataGridTextColumn>
