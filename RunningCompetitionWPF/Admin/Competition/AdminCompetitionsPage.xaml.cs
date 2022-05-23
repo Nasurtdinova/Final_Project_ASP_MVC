@@ -1,7 +1,11 @@
 ﻿using CoreFramework;
+using ExcelDataReader;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -89,5 +93,16 @@ namespace RunningCompetitionWPF
         {
             Manager.MainFrame.Navigate(new AdminResulCompetitionPage((sender as Button).DataContext as Competition));
         }
+
+        private void btnLoad_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "EXCEL Files (*.xlsx)|*.xlsx|EXCEL Files 2013 (*.xls)|*.xls|All files (*.*)|*.*";
+            if (openFileDialog.ShowDialog() != true)
+                return;
+            ConnectionCompetitions.ReadFile(openFileDialog.FileName);
+            dgCompetitions.ItemsSource = ConnectionCompetitions.GetCompetitions().ToList();
+        }
     }
 }
+

@@ -22,5 +22,10 @@ namespace RunningCompetitionWPF
             InitializeComponent();
             sportsmansList.ItemsSource = ConnectionSportsmans.GetSportsmans();
         }
+
+        private void btnView_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }

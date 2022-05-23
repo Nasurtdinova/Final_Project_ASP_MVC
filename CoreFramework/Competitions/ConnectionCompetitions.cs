@@ -1,14 +1,52 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Collections.Generic;
+using System.IO;
+using ExcelDataReader;
+using System.Data;
 
 namespace CoreFramework
 {
     public class ConnectionCompetitions
     {
+        public static IExcelDataReader edr;
+
         public static Competition GetCompetId(int id)
         {
             return GetCompetitions().Where(tt => tt.idCompetition == id).FirstOrDefault();            
+        }
+
+        public static void ReadFile(string fileNames)
+        {
+            var extension = fileNames.Substring(fileNames.LastIndexOf('.'));
+            FileStream stream = File.Open(fileNames, FileMode.Open, FileAccess.Read);
+            if (extension == ".xlsx")
+                edr = ExcelReaderFactory.CreateOpenXmlReader(stream);
+            else if (extension == ".xls")
+                edr = ExcelReaderFactory.CreateBinaryReader(stream);
+            var conf = new ExcelDataSetConfiguration
+            {
+                ConfigureDataTable = _ => new ExcelDataTableConfiguration { UseHeaderRow = true }
+            };
+            DataSet dataSet = edr.AsDataSet(conf);
+            foreach (DataTable table in dataSet.Tables)
+            {
+                foreach (DataRow dr in table.Rows)
+                {
+                    Competition com = new Competition()
+                    {
+                        Name = dr[0].ToString(),
+                        Date = Convert.ToDateTime(dr[1]),
+                        idCity = ConnectionUser.GetCity(dr[2].ToString()).idCity,
+                        NameVenue = dr[3].ToString(),
+                        Street = dr[4].ToString(),
+                        Home = Convert.ToInt32(dr[5])
+                    };
+                    AddCompetition(com);
+                }
+            }
+            edr.Close();
         }
 
         public static ObservableCollection<Competition> GetCompetitions()

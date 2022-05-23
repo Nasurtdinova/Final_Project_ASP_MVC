@@ -7,7 +7,6 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="NoticesSponsorPage">
-
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
@@ -41,8 +40,8 @@
                             <TextBlock Text="Дата конца: " />
                             <TextBlock Text="{Binding DateEnd, StringFormat ='dd.MM.yyyy'}"/>
                         </StackPanel>
-                        <StackPanel  HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
-                            <TextBlock Text="Статус: " />
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
+                            <TextBlock Text="Статус: "/>
                             <TextBlock Text="{Binding Status.Name}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </StackPanel>
                     </StackPanel>

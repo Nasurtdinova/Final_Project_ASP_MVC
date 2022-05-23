@@ -1,4 +1,5 @@
 ﻿using CoreFramework;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -90,6 +91,16 @@ namespace RunningCompetitionWPF
         private void comboCompet_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             UpdateResultCompetitions();
+        }
+
+        private void btnLoad_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "EXCEL Files (*.xlsx)|*.xlsx|EXCEL Files 2013 (*.xls)|*.xls|All files (*.*)|*.*";
+            if (openFileDialog.ShowDialog() != true)
+                return;
+            ConnectionResults.ReadFile(openFileDialog.FileName);
+            dgResultCompetitions.ItemsSource = ConnectionCompetitions.GetCompetitions().ToList();
         }
     }
 }

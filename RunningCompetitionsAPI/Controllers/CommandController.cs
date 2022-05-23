@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using CoreFramework;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-//лишние библиотеки убрать
+
 namespace WebAPI_Project.Controllers
 {
     [ApiController]

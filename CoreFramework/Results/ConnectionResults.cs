@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
+using System.IO;
+using ExcelDataReader;
 using Excel = Microsoft.Office.Interop.Excel;
 
 namespace CoreFramework
 {
     public class ConnectionResults
     {
+        public static IExcelDataReader edr;
+
         public static ObservableCollection<ResultCompetition> GetResults()
         {
             return new ObservableCollection<ResultCompetition>(bdConnection.connection.ResultCompetition.ToList().Where(a=>a.Command.IsDeleted == false && a.Competition.IsDeleted == false));
@@ -29,7 +33,7 @@ namespace CoreFramework
             {
                 Excel.Worksheet worksheet = application.Worksheets.Item[i + 1];
                 worksheet.Name = allCommands[i].Name;
-                worksheet.Cells[1][startRowIndex] = "Город";
+                worksheet.Cells[1][startRowIndex] = "Команда из города";
                 worksheet.Cells[2][startRowIndex] = allCommands[i].City.Name;
                 startRowIndex = 2;
 
@@ -59,6 +63,35 @@ namespace CoreFramework
                 startRowIndex = 1;
             }
             application.Visible = true;
+        }
+
+        public static void ReadFile(string fileNames)
+        {
+            var extension = fileNames.Substring(fileNames.LastIndexOf('.'));
+            FileStream stream = File.Open(fileNames, FileMode.Open, FileAccess.Read);
+            if (extension == ".xlsx")
+                edr = ExcelReaderFactory.CreateOpenXmlReader(stream);
+            else if (extension == ".xls")
+                edr = ExcelReaderFactory.CreateBinaryReader(stream);
+            var conf = new ExcelDataSetConfiguration
+            {
+                ConfigureDataTable = _ => new ExcelDataTableConfiguration { UseHeaderRow = true }
+            };
+            DataSet dataSet = edr.AsDataSet(conf);
+            foreach (DataTable table in dataSet.Tables)
+            {
+                foreach (DataRow dr in table.Rows)
+                {
+                    ResultCompetition res = new ResultCompetition()
+                    {
+                        Command = ConnectionCommands.GetCommandsId(Convert.ToInt32(dr[0])),
+                        Competition = ConnectionCompetitions.GetCompetId(Convert.ToInt32(dr[1])),
+                        Rank = Convert.ToInt32(dr[2])
+                    };
+                    AddResult(res);
+                }
+            }
+            edr.Close();
         }
 
         public static List<ResultCompetition> GetResutCompet(int idCompet)
