@@ -26,13 +26,14 @@ namespace CoreFramework
         [Required(ErrorMessage = "Surname is required")]
         public string Surname { get; set; }
 
-        [Required(ErrorMessage = "Name is required"),StringLength(20, MinimumLength = 3)]
+        [Required(ErrorMessage = "Name is required"), StringLength(20, MinimumLength = 3)]
         public string Name { get; set; }
 
-        //[RegularExpression(@"^\+[1-9]\d{3}-\d{3}-\d{4}$")]
         public string Phone { get; set; }
 
-        public Nullable<int> idUser { get; set; }
+        public int idUser { get; set; }
+
+        public byte[] Photo { get; set; }
     
         public virtual Users Users { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

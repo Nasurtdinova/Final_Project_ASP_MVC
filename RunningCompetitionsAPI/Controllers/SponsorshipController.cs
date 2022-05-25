@@ -26,25 +26,5 @@ namespace WebAPI_Project.Controllers
 
             return sponship;
         }
-
-        [HttpPost]
-        public IActionResult Create(SponsorCommand compet)
-        {
-            ConnectionSponsorship.AddSponsorship(compet);
-            return NoContent();
-        }
-
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
-        {
-            var sponship = ConnectionSponsorship.GetSponsorshipId(id);
-
-            if (sponship is null)
-                return NotFound();
-
-            ConnectionSponsorship.EndSponsorship(id);
-
-            return NoContent();
-        }
     }
 }

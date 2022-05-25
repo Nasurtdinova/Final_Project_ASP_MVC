@@ -101,6 +101,26 @@ namespace CoreFramework
             }
         }
 
+        public static void UpdateSponsor(Sponsor spon)
+        {
+            try
+            {
+                var sports = bdConnection.connection.Sponsor.SingleOrDefault(r => r.idSponsor == CurrentUser.spon.idSponsor);
+                sports.Name = spon.Name;
+                sports.Surname = spon.Surname;
+                sports.Phone = spon.Phone;
+
+                if (spon.Photo != null)
+                    sports.Photo = spon.Photo;
+
+                bdConnection.connection.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
         public static Title GetTitle(int id)
         {
             return GetTitles().Where(a => a.idTitle == id).FirstOrDefault();
@@ -130,7 +150,7 @@ namespace CoreFramework
             if (sponsor.Count() == 1)
             {
                 CurrentUser.user = sponsor.FirstOrDefault();
-                CurrentUser.spon = ConnectionUser.GetSponsors().Where(a => a.idUser == CurrentUser.user.idUser).FirstOrDefault();
+                CurrentUser.spon = GetSponsor(CurrentUser.user.idUser);
                 return 2;
             }
             else if (admin.Count() == 1)

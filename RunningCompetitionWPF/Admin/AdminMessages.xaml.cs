@@ -28,7 +28,7 @@ namespace RunningCompetitionWPF
             var sponCom = (sender as ListView).SelectedItem as SponsorCommand;
             if (sponCom != null)
             {
-                MessageBoxResult result = MessageBox.Show($"Вы хотите принять заявку  от {sponCom.Sponsor.Surname} {sponCom.Sponsor.Name} на спонсирование команды {sponCom.Command.Name}, в период времени с {sponCom.DateBegin.Value.Date.ToString("dd.MM.yyyy")} до {sponCom.DateEnd.Value.Date.ToString("dd.MM.yyyy")}?{Environment.NewLine}Взаимовыгода: {sponCom.MutualBenefit}", "Заявка", MessageBoxButton.YesNoCancel);
+                MessageBoxResult result = MessageBox.Show($"Вы хотите принять заявку  от {sponCom.Sponsor.Surname} {sponCom.Sponsor.Name} на спонсирование команды {sponCom.Command.Name}, в период времени с {sponCom.DateBegin.Date.ToString("dd.MM.yyyy")} до {sponCom.DateEnd.Date.ToString("dd.MM.yyyy")}?{Environment.NewLine}Взаимовыгода: {sponCom.MutualBenefit}", "Заявка", MessageBoxButton.YesNoCancel);
                 switch (result)
                 {
                     case MessageBoxResult.Yes:

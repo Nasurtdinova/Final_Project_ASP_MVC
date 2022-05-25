@@ -37,7 +37,7 @@ namespace RunningCompetitionsUnitTests
         [TestMethod]
         public void TestSportsmans()
         {
-            ConnectionSportsmans.AddSportsman(new Sportsman { Surname = "gslgg", Name = "gdsgsg", Height = 185, idCommand = 23, idTitle = 1}); // добавление спортсмена
+            ConnectionSportsmans.AddSportsman(new Sportsman { Surname = "Морозов", Name = "Сергей", Height = 185, idCommand = 23, idTitle = 1}); // добавление спортсмена
             ConnectionSportsmans.RemoveSportsman(41); // удаление спортсмена
             ConnectionSportsmans.UpdateSportsman(new Sportsman { ID = 39, Height = 180, Name = "Антон", Surname="Антипов", idTitle=1, idCommand=23 }); // редактирование спортсмена
         }
@@ -45,9 +45,9 @@ namespace RunningCompetitionsUnitTests
         [TestMethod]
         public void TestCompetitions()
         {
-            ConnectionCompetitions.AddCompetition(new Competition { Name ="vdcd", Date=new DateTime(), NameVenue = "Vfvf", idCity = 2, Street ="vdfd", Home=12 }); // добавление соревнования
+            ConnectionCompetitions.AddCompetition(new Competition { Name ="Кубок гагарина", Date=new DateTime(2022,8,25), NameVenue = "Физра", idCity = 2, Street ="Аграрная", Home=12 }); // добавление соревнования
             ConnectionCompetitions.RemoveCompetition(41); // удаление соревнования
-            ConnectionCompetitions.UpdateCompet(new Competition { idCompetition = 39, Date = new DateTime(), NameVenue = "Vfvf", idCity = 2, Street = "vdfd", Home = 12 }); // редактирование соревнования
+            ConnectionCompetitions.UpdateCompet(new Competition { idCompetition = 39, Date = new DateTime(2022, 8, 25), NameVenue = "Физра", idCity = 2, Street = "Космонавтов", Home = 12 }); // редактирование соревнования
         }
 
         [TestMethod]

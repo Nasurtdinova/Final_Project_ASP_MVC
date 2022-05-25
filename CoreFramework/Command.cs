@@ -22,24 +22,23 @@ namespace CoreFramework
             this.SponsorCommand = new HashSet<SponsorCommand>();
             this.Sportsman = new HashSet<Sportsman>();
         }
-
+    
         public int idCommand { get; set; }
 
         [Required(ErrorMessage = "Name command is required")]
         public string Name { get; set; }
-     
+
         [Range(6, 12)]
         public Nullable<int> Count { get; set; }
 
         [Required(ErrorMessage = "Name city is required")]
         public Nullable<int> ID_city { get; set; }
-    
+
         public byte[] Image { get; set; }
 
-        public Nullable<bool> IsDeleted { get; set; }
-     
+        public bool IsDeleted { get; set; }
+    
         public virtual City City { get; set; }
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ResultCompetition> ResultCompetition { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

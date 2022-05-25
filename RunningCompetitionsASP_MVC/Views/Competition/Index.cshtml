@@ -33,7 +33,7 @@
                         <p class="font-weight-normal">Город: @compet.City.Name</p>
                     </div>
                     <div>
-                        <p class="font-weight-normal">Дата проведения: @compet.Date.Value.ToString("dd.MM.yyyy hh:mm")</p>
+                        <p class="font-weight-normal">Дата проведения: @compet.Date.ToString("dd.MM.yyyy hh:mm")</p>
                     </div>
                     <a class="btn btn-danger" asp-controller="Competition"
                        asp-action="Remove" asp-route-id="@compet.idCompetition" role="button">

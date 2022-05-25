@@ -51,6 +51,7 @@ namespace RunningCompetitionWPF
             Manager.Exit = exit;
 
             Manager.RoleNameLabel = lbRoleName;
+            Manager.EditProfile = editProfile;
 
             timer = new DispatcherTimer();
             timer.Interval = new TimeSpan(0, 0, 0, 0, 2);
@@ -132,7 +133,7 @@ namespace RunningCompetitionWPF
         {           
             CurrentUser.user = null;
             Manager.DoViewer();
-            Manager.MainFrame.NavigationService.Navigate(new ViewerMainPage());
+            Manager.MainFrame.NavigationService.Navigate(new AuthorizationPage());
         }
 
         private void sportsmanAdmin_Click(object sender, RoutedEventArgs e)
@@ -179,6 +180,11 @@ namespace RunningCompetitionWPF
         private void sponsorship_Click(object sender, RoutedEventArgs e)
         {
             Manager.MainFrame.Navigate(new ViewerSponsorshipsPage());
+        }
+
+        private void btnProfile_Click(object sender, RoutedEventArgs e)
+        {
+            Manager.MainFrame.Navigate(new ProfileSponsorPage());
         }
     }
 }

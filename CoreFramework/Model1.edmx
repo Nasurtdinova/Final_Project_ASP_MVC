@@ -17,24 +17,24 @@
             <PropertyRef Name="idCommand" />
           </Key>
           <Property Name="idCommand" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Count" Type="int" />
-          <Property Name="ID_city" Type="int" />
+          <Property Name="ID_city" Type="int" Nullable="false" />
           <Property Name="Image" Type="varbinary(max)" />
-          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Competition">
           <Key>
             <PropertyRef Name="idCompetition" />
           </Key>
           <Property Name="idCompetition" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" />
-          <Property Name="NameVenue" Type="nvarchar" MaxLength="50" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NameVenue" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Street" Type="nvarchar" MaxLength="50" />
           <Property Name="Home" Type="int" />
-          <Property Name="Date" Type="datetime" />
-          <Property Name="idCity" Type="int" />
-          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="idCity" Type="int" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="ResultCompetition">
           <Key>
@@ -43,29 +43,30 @@
           </Key>
           <Property Name="idCommand" Type="int" Nullable="false" />
           <Property Name="idCompetition" Type="int" Nullable="false" />
-          <Property Name="Rank" Type="int" />
+          <Property Name="Rank" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Sponsor">
           <Key>
             <PropertyRef Name="idSponsor" />
           </Key>
           <Property Name="idSponsor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Surname" Type="nvarchar" MaxLength="50" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Phone" Type="nchar" MaxLength="11" />
-          <Property Name="idUser" Type="int" />
+          <Property Name="idUser" Type="int" Nullable="false" />
+          <Property Name="Photo" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="SponsorCommand">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="idSponsor" Type="int" />
-          <Property Name="idCom" Type="int" />
-          <Property Name="Amount" Type="int" />
-          <Property Name="DateEnd" Type="date" />
-          <Property Name="DateBegin" Type="date" />
-          <Property Name="idStatus" Type="int" />
+          <Property Name="idSponsor" Type="int" Nullable="false" />
+          <Property Name="idCom" Type="int" Nullable="false" />
+          <Property Name="Amount" Type="int" Nullable="false" />
+          <Property Name="DateEnd" Type="date" Nullable="false" />
+          <Property Name="DateBegin" Type="date" Nullable="false" />
+          <Property Name="idStatus" Type="int" Nullable="false" />
           <Property Name="MutualBenefit" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Sportsman">
@@ -73,13 +74,13 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Surname" Type="nvarchar" MaxLength="50" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="idTitle" Type="int" />
           <Property Name="Height" Type="int" />
-          <Property Name="idCommand" Type="int" />
+          <Property Name="idCommand" Type="int" Nullable="false" />
           <Property Name="Image" Type="varbinary(max)" />
-          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Status">
           <Key>
@@ -122,7 +123,7 @@
           <Property Name="idType" Type="int" />
         </EntityType>
         <Association Name="FK_Command_City">
-          <End Role="City" Type="Self.City" Multiplicity="0..1" />
+          <End Role="City" Type="Self.City" Multiplicity="1" />
           <End Role="Command" Type="Self.Command" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="City">
@@ -134,7 +135,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Competition_City1">
-          <End Role="City" Type="Self.City" Multiplicity="0..1" />
+          <End Role="City" Type="Self.City" Multiplicity="1" />
           <End Role="Competition" Type="Self.Competition" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="City">
@@ -170,7 +171,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Sponsor_Users">
-          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
           <End Role="Sponsor" Type="Self.Sponsor" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
@@ -182,7 +183,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SponsorCommand_Command">
-          <End Role="Command" Type="Self.Command" Multiplicity="0..1" />
+          <End Role="Command" Type="Self.Command" Multiplicity="1" />
           <End Role="SponsorCommand" Type="Self.SponsorCommand" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Command">
@@ -194,7 +195,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SponsorCommand_Sponsor">
-          <End Role="Sponsor" Type="Self.Sponsor" Multiplicity="0..1" />
+          <End Role="Sponsor" Type="Self.Sponsor" Multiplicity="1" />
           <End Role="SponsorCommand" Type="Self.SponsorCommand" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Sponsor">
@@ -206,7 +207,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SponsorCommand_Status">
-          <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
+          <End Role="Status" Type="Self.Status" Multiplicity="1" />
           <End Role="SponsorCommand" Type="Self.SponsorCommand" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Status">
@@ -218,7 +219,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Sportsman_Command">
-          <End Role="Command" Type="Self.Command" Multiplicity="0..1" />
+          <End Role="Command" Type="Self.Command" Multiplicity="1" />
           <End Role="Sportsman" Type="Self.Sportsman" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Command">
@@ -321,8 +322,38 @@
           </Key>
           <Property Name="idCity" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Command" Relationship="CompetitionExamModel.FK_Command_City" FromRole="City" ToRole="Command" />
-          <NavigationProperty Name="Competition" Relationship="CompetitionExamModel.FK_Competition_City1" FromRole="City" ToRole="Competition" />
+          <NavigationProperty Name="Command" Relationship="Self.FK_Command_City" FromRole="City" ToRole="Command" />
+          <NavigationProperty Name="Competition" Relationship="Self.FK_Competition_City1" FromRole="City" ToRole="Competition" />
+        </EntityType>
+        <EntityType Name="Command">
+          <Key>
+            <PropertyRef Name="idCommand" />
+          </Key>
+          <Property Name="idCommand" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Count" Type="Int32" />
+          <Property Name="ID_city" Type="Int32" Nullable="false" />
+          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="City" Relationship="Self.FK_Command_City" FromRole="Command" ToRole="City" />
+          <NavigationProperty Name="ResultCompetition" Relationship="Self.FK_ResultCompetition_Command" FromRole="Command" ToRole="ResultCompetition" />
+          <NavigationProperty Name="SponsorCommand" Relationship="Self.FK_SponsorCommand_Command" FromRole="Command" ToRole="SponsorCommand" />
+          <NavigationProperty Name="Sportsman" Relationship="CompetitionExamModel.FK_Sportsman_Command" FromRole="Command" ToRole="Sportsman" />
+        </EntityType>
+        <EntityType Name="Competition">
+          <Key>
+            <PropertyRef Name="idCompetition" />
+          </Key>
+          <Property Name="idCompetition" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NameVenue" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Street" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Home" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="idCity" Type="Int32" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="City" Relationship="Self.FK_Competition_City1" FromRole="Competition" ToRole="City" />
+          <NavigationProperty Name="ResultCompetition" Relationship="Self.FK_ResultCompetition_Competition" FromRole="Competition" ToRole="ResultCompetition" />
         </EntityType>
         <EntityType Name="ResultCompetition">
           <Key>
@@ -331,9 +362,61 @@
           </Key>
           <Property Name="idCommand" Type="Int32" Nullable="false" />
           <Property Name="idCompetition" Type="Int32" Nullable="false" />
-          <Property Name="Rank" Type="Int32" />
-          <NavigationProperty Name="Command" Relationship="CompetitionExamModel.FK_ResultCompetition_Command" FromRole="ResultCompetition" ToRole="Command" />
-          <NavigationProperty Name="Competition" Relationship="CompetitionExamModel.FK_ResultCompetition_Competition" FromRole="ResultCompetition" ToRole="Competition" />
+          <Property Name="Rank" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Command" Relationship="Self.FK_ResultCompetition_Command" FromRole="ResultCompetition" ToRole="Command" />
+          <NavigationProperty Name="Competition" Relationship="Self.FK_ResultCompetition_Competition" FromRole="ResultCompetition" ToRole="Competition" />
+        </EntityType>
+        <EntityType Name="Sponsor">
+          <Key>
+            <PropertyRef Name="idSponsor" />
+          </Key>
+          <Property Name="idSponsor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="idUser" Type="Int32" Nullable="false" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Sponsor_Users" FromRole="Sponsor" ToRole="Users" />
+          <NavigationProperty Name="SponsorCommand" Relationship="Self.FK_SponsorCommand_Sponsor" FromRole="Sponsor" ToRole="SponsorCommand" />
+        </EntityType>
+        <EntityType Name="SponsorCommand">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idSponsor" Type="Int32" Nullable="false" />
+          <Property Name="idCom" Type="Int32" Nullable="false" />
+          <Property Name="Amount" Type="Int32" Nullable="false" />
+          <Property Name="DateEnd" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DateBegin" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="idStatus" Type="Int32" Nullable="false" />
+          <Property Name="MutualBenefit" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Command" Relationship="Self.FK_SponsorCommand_Command" FromRole="SponsorCommand" ToRole="Command" />
+          <NavigationProperty Name="Sponsor" Relationship="Self.FK_SponsorCommand_Sponsor" FromRole="SponsorCommand" ToRole="Sponsor" />
+          <NavigationProperty Name="Status" Relationship="Self.FK_SponsorCommand_Status" FromRole="SponsorCommand" ToRole="Status" />
+        </EntityType>
+        <EntityType Name="Sportsman">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="idTitle" Type="Int32" />
+          <Property Name="Height" Type="Int32" />
+          <Property Name="idCommand" Type="Int32" Nullable="false" />
+          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Command" Relationship="CompetitionExamModel.FK_Sportsman_Command" FromRole="Sportsman" ToRole="Command" />
+          <NavigationProperty Name="Title" Relationship="CompetitionExamModel.FK_Sportsman_Title" FromRole="Sportsman" ToRole="Title" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="idStatus" />
+          </Key>
+          <Property Name="idStatus" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SponsorCommand" Relationship="Self.FK_SponsorCommand_Status" FromRole="Status" ToRole="SponsorCommand" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -359,85 +442,7 @@
           </Key>
           <Property Name="idType" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Users" Relationship="CompetitionExamModel.FK_Users_TypeUser" FromRole="TypeUser" ToRole="Users" />
-        </EntityType>
-        <EntityContainer Name="CompetitionExamEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="City" EntityType="Self.City" />
-          <EntitySet Name="ResultCompetition" EntityType="Self.ResultCompetition" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
-          <EntitySet Name="Title" EntityType="Self.Title" />
-          <EntitySet Name="TypeUser" EntityType="Self.TypeUser" />
-          <EntitySet Name="Status" EntityType="CompetitionExamModel.Status" />
-          <EntitySet Name="Sponsor" EntityType="CompetitionExamModel.Sponsor" />
-          <EntitySet Name="Users" EntityType="CompetitionExamModel.Users" />
-          <AssociationSet Name="FK_Sponsor_Users" Association="CompetitionExamModel.FK_Sponsor_Users">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="Sponsor" EntitySet="Sponsor" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Users_TypeUser" Association="CompetitionExamModel.FK_Users_TypeUser">
-            <End Role="TypeUser" EntitySet="TypeUser" />
-            <End Role="Users" EntitySet="Users" />
-          </AssociationSet>
-          <EntitySet Name="SponsorCommand" EntityType="CompetitionExamModel.SponsorCommand" />
-          <AssociationSet Name="FK_SponsorCommand_Sponsor" Association="CompetitionExamModel.FK_SponsorCommand_Sponsor">
-            <End Role="Sponsor" EntitySet="Sponsor" />
-            <End Role="SponsorCommand" EntitySet="SponsorCommand" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SponsorCommand_Status" Association="CompetitionExamModel.FK_SponsorCommand_Status">
-            <End Role="Status" EntitySet="Status" />
-            <End Role="SponsorCommand" EntitySet="SponsorCommand" />
-          </AssociationSet>
-          <EntitySet Name="Command" EntityType="CompetitionExamModel.Command" />
-          <EntitySet Name="Competition" EntityType="CompetitionExamModel.Competition" />
-          <EntitySet Name="Sportsman" EntityType="CompetitionExamModel.Sportsman" />
-          <AssociationSet Name="FK_Command_City" Association="CompetitionExamModel.FK_Command_City">
-            <End Role="City" EntitySet="City" />
-            <End Role="Command" EntitySet="Command" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Competition_City1" Association="CompetitionExamModel.FK_Competition_City1">
-            <End Role="City" EntitySet="City" />
-            <End Role="Competition" EntitySet="Competition" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ResultCompetition_Command" Association="CompetitionExamModel.FK_ResultCompetition_Command">
-            <End Role="Command" EntitySet="Command" />
-            <End Role="ResultCompetition" EntitySet="ResultCompetition" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SponsorCommand_Command" Association="CompetitionExamModel.FK_SponsorCommand_Command">
-            <End Role="Command" EntitySet="Command" />
-            <End Role="SponsorCommand" EntitySet="SponsorCommand" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Sportsman_Command" Association="CompetitionExamModel.FK_Sportsman_Command">
-            <End Role="Command" EntitySet="Command" />
-            <End Role="Sportsman" EntitySet="Sportsman" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ResultCompetition_Competition" Association="CompetitionExamModel.FK_ResultCompetition_Competition">
-            <End Role="Competition" EntitySet="Competition" />
-            <End Role="ResultCompetition" EntitySet="ResultCompetition" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Sportsman_Title" Association="CompetitionExamModel.FK_Sportsman_Title">
-            <End Role="Title" EntitySet="Title" />
-            <End Role="Sportsman" EntitySet="Sportsman" />
-          </AssociationSet>
-          </EntityContainer>
-        <EntityType Name="Status">
-          <Key>
-            <PropertyRef Name="idStatus" />
-          </Key>
-          <Property Name="idStatus" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="SponsorCommand" Relationship="CompetitionExamModel.FK_SponsorCommand_Status" FromRole="Status" ToRole="SponsorCommand" />
-        </EntityType>
-        <EntityType Name="Sponsor">
-          <Key>
-            <PropertyRef Name="idSponsor" />
-          </Key>
-          <Property Name="idSponsor" Type="Int32" Nullable="false" />
-          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Phone" Type="String" MaxLength="11" FixedLength="true" Unicode="true" />
-          <Property Name="idUser" Type="Int32" />
-          <NavigationProperty Name="Users" Relationship="CompetitionExamModel.FK_Sponsor_Users" FromRole="Sponsor" ToRole="Users" />
-          <NavigationProperty Name="SponsorCommand" Relationship="CompetitionExamModel.FK_SponsorCommand_Sponsor" FromRole="Sponsor" ToRole="SponsorCommand" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Users_TypeUser" FromRole="TypeUser" ToRole="Users" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -447,121 +452,12 @@
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="idType" Type="Int32" />
-          <NavigationProperty Name="Sponsor" Relationship="CompetitionExamModel.FK_Sponsor_Users" FromRole="Users" ToRole="Sponsor" />
-          <NavigationProperty Name="TypeUser" Relationship="CompetitionExamModel.FK_Users_TypeUser" FromRole="Users" ToRole="TypeUser" />
-        </EntityType>
-        <Association Name="FK_Sponsor_Users">
-          <End Type="CompetitionExamModel.Users" Role="Users" Multiplicity="0..1" />
-          <End Type="CompetitionExamModel.Sponsor" Role="Sponsor" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="idUser" />
-            </Principal>
-            <Dependent Role="Sponsor">
-              <PropertyRef Name="idUser" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Users_TypeUser">
-          <End Type="CompetitionExamModel.TypeUser" Role="TypeUser" Multiplicity="0..1" />
-          <End Type="CompetitionExamModel.Users" Role="Users" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TypeUser">
-              <PropertyRef Name="idType" />
-            </Principal>
-            <Dependent Role="Users">
-              <PropertyRef Name="idType" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="SponsorCommand">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="idSponsor" Type="Int32" />
-          <Property Name="idCom" Type="Int32" />
-          <Property Name="Amount" Type="Int32" />
-          <Property Name="DateEnd" Type="DateTime" Precision="0" />
-          <Property Name="DateBegin" Type="DateTime" Precision="0" />
-          <Property Name="idStatus" Type="Int32" />
-          <Property Name="MutualBenefit" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Sponsor" Relationship="CompetitionExamModel.FK_SponsorCommand_Sponsor" FromRole="SponsorCommand" ToRole="Sponsor" />
-          <NavigationProperty Name="Status" Relationship="CompetitionExamModel.FK_SponsorCommand_Status" FromRole="SponsorCommand" ToRole="Status" />
-          <NavigationProperty Name="Command" Relationship="CompetitionExamModel.FK_SponsorCommand_Command" FromRole="SponsorCommand" ToRole="Command" />
-        </EntityType>
-        <Association Name="FK_SponsorCommand_Sponsor">
-          <End Type="CompetitionExamModel.Sponsor" Role="Sponsor" Multiplicity="0..1" />
-          <End Type="CompetitionExamModel.SponsorCommand" Role="SponsorCommand" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Sponsor">
-              <PropertyRef Name="idSponsor" />
-            </Principal>
-            <Dependent Role="SponsorCommand">
-              <PropertyRef Name="idSponsor" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SponsorCommand_Status">
-          <End Type="CompetitionExamModel.Status" Role="Status" Multiplicity="0..1" />
-          <End Type="CompetitionExamModel.SponsorCommand" Role="SponsorCommand" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Status">
-              <PropertyRef Name="idStatus" />
-            </Principal>
-            <Dependent Role="SponsorCommand">
-              <PropertyRef Name="idStatus" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Command">
-          <Key>
-            <PropertyRef Name="idCommand" />
-          </Key>
-          <Property Name="idCommand" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Count" Type="Int32" />
-          <Property Name="ID_city" Type="Int32" />
-          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="IsDeleted" Type="Boolean" />
-          <NavigationProperty Name="City" Relationship="CompetitionExamModel.FK_Command_City" FromRole="Command" ToRole="City" />
-          <NavigationProperty Name="ResultCompetition" Relationship="CompetitionExamModel.FK_ResultCompetition_Command" FromRole="Command" ToRole="ResultCompetition" />
-          <NavigationProperty Name="SponsorCommand" Relationship="CompetitionExamModel.FK_SponsorCommand_Command" FromRole="Command" ToRole="SponsorCommand" />
-          <NavigationProperty Name="Sportsman" Relationship="CompetitionExamModel.FK_Sportsman_Command" FromRole="Command" ToRole="Sportsman" />
-        </EntityType>
-        <EntityType Name="Competition">
-          <Key>
-            <PropertyRef Name="idCompetition" />
-          </Key>
-          <Property Name="idCompetition" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="NameVenue" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Street" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Home" Type="Int32" />
-          <Property Name="Date" Type="DateTime" Precision="3" />
-          <Property Name="idCity" Type="Int32" />
-          <Property Name="IsDeleted" Type="Boolean" />
-          <NavigationProperty Name="City" Relationship="CompetitionExamModel.FK_Competition_City1" FromRole="Competition" ToRole="City" />
-          <NavigationProperty Name="ResultCompetition" Relationship="CompetitionExamModel.FK_ResultCompetition_Competition" FromRole="Competition" ToRole="ResultCompetition" />
-        </EntityType>
-        <EntityType Name="Sportsman">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="idTitle" Type="Int32" />
-          <Property Name="Height" Type="Int32" />
-          <Property Name="idCommand" Type="Int32" />
-          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="IsDeleted" Type="Boolean" />
-          <NavigationProperty Name="Command" Relationship="CompetitionExamModel.FK_Sportsman_Command" FromRole="Sportsman" ToRole="Command" />
-          <NavigationProperty Name="Title" Relationship="CompetitionExamModel.FK_Sportsman_Title" FromRole="Sportsman" ToRole="Title" />
+          <NavigationProperty Name="Sponsor" Relationship="Self.FK_Sponsor_Users" FromRole="Users" ToRole="Sponsor" />
+          <NavigationProperty Name="TypeUser" Relationship="Self.FK_Users_TypeUser" FromRole="Users" ToRole="TypeUser" />
         </EntityType>
         <Association Name="FK_Command_City">
-          <End Type="CompetitionExamModel.City" Role="City" Multiplicity="0..1" />
-          <End Type="CompetitionExamModel.Command" Role="Command" Multiplicity="*" />
+          <End Role="City" Type="Self.City" Multiplicity="1" />
+          <End Role="Command" Type="Self.Command" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="City">
               <PropertyRef Name="idCity" />
@@ -572,8 +468,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Competition_City1">
-          <End Type="CompetitionExamModel.City" Role="City" Multiplicity="0..1" />
-          <End Type="CompetitionExamModel.Competition" Role="Competition" Multiplicity="*" />
+          <End Role="City" Type="Self.City" Multiplicity="1" />
+          <End Role="Competition" Type="Self.Competition" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="City">
               <PropertyRef Name="idCity" />
@@ -584,8 +480,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ResultCompetition_Command">
-          <End Type="CompetitionExamModel.Command" Role="Command" Multiplicity="1" />
-          <End Type="CompetitionExamModel.ResultCompetition" Role="ResultCompetition" Multiplicity="*" />
+          <End Role="Command" Type="Self.Command" Multiplicity="1" />
+          <End Role="ResultCompetition" Type="Self.ResultCompetition" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Command">
               <PropertyRef Name="idCommand" />
@@ -596,8 +492,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SponsorCommand_Command">
-          <End Type="CompetitionExamModel.Command" Role="Command" Multiplicity="0..1" />
-          <End Type="CompetitionExamModel.SponsorCommand" Role="SponsorCommand" Multiplicity="*" />
+          <End Role="Command" Type="Self.Command" Multiplicity="1" />
+          <End Role="SponsorCommand" Type="Self.SponsorCommand" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Command">
               <PropertyRef Name="idCommand" />
@@ -607,8 +503,126 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ResultCompetition_Competition">
+          <End Role="Competition" Type="Self.Competition" Multiplicity="1" />
+          <End Role="ResultCompetition" Type="Self.ResultCompetition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Competition">
+              <PropertyRef Name="idCompetition" />
+            </Principal>
+            <Dependent Role="ResultCompetition">
+              <PropertyRef Name="idCompetition" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sponsor_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Sponsor" Type="Self.Sponsor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="idUser" />
+            </Principal>
+            <Dependent Role="Sponsor">
+              <PropertyRef Name="idUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SponsorCommand_Sponsor">
+          <End Role="Sponsor" Type="Self.Sponsor" Multiplicity="1" />
+          <End Role="SponsorCommand" Type="Self.SponsorCommand" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sponsor">
+              <PropertyRef Name="idSponsor" />
+            </Principal>
+            <Dependent Role="SponsorCommand">
+              <PropertyRef Name="idSponsor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SponsorCommand_Status">
+          <End Role="Status" Type="Self.Status" Multiplicity="1" />
+          <End Role="SponsorCommand" Type="Self.SponsorCommand" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="idStatus" />
+            </Principal>
+            <Dependent Role="SponsorCommand">
+              <PropertyRef Name="idStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_TypeUser">
+          <End Role="TypeUser" Type="Self.TypeUser" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeUser">
+              <PropertyRef Name="idType" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="idType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CompetitionExamEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="City" EntityType="Self.City" />
+          <EntitySet Name="Command" EntityType="Self.Command" />
+          <EntitySet Name="Competition" EntityType="Self.Competition" />
+          <EntitySet Name="ResultCompetition" EntityType="Self.ResultCompetition" />
+          <EntitySet Name="Sponsor" EntityType="Self.Sponsor" />
+          <EntitySet Name="SponsorCommand" EntityType="Self.SponsorCommand" />
+          <EntitySet Name="Sportsman" EntityType="Self.Sportsman" />
+          <EntitySet Name="Status" EntityType="Self.Status" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Title" EntityType="Self.Title" />
+          <EntitySet Name="TypeUser" EntityType="Self.TypeUser" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <AssociationSet Name="FK_Command_City" Association="Self.FK_Command_City">
+            <End Role="City" EntitySet="City" />
+            <End Role="Command" EntitySet="Command" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Competition_City1" Association="Self.FK_Competition_City1">
+            <End Role="City" EntitySet="City" />
+            <End Role="Competition" EntitySet="Competition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ResultCompetition_Command" Association="Self.FK_ResultCompetition_Command">
+            <End Role="Command" EntitySet="Command" />
+            <End Role="ResultCompetition" EntitySet="ResultCompetition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SponsorCommand_Command" Association="Self.FK_SponsorCommand_Command">
+            <End Role="Command" EntitySet="Command" />
+            <End Role="SponsorCommand" EntitySet="SponsorCommand" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ResultCompetition_Competition" Association="Self.FK_ResultCompetition_Competition">
+            <End Role="Competition" EntitySet="Competition" />
+            <End Role="ResultCompetition" EntitySet="ResultCompetition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sponsor_Users" Association="Self.FK_Sponsor_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Sponsor" EntitySet="Sponsor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SponsorCommand_Sponsor" Association="Self.FK_SponsorCommand_Sponsor">
+            <End Role="Sponsor" EntitySet="Sponsor" />
+            <End Role="SponsorCommand" EntitySet="SponsorCommand" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SponsorCommand_Status" Association="Self.FK_SponsorCommand_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="SponsorCommand" EntitySet="SponsorCommand" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_TypeUser" Association="Self.FK_Users_TypeUser">
+            <End Role="TypeUser" EntitySet="TypeUser" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sportsman_Command" Association="CompetitionExamModel.FK_Sportsman_Command">
+            <End Role="Command" EntitySet="Command" />
+            <End Role="Sportsman" EntitySet="Sportsman" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sportsman_Title" Association="CompetitionExamModel.FK_Sportsman_Title">
+            <End Role="Title" EntitySet="Title" />
+            <End Role="Sportsman" EntitySet="Sportsman" />
+          </AssociationSet>
+        </EntityContainer>
         <Association Name="FK_Sportsman_Command">
-          <End Type="CompetitionExamModel.Command" Role="Command" Multiplicity="0..1" />
+          <End Type="CompetitionExamModel.Command" Role="Command" Multiplicity="1" />
           <End Type="CompetitionExamModel.Sportsman" Role="Sportsman" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Command">
@@ -616,18 +630,6 @@
             </Principal>
             <Dependent Role="Sportsman">
               <PropertyRef Name="idCommand" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ResultCompetition_Competition">
-          <End Type="CompetitionExamModel.Competition" Role="Competition" Multiplicity="1" />
-          <End Type="CompetitionExamModel.ResultCompetition" Role="ResultCompetition" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Competition">
-              <PropertyRef Name="idCompetition" />
-            </Principal>
-            <Dependent Role="ResultCompetition">
-              <PropertyRef Name="idCompetition" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -643,17 +645,43 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        </Schema>
+      </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище CompetitionExamModelContainer" CdmEntityContainer="CompetitionExamEntities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище CompetitionExamModelContainer" CdmEntityContainer="CompetitionExamEntities1">
           <EntitySetMapping Name="City">
             <EntityTypeMapping TypeName="CompetitionExamModel.City">
               <MappingFragment StoreEntitySet="City">
                 <ScalarProperty Name="idCity" ColumnName="idCity" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Command">
+            <EntityTypeMapping TypeName="CompetitionExamModel.Command">
+              <MappingFragment StoreEntitySet="Command">
+                <ScalarProperty Name="idCommand" ColumnName="idCommand" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="ID_city" ColumnName="ID_city" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Competition">
+            <EntityTypeMapping TypeName="CompetitionExamModel.Competition">
+              <MappingFragment StoreEntitySet="Competition">
+                <ScalarProperty Name="idCompetition" ColumnName="idCompetition" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="NameVenue" ColumnName="NameVenue" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="Home" ColumnName="Home" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="idCity" ColumnName="idCity" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -663,6 +691,54 @@
                 <ScalarProperty Name="idCommand" ColumnName="idCommand" />
                 <ScalarProperty Name="idCompetition" ColumnName="idCompetition" />
                 <ScalarProperty Name="Rank" ColumnName="Rank" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sponsor">
+            <EntityTypeMapping TypeName="CompetitionExamModel.Sponsor">
+              <MappingFragment StoreEntitySet="Sponsor">
+                <ScalarProperty Name="idSponsor" ColumnName="idSponsor" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SponsorCommand">
+            <EntityTypeMapping TypeName="CompetitionExamModel.SponsorCommand">
+              <MappingFragment StoreEntitySet="SponsorCommand">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idSponsor" ColumnName="idSponsor" />
+                <ScalarProperty Name="idCom" ColumnName="idCom" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="DateEnd" ColumnName="DateEnd" />
+                <ScalarProperty Name="DateBegin" ColumnName="DateBegin" />
+                <ScalarProperty Name="idStatus" ColumnName="idStatus" />
+                <ScalarProperty Name="MutualBenefit" ColumnName="MutualBenefit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sportsman">
+            <EntityTypeMapping TypeName="CompetitionExamModel.Sportsman">
+              <MappingFragment StoreEntitySet="Sportsman">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="idTitle" ColumnName="idTitle" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="idCommand" ColumnName="idCommand" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Status">
+            <EntityTypeMapping TypeName="CompetitionExamModel.Status">
+              <MappingFragment StoreEntitySet="Status">
+                <ScalarProperty Name="idStatus" ColumnName="idStatus" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -693,86 +769,13 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Status">
-            <EntityTypeMapping TypeName="CompetitionExamModel.Status">
-              <MappingFragment StoreEntitySet="Status">
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="idStatus" ColumnName="idStatus" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Sponsor">
-            <EntityTypeMapping TypeName="CompetitionExamModel.Sponsor">
-              <MappingFragment StoreEntitySet="Sponsor">
-                <ScalarProperty Name="idUser" ColumnName="idUser" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Surname" ColumnName="Surname" />
-                <ScalarProperty Name="idSponsor" ColumnName="idSponsor" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="CompetitionExamModel.Users">
               <MappingFragment StoreEntitySet="Users">
-                <ScalarProperty Name="idType" ColumnName="idType" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="idUser" ColumnName="idUser" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="SponsorCommand">
-            <EntityTypeMapping TypeName="CompetitionExamModel.SponsorCommand">
-              <MappingFragment StoreEntitySet="SponsorCommand">
-                <ScalarProperty Name="MutualBenefit" ColumnName="MutualBenefit" />
-                <ScalarProperty Name="idStatus" ColumnName="idStatus" />
-                <ScalarProperty Name="DateBegin" ColumnName="DateBegin" />
-                <ScalarProperty Name="DateEnd" ColumnName="DateEnd" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="idCom" ColumnName="idCom" />
-                <ScalarProperty Name="idSponsor" ColumnName="idSponsor" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Command">
-            <EntityTypeMapping TypeName="CompetitionExamModel.Command">
-              <MappingFragment StoreEntitySet="Command">
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="Image" ColumnName="Image" />
-                <ScalarProperty Name="ID_city" ColumnName="ID_city" />
-                <ScalarProperty Name="Count" ColumnName="Count" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="idCommand" ColumnName="idCommand" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Competition">
-            <EntityTypeMapping TypeName="CompetitionExamModel.Competition">
-              <MappingFragment StoreEntitySet="Competition">
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="idCity" ColumnName="idCity" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="Home" ColumnName="Home" />
-                <ScalarProperty Name="Street" ColumnName="Street" />
-                <ScalarProperty Name="NameVenue" ColumnName="NameVenue" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="idCompetition" ColumnName="idCompetition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Sportsman">
-            <EntityTypeMapping TypeName="CompetitionExamModel.Sportsman">
-              <MappingFragment StoreEntitySet="Sportsman">
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="Image" ColumnName="Image" />
-                <ScalarProperty Name="idCommand" ColumnName="idCommand" />
-                <ScalarProperty Name="Height" ColumnName="Height" />
-                <ScalarProperty Name="idTitle" ColumnName="idTitle" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Surname" ColumnName="Surname" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="idType" ColumnName="idType" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

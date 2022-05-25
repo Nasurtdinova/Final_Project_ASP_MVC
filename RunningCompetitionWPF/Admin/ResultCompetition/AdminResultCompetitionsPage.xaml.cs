@@ -67,7 +67,7 @@ namespace RunningCompetitionWPF
             infoResultCompet = ConnectionResults.GetResults().ToList();
 
             if (checkMonth.IsChecked == true)
-                infoResultCompet = infoResultCompet.Where(a => a.Competition.Date.Value.Month == DateTime.Today.Month).ToList();
+                infoResultCompet = infoResultCompet.Where(a => a.Competition.Date.Month == DateTime.Today.Month).ToList();
 
             if (comboCommand.SelectedIndex > 0)
                 infoResultCompet = infoResultCompet.Where(p => p.idCommand == (comboCommand.SelectedItem as Command).idCommand).ToList();

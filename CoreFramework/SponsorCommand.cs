@@ -28,22 +28,22 @@ namespace CoreFramework
         public Nullable<int> Amount { get; set; }
 
         [Required(ErrorMessage = "Date end is required")]
-        public Nullable<System.DateTime> DateEnd { get; set; }
+        public System.DateTime DateEnd { get; set; }
 
         [Required(ErrorMessage = "Date begin is required")]
-        public Nullable<System.DateTime> DateBegin { get; set; }
+        public System.DateTime DateBegin { get; set; }
 
         public Nullable<int> idStatus { get; set; }
 
         public string MutualBenefit { get; set; }
     
+        public virtual Command Command { get; set; }
         public virtual Sponsor Sponsor { get; set; }
         public virtual Status Status { get; set; }
-        public virtual Command Command { get; set; }
 
         public override string ToString()
         {
-            return $"{id},{Sponsor.Name} - {Command.Name}, {Amount}, {DateBegin.Value.Date.ToShortDateString()} - {DateEnd.Value.Date.ToShortDateString()}";
+            return $"{id},{Sponsor.Name} - {Command.Name}, {Amount}, {DateBegin.Date.ToShortDateString()} - {DateEnd.Date.ToShortDateString()}";
         }
     }
 }

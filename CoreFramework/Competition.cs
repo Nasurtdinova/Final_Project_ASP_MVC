@@ -20,7 +20,6 @@ namespace CoreFramework
         {
             this.ResultCompetition = new HashSet<ResultCompetition>();
         }
-
         [Required(ErrorMessage = "Id is required")]
         public int idCompetition { get; set; }
 
@@ -35,13 +34,13 @@ namespace CoreFramework
         public Nullable<int> Home { get; set; }
 
         [Required(ErrorMessage = "Date is required")]
-        public Nullable<System.DateTime> Date { get; set; }
+        public System.DateTime Date { get; set; }
 
         [Required(ErrorMessage = "Name city is required")]
         public Nullable<int> idCity { get; set; }
 
-        public Nullable<bool> IsDeleted { get; set; }
-       
+        public bool IsDeleted { get; set; }
+    
         public virtual City City { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

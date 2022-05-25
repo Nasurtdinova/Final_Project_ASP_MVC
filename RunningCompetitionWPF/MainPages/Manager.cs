@@ -14,7 +14,7 @@ namespace RunningCompetitionWPF
         public static Label RoleNameLabel { get; set; }
 
         public static ListViewItem Authorization { get; set; }
-        public static ListViewItem Exit { get; set; }
+        public static StackPanel Exit { get; set; }
 
         public static Button SportsmansAdmin { get; set; }
         public static Button Sportsmans { get; set; }
@@ -31,6 +31,7 @@ namespace RunningCompetitionWPF
         public static ListViewItem MySponsorshipsSponsor { get; set; }
         public static ListViewItem MessagesAdmin { get; set; }
         public static ListViewItem NoticesSponsor { get; set; }
+        public static StackPanel EditProfile { get; set; }
 
         public static void DoAdmin()
         {
@@ -81,6 +82,7 @@ namespace RunningCompetitionWPF
             Commands.Visibility = System.Windows.Visibility.Visible;
             Competitions.Visibility = System.Windows.Visibility.Visible;
             ResultCompetitions.Visibility = System.Windows.Visibility.Visible;
+            EditProfile.Visibility = System.Windows.Visibility.Visible;
 
             SportsmansAdmin.Visibility = System.Windows.Visibility.Collapsed;
             CommandsAdmin.Visibility = System.Windows.Visibility.Collapsed;

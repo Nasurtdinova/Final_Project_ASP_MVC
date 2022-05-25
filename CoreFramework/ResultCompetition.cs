@@ -24,7 +24,7 @@ namespace CoreFramework
         [Required(ErrorMessage = "Range is required")]
         [Range(1, 100, ErrorMessage = "Недопустимое место")]
         public Nullable<int> Rank { get; set; }
-
+    
         public virtual Command Command { get; set; }
 
         public virtual Competition Competition { get; set; }

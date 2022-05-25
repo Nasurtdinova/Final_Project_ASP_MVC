@@ -46,7 +46,7 @@ namespace CoreFramework
                 {
                     Excel.Range headerRange = worksheet.Range[worksheet.Cells[1][startRowIndex], worksheet.Cells[3][startRowIndex]];
                     headerRange.Merge();
-                    headerRange.Value = result.Key.Value;
+                    //headerRange.Value = result.Key.Value;
                     headerRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
                     headerRange.Font.Italic = true;
                     startRowIndex++;

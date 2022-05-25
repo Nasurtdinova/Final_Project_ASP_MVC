@@ -41,7 +41,7 @@ namespace RunningCompetitionWPF
             infoCompet = ConnectionCompetitions.GetCompetitions().ToList();
 
             if (checkMonth.IsChecked == true)
-                infoCompet = infoCompet.Where(a => a.Date.Value.Month == DateTime.Today.Month).ToList();
+                infoCompet = infoCompet.Where(a => a.Date.Month == DateTime.Today.Month).ToList();
 
             if (comboCity.SelectedIndex > 0)
                 infoCompet = infoCompet.Where(p => p.idCity == (comboCity.SelectedItem as City).idCity).ToList();

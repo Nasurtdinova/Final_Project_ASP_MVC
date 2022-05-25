@@ -8,6 +8,6 @@ namespace CoreFramework
 {
     public static class bdConnection
     {
-        public static CompetitionExamEntities connection = new CompetitionExamEntities();
+        public static CompetitionExamEntities1 connection = new CompetitionExamEntities1();
     }
 }
