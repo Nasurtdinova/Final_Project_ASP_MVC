@@ -16,7 +16,17 @@ namespace WebAPI_Project.Controllers
         public CommandController() { }
 
         [HttpGet]
-        public ActionResult<ObservableCollection<Command>> GetAll() => ConnectionCommands.GetCommands();
+        public ActionResult<ObservableCollection<Command>> GetAll()
+        {
+            ObservableCollection<Command> commands = ConnectionCommands.GetCommands();
+            foreach (var command in commands)
+                command.Image = null;
+
+            if (commands == null)
+                return NoContent();
+
+            return commands;
+        }
 
         [HttpGet("{id}")]
         public ActionResult<Command> Get(int id)

@@ -8,20 +8,19 @@ namespace Console_Project
 {
     class Program
     {
+        public static Dictionary<int, string> message = new Dictionary<int, string> { 
+            { 1, "Values: ID, Name, Surname, Title, Height, Command" },
+            { 2, "Values: ID, Name, Count" },
+            { 3, "Values: ID, Name, Name venue, Street, Home, City, Date" },
+            { 4, "Values: Command, Competition, Rank" },
+            { 5, "Values: Sponsor - Command, Amount, Date begin - Date end" },
+            { 6, "If you want to see, click, sportsmans - 1, commands - 2, competitions - 3, results of competitions - 4, sponsorships - 5" },};
+
         static void Main(string[] args)
         {
-            Dictionary<int, string> message = new Dictionary<int, string>
-            {
-                { 1, "Input values: Name,Surname,Title,Image,Height,Cost,Command" },
-                { 2, "Input values: Name,City,Count" },
-                { 3, "Input values: Name,NameVenue,Street,Home,City,Date" },
-                { 4, "Input values: Command,Compet,Rank" },
-                { 5, "If you want to see, click, sportsmans - 1, commands - 2, competitions - 3, results of competitions - 4, sponsorships - 5"},
-            };
-
             while (true)
             {
-                Console.WriteLine(message[5]);
+                Console.WriteLine(message[6]);
                 int click = Convert.ToInt32(Console.ReadLine());
                 Viewer(click);
             }
@@ -32,18 +31,23 @@ namespace Console_Project
             switch (click)
             {
                 case 1:
+                    Console.WriteLine(message[1]);
                     PrintSportsmans();
                     break;
                 case 2:
+                    Console.WriteLine(message[2]);
                     PrintCommands();
                     break;
                 case 3:
+                    Console.WriteLine(message[3]);
                     PrintCompetitions();
                     break;
                 case 4:
+                    Console.WriteLine(message[4]);
                     PrintResults();
                     break;
                 case 5:
+                    Console.WriteLine(message[5]);
                     PrintSponsorships();
                     break;
             }

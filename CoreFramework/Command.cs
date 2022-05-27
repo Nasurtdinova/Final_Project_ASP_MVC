@@ -48,7 +48,7 @@ namespace CoreFramework
 
         public override string ToString()
         {
-            return $"{idCommand},{Name} {Count}";
+            return $"{idCommand} {Name} {Count}";
         }
     }
 }

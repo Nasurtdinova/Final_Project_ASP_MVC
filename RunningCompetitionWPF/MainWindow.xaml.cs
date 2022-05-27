@@ -71,6 +71,8 @@ namespace RunningCompetitionWPF
                 {
                     timer.Stop();
                     hidden = false;
+                    lbRoleName.Visibility = Visibility.Visible;
+                    lbWelcome.Visibility = Visibility.Visible;
                     frame_auto_reg.Margin = new Thickness(210, 50, 0, 0);
                     panelHeader.Margin = new Thickness(210, 0, 0, 0);
                 }
@@ -83,6 +85,8 @@ namespace RunningCompetitionWPF
                 {
                     timer.Stop();
                     hidden = true;
+                    lbRoleName.Visibility = Visibility.Collapsed;
+                    lbWelcome.Visibility = Visibility.Collapsed;
                     frame_auto_reg.Margin = new Thickness(40, 50, 0, 0);
                     panelHeader.Margin = new Thickness(40, 0, 0, 0);
                 }

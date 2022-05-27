@@ -49,6 +49,7 @@ namespace CoreFramework
             try
             {
                 var sports = bdConnection.connection.Sportsman.SingleOrDefault(r => r.ID == sportsman.ID);
+                sportsman.IsDeleted = false;
                 sports.Name = sportsman.Name;
                 sports.Height = sportsman.Height;
                 sports.Surname = sportsman.Surname;

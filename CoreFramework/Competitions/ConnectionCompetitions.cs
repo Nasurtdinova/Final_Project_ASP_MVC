@@ -91,7 +91,7 @@ namespace CoreFramework
                 competition.Name = compet.Name;
                 competition.NameVenue = compet.NameVenue;
                 competition.Date = compet.Date;
-
+                competition.IsDeleted = false;
                 competition.idCity = compet.idCity;
                 competition.Home = compet.Home;
                 competition.Street = compet.Street;

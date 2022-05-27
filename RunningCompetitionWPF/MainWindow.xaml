@@ -20,7 +20,7 @@
                         <Image Source="C:\Users\nasur\Source\Repos\Final_Project_ASP_MVC_Clone\RunningCompetitionWPF\icons\menu.png"/>
                     </Button>
                     <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Center" Orientation="Horizontal">
-                        <Label  Content="Welcome," FontFamily="Century Gothic" FontSize="25" Foreground="#FF0F4E7A" FontWeight="Normal"></Label>
+                        <Label  Content="Welcome," FontFamily="Century Gothic" Name="lbWelcome" FontSize="25" Foreground="#FF0F4E7A" FontWeight="Normal"></Label>
                         <Label Content="Viewer" Name="lbRoleName" FontFamily="Century Gothic" FontSize="25" Foreground="#FF0F4E7A" FontWeight="Normal"></Label>
                     </StackPanel>
                 </Grid>

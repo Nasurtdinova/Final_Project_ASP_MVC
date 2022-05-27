@@ -31,7 +31,7 @@ namespace CoreFramework
 
         public override string ToString()
         {
-            return $"{idCommand},{idCompetition},{Command.Name} {Competition.Name} {Rank}";
+            return $"{Command.Name} {Competition.Name} {Rank}";
         }
     }
 }
