@@ -68,7 +68,15 @@ namespace RunningCompetitionWPF
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
-            Manager.MainFrame.Navigate(new AddCompetitionsPage((sender as Button).DataContext as Competition));
+            var a = (sender as Button).DataContext as Competition;
+            if (a != null && a.Date < DateTime.Now)
+            {
+                MessageBox.Show("Соревнование уже прошло!");
+            }
+            else
+            {
+                Manager.MainFrame.Navigate(new AddCompetitionsPage(a));
+            }
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
@@ -79,19 +87,33 @@ namespace RunningCompetitionWPF
         private void btnRemove_Click(object sender, RoutedEventArgs e)
         {
             var competsForRemoving = dgCompetitions.SelectedItems.Cast<Competition>().ToList();
-
-            if (MessageBox.Show($"Вы точно хотите удалить следующие {competsForRemoving.Count()} элементов", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            if (competsForRemoving.Count == 0)
             {
-                foreach (var i in competsForRemoving)
-                    ConnectionCompetitions.RemoveCompetition(i.idCompetition);
-                dgCompetitions.ItemsSource = ConnectionCompetitions.GetCompetitions().ToList();
-                MessageBox.Show("Данные удалены");
+                MessageBox.Show("Вы ничего не выбрали!");
+            }
+            else
+            {
+                if (MessageBox.Show($"Вы точно хотите удалить следующие {competsForRemoving.Count()} элементов", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    foreach (var i in competsForRemoving)
+                        ConnectionCompetitions.RemoveCompetition(i.idCompetition);
+                    dgCompetitions.ItemsSource = ConnectionCompetitions.GetCompetitions().ToList();
+                    MessageBox.Show("Данные удалены");
+                }
             }
         }
 
         private void btnViewResult_Click(object sender, RoutedEventArgs e)
         {
-            Manager.MainFrame.Navigate(new AdminResulCompetitionPage((sender as Button).DataContext as Competition));
+            var a = (sender as Button).DataContext as Competition;
+            if (a != null && a.Date > DateTime.Now)
+            {
+                MessageBox.Show("Соревнование еще не прошло!");
+            }
+            else
+            {
+                Manager.MainFrame.Navigate(new AdminResulCompetitionPage(a));
+            }
         }
 
         private void btnLoad_Click(object sender, RoutedEventArgs e)

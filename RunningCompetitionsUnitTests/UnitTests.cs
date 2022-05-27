@@ -38,16 +38,16 @@ namespace RunningCompetitionsUnitTests
         public void TestSportsmans()
         {
             ConnectionSportsmans.AddSportsman(new Sportsman { Surname = "Морозов", Name = "Сергей", Height = 185, idCommand = 23, idTitle = 1}); // добавление спортсмена
-            ConnectionSportsmans.RemoveSportsman(41); // удаление спортсмена
-            ConnectionSportsmans.UpdateSportsman(new Sportsman { ID = 39, Height = 180, Name = "Антон", Surname="Антипов", idTitle=1, idCommand=23 }); // редактирование спортсмена
+            ConnectionSportsmans.RemoveSportsman(57); // удаление спортсмена
+            ConnectionSportsmans.UpdateSportsman(new Sportsman { ID = 57, Height = 180, Name = "Антон", Surname="Антипов", idTitle=1, idCommand=23, IsDeleted = false }); // редактирование спортсмена
         }
 
         [TestMethod]
         public void TestCompetitions()
         {
             ConnectionCompetitions.AddCompetition(new Competition { Name ="Кубок гагарина", Date=new DateTime(2022,8,25), NameVenue = "Физра", idCity = 2, Street ="Аграрная", Home=12 }); // добавление соревнования
-            ConnectionCompetitions.RemoveCompetition(41); // удаление соревнования
-            ConnectionCompetitions.UpdateCompet(new Competition { idCompetition = 39, Date = new DateTime(2022, 8, 25), NameVenue = "Физра", idCity = 2, Street = "Космонавтов", Home = 12 }); // редактирование соревнования
+            ConnectionCompetitions.RemoveCompetition(40); // удаление соревнования
+            ConnectionCompetitions.UpdateCompet(new Competition { idCompetition = 1039, Date = new DateTime(2022, 8, 25), Name = "Веселые старты", NameVenue = "Физра", idCity = 2, Street = "Космонавтов", Home = 12, IsDeleted = false }); // редактирование соревнования
         }
 
         [TestMethod]

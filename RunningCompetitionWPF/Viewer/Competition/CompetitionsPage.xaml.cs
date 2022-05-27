@@ -34,7 +34,15 @@ namespace RunningCompetitionWPF
 
         private void btnViewResult_Click(object sender, RoutedEventArgs e)
         {
-            Manager.MainFrame.Navigate(new ResulCompetitionPage((sender as Button).DataContext as Competition));
+            var a = (sender as Button).DataContext as Competition;
+            if (a != null && a.Date > DateTime.Now)
+            {
+                MessageBox.Show("Соревнование еще не прошло!");
+            }
+            else
+            {
+                Manager.MainFrame.Navigate(new ResulCompetitionPage(a));
+            }
         }
 
         private void UpdateCompetitions()

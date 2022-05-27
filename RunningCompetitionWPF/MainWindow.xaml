@@ -21,14 +21,14 @@
                     </Button>
                     <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Center" Orientation="Horizontal">
                         <Label  Content="Welcome," FontFamily="Century Gothic" FontSize="25" Foreground="#FF0F4E7A" FontWeight="Normal"></Label>
-                        <Label Content="viewer" Name="lbRoleName" FontFamily="Century Gothic" FontSize="25" Foreground="#FF0F4E7A" FontWeight="Normal"></Label>
+                        <Label Content="Viewer" Name="lbRoleName" FontFamily="Century Gothic" FontSize="25" Foreground="#FF0F4E7A" FontWeight="Normal"></Label>
                     </StackPanel>
                 </Grid>
-                <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" FontFamily="Century Gothic" FontSize="14" Foreground="White" BorderBrush="Transparent" Background="Transparent" FontWeight="Bold">
+                <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" FontFamily="Century Gothic" Foreground="White" BorderBrush="Transparent" Background="Transparent" FontWeight="Bold">
                     <ListViewItem Height="30">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="C:\Users\nasur\Source\Repos\Final_Project_ASP_MVC_Clone\RunningCompetitionWPF\icons\home1.png" Height="20" VerticalAlignment="Center"/>
-                            <Button FontWeight="Bold" Margin="15 0 0 0" Content="Home" Background="#FF0F4E7A" BorderBrush="#FF0F4E7A" Foreground="White" Click="mainPage_Click" VerticalAlignment="Center"/>
+                            <Button FontWeight="Bold" Margin="15 0 0 0" Content="Home"  Background="#FF0F4E7A" BorderBrush="#FF0F4E7A" Foreground="White" Click="mainPage_Click" VerticalAlignment="Center"/>
                         </StackPanel>
                     </ListViewItem>
                     <ListViewItem Height="30">
@@ -95,17 +95,15 @@
                             <Button FontWeight="Bold" Margin="15 0 0 0" Background="#FF0F4E7A" BorderBrush="#FF0F4E7A" Foreground="White" Name="btnExport" Content="Export exsel" Click="btnExport_Click"  VerticalAlignment="Center" />
                         </StackPanel>
                     </ListViewItem>
-
                 </ListView>
-             
             </StackPanel>
         </Grid>
         <StackPanel VerticalAlignment="Bottom" Orientation="Vertical">
-        <StackPanel Orientation="Horizontal" Name="editProfile"  Visibility="Collapsed" Margin="10">
+        <StackPanel Orientation="Horizontal" Name="editProfile"  Visibility="Collapsed" Margin="10 0">
             <Image Source="C:\Users\nasur\Source\Repos\Final_Project_ASP_MVC_Clone\RunningCompetitionWPF\icons\iconProfile.png" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <Button FontWeight="Bold" Margin="15 0 0 0" Background="#FF0F4E7A" BorderBrush="#FF0F4E7A" Foreground="White" Name="btnProfile" Content="Edit profile" Click="btnProfile_Click"  VerticalAlignment="Center" />
         </StackPanel>
-        <StackPanel Orientation="Horizontal" Name="exit" Visibility="Collapsed"  Margin="10">
+        <StackPanel Orientation="Horizontal" Name="exit" Visibility="Collapsed"  Margin="10 0">
             <Image Source="C:\Users\nasur\Source\Repos\Final_Project_ASP_MVC_Clone\RunningCompetitionWPF\icons\exit.png" Height="20" VerticalAlignment="Center"/>
             <Button FontWeight="Bold" Margin="15 0 0 0" Background="#FF0F4E7A" BorderBrush="#FF0F4E7A" Foreground="White" Content="Exit" Click="exit_Click"  VerticalAlignment="Center" />
         </StackPanel>

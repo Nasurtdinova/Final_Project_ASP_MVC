@@ -64,5 +64,16 @@ namespace RunningCompetitionWPF
                     MessageBox.Show($"В соревновании {CurrentResult.Competition.Name} такое место уже заняли");
             }
         }
+
+        private void comboCompets_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var a = (sender as ComboBox).SelectedItem as Competition;
+
+            if (a != null && a.Date > DateTime.Now)
+            {
+                MessageBox.Show("Соревнование еще не прошло!");
+                comboCompets.SelectedItem = null;
+            }
+        }
     }
 }

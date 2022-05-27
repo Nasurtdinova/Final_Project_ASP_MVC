@@ -36,13 +36,15 @@ namespace RunningCompetitionWPF
         public static void DoAdmin()
         {
             VisibleCollapsedAuthReg();
-            RoleNameLabel.Content = "Админ";
+            RoleNameLabel.Content = "Admin";
 
             MessagesAdmin.Visibility = System.Windows.Visibility.Visible;
             Sportsmans.Visibility = System.Windows.Visibility.Collapsed;
             Commands.Visibility = System.Windows.Visibility.Collapsed;
             Competitions.Visibility = System.Windows.Visibility.Collapsed;
             ResultCompetitions.Visibility = System.Windows.Visibility.Collapsed;
+
+            EditProfile.Visibility = System.Windows.Visibility.Collapsed;
 
             SportsmansAdmin.Visibility = System.Windows.Visibility.Visible;
             CommandsAdmin.Visibility = System.Windows.Visibility.Visible;
@@ -55,12 +57,14 @@ namespace RunningCompetitionWPF
         public static void DoViewer()
         {
             VisibleCollapsedAuthReg();
-            RoleNameLabel.Content = "Зритель";
+            RoleNameLabel.Content = "Viewer";
 
             Sportsmans.Visibility = System.Windows.Visibility.Visible;
             Commands.Visibility = System.Windows.Visibility.Visible;
             Competitions.Visibility = System.Windows.Visibility.Visible;
             ResultCompetitions.Visibility = System.Windows.Visibility.Visible;
+
+            EditProfile.Visibility = System.Windows.Visibility.Collapsed;
 
             SportsmansAdmin.Visibility = System.Windows.Visibility.Collapsed;
             CommandsAdmin.Visibility = System.Windows.Visibility.Collapsed;
@@ -74,7 +78,7 @@ namespace RunningCompetitionWPF
         public static void DoSponsor()
         {
             VisibleCollapsedAuthReg();
-            RoleNameLabel.Content = "Спонсор";
+            RoleNameLabel.Content = "Sponsor";
 
             NoticesSponsor.Visibility = System.Windows.Visibility.Visible;
             MySponsorshipsSponsor.Visibility = System.Windows.Visibility.Visible;

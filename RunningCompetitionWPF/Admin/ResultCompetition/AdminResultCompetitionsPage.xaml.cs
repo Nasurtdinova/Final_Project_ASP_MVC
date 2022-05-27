@@ -50,15 +50,21 @@ namespace RunningCompetitionWPF
         private void btnRemove_Click(object sender, RoutedEventArgs e)
         {
             var competsForRemoving = dgResultCompetitions.SelectedItems.Cast<ResultCompetition>().ToList();
-
-            if (MessageBox.Show($"Вы точно хотите удалить следующие {competsForRemoving.Count()} элементов", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            if (competsForRemoving.Count == 0)
             {
-                foreach (var i in competsForRemoving)
+                MessageBox.Show("Вы ничего не выбрали!");
+            }
+            else
+            {
+                if (MessageBox.Show($"Вы точно хотите удалить следующие {competsForRemoving.Count()} элементов", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
-                    ConnectionResults.RemoveResult(Convert.ToInt32(i.idCommand), Convert.ToInt32(i.idCompetition));
+                    foreach (var i in competsForRemoving)
+                    {
+                        ConnectionResults.RemoveResult(Convert.ToInt32(i.idCommand), Convert.ToInt32(i.idCompetition));
+                    }
+                    dgResultCompetitions.ItemsSource = ConnectionResults.GetResults();
+                    MessageBox.Show("Данные удалены");
                 }
-                dgResultCompetitions.ItemsSource = ConnectionResults.GetResults();
-                MessageBox.Show("Данные удалены");
             }
         }
 

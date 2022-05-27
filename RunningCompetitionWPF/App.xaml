@@ -21,13 +21,7 @@
             <Setter Property="VerticalContentAlignment" Value="Center" />
             <Setter Property="Height" Value="35" />
             <Setter Property="Background" Value="#FF0F4E7A"></Setter>
-            
             <Setter Property="Foreground" Value="White" />
-            <!--<Setter Property="Template">
-                <Setter.Value>
-                    --><!-- Your Template goes here --><!--
-                </Setter.Value>
-            </Setter>-->
         </Style>
         <Style TargetType="{x:Type DataGridRow}">
             <Style.Triggers>
@@ -44,7 +38,5 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
-
-
     </Application.Resources>
 </Application>
